@@ -21,7 +21,7 @@
   <body id="page-top">
     <div id="wrapper">
       <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion fixed-top" id="accordionSidebar" style="position: sticky; top: 0; z-index: 99">
+      <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"id="accordionSidebar">
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
@@ -96,7 +96,7 @@
         <!-- Main Content -->
         <div id="content">
           <!-- Topbar -->
-          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="position: sticky; top: 0; z-index: 99">
+          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
               <i class="fa fa-bars"></i>
             </button>
