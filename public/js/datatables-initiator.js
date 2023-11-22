@@ -8,7 +8,7 @@ $(document).ready(function () {
     "lengthMenu": [5, 10, 25, 50],
     "pageLength": 5
   });
-  $('#admin').DataTable({
+  $('#adminDataTables').DataTable({
     "lengthMenu": [5, 10, 25, 50],
     "pageLength": 5
   });
