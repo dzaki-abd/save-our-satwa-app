@@ -2,10 +2,10 @@ const buttonRincianMasuk = document.getElementById("buttonRincianMasuk");
 const buttonRincianKeluar = document.getElementById("buttonRincianKeluar");
 
 buttonRincianKeluar.addEventListener("click", () => {
-    buttonRincianKeluar.classList.remove("btn-outline-success");
+    buttonRincianKeluar.classList.remove("text-success");
     buttonRincianKeluar.classList.add("btn-success");
     buttonRincianMasuk.classList.remove("btn-success");
-    buttonRincianMasuk.classList.add("btn-outline-success");
+    buttonRincianMasuk.classList.add("text-success");
     const boxDonasiKeluar = document.getElementById("boxDonasiKeluar");
     const boxDonasiMasuk = document.getElementById("boxDonasiMasuk");
     boxDonasiKeluar.classList.remove("d-none");
@@ -14,8 +14,8 @@ buttonRincianKeluar.addEventListener("click", () => {
 
 buttonRincianMasuk.addEventListener("click", () => {
     buttonRincianKeluar.classList.remove("btn-success");
-    buttonRincianKeluar.classList.add("btn-outline-success");
-    buttonRincianMasuk.classList.remove("btn-outline-success");
+    buttonRincianKeluar.classList.add("text-success");
+    buttonRincianMasuk.classList.remove("text-success");
     buttonRincianMasuk.classList.add("btn-success");
     const boxDonasiKeluar = document.getElementById("boxDonasiKeluar");
     const boxDonasiMasuk = document.getElementById("boxDonasiMasuk");

@@ -1,0 +1,351 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  --teal-100: #d2f4ea;
+  --teal-200: #a6e9d5;
+  --teal-300: #79dfc1;
+  --teal-400: #4dd4ac;
+  --teal-500: #20c997;
+  --teal-600: #1aa179;
+  --teal-700: #13795b;
+  --teal-800: #0d503c;
+  --teal-900: #06281e;
+  --blue: #4e73df;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #e74a3b;
+  --orange: #fd7e14;
+  --yellow: #f6c23e;
+  --green: #1cc88a;
+  --teal: #20c9a6;
+  --cyan: #36b9cc;
+  --white: #fff;
+  --gray: #858796;
+  --gray-dark: #5a5c69;
+  --primary: #4e73df;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #5a5c69;
+  --black: #131314;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ========== NAVBAR ========== */
+
+.navbar {
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+}
+
+.navbar.scrolled {
+  background-color: var(--teal-600);
+}
+
+.nav-link {
+  font-weight: 400;
+}
+
+.dropdown .profile-picture {
+  max-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
+.dropdown .profile-picture:focus {
+  border: none;
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.dropdown-profile {
+  border: none;
+  background: rgb(210,244,234);
+  background: linear-gradient(45deg, rgba(210,244,234,1) 0%, rgba(255,255,255,1) 50%, rgba(210,244,234,1) 100%);
+}
+
+.dropdown-profile a, .dropdown-profile i {
+  color: var(--teal-500);
+  transition: all 0.2s;
+}
+
+.dropdown-profile a:hover, .dropdown-profile i:hover {
+  color: var(--teal-600);
+}
+
+.dropdown-profile hr {
+  background-color: var(--white);
+}
+
+.button-teal-500 {
+  background-color: var(--teal-500);
+  color: var(--white);
+  transition: all 0.2s;
+}
+
+.button-teal-500:hover {
+  background-color: var(--teal-600);
+  color: var(--white);
+}
+
+/* ========== JUMBOTRON ========== */
+
+.jumbotron {
+  background-image: url('../img/jumbotron.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.jumbotron-container {
+  height: 100%;
+}
+
+.jumbotron-content {
+ width: 50%;
+}
+
+.jumbotron-content p {
+  font-weight: 300;
+  line-height: 2rem;
+}
+
+.breadcrumb-item a {
+  color: var(--teal-500);
+}
+
+.breadcrumb-item.active {
+  color: var(--white);
+}
+
+/* ========== JUMBOTRON 2 ========== */
+
+.jumbotron-2 {
+  background-image: url('../img/jumbotron-2.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 45vh;
+}
+
+.jumbotron-container-2 {
+  height: 100%;
+}
+
+.jumbotron-content-2 {
+ width: 50%;
+}
+
+.jumbotron-content-2 h2 {
+  margin-top: 3rem;
+  margin-bottom: 0;
+ }
+
+.jumbotron-content-2 p {
+  font-weight: 300;
+  line-height: 2rem;
+}
+
+/* ========== DONASI ========== */
+
+.main-content {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.main-content h3 {
+  color: var(--teal-600);
+  font-weight: 600;
+}
+
+.main-content span {
+  color: var(--teal-900);
+}
+
+.main-content p {
+  font-size: 0.95rem;
+  color: var(--black);
+  margin-bottom: 40px;
+}
+
+.donasi-content {
+  background-image: url('../img/donasi.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: fit-content;
+}
+
+.donasi-jumlah {
+  backdrop-filter: blur(6px);
+}
+
+.accordion{
+  background-color: transparent;
+  border-radius: 0.35rem !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--teal-500);
+  border-radius: 0.35rem !important;
+}
+
+.accordion-button:not(.collapsed) h6 {
+  color: var(--white);
+}
+
+.accordion-button:not(.collapsed) .accordion-logo {
+  background-color: var(--white);
+  padding: 0.5rem;
+}
+
+.accordion-button {
+  color: var(--teal-500);
+  border-radius: 0.35rem !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background-image: none;
+}
+
+.accordion-button::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: '\2212';
+  color: var(--teal-500);
+  font-size: 1.5em;
+}
+
+.accordion-button:not(.collapsed)::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: '\002b';
+  color: var(--white);
+  font-size: 1.5em;
+}
+
+.accordion-button::after {
+  background-image: none;
+}
+
+.rekening-box {
+  background-color: var(--teal-500);
+}
+
+.table tr {
+  border: var(--white);
+}
+
+.table tr td {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+/* ========== LAPORKAN ========== */
+
+.form-laporkan h5 {
+  color: var(--teal-500);
+  font-weight: 500;
+}
+
+.form-laporkan p {
+  background-color: var(--teal-500);
+}
+
+@media screen and (max-width: 992px) {
+  .nav-item {
+    margin: 0.5rem 0;
+  }
+
+  .login-button-box {
+    margin-bottom: 1rem;
+  }
+
+  .jumbotron {
+    height: 60vh;
+  }
+
+  .jumbotron-content {
+    width: 75%;
+   }
+
+   .jumbotron-2 {
+    height: 20vh;
+  }
+
+  .jumbotron-content-2 h2 {
+    margin-top: 3rem;
+    margin-bottom: 0;
+   }
+
+   .main-content {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .nav-item {
+    margin: 0.5rem 0;
+  }
+
+  .login-button-box {
+    margin-bottom: 1rem;
+  }
+
+  .jumbotron {
+    height: 80vh;
+  }
+
+  .jumbotron-content {
+    width: 100%;
+   }
+
+   .jumbotron-2 {
+    height: 25vh;
+  }
+
+  .jumbotron-content-2 h2 {
+    margin-top: 3rem;
+    margin-bottom: 0;
+   }
+
+   .main-content {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .main-content p {
+    margin-bottom: 30px;
+  }
+}

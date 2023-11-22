@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
-    <!-- Custom styles for this page -->
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css"> --}}
-
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/data-tables.css">
@@ -169,11 +166,11 @@
 
               <!-- Card Uang Keluar -->
               <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
+                <div class="card border-left-primary shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                           Uang Keluar
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -190,21 +187,21 @@
             </div>
 
             <!-- Link Page -->
-            <ul class="nav nav-tabs border-bottom-success">
+            <ul class="nav nav-tabs border-bottom-success mt-2 bg-white shadow" style="border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem; position: relative; z-index: 2">
               <li class="nav-item">
-                <button id="buttonRincianMasuk" class="btn btn-success" style="border-radius: 0; border-top-left-radius: 0.3rem">
+                <button id="buttonRincianMasuk" class="btn btn-success" style="border-radius: 0; border-top-left-radius: 0.3rem; border-top-right-radius: 0.3rem">
                   Rincian Uang Masuk
                 </button>
               </li>
               <li class="nav-item">
-                <button id="buttonRincianKeluar" class="btn btn-outline-success"  style="border-radius: 0; border-top-right-radius: 0.3rem">
+                <button id="buttonRincianKeluar" class="btn text-success"  style="border-radius: 0; border-top-left-radius: 0.3rem; border-top-right-radius: 0.3rem">
                   Rincian Uang Keluar
                 </button>
               </li>
             </ul>
 
             <!-- DataTales Donasi Masuk -->
-            <div id="boxDonasiMasuk" class="card-2 shadow mb-4">
+            <div id="boxDonasiMasuk" class="card-2 shadow mb-4 bg-white" style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem">
               <div class="card-header py-3 d-flex align-items-center">
                 <h6 class="m-0 font-weight-bold text-success">
                   Rincian Uang Masuk
@@ -263,7 +260,7 @@
             </div>
 
             <!-- DataTales Donasi Keluar -->
-            <div id="boxDonasiKeluar" class="card shadow mb-4 d-none">
+            <div id="boxDonasiKeluar" class="card-2 shadow mb-4 d-none bg-white" style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem">
               <div class="card-header py-3 d-flex align-items-center">
                 <h6 class="m-0 font-weight-bold text-success">
                   Rincian Uang Keluar
@@ -348,14 +345,14 @@
             <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <div class="modal-body pb-0">
-            <form>
+            <form action="" method="">
               <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" placeholder="Masukkan nama" required/>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama" required/>
               </div>   
               <div class="mb-3">
-                <label for="donasi" class="form-label">Jumlah Donasi</label>
-                <input type="number" class="form-control" id="donasi" placeholder="Masukkan jumlah donasi" required>
+                <label for="donation" class="form-label">Jumlah Donasi</label>
+                <input type="number" class="form-control" id="donation" name="donation" placeholder="Masukkan jumlah donasi" required>
               </div>
               <div class="mb-3 pb-2">
                 <label for="rekening">Rekening</label>
@@ -386,14 +383,14 @@
             <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <div class="modal-body pb-0">
-            <form>
+            <form action="money" method="">
               <div class="mb-3">
                 <label for="uangKeluar" class="form-label">Jumlah Uang</label>
-                <input type="number" class="form-control" id="uangKeluar" placeholder="Masukkan jumlah uang" required/>
+                <input type="number" class="form-control" id="money" name="money" placeholder="Masukkan jumlah uang" required/>
               </div>   
               <div class="mb-3">
-                <label for="keperluan" class="form-label">Keperluan</label>
-                <textarea class="form-control" id="keperluan" rows="6" placeholder="Jelaskan keperluan" required></textarea>
+                <label for="description" class="form-label">Keperluan</label>
+                <textarea class="form-control" id="description" name="description" rows="6" placeholder="Jelaskan keperluan" required></textarea>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -414,19 +411,19 @@
             <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <div class="modal-body pb-0">
-            <form>
+            <form action="" method="">
               <div class="mb-3">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" placeholder="Masukkan nama" required/>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama" required value="Kevin Iansyah"/>
               </div>   
               <div class="mb-3">
-                <label for="donasi" class="form-label">Jumlah Donasi</label>
-                <input type="number" class="form-control" id="donasi" placeholder="Masukkan jumlah donasi" required>
+                <label for="donation" class="form-label">Jumlah Donasi</label>
+                <input type="number" class="form-control" id="donation" name="donation" placeholder="Masukkan jumlah donasi" required value="200000">
               </div>
               <div class="mb-3 pb-2">
                 <label for="rekening">Rekening</label>
-                <select class="custom-select custom-select-2" id="rekening" required>
-                  <option>Pilih...</option>
+                <select class="custom-select custom-select-2" id="rekening" name="rekening" required>
+                  <option selected value="Mandiri">{{ $value = 'Mandiri' }}</option>
                   <option value="Akulaku">Akulaku</option>
                   <option value="Mandiri">Mandiri</option>
                   <option value="BNI">BNI</option>
@@ -452,14 +449,14 @@
             <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <div class="modal-body pb-0">
-            <form>
+            <form action="" method="">
               <div class="mb-3">
-                <label for="uangKeluar" class="form-label">Jumlah Uang</label>
-                <input type="number" class="form-control" id="uangKeluar" placeholder="Masukkan jumlah uang" required/>
+                <label for="money" class="form-label">Jumlah Uang</label>
+                <input type="number" class="form-control" id="money" name="money" placeholder="Masukkan jumlah uang" required value="200000"/>
               </div>   
               <div class="mb-3">
-                <label for="keperluan" class="form-label">Keperluan</label>
-                <textarea class="form-control" id="keperluan" rows="6" placeholder="Jelaskan keperluan" required></textarea>
+                <label for="description" class="form-label">Keperluan</label>
+                <textarea class="form-control" id="description" name="description" rows="6" placeholder="Jelaskan keperluan" required>{{ $value = 'Beli tali jepang' }}</textarea>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

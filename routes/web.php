@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// DASHBOARD ROUTE
+
+Route::get('/dashboard/dashboard', function () {
+    return view('dashboard.dashboard');
 });
 
 Route::get('/dashboard/donasi', function () {
     return view('dashboard.donasi');
+});
+
+Route::get('/dashboard/laporan', function () {
+    return view('dashboard.laporan');
+});
+
+Route::get('/dashboard/laporan/detail-laporan/{id}', function ($id) {
+    return view('dashboard.laporan.detail-laporan', ['id' => $id]);
 });
 
 Route::get('/dashboard/admin', function () {
@@ -49,10 +59,29 @@ Route::get('/dashboard/satwa/edit-satwa/{id}', function ($id) {
     return view('dashboard.satwa.edit-satwa', ['id' => $id]);
 });
 
-Route::get('/dashboard/satwa/edit-satwa/{id}', function ($id) {
-    return view('dashboard.satwa.edit-satwa', ['id' => $id]);
-});
-
 Route::get('/dashboard/404', function () {
     return view('dashboard.404');
 });
+
+// CLIENT ROUTE
+
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/donasi', function () {
+    return view('donasi');
+});
+
+Route::get('/satwa', function () {
+    return view('satwa');
+});
+
+Route::get('/laporkan', function () {
+    return view('laporkan');
+}); 
+
