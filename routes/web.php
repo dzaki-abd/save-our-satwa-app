@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // DASHBOARD ROUTE
 Route::get('/dashboard/login', function () {
-    return view('dashboard.login');
+    return view('dashboard.auth.login');
 });
 
 Route::get('/dashboard/dashboard', function () {
@@ -63,7 +63,7 @@ Route::get('/dashboard/satwa/edit-satwa/{id}', function ($id) {
 });
 
 Route::get('/dashboard/404', function () {
-    return view('dashboard.404');
+    return view('dashboard.auth.404');
 });
 
 // CLIENT ROUTE
@@ -87,4 +87,3 @@ Route::get('/satwa', function () {
 Route::get('/laporkan', function () {
     return view('laporkan');
 }); 
-
