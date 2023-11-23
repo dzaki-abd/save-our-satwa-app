@@ -46,7 +46,7 @@
   >
 </head>
 
-<body id="page-top">
+<body id="page-top {{ Route::currentRouteName() }}">
   <div id="wrapper">
     @include('dashboard.layouts.sidebar')
 
