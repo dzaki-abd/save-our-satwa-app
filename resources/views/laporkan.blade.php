@@ -94,7 +94,7 @@
         </p>
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
-          <input type="email" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap anda" required>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama lengkap anda" required>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>

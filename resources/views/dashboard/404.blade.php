@@ -13,12 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
-    <!-- Custom styles for this page -->
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css"> --}}
-
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/data-tables.css">
   </head>
 
   <body id="page-top">
@@ -45,7 +41,7 @@
 
         <div class="sidebar-heading">Halaman</div>
 
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="/dashboard/admin">
             <i class="fa-solid fa-user fa-sm fa-fw"></i>
             <span>Admin</span>
@@ -147,7 +143,8 @@
             <p class="lead text-gray-800 mb-5">Page Not Found</p>
             <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
             <a href="/dashboard/dashboard" class="text-success">&larr; Back to Dashboard</a>
-          </div>
+          </div> 
+          <!-- End of 404 Error Text -->
         </div>
         <!-- End of Main Content -->
 
@@ -167,61 +164,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Tambah Admin -->
-    <div class="modal fade" id="tambahAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header d-flex align-items-center">
-            <h5 class="modal-title fs-5" id="exampleModalLabel">Tambah Admin</h5>
-            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-          <div class="modal-body pb-0">
-            <form action="" method="">
-              <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Masukkan nama" required/>
-              </div>   
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" required>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-success">Simpan</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Delete Admin-->
-    <div class="modal fade" id="deleteAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header d-flex align-items-center">
-            <h5 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin?</h5>
-            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-          <div class="modal-body">
-            Pilih opsi "Hapus" di bawah ini apabila Anda sudah siap untuk menghapus data admin dengan ID "...".
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            <button type="submit" class="btn btn-success">Hapus</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -252,11 +194,5 @@
 
     <!-- Custom scripts for all pages-->
     <script src="../js/sb-admin-2.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
-
-    <script src="../js/datatables-initiator.js"></script>
   </body>
 </html>

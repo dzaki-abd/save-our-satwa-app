@@ -14,14 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
     <!-- Fancy Box -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     
     <!-- Custom styles for this template-->
     <link href="../../css/sb-admin-2.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../css/data-tables.css">
   </head>
 
   <body id="page-top">
@@ -200,7 +196,7 @@
                     </div>
                     <div class="col">
                       <div class="mb-3">
-                        <label for="published">Published</label>
+                        <label for="published">Diterbitkan</label>
                         <input type="date" class="form-control" id="published" name="published" placeholder="Tanggal terbit"/>
                       </div>
                     </div>
