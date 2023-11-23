@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('pelaporans', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('deskripsi');
-            $table->string('bukti');
             $table->dateTime('waktu_kejadian');
+            $table->string('lokasi_kejadian');
+            $table->string('jenis_pelanggaran');
+            $table->string('jenis_satwa');
+            $table->text('deskripsi_kejadian');
+            $table->string('bukti_kejadian');
+            $table->string('tindak_lanjut');
+            $table->string('hasil_investigasi')->nullable();
+            $table->string('catatan')->nullable();
             $table->enum('status', ['Ditinjau', 'Diverifikasi', 'Ditolak']);
             $table->string('user_id');
             $table->timestamps();
