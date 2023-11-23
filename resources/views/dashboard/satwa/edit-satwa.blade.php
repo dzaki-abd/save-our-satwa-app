@@ -14,14 +14,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
     <!-- Fancy Box -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     
     <!-- Custom styles for this template-->
     <link href="../../../css/sb-admin-2.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../css/data-tables.css">
   </head>
 
   <body id="page-top">
@@ -146,14 +142,14 @@
 
           <div class="container-fluid">
             <div class="mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Tambah Satwa</h1>
+              <h1 class="h3 mb-0 text-gray-800">Edit Satwa</h1>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent pl-1">
                   <li class="breadcrumb-item">
                     <a class="text-success" href="/dashboard/satwa">Satwa</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Tambah Satwa
+                    Edit Satwa
                   </li>
                 </ol>
               </nav>
@@ -162,7 +158,7 @@
             <div class="card shadow mb-4">
               <div class="card-header py-3 d-flex align-items-center">
                 <h6 class="m-0 font-weight-bold text-success">
-                  Tambah Satwa
+                  Edit Satwa
                 </h6>
               </div>
               <div class="card-body">
@@ -197,16 +193,33 @@
                       </div>
                     </div>
                   </div>
-                  <div class="mb-3">
-                    <label for="status">Status</label>
-                    <select class="custom-select" id="status" name="status" required>
-                        <option value="{{ $status = "Aman" }}">Pilih...</option>
-                        <option value="Aman">Aman</option>
-                        <option value="Rentan">Rentan</option>
-                        <option value="Terancam Punah">Terancam Punah</option>
-                        <option value="Sangat Terancam">Sangat Terancam</option>
-                        <option value="Hampir Punah">Hampir Punah</option>
-                    </select>
+                  <div class="row">
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="status">Status</label>
+                        <select class="custom-select" id="status" name="status" required>
+                            <option value="{{ $status = "Aman" }}">{{ $status = "Aman" }}</option>
+                            <option value="Aman">Aman</option>
+                            <option value="Rentan">Rentan</option>
+                            <option value="Terancam Punah">Terancam Punah</option>
+                            <option value="Sangat Terancam">Sangat Terancam</option>
+                            <option value="Hampir Punah">Hampir Punah</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="mb-3">
+                        <label for="sub-island">Sub Pulau</label>
+                        <select class="custom-select" id="sub-island" name="sub-island" required>
+                            <option value="{{ $subPulau = "Jawa" }}">{{ $subPulau = "Jawa" }}</option>
+                            <option value="Jawa">Jawa</option>
+                            <option value="Kalimantan">Kalimantan</option>
+                            <option value="Sumatera">Sumatera</option>
+                            <option value="Sulawesi">Sulawesi</option>
+                            <option value="Papua">Papua</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="treats">Ancaman</label>
@@ -306,14 +319,6 @@
           }
         }
       }
-    </script>
-
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
-
-    <script>
-      ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
-        console.error(error);
-      });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>

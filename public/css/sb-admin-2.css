@@ -596,6 +596,26 @@ pre code {
   margin-left: auto;
 }
 
+.login-container .login-box-1 {
+  padding: 4rem 1rem;
+}
+
+.login-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+  "login-box-1"
+  "login-box-2";
+}
+
+.login-container .login-box-2 {
+  padding: 4rem 1rem;
+}
+
+.login-container form {
+  width: 100%;
+}
+
 @media (min-width: 576px) {
   .container,
   .container-sm {
@@ -608,6 +628,20 @@ pre code {
   .container-sm,
   .container-md {
     max-width: 720px;
+  }
+
+  .login-container .login-box-1 {
+    padding: 2rem;
+    height: 40vh;
+  }
+  
+  .login-container .login-box-2 {
+    padding: 2rem;
+    height: 60vh;
+  }
+  
+  .login-container form {
+    width: 28rem;
   }
 }
 
@@ -627,6 +661,25 @@ pre code {
   .container-lg,
   .container-xl {
     max-width: 1140px;
+  }
+
+  .login-container {
+    height: 100vh;
+  }
+
+  .login-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    grid-template-areas: 
+    "login-box-1 login-box-2";
+  }
+
+  .login-container .login-box-1 {
+    height: 100vh;
+  }
+
+  .login-container .login-box-2 {
+    height: 100vh;
   }
 }
 
