@@ -140,87 +140,24 @@
 
           <div class="container-fluid">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Laporan</h1>
+              <h1 class="h3 mb-0 text-gray-800">Satwa</h1>
             </div>
             <div class="row">
-              <!-- Card Laporan Diajukan -->
-              <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                          Laporan Diajukan
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          200
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <i class="fa-solid fa-file-arrow-up  fa-2x text-gray-300"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card Laporan Ditinjau -->
-              <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                          Laporan Ditinjau
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          40
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <i class="fa-solid fa-file-circle-exclamation fa-2x text-gray-300"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card Laporan Disetujui -->
+              <!-- Card Jumlah Satwa -->
               <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                          Laporan Disetujui
+                          Jumlah Satwa
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          50
+                          40
                         </div>
                       </div>
                       <div class="col-auto">
-                        <i class="fa-solid fa-file-circle-check fa-2x text-gray-300"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card Laporan Ditolak -->
-              <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-danger shadow h-100 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                          Laporan Ditolak
-                        </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                          60
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <i class="fa-solid fa-file-circle-xmark fa-2x text-gray-300"></i>
+                        <i class="fa-solid fa-dove fa-fw fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
