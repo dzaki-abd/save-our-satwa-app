@@ -18,11 +18,10 @@ return new class extends Migration
             $table->string('jenis_pelanggaran');
             $table->string('jenis_satwa');
             $table->text('deskripsi_kejadian');
-            $table->string('bukti_kejadian');
             $table->string('tindak_lanjut');
             $table->string('hasil_investigasi')->nullable();
-            $table->string('catatan')->nullable();
-            $table->enum('status', ['Ditinjau', 'Diverifikasi', 'Ditolak']);
+            $table->string('catatan_tambahan')->nullable();
+            $table->enum('status', ['Ditinjau', 'Diverifikasi', 'Ditolak'])->default('Ditinjau');
             $table->string('user_id');
             $table->timestamps();
         });
