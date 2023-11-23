@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-  <h3 class="text-center">LAPORKAN <span>SEKARANG</span></h3>
+  <h3 class="text-center h3-top">LAPORKAN <span>SEKARANG</span></h3>
   <p class="text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
 
   <form

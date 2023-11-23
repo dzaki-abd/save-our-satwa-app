@@ -43,7 +43,7 @@
             </li>
           </ul>
         </div>
-        <a class="btn button-teal-500" href="#">Login</a>
+        <a class="btn button-teal-500" href="/login">Login</a>
       </div>
     </div>
   </div>
