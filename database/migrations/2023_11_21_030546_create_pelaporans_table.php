@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jenis_pelanggaran');
             $table->string('jenis_satwa');
             $table->text('deskripsi_kejadian');
-            $table->string('tindak_lanjut');
+            $table->string('tindak_lanjut')->nullable();
             $table->string('hasil_investigasi')->nullable();
             $table->string('catatan_tambahan')->nullable();
             $table->enum('status', ['Ditinjau', 'Diverifikasi', 'Ditolak'])->default('Ditinjau');

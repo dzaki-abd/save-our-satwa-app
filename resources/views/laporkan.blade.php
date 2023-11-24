@@ -27,10 +27,12 @@
   <p class="text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
 
   <form
-    action=""
-    method=""
+    action="/laporkan/store"
+    method="POST"
+    enctype="multipart/form-data"
     class="shadow p-4 form-laporkan"
   >
+    @csrf
     <h5 class="mb-3">INFORMASI PELAPOR</h5>
     <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
       <i class="fa-solid fa-circle-info"></i>
@@ -40,7 +42,7 @@
       <label
         for="name"
         class="form-label"
-      >Name</label>
+      >Nama</label>
       <input
         type="text"
         class="form-control"
@@ -66,14 +68,14 @@
     </div>
     <div class="mb-5">
       <label
-        for="phone"
+        for="no_hp"
         class="form-label"
       >Nomor Telepon</label>
       <input
-        type="text"
+        type="number"
         class="form-control"
-        id="phone"
-        name="phone"
+        id="no_hp"
+        name="no_hp"
         placeholder="Masukkan nomor telepon anda"
         required
       >
@@ -82,28 +84,28 @@
     <h5 class="mb-3">INFORMASI KEJADIAN</h5>
     <div class="mb-3">
       <label
-        for="date"
+        for="waktu_kejadian"
         class="form-label"
       >Tanggal Kejadian</label>
       <input
         type="date"
         class="form-control"
-        id="date"
-        name="date"
+        id="waktu_kejadian"
+        name="waktu_kejadian"
         placeholder="Masukkan tanggal kejadian"
         required
       >
     </div>
     <div class="mb-5">
       <label
-        for="address"
+        for="lokasi_kejadian"
         class="form-label"
       >Lokasi Kejadian</label>
       <input
         type="text"
         class="form-control"
-        id="address"
-        name="address"
+        id="lokasi_kejadian"
+        name="lokasi_kejadian"
         placeholder="Masukkan lokasi kejadian"
         required
       >
@@ -116,13 +118,13 @@
     </p>
     <div class="mb-3">
       <label
-        for="violation"
+        for="jenis_pelanggaran"
         class="form-label"
       >Pilih Jenis Pelanggaran</label>
       <select
         class="form-select"
-        id="violation"
-        name="violation"
+        id="jenis_pelanggaran"
+        name="jenis_pelanggaran"
         aria-label="Default select example"
         required
       >
@@ -139,27 +141,26 @@
     </div>
     <div class="mb-3">
       <label
-        for="other_violation"
+        for="jenis_pelanggaran_lainnya"
         class="form-label"
       >Jenis Pelanggaran Lainnya</label>
       <input
         type="text"
         class="form-control"
-        id="other_violation"
-        name="other_violation"
+        id="jenis_pelanggaran_lainnya"
+        name="jenis_pelanggaran_lainnya"
         placeholder="Masukkan jenis pelanggaran lainnya"
-        required
       >
     </div>
     <div class="mb-3">
       <label
-        for="animal"
+        for="jenis_satwa"
         class="form-label"
       >Pilih Jenis Satwa</label>
       <select
         class="form-select"
-        id="animal"
-        name="animal"
+        id="jenis_satwa"
+        name="jenis_satwa"
         aria-label="Default select example"
         required
       >
@@ -172,16 +173,15 @@
     </div>
     <div class="mb-5">
       <label
-        for="other_animal"
+        for="jenis_satwa_lainnya"
         class="form-label"
       >Jenis Satwa Lainnya</label>
       <input
         type="text"
         class="form-control"
-        id="other_animal"
-        name="other_animal"
+        id="jenis_satwa_lainnya"
+        name="jenis_satwa_lainnya"
         placeholder="Masukkan jenis satwa lainya"
-        required
       >
     </div>
 
@@ -193,13 +193,13 @@
     </p>
     <div class="mb-5">
       <label
-        for="description"
+        for="deskripsi_kejadian"
         class="form-label"
       >Deskripsi Kejadian</label>
       <textarea
         class="form-control"
-        id="description"
-        name="description"
+        id="deskripsi_kejadian"
+        name="deskripsi_kejadian"
         rows="3"
         placeholder="Masukkan deskripsi kejadian"
         required
@@ -226,7 +226,6 @@
         name="gambar1"
         onchange="fileValidation('gambar1', 'imagePreviewGambar1')"
         aria-label="file example"
-        required
       />
     </div>
 
@@ -270,13 +269,13 @@
     </p>
     <div class="mb-5">
       <label
-        for="action"
+        for="tindak_lanjut"
         class="form-label"
       >Tindakan Yang Diambil (Optional)</label>
       <textarea
         class="form-control"
-        id="action"
-        name="action"
+        id="tindak_lanjut"
+        name="tindak_lanjut"
         rows="3"
         placeholder="Masukkan tindakan yang diambil"
       ></textarea>
@@ -290,15 +289,15 @@
     </p>
     <div class="mb-5">
       <label
-        for="investigation"
+        for="hasil_investigasi"
         class="form-label"
       >Hasil Investigasi (Optional)</label>
       <input
         type="file"
         class="form-control"
-        id="investigation"
-        name="investigation"
-        onchange="fileValidationPdf('investigation')"
+        id="hasil_investigasi"
+        name="hasil_investigasi"
+        onchange="fileValidationPdf('hasil_investigasi')"
       >
     </div>
 
@@ -310,13 +309,13 @@
     </p>
     <div class="mb-3">
       <label
-        for="additional_notes"
+        for="catatan_tambahan"
         class="form-label"
       >Pencatatan Tambahan (Optional)</label>
       <textarea
         class="form-control"
-        id="additional_notes"
-        name="additional_notes"
+        id="catatan_tambahan"
+        name="catatan_tambahan"
         rows="3"
         placeholder="Masukkan catatan tambahan"
       ></textarea>
