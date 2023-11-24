@@ -68,6 +68,14 @@ Route::get('/dashboard/404', function () {
 
 // CLIENT ROUTE
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/regristasi', function () {
+    return view('regristasi');
+});
+
 Route::get('/', function () {
     return view('index');
 });

@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-  <h3 class="text-center">DONASI <span>SEKARANG</span></h3>
+  <h3 class="text-center h3-top">DONASI <span>SEKARANG</span></h3>
   <p class="text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   <div class="row gap-4 gap-lg-0">
     <div class="col-12 col-lg-5">

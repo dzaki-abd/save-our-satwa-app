@@ -111,7 +111,7 @@ body {
 }
 
 .button-teal-500:hover {
-  background-color: var(--teal-600);
+  background-color: var(--teal-400);
   color: var(--white);
 }
 
@@ -176,9 +176,8 @@ body {
 
 /* ========== DONASI ========== */
 
-.main-content {
+.main-content .h3-top {
   margin-top: 70px;
-  margin-bottom: 70px;
 }
 
 .main-content h3 {
@@ -282,6 +281,44 @@ body {
   background-color: var(--teal-500);
 }
 
+/* ========= LOGIN ======== */
+.login-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.login-box {
+  backdrop-filter: blur(20px);
+}
+
+.login-box .input-group-text {
+  background-color: var(--teal-500);
+}
+
+.login-box .label-checkbox, .login-box a {
+  color: var(--teal-500);
+  font-size: 0.9rem;
+}
+
+.login-box .input-group-text {
+  border: var(--teal-500);
+}
+
+.login-box .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
+}
+
+.login-box p  {
+  color: var(--teal-500);
+  font-size: 0.9rem;
+}
+
+.login-box p a {
+  color: var(--teal-500);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 992px) {
   .nav-item {
     margin: 0.5rem 0;
@@ -308,9 +345,8 @@ body {
     margin-bottom: 0;
    }
 
-   .main-content {
+   .main-content .h3-top{
     margin-top: 60px;
-    margin-bottom: 60px;
   }
 }
 
@@ -340,9 +376,8 @@ body {
     margin-bottom: 0;
    }
 
-   .main-content {
+   .main-content .h3-top {
     margin-top: 50px;
-    margin-bottom: 50px;
   }
 
   .main-content p {
