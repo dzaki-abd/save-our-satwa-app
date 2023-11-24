@@ -18,7 +18,7 @@ Route::get('/dashboard/login', function () {
     return view('dashboard.auth.login');
 });
 
-Route::get('/dashboard/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
@@ -68,13 +68,13 @@ Route::get('/dashboard/404', function () {
 
 // CLIENT ROUTE
 
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
-Route::get('/regristasi', function () {
-    return view('regristasi');
-});
+// Route::get('/regristasi', function () {
+//     return view('regristasi');
+// });
 
 Route::get('/', function () {
     return view('index');
@@ -95,3 +95,7 @@ Route::get('/satwa', function () {
 Route::get('/laporkan', function () {
     return view('laporkan');
 }); 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
