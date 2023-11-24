@@ -61,6 +61,17 @@
           >Laporkan</a>
         </li>
       </ul>
+      @role('admin')
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item px-lg-2 my-sm-2">
+            <a
+              href="/dashboard"
+              class="nav-link {{ Request::url() == url('/') || Request::url() == url('/dashboard') ? 'active' : '' }}"
+              aria-current="page"
+            >Dashboard</a>
+          </li>
+        </ul>
+      @endrole
       <div class="d-flex login-button-box">
         @if (Auth::check())
           <div class="dropdown">

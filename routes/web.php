@@ -18,7 +18,7 @@ Route::get('/dashboard/login', function () {
     return view('dashboard.auth.login');
 });
 
-Route::get('/dashboard/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 
