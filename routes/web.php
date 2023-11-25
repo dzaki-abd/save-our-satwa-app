@@ -96,6 +96,8 @@ Route::get('/laporkan', function () {
     return view('laporkan');
 }); 
 
+Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
