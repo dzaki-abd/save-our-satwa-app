@@ -84,11 +84,13 @@ class HomeController extends Controller
         }
 
         if ($request->hasFile('hasil_investigasi')) {
-            $hi = $request->file('hasil_investigasi');
-            $namaHi = time() . '.' . $hi->getClientOriginalExtension();
-            $hi->move(public_path('storage/hasil_investigasi/'), $namaHi);
+            $request->validate([
+                'hasil_investigasi' => 'required|file|mimes:pdf|max:2048',
+            ]);
+            $hasil = time() . '.' . $request->file('hasil_investigasi')->extension();
+            $request->file('hasil_investigasi')->move(public_path('storage/hasil_investigasi/'), $hasil);
 
-            $request->request->add(['hasil_investigasi' => $namaHi]);
+            $request->request->add(['hasil_investigasi' => $hasil]);
         }
 
         Pelaporan::create([
