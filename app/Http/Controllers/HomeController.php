@@ -56,6 +56,10 @@ class HomeController extends Controller
 
                 $request->request->add(['user_id' => $user->id]);
             }
+        } else {
+            $user = Auth()->user();
+
+            $request->request->add(['user_id' => $user->id]);
         }
 
         $request->validate([
