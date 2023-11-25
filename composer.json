@@ -11,6 +11,9 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
+        "realrashid/sweet-alert": "^7.1",
+        "sopamo/laravel-filepond": "^1.2",
+        "spatie/laravel-medialibrary": "^10.15",
         "spatie/laravel-permission": "^6.1",
         "yajra/laravel-datatables": "10.0"
     },

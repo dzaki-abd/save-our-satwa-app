@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->text('konten');
             $table->string('gambar');
-            $table->string('admin_id');
+            $table->integer('users_id');
+            $table->enum('di_posting', ['Ya', 'Tidak',])->default('Tidak');
             $table->timestamps();
         });
     }

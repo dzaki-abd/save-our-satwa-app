@@ -6109,6 +6109,7 @@ a.close.disabled {
   height: 100%;
   overflow: hidden;
   outline: 0;
+  color: black;
 }
 
 .modal-dialog {
@@ -11847,3 +11848,11 @@ body.sidebar-toggled footer.sticky-footer {
   justify-content: center;
 }
 
+.required:after{
+  content:"*";
+  position:relative;
+  font-size:inherit;
+  color:var(--bs-danger);
+  padding-left:.25rem;
+  font-weight:600
+}

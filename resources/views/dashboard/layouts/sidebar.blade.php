@@ -54,10 +54,10 @@
     </a>
   </li>
   <li
-    class="nav-item {{ Request::url() == url('dashboard/artikel') || Request::url() == url('dashboard/artikel*') ? 'active' : '' }}"
+    class="nav-item @if (request()->routeIs('dashboard.artikel.index')) active @endif"
   >
     <a
-      href="/dashboard/artikel"
+      href="{{ route('dashboard.artikel.index') }}"
       class="nav-link"
     >
       <i class="fa-solid fa-newspaper fa-sm fa-fw"></i>

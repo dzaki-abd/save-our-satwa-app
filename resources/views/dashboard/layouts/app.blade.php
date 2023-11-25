@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Admin - Dashboard</title>
 
@@ -22,7 +23,13 @@
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet"
   />
-
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  >
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.css" rel="stylesheet" />
   <link rel="stylesheet" href="../css/data-tables.css" >
@@ -106,6 +113,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
   <script src="../js/chart-area-initiator.js"></script>
   <script src="../js/chart-pie-initiator.js"></script>
+
+  <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
   @stack('scripts')
 </body>
