@@ -43,10 +43,10 @@
     </a>
   </li>
   <li
-    class="nav-item {{ Request::url() == url('dashboard/satwa') || Request::url() == url('dashboard/satwa*') ? 'active' : '' }}"
+    class="nav-item @if (request()->routeIs('dashboard.satwa.*')) active @endif"
   >
     <a
-      href="/dashboard/satwa"
+      href="{{ route('dashboard.satwa.index') }}"
       class="nav-link"
     >
       <i class="fa-solid fa-dove fa-sm fa-fw"></i>
