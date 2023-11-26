@@ -250,3 +250,9 @@
 
   </div>
 @endsection
+
+@push('scripts')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+  <script src="../js/chart-area-initiator.js"></script>
+  <script src="../js/chart-pie-initiator.js"></script>
+@endpush

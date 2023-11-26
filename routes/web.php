@@ -52,9 +52,9 @@ Route::get('/dashboard/admin', function () {
 //     return view('dashboard.artikel');
 // });
 
-Route::get('/dashboard/artikel/tambah-artikel', function () {
-    return view('dashboard.artikel.tambah-artikel');
-});
+// Route::get('/dashboard/artikel/tambah-artikel', function () {
+//     return view('dashboard.artikel.tambah-artikel');
+// });
 
 // Route::get('/dashboard/artikel/edit-artikel/{id}', function ($id) {
 //     return view('dashboard.artikel.edit-artikel', ['id' => $id]);

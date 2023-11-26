@@ -99,7 +99,7 @@
 </div>
 
 <!-- Modal Tambah Artikel-->
-<div class="modal fade" id="addArtikelModal" tabindex="-1" aria-labelledby="addArtikelModalLabel" aria-hidden="true">
+<div class="modal fade" id="addArtikelModal" aria-labelledby="addArtikelModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ route('dashboard.artikel.store') }}" method="POST" enctype="multipart/form-data">
@@ -181,6 +181,7 @@
                 },
             ]
         });
+
         ClassicEditor
             .create(document.querySelector('#konten'))
             .catch(error => {

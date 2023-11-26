@@ -655,3 +655,7 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script src="../js/laporan-initiator.js"></script>
+@endpush

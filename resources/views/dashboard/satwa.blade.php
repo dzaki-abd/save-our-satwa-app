@@ -837,3 +837,7 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script src="../js/satwa-initiator.js"></script>
+@endpush

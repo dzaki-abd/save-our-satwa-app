@@ -638,3 +638,7 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script src="../js/donasi-initiator.js"></script>
+@endpush
