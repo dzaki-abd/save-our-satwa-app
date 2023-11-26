@@ -94,7 +94,7 @@
     class="card-2 shadow mb-4 bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
   >
-    <div class="card-header py-3 d-flex align-items-center">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-success">
         Data Satwa Sumatra
       </h6>

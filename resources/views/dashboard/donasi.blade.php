@@ -79,7 +79,7 @@
     class="card-2 shadow mb-4 bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
   >
-    <div class="card-header py-3 d-flex align-items-center">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-success">
         Rincian Uang Masuk
       </h6>
@@ -171,7 +171,7 @@
     class="card-2 shadow mb-4 d-none bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
   >
-    <div class="card-header py-3 d-flex align-items-center">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-success">
         Rincian Uang Keluar
       </h6>
@@ -260,20 +260,14 @@
   </div>
 
   <!-- Tambah Donasi Masuk Modal -->
-  <div
-    class="modal fade"
-    id="tambahDonasiMasukModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="tambahDonasiMasukModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5
-            class="modal-title fs-5"
+          <h4
+            class="modal-title fs-5 text-success"
             id="exampleModalLabel"
-          >Tambah Rincian Uang Masuk</h5>
+          >Tambah Rincian Uang Masuk</h4>
           <button
             type="button"
             class="btn btn-close"
@@ -346,20 +340,14 @@
   </div>
 
   <!-- Tambah Donasi Keluar Modal -->
-  <div
-    class="modal fade"
-    id="tambahDonasiKeluarModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="tambahDonasiKeluarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5
-            class="modal-title fs-5"
+          <h4
+            class="modal-title fs-5 text-success"
             id="exampleModalLabel"
-          >Tambah Rincian Uang Masuk</h5>
+          >Tambah Rincian Uang Masuk</h4>
           <button
             type="button"
             class="btn btn-close"
@@ -418,20 +406,14 @@
   </div>
 
   <!-- Edit Donasi Masuk Modal -->
-  <div
-    class="modal fade"
-    id="editDonasiMasukModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="editDonasiMasukModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5
-            class="modal-title fs-5"
+          <h4
+            class="modal-title fs-5 text-success"
             id="exampleModalLabel"
-          >Edit Rincian Uang Masuk</h5>
+          >Edit Rincian Uang Masuk</h4>
           <button
             type="button"
             class="btn btn-close"
@@ -510,20 +492,14 @@
   </div>
 
   <!-- Edit Donasi Keluar Modal -->
-  <div
-    class="modal fade"
-    id="editDonasiKeluarModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="editDonasiKeluarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5
-            class="modal-title fs-5"
+          <h4
+            class="modal-title fs-5 text-success"
             id="exampleModalLabel"
-          >Edit Rincian Uang Masuk</h5>
+          >Edit Rincian Uang Masuk</h4>
           <button
             type="button"
             class="btn btn-close"

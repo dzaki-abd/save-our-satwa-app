@@ -100,13 +100,13 @@
 
 <!-- Modal Tambah Artikel-->
 <div class="modal fade" id="addArtikelModal" tabindex="-1" aria-labelledby="addArtikelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ route('dashboard.artikel.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="addArtikelModalLabel">Tambah Artikel</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title fs-5 text-success" id="addArtikelModalLabel">Tambah Artikel</h4>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -124,7 +124,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
+                    <button type="button" class="btn btn-success">Tambah</button>
                 </div>
             </form>
         </div>
