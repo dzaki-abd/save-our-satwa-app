@@ -3,10 +3,9 @@
   data-bs-theme="dark"
 >
   <div class="container">
-    <a
-      class="navbar-brand"
-      href="#"
-    >Logo</a>
+    <a class="navbar-brand" href="#" >
+      <img src="../img/logosos.png" alt="" style="height: 1.8rem">
+    </a>
     <button
       class="navbar-toggler"
       type="button"
