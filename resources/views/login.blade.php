@@ -10,14 +10,14 @@
             <label class="visually-hidden" for="email">Email</label>
             <div class="input-group">
               <div class="input-group-text"><i class="fa-solid fa-envelope text-white"></i></div>
-              <input type="email" class="form-control" id="email" name="email" placeholder="your email..." required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="email anda..." required>
             </div>
           </div>
           <div class="mb-4">
             <label class="visually-hidden" for="password">Password</label>
             <div class="input-group">
               <div class="input-group-text"><i class="fa-solid fa-lock text-white"></i></div>
-              <input type="password" class="form-control" id="password" name="password" placeholder="your password..." required>
+              <input type="password" class="form-control" id="password" name="password" placeholder="password anda..." required>
             </div>
           </div>
           <div class="mb-4 d-flex justify-content-between align-items-center">

@@ -32,7 +32,7 @@
     id="boxAdmin"
     class="card-2 shadow mb-4 bg-white"
   >
-    <div class="card-header py-3 d-flex align-items-center">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-success">
         Data Admin
       </h6>
@@ -102,20 +102,11 @@
 
 
   <!-- Tambah Admin Modal-->
-  <div
-    class="modal fade"
-    id="tambahAdmin"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="tambahAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5
-            class="modal-title fs-5"
-            id="exampleModalLabel"
-          >Tambah Admin</h5>
+          <h4 class="modal-title fs-5 text-success" id="exampleModalLabel">Tambah Admin</h4>
           <button
             type="button"
             class="btn btn-close"
