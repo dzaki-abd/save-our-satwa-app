@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug');
+            $table->string('tag');
             $table->text('konten');
             $table->string('gambar');
             $table->integer('users_id');
+            $table->enum('jenis', ['Artikel', 'Berita',])->default('Artikel');
             $table->enum('di_posting', ['Ya', 'Tidak',])->default('Tidak');
             $table->timestamps();
         });

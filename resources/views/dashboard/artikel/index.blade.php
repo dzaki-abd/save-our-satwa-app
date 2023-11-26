@@ -12,10 +12,10 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Jumlah Artikel Posting
+                            Jumlah Artikel dan Berita Posting
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            3
+                            {{ $countArtikelPosting }}
                         </div>
                     </div>
                     <div class="col-auto">
@@ -32,10 +32,10 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Jumlah Artikel Belum Posting
+                            Jumlah Artikel dan Berita Belum Posting
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            3
+                            {{ $countArtikelTidakPosting }}
                         </div>
                     </div>
                     <div class="col-auto">
@@ -52,10 +52,10 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Jumlah Artikel Keseluruhan
+                            Jumlah Artikel dan Berita Keseluruhan
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            3
+                            {{ $countArtikel }}
                         </div>
                     </div>
                     <div class="col-auto">
@@ -70,10 +70,10 @@
 <div class="card shadow mb-4 bg-white">
     <div class="card-header py-3 d-flex align-items-center">
         <h6 class="m-0 font-weight-bold text-success">List Artikel</h6>
-        <button type="button" class="btn btn-success mr-3 ml-auto" data-bs-toggle="modal" data-bs-target="#addArtikelModal">
+        <a class="btn btn-success mr-0 ml-auto" href="{{ route('dashboard.artikel.add') }}">
             <i class="fa-solid fa-plus mr-2"></i>
             Tambah Artikel
-        </button>
+        </a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -81,9 +81,8 @@
                 <thead>
                     <tr>
                         <th class="border-0">No</th>
+                        <th class="border-0">Jenis</th>
                         <th class="border-0">Judul</th>
-                        <th class="border-0">Konten</th>
-                        <th class="border-0">Gambar</th>
                         <th class="border-0">Penulis</th>
                         <th class="border-0">Posting</th>
                         <th class="border-0">Aksi</th>
@@ -97,97 +96,100 @@
         </div>
     </div>
 </div>
-
-<!-- Modal Tambah Artikel-->
-<div class="modal fade" id="addArtikelModal" tabindex="-1" aria-labelledby="addArtikelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{ route('dashboard.artikel.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="addArtikelModalLabel">Tambah Artikel</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="judul" class="form-label required">Judul</label>
-                        <input type="text" class="form-control" id="judul" placeholder="Masukkan Judul Artikel" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="konten" class="form-label required">Konten</label>
-                        <textarea class="form-control" id="konten" rows="3" placeholder="Masukkan Konten Artikel" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label required">Gambar Header</label>
-                        <input type="file" class="filepond" id="gambar" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary">Tambah</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
 <script>
     let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $(document).ready(function() {
-        $('#table-list-artikel').DataTable({
-            fixedHeader: true,
-            pageLength: 25,
-            lengthChange: true,
-            autoWidth: false,
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('dashboard.artikel.get-data') }}",
-                type: 'GET',
+
+    $('#table-list-artikel').DataTable({
+        fixedHeader: true,
+        pageLength: 25,
+        lengthChange: true,
+        autoWidth: false,
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: "{{ route('dashboard.artikel.get-data') }}",
+            type: 'GET',
+        },
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                className: 'text-center',
             },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    className: 'text-center',
-                },
-                {
-                    data: 'judul',
-                    name: 'judul'
-                },
-                {
-                    data: 'penulis',
-                    name: 'penulis'
-                },
-                {
-                    data: 'diterbitkan',
-                    name: 'diterbitkan'
-                },
-                {
-                    data: 'jenis',
-                    name: 'jenis'
-                },
-                {
-                    data: 'tampilkan',
-                    name: 'tampilkan'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-        ClassicEditor
-            .create(document.querySelector('#konten'))
-            .catch(error => {
-                console.error(error);
-            });
-        FilePond.parse(document.body);
+            {
+                data: 'jenis',
+                name: 'jenis'
+            },
+            {
+                data: 'judul',
+                name: 'judul'
+            },
+            {
+                data: 'penulis',
+                name: 'penulis'
+            },
+            {
+                data: 'di_posting',
+                name: 'di_posting'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
+        ]
     });
+
+    function destroyArtikel($id) {
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Anda tidak akan dapat mengembalikan ini!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ route('dashboard.artikel.destroy', ['artikel' => 'id']) }}".replace('id', $id),
+                    type: 'DELETE',
+                    data: {
+                        _token: CSRF_TOKEN
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: response.message,
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#table-list-artikel').DataTable().ajax.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: response.message,
+                                icon: 'error',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: xhr.responseJSON.message,
+                            icon: 'error',
+                        });
+                    }
+                });
+            }
+        });
+    }
 </script>
 
 @endpush

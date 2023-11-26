@@ -170,7 +170,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -185,7 +184,6 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
