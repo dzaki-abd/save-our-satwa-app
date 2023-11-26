@@ -28,11 +28,10 @@
     rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
-  >
-  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  />
   <!-- Custom styles for this template-->
-  <link href="../css/sb-admin-2.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/data-tables.css" >
+  <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('css/data-tables.css') }}" />
 </head>
 
 <body id="page-top">
@@ -103,19 +102,47 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-  <script src="../js/sb-admin-2.js"></script>
+  <script src="{{ asset('js/sb-admin-2.js') }}"></script>
 
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
 
-  <script src="../js/datatables-initiator.js"></script>
+  <script src="{{ asset('js/datatables-initiator.js') }}"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-  <script src="../js/chart-area-initiator.js"></script>
-  <script src="../js/chart-pie-initiator.js"></script>
+  <script src="{{ asset('js/chart-pie-initiator.js') }}"></script>
+  <script src="{{ asset('js/chart-area-initiator.js') }}"></script>
+
 
   <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
-  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+  @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
+    </script>
+  @endif
+
+  @if(session('error'))
+      <script>
+          Swal.fire({
+              icon: 'error',
+              title: 'Gagal!',
+              text: '{{ session('error') }}',
+              timer: 2000,
+              timerProgressBar: true,
+              showConfirmButton: false
+          });
+      </script>
+  @endif
 
   @stack('scripts')
 </body>

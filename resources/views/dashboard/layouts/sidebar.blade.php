@@ -6,7 +6,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">SOS</div>
   </a>
 
   <hr class="sidebar-divider my-0" />
@@ -54,7 +54,7 @@
     </a>
   </li>
   <li
-    class="nav-item @if (request()->routeIs('dashboard.artikel.index')) active @endif"
+    class="nav-item @if (request()->routeIs('dashboard.artikel.*')) active @endif"
   >
     <a
       href="{{ route('dashboard.artikel.index') }}"
