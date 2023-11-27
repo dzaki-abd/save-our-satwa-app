@@ -15,7 +15,7 @@
                 Laporan Diajukan
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                200
+                {{ $countLaporan }}
               </div>
             </div>
             <div class="col-auto">
@@ -154,6 +154,7 @@
         >
           <thead>
             <tr>
+              <th class="border-0 text-gray-700">No</th>
               <th class="border-0 text-gray-700">Nama Pelapor</th>
               <th class="border-0 text-gray-700">Tanggal Kejadian</th>
               <th class="border-0 text-gray-700">Jenis Pelanggaran</th>
@@ -164,6 +165,7 @@
           </thead>
           <tfoot>
             <tr>
+              <th class="text-gray-700">No</th>
               <th class="text-gray-700">Nama Pelapor</th>
               <th class="text-gray-700">Tanggal Kejadian</th>
               <th class="text-gray-700">Jenis Pelanggaran</th>
@@ -173,61 +175,7 @@
             </tr>
           </tfoot>
           <tbody>
-            @for ($i = 0; $i < 5; $i++)
-              <tr class="align-middle">
-                <td class="align-middle text-gray-600">Kevin Iansyah</td>
-                <td class="align-middle text-gray-600">20 Desember 2022</td>
-                <td class="align-middle text-gray-600">Perburuan Illegal</td>
-                <td class="align-middle text-gray-600">Orang Utan</td>
-                <td class="align-middle text-gray-600">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                  >Diajukan</button>
-                </td>
-                <td class="d-flex align-middle">
-                  <div class="d-flex">
-                    <!-- Button Trigger-->
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-primary d-flex justify-content-center align-items-center mr-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#riwayatLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-clock-rotate-left"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                    <a
-                      href="/dashboard/laporan/detail-laporan/id"
-                      class="btn btn-warning d-flex justify-content-center align-items-center mr-1"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-eye"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </a>
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-danger d-flex justify-content-center align-items-center"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-trash"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            @endfor
+
           </tbody>
         </table>
       </div>
@@ -572,19 +520,19 @@
                 <li class="timeline-item">
                   <span class="timeline-icon bg-success">
                     <!--
-                      Gunakan icon berdasarkan status menggunakan if
-                      Diajukan :
-                      <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
-                      
-                      Ditinjau
-                      <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
+                                        Gunakan icon berdasarkan status menggunakan if
+                                        Diajukan :
+                                        <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
+                                        
+                                        Ditinjau
+                                        <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
 
-                      Disetujui
-                      <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
+                                        Disetujui
+                                        <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
 
-                      Ditolak
-                      <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
-                    -->
+                                        Ditolak
+                                        <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
+                                      -->
                     <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
                   </span>
 
@@ -657,5 +605,60 @@
 @endsection
 
 @push('scripts')
-  <script src="../js/laporan-initiator.js"></script>
+  <script src="{{ asset('js/laporan-initiator.js') }}"></script>
+
+  <script>
+    $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {
+      console.log(message);
+    };
+
+    $('#laporanDiajukan').DataTable({
+      fixedHeader: true,
+      pageLength: 25,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('dashboard.laporan.index') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex',
+          className: 'text-center',
+        },
+        {
+          data: 'nama_pelapor',
+          name: 'nama_pelapor'
+        },
+        {
+          data: 'tanggal_kejadian',
+          name: 'tanggal_kejadian'
+        },
+        {
+          data: 'jenis_pelanggaran',
+          name: 'jenis_pelanggaran'
+        },
+        {
+          data: 'jenis_satwa',
+          name: 'jenis_satwa'
+        },
+        {
+          data: 'status',
+          name: 'status'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: false,
+          searchable: false
+        },
+      ]
+    });
+    $(document).ready(function() {
+
+      $('#laporanDitinjau').DataTable();
+      $('#laporanDisetujui').DataTable();
+      $('#laporanDitolak').DataTable();
+    });
+  </script>
 @endpush
