@@ -43,12 +43,16 @@
     rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
-  >
-  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+  />
   <!-- Custom styles for this template-->
-  <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ asset('css/data-tables.css') }}" />
+  <link
+    href="{{ asset('css/sb-admin-2.css') }}"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ asset('css/data-tables.css') }}"
+  />
 </head>
 
 <body id="page-top">
@@ -169,20 +173,21 @@
             timerProgressBar: true,
             showConfirmButton: false
         });
+
     </script>
   @endif
 
   @if (session('error'))
-      <script>
-          Swal.fire({
-              icon: 'error',
-              title: 'Gagal!',
-              text: '{{ session('error') }}',
-              timer: 2000,
-              timerProgressBar: true,
-              showConfirmButton: false
-          });
-      </script>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: 'Gagal!',
+        text: '{{ session('error') }}',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+    </script>
   @endif
 
   @stack('scripts')
