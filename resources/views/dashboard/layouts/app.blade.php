@@ -3,11 +3,26 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta
+    name="description"
+    content=""
+  />
+  <meta
+    name="author"
+    content=""
+  />
+  <meta
+    name="csrf-token"
+    content="{{ csrf_token() }}"
+  >
 
   <title>Admin - Dashboard</title>
 
@@ -40,7 +55,10 @@
   <div id="wrapper">
     @include('dashboard.layouts.sidebar')
 
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div
+      id="content-wrapper"
+      class="d-flex flex-column"
+    >
       <!-- Main Content -->
       <div id="content">
         @include('dashboard.layouts.topbar')
@@ -64,17 +82,34 @@
   </div>
 
   <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top" >
+  <a
+    class="scroll-to-top rounded"
+    href="#page-top"
+  >
     <i class="fas fa-angle-up"></i>
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header d-flex align-items-center">
-          <h5 class="modal-title fs-5" id="exampleModalLabel" >Siap Untuk Keluar?</h5>
-          <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <h5
+            class="modal-title fs-5"
+            id="exampleModalLabel"
+          >Siap Untuk Keluar?</h5>
+          <button
+            type="button"
+            class="btn btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -82,8 +117,16 @@
           Pilih opsi "Keluar" di bawah ini apabila Anda sudah siap untuk mengakhiri sesi Anda saat ini.
         </div>
         <div class="modal-footer">
-          <button type="button" lass="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <a href="/dashboard/login" type="submit" class="btn btn-success">Keluar</a>
+          <button
+            type="button"
+            lass="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >Tutup</button>
+          <a
+            href="/dashboard/login"
+            type="submit"
+            class="btn btn-success"
+          >Keluar</a>
         </div>
       </div>
     </div>
@@ -116,7 +159,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   <script src="{{ asset('js/fancybox-initiator.js') }}"></script>
 
-  @if(session('success'))
+  @if (session('success'))
     <script>
         Swal.fire({
             icon: 'success',
@@ -129,7 +172,7 @@
     </script>
   @endif
 
-  @if(session('error'))
+  @if (session('error'))
       <script>
           Swal.fire({
               icon: 'error',

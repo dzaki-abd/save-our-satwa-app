@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pelaporan;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\StorePelaporanRequest;
 use App\Http\Requests\UpdatePelaporanRequest;
 
@@ -13,7 +15,45 @@ class PelaporanController extends Controller
      */
     public function index()
     {
-        //
+        $laporan = Pelaporan::all();
+        $countLaporan = $laporan->count();
+
+        // return $laporan;
+
+        if (request()->ajax()) {
+            return DataTables::of($laporan)
+                ->addIndexColumn()
+                ->addColumn('nama_pelapor', function ($row) {
+                    $user = User::find($row->user_id);
+                    return $user->name;
+                })
+                ->addColumn('tanggal_kejadian', function ($row) {
+                    return date('d F Y', strtotime($row->waktu_kejadian));
+                })
+                ->addColumn('jenis_pelanggaran', function ($row) {
+                    return $row->jenis_pelanggaran;
+                })
+                ->addColumn('jenis_satwa', function ($row) {
+                    return $row->jenis_satwa;
+                })
+                ->addColumn('status', function ($row) {
+                    $badgeStatus = '<span class="badge text-bg-primary">' . $row->status . '</span>';
+                    return $badgeStatus;
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '
+                        <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
+                            <button type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah"><i class="fa-solid fa-pen"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    ';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action', 'status'])
+                ->make(true);
+        }
+
+        return view('dashboard.laporan', compact('countLaporan'));
     }
 
     /**

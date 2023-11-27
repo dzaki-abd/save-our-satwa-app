@@ -519,6 +519,11 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
+.pagination {
+  --bs-pagination-color: var(--teal-500);
+  --bs-pagination-disabled-bg: var(--white);
+}
+
 /* ========== LAPORKAN ========== */
 
 .form-laporkan h5 {

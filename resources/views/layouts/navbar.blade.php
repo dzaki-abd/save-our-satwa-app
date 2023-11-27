@@ -62,7 +62,7 @@
           <li class="nav-item px-lg-2 my-sm-2">
             <a
               href="/dashboard"
-              class="nav-link {{ Request::url() == url('/') || Request::url() == url('/dashboard') ? 'active' : '' }}"
+              class="nav-link {{ Request::url() == url('/dashboard') ? 'active' : '' }}"
               aria-current="page"
             >Dashboard</a>
           </li>
