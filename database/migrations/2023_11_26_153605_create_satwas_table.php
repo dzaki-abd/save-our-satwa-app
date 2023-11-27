@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('kategori_iucn');
             $table->string('gambar');
             $table->integer('populasi');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
