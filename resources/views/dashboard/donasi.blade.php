@@ -74,11 +74,7 @@
   </ul>
 
   <!-- DataTales Donasi Masuk -->
-  <div
-    id="boxDonasiMasuk"
-    class="card-2 shadow mb-4 bg-white"
-    style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
-  >
+  <div id="boxDonasiMasuk" class="card-2 shadow mb-4 bg-white" style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
       <h6 class="m-0 font-weight-bold text-success">
         Rincian Uang Masuk
@@ -273,7 +269,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body pb-0">
           <form
@@ -353,7 +349,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body pb-0">
           <form
@@ -419,7 +415,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body pb-0">
           <form
@@ -505,7 +501,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body pb-0">
           <form
@@ -578,7 +574,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body">
           Pilih opsi "Hapus" di bawah ini apabila Anda sudah siap untuk menghapus data dengan ID "...".
@@ -618,7 +614,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body">
           Pilih opsi "Hapus" di bawah ini apabila Anda sudah siap untuk menghapus data dengan ID "...".

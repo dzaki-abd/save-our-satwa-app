@@ -3,22 +3,10 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta
-    http-equiv="X-UA-Compatible"
-    content="IE=edge"
-  />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
-  <meta
-    name="description"
-    content=""
-  />
-  <meta
-    name="author"
-    content=""
-  />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
 
   <title>Save Our Satwa</title>
 
@@ -37,15 +25,10 @@
   >
 
   <!-- Fancy Box -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
 
-  <link
-    rel="stylesheet"
-    href="../css/app.css"
-  >
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}" >
+  <link rel="stylesheet" href="{{ asset('css/data-tables.css') }}" />
 </head>
 
 <body>
@@ -56,6 +39,10 @@
   <div class="container main-content">
     @yield('content')
   </div>
+
+  @if(isset($showFooter) && $showFooter)
+    @include('layouts.footer')
+  @endif
 
   <script src="../js/navbar-initiator.js"></script>
 
@@ -73,7 +60,14 @@
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"
   ></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+  <script src="{{ asset('js/datatables-initiator.js') }}"></script>
 
   @stack('scripts')
 </body>

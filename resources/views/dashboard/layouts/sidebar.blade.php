@@ -1,18 +1,12 @@
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"id="accordionSidebar">
-  <a
-    href="index.html"
-    class="sidebar-brand d-flex align-items-center justify-content-center"
-  >
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
-    </div>
-    <div class="sidebar-brand-text mx-3">SOS</div>
-  </a>
+  <div class="sidebar-brand d-flex align-items-center justify-content-center">
+    <img src="../../img/logosos.png" alt="" style="height: 1.8rem">
+  </div>
 
   <hr class="sidebar-divider my-0" />
-  <li class="nav-item {{ Request::url() == url('/dashboard/dashboard') ? 'active' : '' }}">
+  <li class="nav-item {{ Request::url() == url('/dashboard') ? 'active' : '' }}">
     <a
-      href="/dashboard/dashboard"
+      href="/dashboard"
       class="nav-link"
     >
       <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -43,10 +37,10 @@
     </a>
   </li>
   <li
-    class="nav-item {{ Request::url() == url('dashboard/satwa') || Request::url() == url('dashboard/satwa*') ? 'active' : '' }}"
+    class="nav-item @if (request()->routeIs('dashboard.satwa.*')) active @endif"
   >
     <a
-      href="/dashboard/satwa"
+      href="{{ route('dashboard.satwa.index') }}"
       class="nav-link"
     >
       <i class="fa-solid fa-dove fa-sm fa-fw"></i>
