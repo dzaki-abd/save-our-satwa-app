@@ -104,7 +104,7 @@ body {
   background-color: var(--white);
 }
 
-.button-teal-500 {
+/* .button-teal-500 {
   background-color: var(--teal-500);
   color: var(--white);
   transition: all 0.2s;
@@ -112,6 +112,45 @@ body {
 
 .button-teal-500:hover {
   background-color: var(--teal-400);
+  color: var(--white);
+} */
+
+.button-teal-500 {
+  display: inline-block;
+	font-weight: 400;
+	color: #212529;
+	text-align: center;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	color: #fff;
+	background-color: var(--teal-500);
+  text-decoration: none;
+}
+
+.button-teal-500:hover {
+  background-color: var(--teal-400);
+}
+
+/* ========== FOOTER ========== */
+
+.footer {
+  margin-top: 70px;
+  background-color: var(--teal-600);
+}
+
+.footer .card-body {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+
+.footer .card {
+  background-color: var(--teal-600);
+}
+
+.footer h5 {
   color: var(--white);
 }
 
@@ -156,12 +195,17 @@ body {
   height: 45vh;
 }
 
+.jumbotron-2 .form-seach {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
 .jumbotron-container-2 {
   height: 100%;
 }
 
 .jumbotron-content-2 {
- width: 50%;
+ width: 100%;
 }
 
 .jumbotron-content-2 h2 {
@@ -189,9 +233,11 @@ body {
   color: var(--teal-900);
 }
 
-.main-content p {
+.main-content p.p-top {
   font-size: 0.95rem;
-  color: var(--black);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--teal-900);
   margin-bottom: 40px;
 }
 
@@ -210,6 +256,20 @@ body {
 .accordion{
   background-color: transparent;
   border-radius: 0.35rem !important;
+}
+
+.accordian-donasi tr td {
+  padding: 0.5rem 0;
+}
+
+.accordian-donasi tr td:first-child {
+  padding-right: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.accordian-donasi tr td:last-child p:first-child {
+  font-weight: 500;
 }
 
 .accordion-button:not(.collapsed) {
@@ -268,6 +328,195 @@ body {
 .table tr td {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+}
+
+/* ========== INFORMASI SATWA ========== */
+
+.satwa-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.satwa-overlay:hover {
+  transform: scale(1.2);
+}
+
+.satwa-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.satwa-content {
+  width: 100%;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  backdrop-filter: blur(20px);
+}
+
+.satwa-content h6 {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.satwa-content p {
+  color: var(--white);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.satwa-box {
+  height: 18rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========== DETAIL SATWA ========== */
+
+.jumbotron-3 {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  max-height: fit-content;
+}
+
+.jumbotron-container-3 {
+  background-color: rgba(0 ,0 ,0 , 0.6);
+  height: 100%;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.detail-poster, .detail-content {
+  height: 100%;
+}
+
+.detail-poster .poster-box {
+  width: 18rem;
+  height: 25rem;
+  position: relative;
+}
+
+.poster-box a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-box .like-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+}
+
+.detail-content h1 {
+  color: var(--white);
+}
+
+.detail-content .table {
+  --bs-table-color-state: var(--white);
+  --bs-table-bg: transparent;
+}
+
+.detail-content .table th {
+  border-top: 0; 
+  min-width: 8rem !important; 
+  max-width: 10rem !important;
+}
+
+.detail-content .table td {
+  border-top: 0; 
+}
+
+.table>:not(caption)>*>* {
+  border-bottom-width: 0;
+}
+
+@media (min-height: 100vh) {
+  .jumbotron-3 {
+    height: fit-content;
+    max-height: none; /* Reset max-height for this condition if needed */
+  }
+
+  .jumbotron-container-3 {
+    padding-top: 120px;
+  }
+
+  .detail-satwa-container {
+    align-items: start;
+  }
+
+  .detail-poster {
+    margin-top: 0.5rem;
+  }
+
+  .table-riwayat {
+    width: 100%;
+    min-width: 20rem;
+  }
+
+  .table-riwayat th {
+    font-size: 0.95rem;
+  }
+
+  .table-riwayat tr td {
+    padding: 1rem;
+  }
+
+  .table-riwayat p, .table-riwayat i {
+    font-size: 0.9rem;
+  }
+
+  .table-riwayat .icon-riwayat p, .table-riwayat .icon-riwayat i {
+    font-size: 0.8rem;
+    color: var(--secondary);
+  }
+
+  .table-riwayat tr td:first-child {
+    min-width: 20rem;
+  }
+}
+
+/* ========== DATA TABLES ========== */
+.active>.page-link, .page-link.active {
+  z-index: 3;
+  color: var(--white);
+  background-color: var(--teal-500);
+  border-color: var(--teal-500);
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+  padding-right: 12px;
+}
+
+div.dataTables_wrapper div.dataTables_length {
+  padding-left: 12px;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  padding-right: 12px;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+  padding-left: 12px;
+}
+
+div.dataTables_wrapper div.dataTables_filter > label > input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
+}
+
+div.dataTables_wrapper div.dataTables_length > label > select:focus{
+  box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
 /* ========== LAPORKAN ========== */
@@ -337,7 +586,7 @@ body {
    }
 
    .jumbotron-2 {
-    height: 20vh;
+    height: 25vh;
   }
 
   .jumbotron-content-2 h2 {
@@ -345,8 +594,31 @@ body {
     margin-bottom: 0;
    }
 
-   .main-content .h3-top{
+   .jumbotron-3 {
+    height: fit-content;
+  }
+
+  .footer {
     margin-top: 60px;
+  }
+  
+  .footer .card-body {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .main-content .h3-top{
+    margin-top: 60px;
+  }
+
+  .jumbotron-container-3 {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .detail-satwa-container {
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -368,7 +640,15 @@ body {
    }
 
    .jumbotron-2 {
-    height: 25vh;
+    height: 35vh;
+  }
+
+  .jumbotron-search-2{
+    height: 45vh;
+  }
+
+  .jumbotron-2 .form-seach {
+    margin-top: 0;
   }
 
   .jumbotron-content-2 h2 {
@@ -383,4 +663,28 @@ body {
   .main-content p {
     margin-bottom: 30px;
   }
+
+  .footer {
+    margin-top: 50px;
+  }
+  
+  .footer .card-body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .satwa-box {
+    height: 16rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .jumbotron-container-3 {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .table-responsive .row {
+    gap: 0.5rem;
+  }  
 }

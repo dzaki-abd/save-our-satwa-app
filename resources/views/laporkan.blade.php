@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
     <div class="jumbotron-2">
@@ -130,9 +130,9 @@
         <div id="formfield">
         </div>
         <div>
-            <button type="button" class="btn button-teal-500" style="margin-bottom: 1rem;" onclick="addUpload()">Tambah
+            <button type="button" class="button-teal-500" style="margin-bottom: 1rem;" onclick="addUpload()">Tambah
                 Unggah</button>
-            <button type="button" class="btn button-teal-500" style="margin-bottom: 1rem;"
+            <button type="button" class="button-teal-500" style="margin-bottom: 1rem;"
                 onclick="removeUpload()">Hapus Unggah</button>
         </div>
 
@@ -180,7 +180,7 @@
             <textarea class="form-control" id="catatan_tambahan" name="catatan_tambahan" rows="3"
                 placeholder="Masukkan catatan tambahan"></textarea>
         </div>
-        <button type="submit" class="btn button-teal-500">Kirim</button>
+        <button type="submit" class="button-teal-500">Kirim</button>
     </form>
 @endsection
 

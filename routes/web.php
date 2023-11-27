@@ -18,6 +18,8 @@ Route::group(['middleware' => ['auth','web']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::name('artikel.')->prefix('artikel')->group(function () {
             Route::get('/get-data', [ArtikelController::class, 'getDataArtikel'])->name('get-data');
+            Route::get('/get-data/{id}', [ArtikelController::class, 'getDataArtikelById'])->name('get-data-by-id');
+            Route::get('/add', [ArtikelController::class, 'addArtikelPage'])->name('add');
         });
         Route::resource('artikel', ArtikelController::class);
     });
@@ -99,8 +101,13 @@ Route::get('/donasi', function () {
 });
 
 Route::get('/satwa', function () {
-return view('satwa');
+    return view('satwa');
 });
+
+Route::get('/detail-satwa', function () {
+    return view('detail-satwa');
+});
+    
 
 Route::get('/laporkan', function () {
     return view('laporkan');

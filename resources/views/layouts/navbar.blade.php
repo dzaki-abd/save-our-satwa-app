@@ -1,7 +1,4 @@
-<nav
-  class="navbar navbar-expand-lg fixed-top"
-  data-bs-theme="dark"
->
+<nav class="navbar navbar-expand-lg fixed-top" data-bs-theme="dark">
   <div class="container">
     <a class="navbar-brand" href="#" >
       <img src="../img/logosos.png" alt="" style="height: 1.8rem">
@@ -122,9 +119,9 @@
     @else
       <div class="d-flex login-button-box">
         <a
-          class="btn button-teal-500"
+          class="button-teal-500"
           href="/login"
-        >Login</a>
+        >Masuk</a>
       </div>
       @endif
     </div>
