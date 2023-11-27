@@ -15,7 +15,8 @@ class SatwaController extends Controller
      */
     public function index()
     {
-        return view('dashboard.satwa.index');
+        $countSatwa = Satwa::count();
+        return view('dashboard.satwa.index', compact('countSatwa'));
     }
 
     /**
