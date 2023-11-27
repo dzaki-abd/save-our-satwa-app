@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
             Route::get('/get-data-api', [SatwaController::class, 'getDataFromAPI'])->name('get-data-api');
         });
         Route::resource('satwa', SatwaController::class);
-        
+
         Route::name('laporan.')->prefix('laporan')->group(function () {
         });
         Route::resource('laporan', PelaporanController::class);
@@ -61,13 +61,13 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     });
 
     Route::get('/satwa', function () {
-      return view('satwa');
+        return view('satwa');
     });
-  
+
     Route::get('/detail-satwa', function () {
         return view('detail-satwa');
     });
-    
+
     Route::get('/laporkan', function () {
         return view('laporkan');
     });

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('satwas', function (Blueprint $table) {
             $table->id();
             $table->string('taxonid');
-            $table->string('nama_ilmiah');
+            $table->string('nama_ilmiah')->unique();
             $table->string('nama_lokal');
             $table->string('nama_inggris');
             $table->text('deskripsi');
