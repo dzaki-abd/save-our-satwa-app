@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth','web','role:admin']], function () {
         Route::name('satwa.')->prefix('satwa')->group(function () {
             Route::get('/get-data', [SatwaController::class, 'getDataSatwa'])->name('get-data');
             Route::get('/get-data/{id}', [SatwaController::class, 'getDataSatwaById'])->name('get-data-by-id');
+            Route::get('/get-data-api', [SatwaController::class, 'getDataFromAPI'])->name('get-data-api');
+
         });
         Route::resource('satwa', SatwaController::class);
        Route::name('laporan.')->prefix('laporan')->group(function () {
