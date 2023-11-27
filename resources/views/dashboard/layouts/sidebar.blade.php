@@ -10,9 +10,9 @@
   </a>
 
   <hr class="sidebar-divider my-0" />
-  <li class="nav-item {{ Request::url() == url('/dashboard/dashboard') ? 'active' : '' }}">
+  <li class="nav-item {{ Request::url() == url('/dashboard') ? 'active' : '' }}">
     <a
-      href="/dashboard/dashboard"
+      href="/dashboard"
       class="nav-link"
     >
       <i class="fas fa-fw fa-tachometer-alt"></i>

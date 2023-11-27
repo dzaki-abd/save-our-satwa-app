@@ -6,6 +6,7 @@ use App\Models\Satwa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class SatwaController extends Controller
 {
@@ -30,13 +31,60 @@ class SatwaController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_ilmiah' => 'required|string',
-            'nama_lokal' => 'required|string',
-            'populasi' => 'required|string',
-            'kategori_iucn' => 'required|string',
-            'lokasi' => 'required|string',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'taxonid' => 'required',
+                'nama_ilmiah' => 'required',
+                'nama_lokal' => 'required',
+                'nama_inggris' => 'required',
+                'deskripsi' => 'required',
+                'kingdom' => 'required',
+                'filum' => 'required',
+                'kelas' => 'required',
+                'ordo' => 'required',
+                'famili' => 'required',
+                'genus' => 'required',
+                'tren_populasi' => 'required',
+                'kategori_iucn' => 'required',
+                'populasi' => 'required',
+                'lokasi' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
+            $request->file('image')->storeAs('img/satwa_images', $namaFile, 'public');
+            
+            $slug = Str::slug($validatedData['nama_lokal'], '-');
+    
+            $populasi = (int) $validatedData['populasi'];
+            
+            $satwa = Satwa::create([
+                'taxonid' => $validatedData['taxonid'],
+                'nama_ilmiah' => $validatedData['nama_ilmiah'],
+                'nama_lokal' => $validatedData['nama_lokal'],
+                'nama_inggris' => $validatedData['nama_inggris'],
+                'deskripsi' => $validatedData['deskripsi'],
+                'kingdom' => $validatedData['kingdom'],
+                'filum' => $validatedData['filum'],
+                'kelas' => $validatedData['kelas'],
+                'ordo' => $validatedData['ordo'],
+                'famili' => $validatedData['famili'],
+                'genus' => $validatedData['genus'],
+                'tren_populasi' => $validatedData['tren_populasi'],
+                'kategori_iucn' => $validatedData['kategori_iucn'],
+                'gambar' => $namaFile,
+                'populasi' => $populasi,
+                'lokasi' => $validatedData['lokasi'],
+                'slug' => $slug,
+            ]);
+    
+            $satwa->save();
+    
+            return redirect()->back()->with('success', 'Satwa berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+
     }
 
     /**
@@ -49,9 +97,14 @@ class SatwaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        //
+        $satwa = Satwa::findOrFail($id);
+
+        return response()->json([
+            'status' => true,
+            'data' => $satwa
+        ]);
     }
 
     /**
@@ -59,13 +112,95 @@ class SatwaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try {
+            $satwa = Satwa::findOrFail($id);
+
+            $validatedData = $request->validate([
+                'taxonid' => 'required',
+                'nama_ilmiah' => 'required',
+                'nama_lokal' => 'required',
+                'nama_inggris' => 'required',
+                'deskripsi' => 'required',
+                'kingdom' => 'required',
+                'filum' => 'required',
+                'kelas' => 'required',
+                'ordo' => 'required',
+                'famili' => 'required',
+                'genus' => 'required',
+                'tren_populasi' => 'required',
+                'kategori_iucn' => 'required',
+                'populasi' => 'required',
+                'lokasi' => 'required',
+                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $populasi = (int) $validatedData['populasi'];
+
+            $slug = Str::slug($validatedData['nama_lokal'], '-');
+
+            if ($request->hasFile('image_edit')) {
+                $namaFile = 'satwa-' . time() . '.' .  $request->image_edit->extension();
+                $request->file('image_edit')->storeAs('img/satwa_images', $namaFile, 'public');
+
+                $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+            } else {
+                $namaFile = $satwa->gambar;
+            }
+
+            $satwa->update([
+                'taxonid' => $validatedData['taxonid'],
+                'nama_ilmiah' => $validatedData['nama_ilmiah'],
+                'nama_lokal' => $validatedData['nama_lokal'],
+                'nama_inggris' => $validatedData['nama_inggris'],
+                'deskripsi' => $validatedData['deskripsi'],
+                'kingdom' => $validatedData['kingdom'],
+                'filum' => $validatedData['filum'],
+                'kelas' => $validatedData['kelas'],
+                'ordo' => $validatedData['ordo'],
+                'famili' => $validatedData['famili'],
+                'genus' => $validatedData['genus'],
+                'tren_populasi' => $validatedData['tren_populasi'],
+                'kategori_iucn' => $validatedData['kategori_iucn'],
+                'gambar' => $namaFile,
+                'populasi' => $populasi,
+                'lokasi' => $validatedData['lokasi'],
+                'slug' => $slug,
+            ]);
+            
+            return redirect()->back()->with('success', $validatedData['nama_ilmiah'] . ' berhasil diubah.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
+        try {
+            $satwa = Satwa::findOrFail($id);
+
+            $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+
+            $satwa->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Satwa berhasil dihapus.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getDataSatwa()
@@ -90,11 +225,10 @@ class SatwaController extends Controller
                 return $row->lokasi;
             })
             ->addColumn('action', function ($row) {
-                $url_edit = route('dashboard.artikel.show', ['artikel' => $row->id]);
                 $actionBtn = '
                     <div class="btn-group" role="group" aria-label="Action">
-                        <a href="' . $url_edit . '" class="btn btn-primary btn-md btn-icon" title="Detail / Edit"><i class="fa-solid fa-eye"></i></a>
-                        <button type="button" class="btn btn-danger btn-md btn-icon" onclick="destroyArtikel(' . $row->id . ')" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                        <button type="button" class="btn btn-primary btn-md btn-icon" onclick="editSatwa(' . $row->id . ')" title="Detail / Edit"><i class="fa-solid fa-eye"></i></button>
+                        <button type="button" class="btn btn-danger btn-md btn-icon" onclick="destroySatwa(' . $row->id . ')" title="Hapus"><i class="fa-solid fa-trash"></i></button>
                     </div>
                             ';
                 return $actionBtn;

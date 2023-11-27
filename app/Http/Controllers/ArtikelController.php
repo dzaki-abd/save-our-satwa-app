@@ -42,38 +42,39 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'jenis_artikel' => 'required|in:Artikel,Berita',
-            'di_posting' => 'required|in:Ya,Tidak',
-            'judul_artikel' => 'required|string',
-            'tag_artikel' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'konten' => 'required|string',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'jenis_artikel' => 'required|in:Artikel,Berita',
+                'di_posting' => 'required|in:Ya,Tidak',
+                'judul_artikel' => 'required|string',
+                'tag_artikel' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'konten' => 'required|string',
+            ]);
 
-        $users_id = auth()->user()->id;
+            $users_id = auth()->user()->id;
 
-        $namaFile = 'artikel-'. time() . '.' .  $request->image->extension();
-        $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
-        
-        $slug = Str::slug($validatedData['judul_artikel'], '-');
+            $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
+            $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
 
-        $artikel = new Artikel([
-            'jenis' => $validatedData['jenis_artikel'],
-            'di_posting' => $validatedData['di_posting'],
-            'judul' => $validatedData['judul_artikel'],
-            'tag' => $validatedData['tag_artikel'],
-            'gambar' => $namaFile,
-            'konten' => $validatedData['konten'],
-            'users_id' => $users_id,
-            'slug' => $slug,
-        ]);
+            $slug = Str::slug($validatedData['judul_artikel'], '-');
 
-        // Save the artikel to the database
-        $artikel->save();
+            $artikel = new Artikel([
+                'jenis' => $validatedData['jenis_artikel'],
+                'di_posting' => $validatedData['di_posting'],
+                'judul' => $validatedData['judul_artikel'],
+                'tag' => $validatedData['tag_artikel'],
+                'gambar' => $namaFile,
+                'konten' => $validatedData['konten'],
+                'users_id' => $users_id,
+                'slug' => $slug,
+            ]);
+            $artikel->save();
 
-        // Redirect or perform any other action as needed
-        return redirect()->route('dashboard.artikel.index')->with('success', $validatedData['jenis_artikel'] . ' berhasil dibuat.');
+            return redirect()->route('dashboard.artikel.index')->with('success', $validatedData['jenis_artikel'] . ' berhasil dibuat.');
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.artikel.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -99,40 +100,44 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $artikel = Artikel::findOrFail($id);
+        try {
+            $artikel = Artikel::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'jenis_artikel' => 'required|in:Artikel,Berita',
-            'di_posting' => 'required|in:Ya,Tidak',
-            'judul_artikel' => 'required|string',
-            'tag_artikel' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'konten' => 'required|string',
-        ]);
+            $validatedData = $request->validate([
+                'jenis_artikel' => 'required|in:Artikel,Berita',
+                'di_posting' => 'required|in:Ya,Tidak',
+                'judul_artikel' => 'required|string',
+                'tag_artikel' => 'required|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'konten' => 'required|string',
+            ]);
 
-        $users_id = auth()->user()->id;
+            $users_id = auth()->user()->id;
 
-        if ($request->hasFile('image')) {
-            $namaFile = 'artikel-'. time() . '.' .  $request->image->extension();
-            $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
-            $artikel->gambar = $namaFile;
+            if ($request->hasFile('image')) {
+                $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
+                $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
+                $artikel->gambar = $namaFile;
+            }
+
+            $slug = Str::slug($validatedData['judul_artikel'], '-');
+
+            $artikel->jenis = $validatedData['jenis_artikel'];
+            $artikel->di_posting = $validatedData['di_posting'];
+            $artikel->judul = $validatedData['judul_artikel'];
+            $artikel->tag = $validatedData['tag_artikel'];
+            $artikel->konten = $validatedData['konten'];
+            $artikel->users_id = $users_id;
+            $artikel->slug = $slug;
+
+            // Save the artikel to the database
+            $artikel->save();
+
+            // Redirect or perform any other action as needed
+            return redirect()->route('dashboard.artikel.index')->with('success', $validatedData['jenis_artikel'] . ' berhasil diubah.');
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.artikel.index')->with('error', $e->getMessage());
         }
-
-        $slug = Str::slug($validatedData['judul_artikel'], '-');
-
-        $artikel->jenis = $validatedData['jenis_artikel'];
-        $artikel->di_posting = $validatedData['di_posting'];
-        $artikel->judul = $validatedData['judul_artikel'];
-        $artikel->tag = $validatedData['tag_artikel'];
-        $artikel->konten = $validatedData['konten'];
-        $artikel->users_id = $users_id;
-        $artikel->slug = $slug;
-
-        // Save the artikel to the database
-        $artikel->save();
-
-        // Redirect or perform any other action as needed
-        return redirect()->route('dashboard.artikel.index')->with('success', $validatedData['jenis_artikel'] . ' berhasil diubah.');
     }
 
     /**
@@ -140,20 +145,24 @@ class ArtikelController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $artikel = Artikel::findOrFail($id);
-        $image_path = public_path('storage/img/artikel_images/' . $artikel->gambar);
-        if(file_exists($image_path)) {
-            unlink($image_path);
+        try {
+            $artikel = Artikel::findOrFail($id);
+            $image_path = public_path('storage/img/artikel_images/' . $artikel->gambar);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+            $artikel->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data berhasil dihapus.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
         }
-        $artikel->delete();
-
-        //return json
-        return response()->json([
-            'status' => true,
-            'message' => 'Data berhasil dihapus.'
-        ]);
-
-        // return redirect()->route('dashboard.artikel.index')->with('success', 'Artikel berhasil dihapus.');
     }
 
     public function getDataArtikel()

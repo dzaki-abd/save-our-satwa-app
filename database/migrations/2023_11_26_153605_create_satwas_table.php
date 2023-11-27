@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('satwas', function (Blueprint $table) {
             $table->id();
-            $table->integer('taxonid');
+            $table->string('taxonid');
             $table->string('nama_ilmiah');
             $table->string('nama_lokal');
             $table->string('nama_inggris');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('gambar');
             $table->integer('populasi');
             $table->string('lokasi');
+            $table->string('slug');
             $table->timestamps();
         });
     }
