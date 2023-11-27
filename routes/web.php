@@ -61,9 +61,13 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     });
 
     Route::get('/satwa', function () {
-        return view('satwa');
+      return view('satwa');
     });
-
+  
+    Route::get('/detail-satwa', function () {
+        return view('detail-satwa');
+    });
+    
     Route::get('/laporkan', function () {
         return view('laporkan');
     });

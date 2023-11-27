@@ -1,13 +1,7 @@
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"id="accordionSidebar">
-  <a
-    href="index.html"
-    class="sidebar-brand d-flex align-items-center justify-content-center"
-  >
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
-    </div>
-    <div class="sidebar-brand-text mx-3">SOS</div>
-  </a>
+  <div class="sidebar-brand d-flex align-items-center justify-content-center">
+    <img src="../../img/logosos.png" alt="" style="height: 1.8rem">
+  </div>
 
   <hr class="sidebar-divider my-0" />
   <li class="nav-item {{ Request::url() == url('/dashboard') ? 'active' : '' }}">

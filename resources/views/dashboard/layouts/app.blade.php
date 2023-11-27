@@ -158,26 +158,23 @@
 
   <script src="{{ asset('js/datatables-initiator.js') }}"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-  <script src="{{ asset('js/chart-pie-initiator.js') }}"></script>
-  <script src="{{ asset('js/chart-area-initiator.js') }}"></script>
-
-
   <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+  <script src="{{ asset('js/fancybox-initiator.js') }}"></script>
   <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/squircle.js"></script>
 
   @if (session('success'))
     <script>
-      Swal.fire({
-        icon: 'success',
-        title: 'Berhasil!',
-        text: '{{ session('success') }}',
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false
-      });
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
+
     </script>
   @endif
 

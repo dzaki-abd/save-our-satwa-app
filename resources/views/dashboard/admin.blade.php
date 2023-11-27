@@ -112,7 +112,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body pb-0">
           <form
@@ -212,7 +212,7 @@
             class="btn btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
-          ><i class="fa-solid fa-xmark"></i></button>
+          ></button>
         </div>
         <div class="modal-body">
           Pilih opsi "Hapus" di bawah ini apabila Anda sudah siap untuk menghapus data admin dengan ID "...".

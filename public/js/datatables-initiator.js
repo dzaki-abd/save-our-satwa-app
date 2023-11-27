@@ -56,4 +56,8 @@ $(document).ready(function () {
     "lengthMenu": [5, 10, 25, 50],
     "pageLength": 5
   });
+  $('#detailSatwa').DataTable({
+    "lengthMenu": [5, 10, 25, 50],
+    "pageLength": 5
+  });
 });

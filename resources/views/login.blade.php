@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['showFooter' => false])
 
 @section('jumbotron')
   <div class="jumbotron h-100">
@@ -27,7 +27,7 @@
             </div>
             <a href="#">Lupa Password?</a>
           </div>
-          <button type="submit" class="btn button-teal-500 w-100 mb-3">Masuk</button>
+          <button type="submit" class="button-teal-500 w-100 mb-3">Masuk</button>
           <p class="text-center text-white mb-0">Belum punya akun? <a href="/regristasi">Daftar</a></p>
         </form>
       </div>
