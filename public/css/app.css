@@ -530,6 +530,29 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   --bs-pagination-disabled-bg: var(--white);
 }
 
+/* ========== INFORMASI ARTIKEL ========== */
+
+.artikel-poster{
+  padding: 0.4rem;
+}
+
+.artikel-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artikel-content .card-title {
+  color: var(--teal-500);
+}
+
+.artikel-content .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* ========== LAPORKAN ========== */
 
 .form-laporkan h5 {
@@ -698,6 +721,12 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
   .table-responsive .row {
     gap: 0.5rem;
+  }
+
+  /* ========== INFORMASI ARTIKEL ========== */
+
+  .artikel-poster{
+    height: 10rem;
   }
 }
 
