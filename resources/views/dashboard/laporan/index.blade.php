@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <!-- Card Laporan Diajukan -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    {{-- <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -24,10 +24,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <!-- Card Laporan Ditinjau -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-warning shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -36,7 +36,7 @@
                 Laporan Ditinjau
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                40
+                {{ $countLaporan }}
               </div>
             </div>
             <div class="col-auto">
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Card Laporan Disetujui -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-success shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Card Laporan Ditolak -->
-    <div class="col-xl-3 col-md-6 mb-4">
+    <div class="col-xl-4 col-md-6 mb-4">
       <div class="card border-left-danger shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -97,14 +97,14 @@
   >
     <li class="nav-item">
       <button
-        id="buttonLaporanDiajukan"
+        id="buttonLaporanDitinjau"
         class="btn btn-success"
         style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
       >
-        Laporan Diajukan
+        Laporan Ditinjau
       </button>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <button
         id="buttonLaporanDitinjau"
         class="btn text-success"
@@ -112,7 +112,7 @@
       >
         Laporan Ditinjau
       </button>
-    </li>
+    </li> --}}
     <li class="nav-item">
       <button
         id="buttonLaporanDisetujui"
@@ -134,7 +134,7 @@
   </ul>
 
   <!-- DataTales Laporan Diajukan -->
-  <div
+  {{-- <div
     id="boxLaporanDiajukan"
     class="card-2 shadow mb-4 bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
@@ -180,12 +180,12 @@
         </table>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <!-- DataTales Laporan Ditinjau -->
   <div
     id="boxLaporanDitinjau"
-    class="card-2 shadow mb-4 d-none bg-white"
+    class="card-2 shadow mb-4 bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
   >
     <div class="card-header py-3 d-flex align-items-center">
@@ -222,61 +222,7 @@
             </tr>
           </tfoot>
           <tbody>
-            @for ($i = 0; $i < 5; $i++)
-              <tr class="align-middle">
-                <td class="align-middle text-gray-600">Kevin Iansyah</td>
-                <td class="align-middle text-gray-600">20 Desember 2022</td>
-                <td class="align-middle text-gray-600">Perburuan Illegal</td>
-                <td class="align-middle text-gray-600">Orang Utan</td>
-                <td class="align-middle text-gray-600">
-                  <button
-                    type="button"
-                    class="btn btn-warning"
-                  >Ditinjau</button>
-                </td>
-                <td class="d-flex align-middle">
-                  <div class="d-flex">
-                    <!-- Button Trigger-->
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-primary d-flex justify-content-center align-items-center mr-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#riwayatLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-clock-rotate-left"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                    <a
-                      href="/dashboard/laporan/detail-laporan/id"
-                      class="btn btn-warning d-flex justify-content-center align-items-center mr-1"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-eye"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </a>
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-danger d-flex justify-content-center align-items-center"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-trash"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            @endfor
+
           </tbody>
         </table>
       </div>
@@ -520,19 +466,19 @@
                 <li class="timeline-item">
                   <span class="timeline-icon bg-success">
                     <!--
-                                        Gunakan icon berdasarkan status menggunakan if
-                                        Diajukan :
-                                        <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
-                                        
-                                        Ditinjau
-                                        <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
+                                                              Gunakan icon berdasarkan status menggunakan if
+                                                              Diajukan :
+                                                              <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
+                                                              
+                                                              Ditinjau
+                                                              <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
 
-                                        Disetujui
-                                        <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
+                                                              Disetujui
+                                                              <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
 
-                                        Ditolak
-                                        <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
-                                      -->
+                                                              Ditolak
+                                                              <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
+                                                            -->
                     <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
                   </span>
 
@@ -612,7 +558,7 @@
       console.log(message);
     };
 
-    $('#laporanDiajukan').DataTable({
+    $('#laporanDitinjau').DataTable({
       fixedHeader: true,
       pageLength: 25,
       lengthChange: true,

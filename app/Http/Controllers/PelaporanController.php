@@ -37,13 +37,14 @@ class PelaporanController extends Controller
                     return $row->jenis_satwa;
                 })
                 ->addColumn('status', function ($row) {
-                    $badgeStatus = '<span class="badge text-bg-primary">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
                     return $badgeStatus;
                 })
                 ->addColumn('action', function ($row) {
+                    $show = route('dashboard.laporan.show', encrypt($row->id));
                     $actionBtn = '
                         <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
-                            <button type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah"><i class="fa-solid fa-pen"></i></button>
+                            <a type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
                             <button type="button" class="btn btn-danger btn-sm btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     ';
@@ -53,7 +54,7 @@ class PelaporanController extends Controller
                 ->make(true);
         }
 
-        return view('dashboard.laporan', compact('countLaporan'));
+        return view('dashboard.laporan.index', compact('countLaporan'));
     }
 
     /**
@@ -75,9 +76,13 @@ class PelaporanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pelaporan $pelaporan)
+    public function show(Pelaporan $pelaporan, $laporan)
     {
-        //
+        $idLaporan = decrypt($laporan);
+        $laporan = Pelaporan::find($idLaporan);
+        $user = User::find($laporan->user_id);
+
+        return view('dashboard.laporan.show', compact('laporan', 'user'));
     }
 
     /**
@@ -85,7 +90,7 @@ class PelaporanController extends Controller
      */
     public function edit(Pelaporan $pelaporan)
     {
-        //
+
     }
 
     /**
