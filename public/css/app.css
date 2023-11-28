@@ -105,34 +105,25 @@ body {
   background-color: var(--white);
 }
 
-/* .button-teal-500 {
-  background-color: var(--teal-500);
-  color: var(--white);
-  transition: all 0.2s;
-}
-
-.button-teal-500:hover {
-  background-color: var(--teal-400);
-  color: var(--white);
-} */
-
 .button-teal-500 {
   display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  border: 1px solid transparent;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  border-radius: .25rem;
-  color: #fff;
-  background-color: var(--teal-500);
+	font-weight: 400;
+	color: #212529;
+	text-align: center;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	color: var(--white);
+	background-color: var(--teal-500);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button-teal-500:hover {
   background-color: var(--teal-400);
+  color: var(--white)
 }
 
 /* ========== FOOTER ========== */
@@ -140,6 +131,10 @@ body {
 .footer {
   margin-top: 70px;
   background-color: var(--teal-600);
+}
+
+.footer.active {
+  margin-top: 0;
 }
 
 .footer .card-body {
@@ -223,14 +218,11 @@ body {
 
 .main-content .h3-top {
   margin-top: 70px;
-}
-
-.main-content h3 {
   color: var(--teal-600);
   font-weight: 600;
 }
 
-.main-content span {
+.main-content .h3-top span {
   color: var(--teal-900);
 }
 
@@ -448,7 +440,6 @@ body {
   .jumbotron-3 {
     height: fit-content;
     max-height: none;
-    /* Reset max-height for this condition if needed */
   }
 
   .jumbotron-container-3 {
@@ -553,6 +544,53 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   overflow: hidden;
 }
 
+/* ========== DETAIL ARTIKEL ========== */
+
+.jumbotron-4 {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 60vh;
+}
+
+.jumbotron-container-4 {
+  height: 100%;
+  background-color: rgba(0 ,0 ,0 , 0.6);
+}
+
+.jumbotron-content-4 {
+ width: 100%;
+}
+
+.detail-artikel-container {
+  position: relative;
+  z-index: 2;
+  top: -70px;
+  background-color: var(--white);
+}
+
+.detail-artikel-container img {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.detail-artikel-content, .detail-artikel-sidebar  {
+  padding: 0.5rem;
+}
+
+.detail-artikel-content a, .detail-artikel-content h1, .detail-artikel-content h2, .detail-artikel-content h3 {
+  color: var(--teal-500);
+}
+
+.detail-artikel-content h1, .detail-artikel-content h2, .detail-artikel-content h3 {
+  margin-bottom: 1rem;
+}
+
+.detail-artikel-sidebar h6 {
+  color: var(--teal-500);
+}
+
 /* ========== LAPORKAN ========== */
 
 .form-laporkan h5 {
@@ -637,6 +675,10 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-top: 60px;
   }
 
+  .footer.active {
+    margin-top: 0;
+  }
+
   .footer .card-body {
     margin-top: 60px;
     margin-bottom: 60px;
@@ -654,6 +696,16 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .detail-satwa-container {
     display: flex;
     align-items: center;
+  }
+
+  /* ========== DETAIL ARTIKEL ========== */
+
+  .jumbotron-4 {
+    height: 40vh;
+  }
+
+  .detail-artikel-container {
+    top: -60px;
   }
 }
 
@@ -703,6 +755,10 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-top: 50px;
   }
 
+  .footer.active {
+    margin-top: 0;
+  }
+
   .footer .card-body {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -727,6 +783,20 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
   .artikel-poster{
     height: 10rem;
+  }
+
+  /* ========== DETAIL ARTIKEL ========== */
+
+  .jumbotron-4 {
+    height: 60vh;
+  }
+
+  .detail-artikel-container {
+    top: -50px;
+  }
+
+  .detail-artikel-container img {
+    height: 15rem;
   }
 }
 

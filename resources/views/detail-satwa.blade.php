@@ -78,13 +78,13 @@
       >
         <thead>
           <tr>
-            <th class="border-0 text-gray-700">Nama</th>
+            <th class="border-0 text-gray-700">Laporan</th>
             <th class="border-0 text-gray-700">Aksi</th>
           </tr>
         </thead>
         <tfoot>
           <tr>
-            <th class="text-gray-700">Nama</th>
+            <th class="text-gray-700">Laporan</th>
             <th class="text-gray-700">Aksi</th>
           </tr>
         </tfoot>
