@@ -10,4 +10,9 @@ class BuktiKejadian extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function pelaporan()
+    {
+        return $this->belongsTo(Pelaporan::class);
+    }
 }

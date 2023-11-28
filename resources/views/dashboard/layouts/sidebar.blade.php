@@ -1,6 +1,12 @@
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion"id="accordionSidebar">
   <div class="sidebar-brand d-flex align-items-center justify-content-center">
-    <img src="../../img/logosos.png" alt="" style="height: 1.8rem">
+    <a href="{{ route('home') }}">
+      <img
+        src="{{ asset('img/logosos.png') }}"
+        alt=""
+        style="height: 1.8rem"
+      >
+    </a>
   </div>
 
   <hr class="sidebar-divider my-0" />
@@ -36,9 +42,7 @@
       <span>Laporan</span>
     </a>
   </li>
-  <li
-    class="nav-item @if (request()->routeIs('dashboard.satwa.*')) active @endif"
-  >
+  <li class="nav-item @if (request()->routeIs('dashboard.satwa.*')) active @endif">
     <a
       href="{{ route('dashboard.satwa.index') }}"
       class="nav-link"
@@ -47,9 +51,7 @@
       <span>Satwa</span>
     </a>
   </li>
-  <li
-    class="nav-item @if (request()->routeIs('dashboard.artikel.*')) active @endif"
-  >
+  <li class="nav-item @if (request()->routeIs('dashboard.artikel.*')) active @endif">
     <a
       href="{{ route('dashboard.artikel.index') }}"
       class="nav-link"

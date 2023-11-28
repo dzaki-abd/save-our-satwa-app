@@ -15,4 +15,9 @@ class Pelaporan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function buktiKejadian()
+    {
+        return $this->hasMany(BuktiKejadian::class);
+    }
 }

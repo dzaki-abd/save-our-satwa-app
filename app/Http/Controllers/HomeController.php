@@ -98,6 +98,7 @@ class HomeController extends Controller
         }
 
         Pelaporan::create([
+            'uniqid' => uniqid(),
             'waktu_kejadian' => $request->waktu_kejadian,
             'lokasi_kejadian' => $request->lokasi_kejadian,
             'jenis_pelanggaran' => $request->jenis_pelanggaran,
