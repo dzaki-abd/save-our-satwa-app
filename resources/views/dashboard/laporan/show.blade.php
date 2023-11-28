@@ -49,16 +49,21 @@
             name="status"
             required
           >
-            <option>Pilih...</option>
-            <option value="Disetujui">Ditinjau</option>
+            <option
+              readonly
+              selected
+              value="null"
+            >Pilih...</option>
+            <option value="Ditinjau">Ditinjau</option>
             <option value="Disetujui">Disetujui</option>
             <option value="Ditolak">Ditolak</option>
           </select>
         </div>
         <div class="col-auto">
           <button
-            type="submit"
+            type="button"
             class="btn btn-success"
+            id = "btn-ubah-status"
           >Simpan</button>
         </div>
       </form>
@@ -336,6 +341,63 @@
 
 @push('scripts')
   <script>
-    Fancybox.bind('[data-fancybox="buktiLaporan"]', {});
+    // Fancybox.bind('[data-fancybox="buktiLaporan"]', {});
+    // get from url
+    const idLaporan = window.location.pathname.split('/')[3];
+
+    $('#btn-ubah-status').click(function() {
+      // console.log(idLaporan);
+      let status = $('#status').val();
+      let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
+      if (status == 'null') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Anda belum memilih status!',
+        })
+      } else {
+        Swal.fire({
+          title: 'Apakah Anda yakin?',
+          text: "Anda akan mengubah status laporan ini!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#1cc88a',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ubah',
+          cancelButtonText: 'Batal'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: urlUpdate,
+              method: 'PUT',
+              data: {
+                _token: '{{ csrf_token() }}',
+                status: status
+              },
+              success: function(response) {
+                if (response.status == 'success') {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Status laporan berhasil diubah!',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.reload();
+                    }
+                  })
+                }
+              },
+              error: function(response) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Terjadi kesalahan!',
+                })
+              }
+            })
+          }
+        })
+      }
+    });
   </script>
 @endpush

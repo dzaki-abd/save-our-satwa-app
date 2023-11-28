@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pelaporan;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\StorePelaporanRequest;
 use App\Http\Requests\UpdatePelaporanRequest;
@@ -106,9 +107,19 @@ class PelaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePelaporanRequest $request, Pelaporan $pelaporan)
+    public function update(Request $request, $laporan)
     {
-        //
+        $idLaporan = decrypt($laporan);
+
+        $laporan = Pelaporan::where('id', $idLaporan)->first();
+        $laporan->status = $request->status;
+        $laporan->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil mengubah status laporan'
+        ]);
+
     }
 
     /**
