@@ -24,7 +24,7 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center">
       <h6 class="m-0 font-weight-bold text-success">
-        Edit Status Laporan dengan ID {{ $laporan->uniqid }}
+        Edit Status Laporan dengan ID {{ $data['laporan']->uniqid }}
       </h6>
     </div>
     <div class="card-body">
@@ -101,12 +101,12 @@
                 style="border-top: 0"
               >
                 <!-- Pilih salah satu status menggunakan if berdasarkan status terbar -->
-                @if ($laporan->status == 'Ditolak')
+                @if ($data['laporan']->status == 'Ditolak')
                   <button
                     type="button"
                     class="btn btn-danger"
                   >Ditolak</button>
-                @elseif ($laporan->status == 'Ditinjau')
+                @elseif ($data['laporan']->status == 'Ditinjau')
                   <button
                     type="button"
                     class="btn btn-warning"
@@ -138,7 +138,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->user->name }}</td>
+              >{{ $data['laporan']->user->name }}</td>
             </tr>
             <tr class="align-middle">
               <th
@@ -148,7 +148,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->user->email }}</td>
+              >{{ $data['laporan']->user->email }}</td>
             </tr>
             <tr class="align-middle">
               <th
@@ -158,7 +158,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->user->no_hp }}</td>
+              >{{ $data['laporan']->user->no_hp }}</td>
             </tr>
 
             <thead>
@@ -179,7 +179,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ date('d F Y', strtotime($laporan->waktu_kejadian)) }}</td>
+              >{{ date('d F Y', strtotime($data['laporan']->waktu_kejadian)) }}</td>
             </tr>
             <tr class="align-middle">
               <th
@@ -189,7 +189,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->lokasi_kejadian }}</td>
+              >{{ $data['laporan']->lokasi_kejadian }}</td>
             </tr>
 
             <thead>
@@ -210,7 +210,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->jenis_pelanggaran }}</td>
+              >{{ $data['laporan']->jenis_pelanggaran }}</td>
             </tr>
             <tr class="align-middle">
               <th
@@ -220,7 +220,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $laporan->jenis_satwa }}</td>
+              >{{ $data['laporan']->jenis_satwa }}</td>
             </tr>
 
             <thead>
@@ -238,7 +238,7 @@
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0"
-              >{{ $laporan->deskripsi_kejadian }}</td>
+              >{{ $data['laporan']->deskripsi_kejadian }}</td>
             </tr>
 
             <thead>
@@ -257,20 +257,20 @@
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0"
               >
-                @for ($i = 0; $i < 5; $i++)
+                @foreach ($data['buktiKejadian'] as $bukti)
                   <a
                     href="../../../img/buktilaporan.jpg"
                     {{-- data-fancybox="buktiLaporan" --}}
                     {{-- data-caption="Gallery B #2" --}}
                   >
                     <img
-                      src="../../../img/buktilaporan.jpg"
+                      src="{{ asset('storage/bukti_kejadian/' . $bukti->bukti_kejadian) }}"
                       alt=""
                       class="rounded mb-1"
                       style="height: 200px"
                     >
                   </a>
-                @endfor
+                @endforeach
               </td>
             </tr>
 
@@ -289,7 +289,7 @@
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0"
-              >{{ $laporan->tindak_lanjut ?? 'Tidak ada' }}</td>
+              >{{ $data['laporan']->tindak_lanjut ?? 'Tidak ada' }}</td>
             </tr>
 
             <thead>
@@ -330,7 +330,7 @@
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0"
-              >{{ $laporan->catatan_tambahan ?? 'Tidak ada' }}</td>
+              >{{ $data['laporan']->catatan_tambahan ?? 'Tidak ada' }}</td>
             </tr>
           </tbody>
         </table>

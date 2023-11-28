@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
@@ -48,8 +47,8 @@
 
 body {
   font-family: 'Roboto', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol', 'Noto Color Emoji';
+    'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* ========== NAVBAR ========== */
@@ -87,16 +86,18 @@ body {
 
 .dropdown-profile {
   border: none;
-  background: rgb(210,244,234);
-  background: linear-gradient(45deg, rgba(210,244,234,1) 0%, rgba(255,255,255,1) 50%, rgba(210,244,234,1) 100%);
+  background: rgb(210, 244, 234);
+  background: linear-gradient(45deg, rgba(210, 244, 234, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(210, 244, 234, 1) 100%);
 }
 
-.dropdown-profile a, .dropdown-profile i {
+.dropdown-profile a,
+.dropdown-profile i {
   color: var(--teal-500);
   transition: all 0.2s;
 }
 
-.dropdown-profile a:hover, .dropdown-profile i:hover {
+.dropdown-profile a:hover,
+.dropdown-profile i:hover {
   color: var(--teal-600);
 }
 
@@ -164,7 +165,7 @@ body {
 }
 
 .jumbotron-content {
- width: 50%;
+  width: 50%;
 }
 
 .jumbotron-content p {
@@ -200,13 +201,13 @@ body {
 }
 
 .jumbotron-content-2 {
- width: 100%;
+  width: 100%;
 }
 
 .jumbotron-content-2 h2 {
   margin-top: 3rem;
   margin-bottom: 0;
- }
+}
 
 .jumbotron-content-2 p {
   font-weight: 300;
@@ -245,7 +246,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-.accordion{
+.accordion {
   background-color: transparent;
   border-radius: 0.35rem !important;
 }
@@ -382,13 +383,14 @@ body {
 }
 
 .jumbotron-container-3 {
-  background-color: rgba(0 ,0 ,0 , 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
   padding-top: 70px;
   padding-bottom: 70px;
 }
 
-.detail-poster, .detail-content {
+.detail-poster,
+.detail-content {
   height: 100%;
 }
 
@@ -421,13 +423,13 @@ body {
 }
 
 .detail-content .table th {
-  border-top: 0; 
-  min-width: 8rem !important; 
+  border-top: 0;
+  min-width: 8rem !important;
   max-width: 10rem !important;
 }
 
 .detail-content .table td {
-  border-top: 0; 
+  border-top: 0;
 }
 
 .table>:not(caption)>*>* {
@@ -465,11 +467,13 @@ body {
     padding: 1rem;
   }
 
-  .table-riwayat p, .table-riwayat i {
+  .table-riwayat p,
+  .table-riwayat i {
     font-size: 0.9rem;
   }
 
-  .table-riwayat .icon-riwayat p, .table-riwayat .icon-riwayat i {
+  .table-riwayat .icon-riwayat p,
+  .table-riwayat .icon-riwayat i {
     font-size: 0.8rem;
     color: var(--secondary);
   }
@@ -480,7 +484,8 @@ body {
 }
 
 /* ========== DATA TABLES ========== */
-.active>.page-link, .page-link.active {
+.active>.page-link,
+.page-link.active {
   z-index: 3;
   color: var(--white);
   background-color: var(--teal-500);
@@ -503,17 +508,40 @@ div.dataTables_wrapper div.dataTables_info {
   padding-left: 12px;
 }
 
-div.dataTables_wrapper div.dataTables_filter > label > input:focus {
+div.dataTables_wrapper div.dataTables_filter>label>input:focus {
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
-div.dataTables_wrapper div.dataTables_length > label > select:focus{
+div.dataTables_wrapper div.dataTables_length>label>select:focus {
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
 .pagination {
   --bs-pagination-color: var(--teal-500);
   --bs-pagination-disabled-bg: var(--white);
+}
+
+/* ========== INFORMASI ARTIKEL ========== */
+
+.artikel-poster{
+  padding: 0.4rem;
+}
+
+.artikel-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artikel-content .card-title {
+  color: var(--teal-500);
+}
+
+.artikel-content .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ========== DETAIL ARTIKEL ========== */
@@ -588,7 +616,8 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   background-color: var(--teal-500);
 }
 
-.login-box .label-checkbox, .login-box a {
+.login-box .label-checkbox,
+.login-box a {
   color: var(--teal-500);
   font-size: 0.9rem;
 }
@@ -601,7 +630,7 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
-.login-box p  {
+.login-box p {
   color: var(--teal-500);
   font-size: 0.9rem;
 }
@@ -627,18 +656,18 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .jumbotron-content {
     width: 75%;
-   }
+  }
 
-   .jumbotron-2 {
+  .jumbotron-2 {
     height: 25vh;
   }
 
   .jumbotron-content-2 h2 {
     margin-top: 3rem;
     margin-bottom: 0;
-   }
+  }
 
-   .jumbotron-3 {
+  .jumbotron-3 {
     height: fit-content;
   }
 
@@ -655,7 +684,7 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
     margin-bottom: 60px;
   }
 
-  .main-content .h3-top{
+  .main-content .h3-top {
     margin-top: 60px;
   }
 
@@ -695,13 +724,13 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .jumbotron-content {
     width: 100%;
-   }
+  }
 
-   .jumbotron-2 {
+  .jumbotron-2 {
     height: 35vh;
   }
 
-  .jumbotron-search-2{
+  .jumbotron-search-2 {
     height: 45vh;
   }
 
@@ -712,9 +741,9 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   .jumbotron-content-2 h2 {
     margin-top: 3rem;
     margin-bottom: 0;
-   }
+  }
 
-   .main-content .h3-top {
+  .main-content .h3-top {
     margin-top: 50px;
   }
 
@@ -748,7 +777,13 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .table-responsive .row {
     gap: 0.5rem;
-  }  
+  }
+
+  /* ========== INFORMASI ARTIKEL ========== */
+
+  .artikel-poster{
+    height: 10rem;
+  }
 
   /* ========== DETAIL ARTIKEL ========== */
 
@@ -763,4 +798,13 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   .detail-artikel-container img {
     height: 15rem;
   }
+}
+
+.required:after {
+  content: "*";
+  position: relative;
+  font-size: inherit;
+  color: var(--bs-danger);
+  padding-left: .25rem;
+  font-weight: 600
 }

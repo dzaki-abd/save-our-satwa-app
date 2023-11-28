@@ -58,7 +58,7 @@ class PelaporanController extends Controller
                 $show = route('dashboard.laporan.show', encrypt($row->id));
                 $actionBtn = '
                     <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
-                        <a type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
+                        <a type="button" class="btn btn-primary btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
                         <button type="button" class="btn btn-danger btn-sm btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>
                     </div>
                 ';
@@ -92,8 +92,17 @@ class PelaporanController extends Controller
         $idLaporan = decrypt($laporan);
         $laporan = Pelaporan::find($idLaporan);
         $user = User::find($laporan->user_id);
+        $buktiKejadian = $laporan->buktiKejadian;
 
-        return view('dashboard.laporan.show', compact('laporan', 'user'));
+        $data = [
+            'laporan' => $laporan,
+            'user' => $user,
+            'buktiKejadian' => $buktiKejadian,
+        ];
+
+        // return $buktiKejadian;
+
+        return view('dashboard.laporan.show', compact('data'));
     }
 
     /**

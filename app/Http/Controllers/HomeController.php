@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
+use App\Models\Donasi;
 
 class HomeController extends Controller
 {
@@ -98,6 +99,7 @@ class HomeController extends Controller
         }
 
         Pelaporan::create([
+            'uniqid' => uniqid(),
             'waktu_kejadian' => $request->waktu_kejadian,
             'lokasi_kejadian' => $request->lokasi_kejadian,
             'jenis_pelanggaran' => $request->jenis_pelanggaran,
@@ -139,5 +141,33 @@ class HomeController extends Controller
 
         return redirect()->back()
             ->with('success', 'Laporan berhasil ditambahkan.');
+    }
+
+    public function addDonasi(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'nama_donatur' => 'required',
+                'email_donatur' => 'required',
+                'nomor_donatur' => 'required',
+                'jumlah_donatur' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
+
+            $namaFile = 'donasi-' . time() . '.' . $request->image->extension();
+            $request->file('image')->storeAs('img/donasi_images', $namaFile, 'public');
+
+            Donasi::create([
+                'nama_donatur' => $validatedData['nama_donatur'],
+                'email' => $validatedData['email_donatur'],
+                'no_hp' => $validatedData['nomor_donatur'],
+                'bukti_transfer' => $namaFile,
+                'jumlah_donasi' => $validatedData['jumlah_donatur'],
+            ]);
+
+            return redirect()->back()->with('success', 'Konfirmasi dikirim, terima kasih.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Konfirmasi gagal dikirim, silahkan coba lagi.');
+        }
     }
 }
