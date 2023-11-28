@@ -42,15 +42,15 @@ buttonLaporanDitinjau.addEventListener("click", () => {
     buttonLaporanDitolak.classList.remove("btn-success");
     buttonLaporanDitolak.classList.add("text-success");
 
-    const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
-    const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
-    const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
-    const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
+    // const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
+    // // const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
+    // const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
+    // const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
 
-    boxLaporanDitinjau.classList.remove("d-none");
-    boxLaporanDiajukan.classList.add("d-none");
-    boxLaporanDisetujui.classList.add("d-none");
-    boxLaporanDitolak.classList.add("d-none");
+    // boxLaporanDitinjau.classList.remove("d-none");
+    // // boxLaporanDiajukan.classList.add("d-none");
+    // boxLaporanDisetujui.classList.add("d-none");
+    // boxLaporanDitolak.classList.add("d-none");
 });
 
 buttonLaporanDisetujui.addEventListener("click", () => {
@@ -66,15 +66,15 @@ buttonLaporanDisetujui.addEventListener("click", () => {
     buttonLaporanDitolak.classList.remove("btn-success");
     buttonLaporanDitolak.classList.add("text-success");
 
-    const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
-    const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
-    const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
-    const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
+    // const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
+    // // const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
+    // const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
+    // const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
 
-    boxLaporanDisetujui.classList.remove("d-none");
-    boxLaporanDiajukan.classList.add("d-none");
-    boxLaporanDitinjau.classList.add("d-none");
-    boxLaporanDitolak.classList.add("d-none");
+    // boxLaporanDisetujui.classList.remove("d-none");
+    // // boxLaporanDiajukan.classList.add("d-none");
+    // boxLaporanDitinjau.classList.add("d-none");
+    // boxLaporanDitolak.classList.add("d-none");
 });
 
 buttonLaporanDitolak.addEventListener("click", () => {
@@ -90,13 +90,13 @@ buttonLaporanDitolak.addEventListener("click", () => {
     buttonLaporanDitinjau.classList.remove("btn-success");
     buttonLaporanDitinjau.classList.add("text-success");
 
-    const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
-    const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
-    const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
-    const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
+    // const boxLaporanDitinjau = document.getElementById("boxLaporanDitinjau");
+    // // const boxLaporanDiajukan = document.getElementById("boxLaporanDiajukan");
+    // const boxLaporanDisetujui = document.getElementById("boxLaporanDisetujui");
+    // const boxLaporanDitolak = document.getElementById("boxLaporanDitolak");
 
-    boxLaporanDitolak.classList.remove("d-none");
-    boxLaporanDiajukan.classList.add("d-none");
-    boxLaporanDisetujui.classList.add("d-none");
-    boxLaporanDitinjau.classList.add("d-none");
+    // boxLaporanDitolak.classList.remove("d-none");
+    // // boxLaporanDiajukan.classList.add("d-none");
+    // boxLaporanDisetujui.classList.add("d-none");
+    // boxLaporanDitinjau.classList.add("d-none");
 });

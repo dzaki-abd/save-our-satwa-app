@@ -36,7 +36,7 @@
                 Laporan Ditinjau
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ $countLaporan }}
+                {{ $countLaporan['ditinjau'] }}
               </div>
             </div>
             <div class="col-auto">
@@ -57,7 +57,7 @@
                 Laporan Disetujui
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                50
+                {{ $countLaporan['disetujui'] }}
               </div>
             </div>
             <div class="col-auto">
@@ -78,7 +78,7 @@
                 Laporan Ditolak
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                60
+                {{ $countLaporan['ditolak'] }}
               </div>
             </div>
             <div class="col-auto">
@@ -100,6 +100,7 @@
         id="buttonLaporanDitinjau"
         class="btn btn-success"
         style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
+        data-id="Ditinjau"
       >
         Laporan Ditinjau
       </button>
@@ -118,6 +119,7 @@
         id="buttonLaporanDisetujui"
         class="btn text-success"
         style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
+        data-id="Disetujui"
       >
         Laporan Disetujui
       </button>
@@ -127,28 +129,32 @@
         id="buttonLaporanDitolak"
         class="btn text-success"
         style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
+        data-id="Ditolak"
       >
         Laporan Ditolak
       </button>
     </li>
   </ul>
 
-  <!-- DataTales Laporan Diajukan -->
-  {{-- <div
-    id="boxLaporanDiajukan"
+  <!-- DataTales Laporan Ditinjau -->
+  <div
+    id="boxLaporanDitinjau"
     class="card-2 shadow mb-4 bg-white"
     style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
   >
     <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Data Laporan Diajukan
+      <h6
+        class="m-0 font-weight-bold text-success"
+        id="title-table"
+      >
+        Data Laporan Ditinjau
       </h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
         <table
           class="table table-striped"
-          id="laporanDiajukan"
+          id="list-laporan"
           width="100%"
           cellspacing="0"
         >
@@ -163,268 +169,8 @@
               <th class="border-0 text-gray-700">Aksi</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th class="text-gray-700">No</th>
-              <th class="text-gray-700">Nama Pelapor</th>
-              <th class="text-gray-700">Tanggal Kejadian</th>
-              <th class="text-gray-700">Jenis Pelanggaran</th>
-              <th class="text-gray-700">Jenis Satwa</th>
-              <th class="text-gray-700">Status</th>
-              <th class="text-gray-700">Aksi</th>
-            </tr>
-          </tfoot>
           <tbody>
 
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div> --}}
-
-  <!-- DataTales Laporan Ditinjau -->
-  <div
-    id="boxLaporanDitinjau"
-    class="card-2 shadow mb-4 bg-white"
-    style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
-  >
-    <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Data Laporan Ditinjau
-      </h6>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table
-          class="table table-striped"
-          id="laporanDitinjau"
-          width="100%"
-          cellspacing="0"
-        >
-          <thead>
-            <tr>
-              <th class="border-0 text-gray-700">Nama Pelapor</th>
-              <th class="border-0 text-gray-700">Tanggal Kejadian</th>
-              <th class="border-0 text-gray-700">Jenis Pelanggaran</th>
-              <th class="border-0 text-gray-700">Jenis Satwa</th>
-              <th class="border-0 text-gray-700">Status</th>
-              <th class="border-0 text-gray-700">Aksi</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th class="text-gray-700">Nama Pelapor</th>
-              <th class="text-gray-700">Tanggal Kejadian</th>
-              <th class="text-gray-700">Jenis Pelanggaran</th>
-              <th class="text-gray-700">Jenis Satwa</th>
-              <th class="text-gray-700">Status</th>
-              <th class="text-gray-700">Aksi</th>
-            </tr>
-          </tfoot>
-          <tbody>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- DataTales Laporan Disetujui -->
-  <div
-    id="boxLaporanDisetujui"
-    class="card-2 shadow mb-4 d-none bg-white"
-    style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
-  >
-    <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Data Laporan Disetujui
-      </h6>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table
-          class="table table-striped"
-          id="laporanDisetujui"
-          width="100%"
-          cellspacing="0"
-        >
-          <thead>
-            <tr>
-              <th class="border-0 text-gray-700">Nama Pelapor</th>
-              <th class="border-0 text-gray-700">Tanggal Kejadian</th>
-              <th class="border-0 text-gray-700">Jenis Pelanggaran</th>
-              <th class="border-0 text-gray-700">Jenis Satwa</th>
-              <th class="border-0 text-gray-700">Status</th>
-              <th class="border-0 text-gray-700">Aksi</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th class="text-gray-700">Nama Pelapor</th>
-              <th class="text-gray-700">Tanggal Kejadian</th>
-              <th class="text-gray-700">Jenis Pelanggaran</th>
-              <th class="text-gray-700">Jenis Satwa</th>
-              <th class="text-gray-700">Status</th>
-              <th class="text-gray-700">Aksi</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            @for ($i = 0; $i < 5; $i++)
-              <tr class="align-middle">
-                <td class="align-middle text-gray-600">Kevin Iansyah</td>
-                <td class="align-middle text-gray-600">20 Desember 2022</td>
-                <td class="align-middle text-gray-600">Perburuan Illegal</td>
-                <td class="align-middle text-gray-600">Orang Utan</td>
-                <td class="align-middle text-gray-600">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                  >Disetujui</button>
-                </td>
-                <td class="d-flex align-middle">
-                  <div class="d-flex">
-                    <!-- Button Trigger-->
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-primary d-flex justify-content-center align-items-center mr-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#riwayatLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-clock-rotate-left"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                    <a
-                      href="/dashboard/laporan/detail-laporan/id"
-                      class="btn btn-warning d-flex justify-content-center align-items-center mr-1"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-eye"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </a>
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-danger d-flex justify-content-center align-items-center"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-trash"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            @endfor
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- DataTales Laporan Ditolak -->
-  <div
-    id="boxLaporanDitolak"
-    class="card-2 shadow mb-4 d-none bg-white"
-    style="border-bottom-left-radius: 0.35rem; border-bottom-right-radius: 0.35rem"
-  >
-    <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Data Laporan Ditolak
-      </h6>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table
-          class="table table-striped"
-          id="laporanDitolak"
-          width="100%"
-          cellspacing="0"
-        >
-          <thead>
-            <tr>
-              <th class="border-0 text-gray-700">Nama Pelapor</th>
-              <th class="border-0 text-gray-700">Tanggal Kejadian</th>
-              <th class="border-0 text-gray-700">Jenis Pelanggaran</th>
-              <th class="border-0 text-gray-700">Jenis Satwa</th>
-              <th class="border-0 text-gray-700">Status</th>
-              <th class="border-0 text-gray-700">Aksi</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th class="text-gray-700">Nama Pelapor</th>
-              <th class="text-gray-700">Tanggal Kejadian</th>
-              <th class="text-gray-700">Jenis Pelanggaran</th>
-              <th class="text-gray-700">Jenis Satwa</th>
-              <th class="text-gray-700">Status</th>
-              <th class="text-gray-700">Aksi</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            @for ($i = 0; $i < 5; $i++)
-              <tr class="align-middle">
-                <td class="align-middle text-gray-600">Kevin Iansyah</td>
-                <td class="align-middle text-gray-600">20 Desember 2022</td>
-                <td class="align-middle text-gray-600">Perburuan Illegal</td>
-                <td class="align-middle text-gray-600">Orang Utan</td>
-                <td class="align-middle text-gray-600">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                  >Ditolak</button>
-                </td>
-                <td class="d-flex align-middle">
-                  <div class="d-flex">
-                    <!-- Button Trigger-->
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-primary d-flex justify-content-center align-items-center mr-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#riwayatLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-clock-rotate-left"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                    <a
-                      href="/dashboard/laporan/detail-laporan/id"
-                      class="btn btn-warning d-flex justify-content-center align-items-center mr-1"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-eye"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </a>
-                    <button
-                      type="button"
-                      href="#"
-                      class="btn btn-danger d-flex justify-content-center align-items-center"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteLaporan"
-                      style="width: 30px; height: 30px"
-                    >
-                      <i
-                        class="fa-solid fa-trash"
-                        style="font-size: 0.8rem"
-                      ></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            @endfor
           </tbody>
         </table>
       </div>
@@ -466,19 +212,19 @@
                 <li class="timeline-item">
                   <span class="timeline-icon bg-success">
                     <!--
-                                                              Gunakan icon berdasarkan status menggunakan if
-                                                              Diajukan :
-                                                              <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
-                                                              
-                                                              Ditinjau
-                                                              <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
+                                                                                                                                                Gunakan icon berdasarkan status menggunakan if
+                                                                                                                                                Diajukan :
+                                                                                                                                                <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
+                                                                                                                                                
+                                                                                                                                                Ditinjau
+                                                                                                                                                <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
 
-                                                              Disetujui
-                                                              <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
+                                                                                                                                                Disetujui
+                                                                                                                                                <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
 
-                                                              Ditolak
-                                                              <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
-                                                            -->
+                                                                                                                                                Ditolak
+                                                                                                                                                <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
+                                                                                                                                              -->
                     <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
                   </span>
 
@@ -554,11 +300,12 @@
   <script src="{{ asset('js/laporan-initiator.js') }}"></script>
 
   <script>
+    // trigger buttonLaporanDitinjau click
     $.fn.dataTable.ext.errMode = function(settings, helpPage, message) {
       console.log(message);
     };
 
-    $('#laporanDitinjau').DataTable({
+    let table = $('#list-laporan').DataTable({
       fixedHeader: true,
       pageLength: 25,
       lengthChange: true,
@@ -566,7 +313,7 @@
       responsive: true,
       processing: true,
       serverSide: true,
-      ajax: "{{ route('dashboard.laporan.index') }}",
+      ajax: "{{ route('dashboard.laporan.get-data', 'Ditinjau') }}",
       columns: [{
           data: 'DT_RowIndex',
           name: 'DT_RowIndex',
@@ -600,11 +347,15 @@
         },
       ]
     });
-    $(document).ready(function() {
 
-      $('#laporanDitinjau').DataTable();
-      $('#laporanDisetujui').DataTable();
-      $('#laporanDitolak').DataTable();
+    // $('#buttonLaporanDitinjau').trigger('click');
+
+    $('#buttonLaporanDitinjau, #buttonLaporanDisetujui, #buttonLaporanDitolak').on('click', function() {
+      let laporanFilter = $(this).data('id');
+      $('#title-table').html('Data Laporan ' + laporanFilter);
+
+      table.ajax.url("{{ route('dashboard.laporan.get-data', ':id') }}".replace(':id', laporanFilter)).load();
+
     });
   </script>
 @endpush

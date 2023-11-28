@@ -16,45 +16,55 @@ class PelaporanController extends Controller
     public function index()
     {
         $laporan = Pelaporan::all();
-        $countLaporan = $laporan->count();
-
-        // return $laporan;
-
-        if (request()->ajax()) {
-            return DataTables::of($laporan)
-                ->addIndexColumn()
-                ->addColumn('nama_pelapor', function ($row) {
-                    $user = User::find($row->user_id);
-                    return $user->name;
-                })
-                ->addColumn('tanggal_kejadian', function ($row) {
-                    return date('d F Y', strtotime($row->waktu_kejadian));
-                })
-                ->addColumn('jenis_pelanggaran', function ($row) {
-                    return $row->jenis_pelanggaran;
-                })
-                ->addColumn('jenis_satwa', function ($row) {
-                    return $row->jenis_satwa;
-                })
-                ->addColumn('status', function ($row) {
-                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
-                    return $badgeStatus;
-                })
-                ->addColumn('action', function ($row) {
-                    $show = route('dashboard.laporan.show', encrypt($row->id));
-                    $actionBtn = '
-                        <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
-                            <a type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    ';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action', 'status'])
-                ->make(true);
-        }
+        $countLaporan = [
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
+        ];
 
         return view('dashboard.laporan.index', compact('countLaporan'));
+    }
+
+    public function getDataLaporan($filter) {
+        $laporan = Pelaporan::where('status', $filter)->get();
+
+        return DataTables::of($laporan)
+            ->addIndexColumn()
+            ->addColumn('nama_pelapor', function ($row) {
+                $user = User::find($row->user_id);
+                return $user->name;
+            })
+            ->addColumn('tanggal_kejadian', function ($row) {
+                return date('d F Y', strtotime($row->waktu_kejadian));
+            })
+            ->addColumn('jenis_pelanggaran', function ($row) {
+                return $row->jenis_pelanggaran;
+            })
+            ->addColumn('jenis_satwa', function ($row) {
+                return $row->jenis_satwa;
+            })
+            ->addColumn('status', function ($row) {
+                if ($row->status == 'Ditolak') {
+                    $badgeStatus = '<span class="badge text-bg-danger">' . $row->status . '</span>';
+                } elseif ($row->status == 'Ditinjau') {
+                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
+                } else {
+                    $badgeStatus = '<span class="badge text-bg-success">' . $row->status . '</span>';
+                }
+                return $badgeStatus;
+            })
+            ->addColumn('action', function ($row) {
+                $show = route('dashboard.laporan.show', encrypt($row->id));
+                $actionBtn = '
+                    <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
+                        <a type="button" class="btn btn-warning btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
+                        <button type="button" class="btn btn-danger btn-sm btn-icon" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                ';
+                return $actionBtn;
+            })
+            ->rawColumns(['action', 'status'])
+            ->make(true);
     }
 
     /**
@@ -62,7 +72,7 @@ class PelaporanController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
