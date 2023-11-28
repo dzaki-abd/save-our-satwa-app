@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
 
@@ -35,14 +36,16 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
             Route::get('/get-data/{filter}', [PelaporanController::class, 'getDataLaporan'])->name('get-data');
         });
         Route::resource('laporan', PelaporanController::class);
+
+        Route::name('donasi.')->prefix('donasi')->group(function () {
+            Route::get('/get-data', [DonasiController::class, 'getDataDonasi'])->name('get-data');
+            Route::put('/verify/{id}', [DonasiController::class, 'verifyDonasi'])->name('verify');
+        });
+        Route::resource('donasi', DonasiController::class);
     });
 
     Route::get('/dashboard', function () {
         return view('dashboard.dashboard');
-    });
-
-    Route::get('/dashboard/donasi', function () {
-        return view('dashboard.donasi');
     });
 
     Route::get('/dashboard/admin', function () {
@@ -60,6 +63,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('/donasi', function () {
         return view('donasi');
     });
+
+    Route::post('/donasi/store', [App\Http\Controllers\HomeController::class, 'addDonasi'])->name('donasi.store');
 
     Route::get('/satwa', function () {
         return view('satwa');
