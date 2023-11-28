@@ -29,33 +29,33 @@
   <!-- Link Page -->
   <ul class="nav nav-tabs border-bottom-success mt-2 bg-white shadow" style="border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem; position: relative; z-index: 2">
     <li class="nav-item">
-      <button id="buttonSumatra" class="btn btn-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+      <button id="All" class="btn btn-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+        Semua Pulau
+      </button>
+    </li>
+    <li class="nav-item">
+      <button id="Sumatra" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
         Sumatra
       </button>
     </li>
     <li class="nav-item">
-      <button id="buttonJawa" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+      <button id="Jawa" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
         Jawa
       </button>
     </li>
     <li class="nav-item">
-      <button id="buttonKalimantan" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+      <button id="Kalimantan" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
         Kalimantan
       </button>
     </li>
     <li class="nav-item">
-      <button id="buttonSulawesi" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+      <button id="Sulawesi" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
         Sulawesi
       </button>
     </li>
     <li class="nav-item">
-      <button id="buttonPapua" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
+      <button id="Papua" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
         Papua
-      </button>
-    </li>
-    <li class="nav-item">
-      <button id="buttonAllIslands" class="btn text-success" style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem">
-        Semua Data
       </button>
     </li>
   </ul>
@@ -301,7 +301,7 @@
   let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   var base_url_asset = "{{ asset('') }}";
 
-  $('#table-list-satwa').DataTable({
+  var table = $('#table-list-satwa').DataTable({
     fixedHeader: true,
     pageLength: 25,
     lengthChange: true,
@@ -345,6 +345,20 @@
         searchable: false
       },
     ]
+  });
+
+  $('#All, #Sumatra, #Jawa, #Kalimantan, #Sulawesi, #Papua').on('click', function() {
+    var locationFilter = $(this).attr('id');
+
+    table.columns().search('').draw();
+
+    if (locationFilter !== 'All') {
+      table.column(5).search(locationFilter).draw();
+    }
+
+    $('#All, #Sumatra, #Jawa, #Kalimantan, #Sulawesi, #Papua').removeClass('btn btn-success').addClass('btn text-success');
+
+    $(this).removeClass('btn text-success').addClass('btn btn-success');
   });
 
   $('#getDataAPI').on('click', function() {
