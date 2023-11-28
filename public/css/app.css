@@ -104,17 +104,6 @@ body {
   background-color: var(--white);
 }
 
-/* .button-teal-500 {
-  background-color: var(--teal-500);
-  color: var(--white);
-  transition: all 0.2s;
-}
-
-.button-teal-500:hover {
-  background-color: var(--teal-400);
-  color: var(--white);
-} */
-
 .button-teal-500 {
   display: inline-block;
 	font-weight: 400;
@@ -125,13 +114,14 @@ body {
 	font-size: 1rem;
 	line-height: 1.5;
 	border-radius: .25rem;
-	color: #fff;
+	color: var(--white);
 	background-color: var(--teal-500);
   text-decoration: none;
 }
 
 .button-teal-500:hover {
   background-color: var(--teal-400);
+  color: var(--white)
 }
 
 /* ========== FOOTER ========== */
