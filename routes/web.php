@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
         Route::resource('satwa', SatwaController::class);
 
         Route::name('laporan.')->prefix('laporan')->group(function () {
+            Route::get('/get-data/{filter}', [PelaporanController::class, 'getDataLaporan'])->name('get-data');
         });
         Route::resource('laporan', PelaporanController::class);
     });
