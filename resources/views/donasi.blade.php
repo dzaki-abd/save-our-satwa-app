@@ -314,7 +314,7 @@
                 <div class="rekening-box p-3 shadow-sm rounded" style="width: 16rem">
                   <div class="d-flex justify-content-between flex-column align-items-center">
                     <p class="mb-2 text-white">No. Rekening (BRI)</p>
-                    <h2 class="mb-0 text-white">1250445265</h2>
+                    <h2 class="mb-0 text-white">530601028331531</h2>
                   </div>
                 </div>
 
