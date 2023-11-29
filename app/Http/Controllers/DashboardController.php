@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artikel;
 use App\Models\Satwa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,6 +13,7 @@ class DashboardController extends Controller
     {
         $countArtikel = Artikel::count();
         $countSatwa = Satwa::count();
-        return view('dashboard.dashboard', compact('countArtikel', 'countSatwa'));
+        $countAdmin = User::role('admin')->count();
+        return view('dashboard.dashboard', compact('countArtikel', 'countSatwa', 'countAdmin'));
     }
 }

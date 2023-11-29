@@ -18,7 +18,7 @@
                 Admin
               </div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                10
+                {{$countAdmin}}
               </div>
             </div>
             <div class="col-auto">
@@ -145,10 +145,8 @@
   </div>
 
   <!-- Content Row -->
-  <div class="row">
-    <!-- Content Column -->
+  <!-- <div class="row">
     <div class="col-lg-6 mb-4">
-      <!-- Project Card Example -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
@@ -189,7 +187,6 @@
     </div>
 
     <div class="col-lg-6 mb-4">
-      <!-- Approach -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">
@@ -211,7 +208,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>
 @endsection
