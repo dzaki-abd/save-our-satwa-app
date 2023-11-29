@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
+
 
 /*
 |--------------------------------------------------------------------------
