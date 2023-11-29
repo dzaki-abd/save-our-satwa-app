@@ -15,7 +15,7 @@
               Donasi Masuk
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              Rp {{$jumlahDonasi}}
+              Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}
             </div>
           </div>
           <div class="col-auto">
@@ -158,12 +158,6 @@
               <div id="imagePreviewCoverEdit"></div>
               <input type="file" class="form-control" id="image_edit" name="image_edit" placeholder="Gambar" onchange="return fileValidation('image_edit', 'imagePreviewCoverEdit')">
             </div>
-            <label for="status" class="form-label required">Status</label>
-            <select class="form-select" aria-label="Default select example" name="status" id="status" required>
-              <option value="">Pilih...</option>
-              <option value="Belum Diverifikasi">Belum Diverifikasi</option>
-              <option value="Sudah Diverifikasi">Sudah Diverifikasi</option>
-            </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -288,7 +282,7 @@
       }
     }
 
-    function verifyDonasi($id){
+    function verifyDonasi($id) {
       Swal.fire({
         title: 'Apakah anda yakin?',
         text: "Anda tidak akan dapat mengembalikan status!",
@@ -341,7 +335,7 @@
         type: 'GET',
         success: function(response) {
           if (response.status) {
-            if(response.data.status === 'Sudah Diverifikasi') {
+            if (response.data.status === 'Sudah Diverifikasi') {
               $('#editDonasiModal #nama_donatur').attr('disabled', true);
               $('#editDonasiModal #email_donatur').attr('disabled', true);
               $('#editDonasiModal #nomor_donatur').attr('disabled', true);
@@ -389,50 +383,52 @@
     }
 
     function destroyDonasi($id) {
-    Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Anda tidak akan dapat mengembalikan ini!",
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Ya, hapus!',
-      cancelButtonText: 'Batal'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        $.ajax({
-          url: "{{ route('dashboard.donasi.destroy', ['donasi' => 'id']) }}".replace('id', $id),
-          type: 'DELETE',
-          data: {
-            _token: CSRF_TOKEN
-          },
-          success: function(response) {
-            if (response.status) {
-              Swal.fire({
-                title: 'Berhasil!',
-                text: response.message,
-                icon: 'success',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  $('#table-list-donasi').DataTable().ajax.reload();
-                }
-              });
-            } else {
+      Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "Anda tidak akan dapat mengembalikan ini!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: "{{ route('dashboard.donasi.destroy', ['donasi' => 'id']) }}".replace('id', $id),
+            type: 'DELETE',
+            data: {
+              _token: CSRF_TOKEN
+            },
+            success: function(response) {
+              if (response.status) {
+                Swal.fire({
+                  title: 'Berhasil!',
+                  text: response.message,
+                  icon: 'success',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    $('#table-list-donasi').DataTable().ajax.reload();
+                  }
+                });
+              } else {
+                Swal.fire({
+                  title: 'Gagal!',
+                  text: response.message,
+                  icon: 'error',
+                });
+              }
+            },
+            error: function(xhr) {
               Swal.fire({
                 title: 'Gagal!',
-                text: response.message,
+                text: xhr.responseJSON.message,
                 icon: 'error',
               });
             }
-          },
-          error: function(xhr) {
-            Swal.fire({
-              title: 'Gagal!',
-              text: xhr.responseJSON.message,
-              icon: 'error',
-            });
-          }
-        });
-      }
-    });
-  }
+          });
+        }
+      });
+    }
+
+    $('#jumlah_donatur').mask('Rp 000.000.000.000', { reverse: true });
   </script>
   @endpush

@@ -321,5 +321,7 @@
       }
     }
   }
+
+  $('#jumlah_donatur').mask('Rp 000.000.000.000', { reverse: true });
 </script>
 @endpush
