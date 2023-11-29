@@ -44,6 +44,10 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
   />
+  
+  <!-- Fancy Box -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+
   <!-- Custom styles for this template-->
   <link
     href="{{ asset('css/sb-admin-2.css') }}"

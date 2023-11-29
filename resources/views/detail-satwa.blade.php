@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron-3" style="background-image: url('../img/jumbotron.jpg');">
+  <div class="jumbotron-3" style="background-image: url('{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}');">
     <div class="jumbotron-container-3">
       <div class="container d-flex flex-column flex-lg-row gap-5 detail-satwa-container h-100">
         <div class="detail-poster d-flex flex-column gap-3">
@@ -12,8 +12,8 @@
             </ol>
           </nav>
           <div class="poster-box">
-            <a href="../img/poster.jpg" data-fancybox>
-              <img src="../img/poster.jpg" class="rounded"/>
+            <a href="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" data-fancybox>
+              <img src="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" class="rounded"/>
             </a>
             <div class="like-button button-teal-500">
               <i class="fa-regular fa-heart"></i>
@@ -21,40 +21,73 @@
           </div>
         </div>
         <div class="detail-content d-flex flex-column justify-content-center gap-3">
-          <h1>Kakaktua Raja</h1>
+          <h1>{{ $satwa->nama_lokal }}</h1>
           <table class="table m-0" width="100%" cellspacing="0">
             <tbody>
               <tr>
-                <th class="ps-0">Nama Umum</th>
-                <td class="p-2 ps-0 ps-md-5">Kakatua Raja</td>
+                <th class="ps-0">Nama Inggris</th>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->nama_inggris }}</td>
               </tr>
               <tr>
                 <th class="ps-0">Nama Ilmiah</th>
-                <td class="p-2 ps-0 ps-md-5">Probosciger aterrimus</td>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->nama_ilmiah }}</td>
               </tr>
               <tr>
-                <th class="ps-0">Habitat</th>
-                <td class="p-2 ps-0 ps-md-5">Papua, Pulau Salawati, dan Pulau Yapen adsada adad zada adad ada adad</td>
+                <th class="ps-0">Lokasi</th>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->lokasi }}</td>
               </tr>
               <tr>
                 <th class="ps-0">Status</th>
-                <td class="p-2 ps-0 ps-md-5">Rentan</td>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->kategori_iucn }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Tren Populasi</th>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->tren_populasi }}</td>
               </tr>
               <tr>
                 <th class="ps-0">Populasi</th>
-                <td class="p-2 ps-0 ps-md-5">-</td>
-              </tr>
-              <tr>
-                <th class="ps-0">Ancaman</th>
-              </tr>
-              <tr>
-                <td colspan="2" class="p-2 ps-0">Ancaman terhadap kakatua raja termasuk hilangnya habitat, perburuan untuk perdagangan satwa liar, dan perdagangan ilegal.</td>
+                <td class="p-2 ps-0 ps-md-5">{{ $satwa->populasi }}</td>
               </tr>
               <tr>
                 <th class="ps-0">Deskripsi</th>
               </tr>
               <tr>
-                <td colspan="2" class="p-2 ps-0">Kakatua Raja memiliki warna bulu yang mencolok, dengan kombinasi merah, kuning, dan hitam. Mereka memiliki paruh yang kuat dan seringkali hidup dalam kelompok besar.</td>
+                <td colspan="2" class="p-2 ps-0">{{ $satwa->deskripsi }}</td>
+              </tr>
+              <tr>
+                <th class="ps-0">Taksonomi</th>
+              </tr>
+              <tr>
+                <td colspan="2" class="p-2 ps-0">
+                  <div class="taxonomy-box rounded p-3">
+                    <div class="row">
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Kingdom</h6>
+                        <h5>{{ strtolower($satwa->kingdom) }}</h5>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Filum</h6>
+                        <h5>{{ strtolower($satwa->filum) }}</h5>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Kelas</h6>
+                        <h5>{{ strtolower($satwa->kelas) }}</h5>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Ordo</h6>
+                        <h5>{{ strtolower($satwa->ordo) }}</h5>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Famili</h6>
+                        <h5>{{ strtolower($satwa->famili) }}</h5>
+                      </div>
+                      <div class="col-6 col-md-4 d-flex flex-column p-2">
+                        <h6>Genus</h6>
+                        <h5>{{ strtolower($satwa->genus) }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
