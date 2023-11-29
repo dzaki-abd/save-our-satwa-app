@@ -80,13 +80,11 @@ Route::group(['middleware' => ['web']], function () {
         return view('detail-artikel');
     });
 
-    Route::group(['middleware' => ['auth']], function () {
-        Route::get('/laporkan', function () {
-            return view('laporkan');
-        });
-    
-        Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
-    }); 
+    Route::get('/laporkan', function () {
+        return view('laporkan');
+    });
+
+    Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
 });
 
 Auth::routes();
