@@ -432,6 +432,18 @@ body {
   border-top: 0;
 }
 
+.taxonomy-box {
+  backdrop-filter: blur(10px);
+}
+
+.taxonomy-box h6 {
+  font-weight: 400;
+}
+
+.taxonomy-box h5 {
+  font-weight: 700;
+}
+
 .table>:not(caption)>*>* {
   border-bottom-width: 0;
 }

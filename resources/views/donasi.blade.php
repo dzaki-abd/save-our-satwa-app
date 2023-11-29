@@ -24,7 +24,7 @@
     <div class="donasi-content rounded p-3 p-lg-4 shadow">
       <div class="donasi-jumlah rounded p-3">
         <h5 class="text-white mb-1">Jumlah Donasi (via Bank BRI)</h5>
-        <p class="text-white mb-3" style="font-size: 0.9rem">hingga {{getFullDateID()}}</p>
+        <p class="text-white mb-3" style="font-size: 0.9rem">hingga {{ getFullDateID() }}</p>
         <h2 class="text-white mb-0">Rp 200.000.000,0</h2>
       </div>
     </div>
@@ -234,7 +234,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="konfirmasiModalLabel">Konfirmasi Donasi</h1>
+        <h1 class="modal-title fs-5" id="konfirmasiModalLabel" style="color: #20c997">Konfirmasi Donasi</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -264,7 +264,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary">Konfirmasi</button>
+        <button type="submit" class="button-teal-500">Konfirmasi</button>
       </div>
       </form>
     </div>

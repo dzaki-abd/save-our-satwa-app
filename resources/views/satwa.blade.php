@@ -29,18 +29,18 @@
   <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 g-lg-4">
-    @for ( $i = 0; $i < 7; $i++ )
+    @foreach ($satwaList as $data)
     <div class="col">
-      <a href="/detail-satwa" class="card satwa-box border-0"> 
+      <a href="/detail-satwa/{{ $data->id }}" class="card satwa-box border-0">
         <div class="satwa-overlay">
-          <img src="../img/donasi.jpg" alt="" />
+          <img src="{{ asset('storage/img/satwa_images/' . $data->gambar) }}" alt="" />
         </div>
         <div class="satwa-content">
-          <h6>Kakaktua Raja</h6>
-          <p class="m-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt vero voluptatum laboriosam sequi! Explicabo officia, aut, tempore debitis aspernatur alias</p>
+          <h6>{{ $data->nama_lokal }}</h6>
+          <p class="m-0">{{ $data->deskripsi }}</p>
         </div>
       </a>
     </div>
-    @endfor
+    @endforeach
   </div>
 @endsection

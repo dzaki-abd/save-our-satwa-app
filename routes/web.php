@@ -66,13 +66,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::post('/donasi/store', [App\Http\Controllers\HomeController::class, 'addDonasi'])->name('donasi.store');
 
-    Route::get('/satwa', function () {
-        return view('satwa');
-    });
+    Route::get('/satwa', [SatwaController::class, 'getDataSatwaForUser']);
 
-    Route::get('/detail-satwa', function () {
-        return view('detail-satwa');
-    });
+    Route::get('/detail-satwa/{id}', [SatwaController::class, 'getDataSatwaForUserById']);
 
     Route::get('/artikel', function () {
         return view('artikel');
