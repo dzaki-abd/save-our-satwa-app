@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\SatwaController;
 
 Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
+        Route::get('/',[DashboardController::class, 'index'])->name('index');
+
         Route::name('artikel.')->prefix('artikel')->group(function () {
             Route::get('/get-data', [ArtikelController::class, 'getDataArtikel'])->name('get-data');
             Route::get('/add', [ArtikelController::class, 'addArtikelPage'])->name('add');
@@ -46,9 +49,6 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
         Route::resource('donasi', DonasiController::class);
     });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    });
 
     Route::get('/dashboard/admin', function () {
         return view('dashboard.admin');

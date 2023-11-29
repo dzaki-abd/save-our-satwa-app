@@ -6,8 +6,8 @@
   </div>
 
   <hr class="sidebar-divider my-0" />
-  <li class="nav-item {{ Request::url() == url('/dashboard') ? 'active' : '' }}">
-    <a href="/dashboard" class="nav-link">
+  <li class="nav-item @if (request()->routeIs('dashboard.index')) active @endif">
+    <a href="{{ route('dashboard.index') }}" class="nav-link">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span>
     </a>

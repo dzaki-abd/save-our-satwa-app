@@ -61,8 +61,8 @@
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item px-lg-2 my-sm-2">
             <a
-              href="/dashboard"
-              class="nav-link {{ Request::url() == url('/dashboard') ? 'active' : '' }}"
+              href="{{ route('dashboard.index') }}"
+              class="nav-link @if (request()->routeIs('dashboard.index')) active @endif"
               aria-current="page"
             >Dashboard</a>
           </li>
