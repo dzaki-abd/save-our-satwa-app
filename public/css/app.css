@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
@@ -48,8 +47,8 @@
 
 body {
   font-family: 'Roboto', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol', 'Noto Color Emoji';
+    'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* ========== NAVBAR ========== */
@@ -87,33 +86,24 @@ body {
 
 .dropdown-profile {
   border: none;
-  background: rgb(210,244,234);
-  background: linear-gradient(45deg, rgba(210,244,234,1) 0%, rgba(255,255,255,1) 50%, rgba(210,244,234,1) 100%);
+  background: rgb(210, 244, 234);
+  background: linear-gradient(45deg, rgba(210, 244, 234, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(210, 244, 234, 1) 100%);
 }
 
-.dropdown-profile a, .dropdown-profile i {
+.dropdown-profile a,
+.dropdown-profile i {
   color: var(--teal-500);
   transition: all 0.2s;
 }
 
-.dropdown-profile a:hover, .dropdown-profile i:hover {
+.dropdown-profile a:hover,
+.dropdown-profile i:hover {
   color: var(--teal-600);
 }
 
 .dropdown-profile hr {
   background-color: var(--white);
 }
-
-/* .button-teal-500 {
-  background-color: var(--teal-500);
-  color: var(--white);
-  transition: all 0.2s;
-}
-
-.button-teal-500:hover {
-  background-color: var(--teal-400);
-  color: var(--white);
-} */
 
 .button-teal-500 {
   display: inline-block;
@@ -125,13 +115,15 @@ body {
 	font-size: 1rem;
 	line-height: 1.5;
 	border-radius: .25rem;
-	color: #fff;
+	color: var(--white);
 	background-color: var(--teal-500);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button-teal-500:hover {
   background-color: var(--teal-400);
+  color: var(--white)
 }
 
 /* ========== FOOTER ========== */
@@ -139,6 +131,10 @@ body {
 .footer {
   margin-top: 70px;
   background-color: var(--teal-600);
+}
+
+.footer.active {
+  margin-top: 0;
 }
 
 .footer .card-body {
@@ -169,7 +165,7 @@ body {
 }
 
 .jumbotron-content {
- width: 50%;
+  width: 50%;
 }
 
 .jumbotron-content p {
@@ -205,13 +201,13 @@ body {
 }
 
 .jumbotron-content-2 {
- width: 100%;
+  width: 100%;
 }
 
 .jumbotron-content-2 h2 {
   margin-top: 3rem;
   margin-bottom: 0;
- }
+}
 
 .jumbotron-content-2 p {
   font-weight: 300;
@@ -222,14 +218,11 @@ body {
 
 .main-content .h3-top {
   margin-top: 70px;
-}
-
-.main-content h3 {
   color: var(--teal-600);
   font-weight: 600;
 }
 
-.main-content span {
+.main-content .h3-top span {
   color: var(--teal-900);
 }
 
@@ -253,7 +246,7 @@ body {
   backdrop-filter: blur(6px);
 }
 
-.accordion{
+.accordion {
   background-color: transparent;
   border-radius: 0.35rem !important;
 }
@@ -390,13 +383,14 @@ body {
 }
 
 .jumbotron-container-3 {
-  background-color: rgba(0 ,0 ,0 , 0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100%;
   padding-top: 70px;
   padding-bottom: 70px;
 }
 
-.detail-poster, .detail-content {
+.detail-poster,
+.detail-content {
   height: 100%;
 }
 
@@ -429,13 +423,13 @@ body {
 }
 
 .detail-content .table th {
-  border-top: 0; 
-  min-width: 8rem !important; 
+  border-top: 0;
+  min-width: 8rem !important;
   max-width: 10rem !important;
 }
 
 .detail-content .table td {
-  border-top: 0; 
+  border-top: 0;
 }
 
 .table>:not(caption)>*>* {
@@ -445,7 +439,7 @@ body {
 @media (min-height: 100vh) {
   .jumbotron-3 {
     height: fit-content;
-    max-height: none; /* Reset max-height for this condition if needed */
+    max-height: none;
   }
 
   .jumbotron-container-3 {
@@ -473,11 +467,13 @@ body {
     padding: 1rem;
   }
 
-  .table-riwayat p, .table-riwayat i {
+  .table-riwayat p,
+  .table-riwayat i {
     font-size: 0.9rem;
   }
 
-  .table-riwayat .icon-riwayat p, .table-riwayat .icon-riwayat i {
+  .table-riwayat .icon-riwayat p,
+  .table-riwayat .icon-riwayat i {
     font-size: 0.8rem;
     color: var(--secondary);
   }
@@ -488,7 +484,8 @@ body {
 }
 
 /* ========== DATA TABLES ========== */
-.active>.page-link, .page-link.active {
+.active>.page-link,
+.page-link.active {
   z-index: 3;
   color: var(--white);
   background-color: var(--teal-500);
@@ -511,17 +508,87 @@ div.dataTables_wrapper div.dataTables_info {
   padding-left: 12px;
 }
 
-div.dataTables_wrapper div.dataTables_filter > label > input:focus {
+div.dataTables_wrapper div.dataTables_filter>label>input:focus {
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
-div.dataTables_wrapper div.dataTables_length > label > select:focus{
+div.dataTables_wrapper div.dataTables_length>label>select:focus {
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
 .pagination {
   --bs-pagination-color: var(--teal-500);
   --bs-pagination-disabled-bg: var(--white);
+}
+
+/* ========== INFORMASI ARTIKEL ========== */
+
+.artikel-poster{
+  padding: 0.4rem;
+}
+
+.artikel-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artikel-content .card-title {
+  color: var(--teal-500);
+}
+
+.artikel-content .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ========== DETAIL ARTIKEL ========== */
+
+.jumbotron-4 {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 60vh;
+}
+
+.jumbotron-container-4 {
+  height: 100%;
+  background-color: rgba(0 ,0 ,0 , 0.6);
+}
+
+.jumbotron-content-4 {
+ width: 100%;
+}
+
+.detail-artikel-container {
+  position: relative;
+  z-index: 2;
+  top: -70px;
+  background-color: var(--white);
+}
+
+.detail-artikel-container img {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+}
+
+.detail-artikel-content, .detail-artikel-sidebar  {
+  padding: 0.5rem;
+}
+
+.detail-artikel-content a, .detail-artikel-content h1, .detail-artikel-content h2, .detail-artikel-content h3 {
+  color: var(--teal-500);
+}
+
+.detail-artikel-content h1, .detail-artikel-content h2, .detail-artikel-content h3 {
+  margin-bottom: 1rem;
+}
+
+.detail-artikel-sidebar h6 {
+  color: var(--teal-500);
 }
 
 /* ========== LAPORKAN ========== */
@@ -549,7 +616,8 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   background-color: var(--teal-500);
 }
 
-.login-box .label-checkbox, .login-box a {
+.login-box .label-checkbox,
+.login-box a {
   color: var(--teal-500);
   font-size: 0.9rem;
 }
@@ -562,7 +630,7 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   box-shadow: 0 0 0 0.2rem rgba(32, 201, 151, 0.25);
 }
 
-.login-box p  {
+.login-box p {
   color: var(--teal-500);
   font-size: 0.9rem;
 }
@@ -588,31 +656,35 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .jumbotron-content {
     width: 75%;
-   }
+  }
 
-   .jumbotron-2 {
+  .jumbotron-2 {
     height: 25vh;
   }
 
   .jumbotron-content-2 h2 {
     margin-top: 3rem;
     margin-bottom: 0;
-   }
+  }
 
-   .jumbotron-3 {
+  .jumbotron-3 {
     height: fit-content;
   }
 
   .footer {
     margin-top: 60px;
   }
-  
+
+  .footer.active {
+    margin-top: 0;
+  }
+
   .footer .card-body {
     margin-top: 60px;
     margin-bottom: 60px;
   }
 
-  .main-content .h3-top{
+  .main-content .h3-top {
     margin-top: 60px;
   }
 
@@ -624,6 +696,16 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   .detail-satwa-container {
     display: flex;
     align-items: center;
+  }
+
+  /* ========== DETAIL ARTIKEL ========== */
+
+  .jumbotron-4 {
+    height: 40vh;
+  }
+
+  .detail-artikel-container {
+    top: -60px;
   }
 }
 
@@ -642,13 +724,13 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .jumbotron-content {
     width: 100%;
-   }
+  }
 
-   .jumbotron-2 {
+  .jumbotron-2 {
     height: 35vh;
   }
 
-  .jumbotron-search-2{
+  .jumbotron-search-2 {
     height: 45vh;
   }
 
@@ -659,9 +741,9 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   .jumbotron-content-2 h2 {
     margin-top: 3rem;
     margin-bottom: 0;
-   }
+  }
 
-   .main-content .h3-top {
+  .main-content .h3-top {
     margin-top: 50px;
   }
 
@@ -672,7 +754,11 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
   .footer {
     margin-top: 50px;
   }
-  
+
+  .footer.active {
+    margin-top: 0;
+  }
+
   .footer .card-body {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -691,5 +777,34 @@ div.dataTables_wrapper div.dataTables_length > label > select:focus{
 
   .table-responsive .row {
     gap: 0.5rem;
-  }  
+  }
+
+  /* ========== INFORMASI ARTIKEL ========== */
+
+  .artikel-poster{
+    height: 10rem;
+  }
+
+  /* ========== DETAIL ARTIKEL ========== */
+
+  .jumbotron-4 {
+    height: 60vh;
+  }
+
+  .detail-artikel-container {
+    top: -50px;
+  }
+
+  .detail-artikel-container img {
+    height: 15rem;
+  }
+}
+
+.required:after {
+  content: "*";
+  position: relative;
+  font-size: inherit;
+  color: var(--bs-danger);
+  padding-left: .25rem;
+  font-weight: 600
 }

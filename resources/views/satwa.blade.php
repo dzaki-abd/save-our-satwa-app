@@ -26,7 +26,7 @@
 
 @section('content')
   <h3 class="text-center h3-top">INFORMASI <span>SATWA</span></h3>
-  <p class="text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+  <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 g-lg-4">
     @for ( $i = 0; $i < 7; $i++ )
