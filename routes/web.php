@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -47,11 +48,11 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
             Route::put('/verify/{id}', [DonasiController::class, 'verifyDonasi'])->name('verify');
         });
         Route::resource('donasi', DonasiController::class);
-    });
 
-
-    Route::get('/dashboard/admin', function () {
-        return view('dashboard.admin');
+        Route::name('admin.')->prefix('admin')->group(function () {
+            Route::get('/get-data', [AdminController::class, 'getDataAdmin'])->name('get-data');
+        });
+        Route::resource('admin', AdminController::class);
     });
 });
 

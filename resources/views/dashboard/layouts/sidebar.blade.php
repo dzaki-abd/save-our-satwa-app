@@ -17,12 +17,14 @@
 
   <div class="sidebar-heading">Halaman</div>
 
-  <li class="nav-item {{ Request::url() == url('/dashboard/admin') ? 'active' : '' }}">
-    <a href="/dashboard/admin" class="nav-link">
+  @if (Auth::user()->email === 'admin@example.com')
+  <li class="nav-item @if (request()->routeIs('dashboard.admin.index')) active @endif">
+    <a href="{{ route('dashboard.admin.index') }}" class="nav-link">
       <i class="fa-solid fa-user fa-sm fa-fw"></i>
       <span>Admin</span>
     </a>
   </li>
+  @endif
   <li class="nav-item {{ Request::url() == url('/dashboard/laporan') ? 'active' : '' }}">
     <a href="/dashboard/laporan" class="nav-link">
       <i class="fa-solid fa-clipboard-list fa-sm fa-fw"></i>
