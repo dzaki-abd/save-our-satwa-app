@@ -87,6 +87,14 @@ Route::group(['middleware' => ['web']], function () {
         });
     
         Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
+        Route::name('dashboard.')->prefix('dashboard')->group(function () {
+            Route::name('pelaporan.')->prefix('pelaporan')->group(function () {
+                Route::get('/pelaporan', [HomeController::class, 'indexPelaporan'])->name('indexPelaporan');
+                Route::get('/get-data/{filter}', [HomeController::class, 'getDataPelaporan'])->name('get-data');
+                Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
+            });
+            Route::resource('pelaporan', HomeController::class);
+        });
     }); 
 });
 
