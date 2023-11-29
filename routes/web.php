@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +55,7 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'web']], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/index', function () {
@@ -82,11 +84,13 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         return view('detail-artikel');
     });
 
-    Route::get('/laporkan', function () {
-        return view('laporkan');
-    });
-
-    Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/laporkan', function () {
+            return view('laporkan');
+        });
+    
+        Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
+    }); 
 });
 
 Auth::routes();
