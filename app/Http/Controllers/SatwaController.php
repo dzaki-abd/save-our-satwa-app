@@ -49,7 +49,7 @@ class SatwaController extends Controller
                 'kategori_iucn' => 'required',
                 'populasi' => 'required',
                 'lokasi' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             ]);
     
             $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
@@ -132,7 +132,7 @@ class SatwaController extends Controller
                 'kategori_iucn' => 'required',
                 'populasi' => 'required',
                 'lokasi' => 'required',
-                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             ]);
 
             $populasi = (int) $validatedData['populasi'];
