@@ -35,6 +35,7 @@ class AdminController extends Controller
                 'email' => $validatedData['email_admin'],
                 'no_hp' => $validatedData['nomor_admin'],
                 'password' => bcrypt($validatedData['password_admin']),
+                'email_verified_at' => now(),
             ])->assignRole(['admin']);
 
             return redirect()->back()->with('success', 'Admin berhasil ditambahkan.');
