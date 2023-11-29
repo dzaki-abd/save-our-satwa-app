@@ -121,21 +121,10 @@
             ke Drive dan melampirkan linknya di kolom yang telah disediakan.
         </p>
         <div class="mb-3">
-            <label for="gambar1" class="form-label">Foto 1</label>
-            <div id="imagePreviewGambar1"></div>
-            <input type="file" class="form-control" id="gambar1" name="gambar1"
-                onchange="fileValidation('gambar1', 'imagePreviewGambar1')" aria-label="file example" />
+            <label for="gambar" class="form-label">Foto</label>
+            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200"
+                data-max-file-size="25M" data-allowed-file-extensions="jpg jpeg png" multiple>
         </div>
-
-        <div id="formfield">
-        </div>
-        <div>
-            <button type="button" class="button-teal-500" style="margin-bottom: 1rem;" onclick="addUpload()">Tambah
-                Unggah</button>
-            <button type="button" class="button-teal-500" style="margin-bottom: 1rem;"
-                onclick="removeUpload()">Hapus Unggah</button>
-        </div>
-
 
         <div class="mb-5">
             <label for="link_gdrive" class="form-label">Link Google Drive (Optional)</label>
@@ -186,33 +175,6 @@
 
 @push('scripts')
     <script>
-        let no = 2;
-        const max = 10;
-
-        function addUpload() {
-            if (no <= max) {
-                var form = `
-                      <div class="mb-3">
-                          <label for="gambar${no}" class="form-label">Foto ${no}</label>
-                          <div id="imagePreviewGambar${no}"></div>
-                          <input type="file" class="form-control" id="gambar${no}" onchange="fileValidation('gambar${no}', 'imagePreviewGambar${no}')" name="gambar${no}" aria-label="file example" required />
-                      </div>`;
-                document.getElementById('formfield').insertAdjacentHTML("beforeend", form);
-                no++;
-            } else {
-                alert('Maksimal upload 10');
-            }
-        }
-
-        function removeUpload() {
-            if (no > 2) {
-                no--;
-                document.getElementById('formfield').removeChild(document.getElementById('formfield').lastElementChild);
-            } else {
-                alert('Minimal upload 1');
-            }
-        }
-
         function fileValidation(id, idPreview) {
             var fileInput = document.getElementById(id);
             var filePath = fileInput.value;
@@ -248,5 +210,54 @@
                 return false;
             }
         }
+
+        $(document).ready(function() {
+            // Initialize Dropify
+            $('.dropify').dropify();
+
+            // You can also add event listeners or customize options here
+            $('.dropify').on('dropify.beforeClear', function(event, element) {
+                return confirm("Apakah Anda yakin ingin menghapus \"" + element.file.name + "\" ?");
+            });
+
+            $('.dropify').on('dropify.afterClear', function(event, element) {
+                Swal.fire({
+                    title: 'Berhasil',
+                    text: 'Foto berhasil dihapus.',
+                    icon: 'success',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            });
+
+            $('.dropify').on('dropify.errors', function(event, element) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Tipe file tidak valid. Hanya file JPG, JPEG, dan PNG yang diperbolehkan.',
+                    icon: 'error',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            });
+
+            $('.dropify').on('dropify.fileReady', function(event, element) {
+                let fileSize = element.file.size; // in bytes
+                let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+
+                if (fileSize > maxSizeInBytes) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Ukuran file terlalu besar. Maksimal 10 MB.',
+                        icon: 'error',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                    $('.dropify').dropify('clear');
+                }
+            });
+        });
     </script>
 @endpush

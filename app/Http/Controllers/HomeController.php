@@ -7,6 +7,7 @@ use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
 use App\Models\Donasi;
+use Yajra\DataTables\Facades\DataTables;
 
 class HomeController extends Controller
 {
@@ -34,34 +35,27 @@ class HomeController extends Controller
         return view('index');
     }
 
+    public function indexPelaporan()
+    {
+        $laporan = Pelaporan::all();
+        $countLaporan = [
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
+        ];
+
+        return view('dashboard.pelaporan.index', compact('countLaporan'));
+    }
+
+    public function addPelaporanPage()
+    {
+        return view('dashboard.pelaporan.add');
+    }
+
     public function addLaporan(Request $request)
     {
-        if ($request->name != null && $request->no_hp != null && $request->email != null) {
-            if (User::where('email', $request->email)->first() == null) {
-                $request->validate([
-                    'name' => 'required',
-                    'no_hp' => 'required',
-                    'email' => 'required',
-                ]);
-
-                $user = User::create([
-                    'name' => $request->name,
-                    'no_hp' => $request->no_hp,
-                    'email' => $request->email,
-                    'role' => 'guest',
-                ]);
-
-                $request->request->add(['user_id' => $user->id]);
-            } else {
-                $user = User::where('email', $request->email)->first();
-
-                $request->request->add(['user_id' => $user->id]);
-            }
-        } else {
-            $user = Auth()->user();
-
-            $request->request->add(['user_id' => $user->id]);
-        }
+        $user = Auth()->user();
+        $request->request->add(['user_id' => $user->id]);
 
         $request->validate([
             'waktu_kejadian' => 'required',
@@ -112,20 +106,20 @@ class HomeController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        for ($i = 1; $i <= 10; $i++) {
-            if ($request->hasFile('gambar' . $i)) {
-                $request->validate([
-                    'gambar' . $i => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
-                ]);
+        $gambar = $request->file('gambar');
 
-                $imageName = time() . $i . '.' . $request->file('gambar' . $i)->extension();
-                $request->file('gambar' . $i)->move(public_path('storage/bukti_kejadian/'), $imageName);
+        foreach ($gambar as $key => $value) {
+            $name = time() . $key . '.' . $value->getClientOriginalExtension();
+            $value->move(public_path('storage/gambar_kejadian/'), $name);
 
-                $request->request->add(['bukti_kejadian' => $imageName]);
-                $request->request->add(['pelaporan_id' => Pelaporan::latest()->first()->id]);
+            $data[] = $name;
+        }
 
-                BuktiKejadian::create($request->all());
-            }
+        foreach ($data as $key => $value) {
+            BuktiKejadian::create([
+                'bukti_kejadian' => $value,
+                'pelaporan_id' => Pelaporan::latest()->first()->id,
+            ]);
         }
 
         if ($request->link_gdrive != null) {
@@ -141,6 +135,39 @@ class HomeController extends Controller
 
         return redirect()->back()
             ->with('success', 'Laporan berhasil ditambahkan.');
+    }
+
+    public function getDataPelaporan($filter)
+    {
+        $laporan = Pelaporan::where('status', $filter)->get();
+
+        return DataTables::of($laporan)
+            ->addIndexColumn()
+            ->addColumn('nama_pelapor', function ($row) {
+                $user = User::find($row->user_id);
+                return $user->name;
+            })
+            ->addColumn('tanggal_kejadian', function ($row) {
+                return date('d F Y', strtotime($row->waktu_kejadian));
+            })
+            ->addColumn('jenis_pelanggaran', function ($row) {
+                return $row->jenis_pelanggaran;
+            })
+            ->addColumn('jenis_satwa', function ($row) {
+                return $row->jenis_satwa;
+            })
+            ->addColumn('status', function ($row) {
+                if ($row->status == 'Ditolak') {
+                    $badgeStatus = '<span class="badge text-bg-danger">' . $row->status . '</span>';
+                } elseif ($row->status == 'Ditinjau') {
+                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
+                } else {
+                    $badgeStatus = '<span class="badge text-bg-success">' . $row->status . '</span>';
+                }
+                return $badgeStatus;
+            })
+            ->rawColumns(['status'])
+            ->make(true);
     }
 
     public function addDonasi(Request $request)
