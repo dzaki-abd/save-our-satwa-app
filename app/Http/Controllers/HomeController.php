@@ -14,14 +14,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth', [
-            'except' => [
-                'addLaporan',
-            ]
-        ]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', [
+    //         'except' => [
+    //             'addLaporan',
+    //         ]
+    //     ]);
+    // }
 
     /**
      * Show the application dashboard.

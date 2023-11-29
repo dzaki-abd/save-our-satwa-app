@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     });
 });
 
-Route::group(['middleware' => ['auth', 'web']], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('/index', function () {
@@ -69,11 +69,13 @@ Route::group(['middleware' => ['auth', 'web']], function () {
         return view('detail-satwa');
     });
 
-    Route::get('/laporkan', function () {
-        return view('laporkan');
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/laporkan', function () {
+            return view('laporkan');
+        });
+    
+        Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
     });
-
-    Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
 });
 
 Auth::routes();
