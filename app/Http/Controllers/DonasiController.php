@@ -10,7 +10,7 @@ class DonasiController extends Controller
 {
     public function index()
     {
-        $jumlahDonasi = Donasi::sum('jumlah_donasi');
+        $jumlahDonasi = Donasi::where('status', 'Sudah Diverifikasi')->sum('jumlah_donasi');
         return view('dashboard.donasi.index', compact('jumlahDonasi'));
     }
 
@@ -27,7 +27,7 @@ class DonasiController extends Controller
                 'email_donatur' => 'required',
                 'nomor_donatur' => 'required',
                 'jumlah_donatur' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:10240',
                 'status' => 'required',
             ]);
 
@@ -71,9 +71,48 @@ class DonasiController extends Controller
         }
     }
 
-    public function update(Request $request, Donasi $donasi)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $donasi = Donasi::findOrFail($id);
+
+            $validatedData = $request->validate([
+                'nama_donatur' => 'required',
+                'email_donatur' => 'required',
+                'nomor_donatur' => 'required',
+                'jumlah_donatur' => 'required',
+                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            ]);
+
+            if ($request->hasFile('image_edit')) {
+                $image_path = public_path('storage/img/donasi_images/' . $donasi->bukti_transfer);
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+
+                $namaFile = 'donasi-' . time() . '.' . $request->image_edit->extension();
+                $request->file('image_edit')->storeAs('img/donasi_images', $namaFile, 'public');
+
+                $donasi->update([
+                    'nama_donatur' => $validatedData['nama_donatur'],
+                    'email' => $validatedData['email_donatur'],
+                    'no_hp' => $validatedData['nomor_donatur'],
+                    'bukti_transfer' => $namaFile,
+                    'jumlah_donasi' => $validatedData['jumlah_donatur'],
+                ]);
+            } else {
+                $donasi->update([
+                    'nama_donatur' => $validatedData['nama_donatur'],
+                    'email' => $validatedData['email_donatur'],
+                    'no_hp' => $validatedData['nomor_donatur'],
+                    'jumlah_donasi' => $validatedData['jumlah_donatur'],
+                ]);
+            }
+
+            return redirect()->back()->with('success', 'Donasi berhasil diubah.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function destroy($id)
@@ -119,7 +158,8 @@ class DonasiController extends Controller
                 return $row->bukti_transfer;
             })
             ->addColumn('jumlah_donasi', function ($row) {
-                return $row->jumlah_donasi;
+                $jumlah = number_format($row->jumlah_donasi, 0, ',', '.');
+                return $jumlah;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Belum Diverifikasi') {
