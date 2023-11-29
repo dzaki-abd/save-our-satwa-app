@@ -87,7 +87,7 @@
             type="submit"
             class="btn button-teal-500 w-100 mb-3"
           >Masuk</button>
-          <p class="text-center text-white mb-0">Belum punya akun? <a href="/regristasi">Daftar</a></p>
+          <p class="text-center text-white mb-0">Belum punya akun? <a href="/register">Daftar</a></p>
         </form>
       </div>
     </div>

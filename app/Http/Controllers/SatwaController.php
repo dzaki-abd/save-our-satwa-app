@@ -49,7 +49,7 @@ class SatwaController extends Controller
                 'kategori_iucn' => 'required',
                 'populasi' => 'required',
                 'lokasi' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             ]);
     
             $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
@@ -132,7 +132,7 @@ class SatwaController extends Controller
                 'kategori_iucn' => 'required',
                 'populasi' => 'required',
                 'lokasi' => 'required',
-                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image_edit' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
             ]);
 
             $populasi = (int) $validatedData['populasi'];
@@ -279,14 +279,21 @@ class SatwaController extends Controller
     public function getDataSatwaForUserById($id)
     {
         $satwa = Satwa::find($id);
-        $satwa->kategori_iucn = $this->convertIUCNCategory($satwa->kategori_iucn);
-        $satwa->tren_populasi = $this->convertIUCNTrendPopulation($satwa->tren_populasi);
+        $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
+        $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
         return view('detail-satwa', compact('satwa'));
     }
 
-    private function convertIUCNCategory($originalCategory)
+    private function convertIUCN($originalValue, $isCategory = true)
     {
-        $categoryMap = [
+        $map = $isCategory ? $this->getIUCNCategoryMap() : $this->getIUCNTrendPopulationMap();
+
+        return isset($map[$originalValue]) ? $map[$originalValue] : $originalValue;
+    }
+
+    private function getIUCNCategoryMap()
+    {
+        return [
             'EX' => 'Extinct (EX) - Punah',
             'EW' => 'Extinct in the Wild (EW) - Punah di Alam Liar',
             'CR' => 'Critically Endangered (CR) - Terancam Punah',
@@ -297,19 +304,15 @@ class SatwaController extends Controller
             'DD' => 'Data Deficient (DD) - Data Kurang',
             'NE' => 'Not Evaluated (NE) - Belum Dinilai',
         ];
-
-        return isset($categoryMap[$originalCategory]) ? $categoryMap[$originalCategory] : $originalCategory;
     }
 
-    private function convertIUCNTrendPopulation($originalTrend)
+    private function getIUCNTrendPopulationMap()
     {
-        $categoryMap = [
+        return [
             'Unknown' => 'Unknown - Tidak diketahui',
             'Stable' => 'Stable - Stabil',
             'Decreasing' => 'Decreasing - Menurun',
             'Increasing' => 'Increasing - Bertambah',
         ];
-
-        return isset($categoryMap[$originalTrend]) ? $categoryMap[$originalTrend] : $originalTrend;
     }
 }

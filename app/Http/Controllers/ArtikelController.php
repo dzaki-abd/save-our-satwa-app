@@ -48,7 +48,7 @@ class ArtikelController extends Controller
                 'di_posting' => 'required|in:Ya,Tidak',
                 'judul_artikel' => 'required|string',
                 'tag_artikel' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
                 'konten' => 'required|string',
             ]);
 
@@ -108,7 +108,7 @@ class ArtikelController extends Controller
                 'di_posting' => 'required|in:Ya,Tidak',
                 'judul_artikel' => 'required|string',
                 'tag_artikel' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
                 'konten' => 'required|string',
             ]);
 

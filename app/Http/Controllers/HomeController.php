@@ -15,14 +15,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth', [
-            'except' => [
-                'addLaporan',
-            ]
-        ]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', [
+    //         'except' => [
+    //             'addLaporan',
+    //         ]
+    //     ]);
+    // }
 
     /**
      * Show the application dashboard.
@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         if ($request->hasFile('hasil_investigasi')) {
             $request->validate([
-                'hasil_investigasi' => 'required|file|mimes:pdf|max:2048',
+                'hasil_investigasi' => 'required|file|mimes:pdf|max:10240',
             ]);
             $hasil = time() . '.' . $request->file('hasil_investigasi')->extension();
             $request->file('hasil_investigasi')->move(public_path('storage/hasil_investigasi/'), $hasil);
@@ -115,7 +115,7 @@ class HomeController extends Controller
         for ($i = 1; $i <= 10; $i++) {
             if ($request->hasFile('gambar' . $i)) {
                 $request->validate([
-                    'gambar' . $i => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'gambar' . $i => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
                 ]);
 
                 $imageName = time() . $i . '.' . $request->file('gambar' . $i)->extension();
@@ -151,7 +151,7 @@ class HomeController extends Controller
                 'email_donatur' => 'required',
                 'nomor_donatur' => 'required',
                 'jumlah_donatur' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:10240',
             ]);
 
             $namaFile = 'donasi-' . time() . '.' . $request->image->extension();
