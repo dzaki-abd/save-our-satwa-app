@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
-
+use App\Models\Artikel;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,13 +73,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/detail-satwa/{id}', [SatwaController::class, 'getDataSatwaForUserById']);
 
-    Route::get('/artikel', function () {
-        return view('artikel');
-    });
+    Route::get('/artikel', [ArtikelController::class, 'getDataArtikelForUser']);
 
-    Route::get('/detail-artikel', function () {
-        return view('detail-artikel');
-    });
+    Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/laporkan', function () {
