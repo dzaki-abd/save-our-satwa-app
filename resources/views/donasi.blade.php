@@ -25,7 +25,7 @@
       <div class="donasi-jumlah rounded p-3">
         <h5 class="text-white mb-1">Jumlah Donasi (via Bank BRI)</h5>
         <p class="text-white mb-3" style="font-size: 0.9rem">hingga {{ getFullDateID() }}</p>
-        <h2 class="text-white mb-0">Rp 200.000.000,0</h2>
+        <h2 class="text-white mb-0">Rp {{ number_format($jumlahDonasi, 0, ',', '.') }}</h2>
       </div>
     </div>
   </div>

@@ -63,11 +63,12 @@ Route::group(['middleware' => ['web']], function () {
         return view('index');
     });
 
-    Route::get('/donasi', function () {
-        return view('donasi');
-    });
+    // Route::get('/donasi', function () {
+    //     return view('donasi');
+    // });
+    Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
 
-    Route::post('/donasi/store', [App\Http\Controllers\HomeController::class, 'addDonasi'])->name('donasi.store');
+    Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
 
     Route::get('/satwa', [SatwaController::class, 'getDataSatwaForUser']);
 
