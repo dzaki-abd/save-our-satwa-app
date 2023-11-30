@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
+use DOMDocument;
+use DOMXPath;
+use Carbon\Carbon;
 
 class ArtikelController extends Controller
 {
@@ -202,4 +205,32 @@ class ArtikelController extends Controller
             ->rawColumns(['action', 'di_posting'])
             ->make(true);
     }
+
+    public function getDataArtikelForUser()
+    {
+        $artikelList = Artikel::all();
+
+        foreach ($artikelList as $artikel) {
+            $dom = new DOMDocument();
+
+            $dom->loadHTML($artikel->konten);
+
+            $xpath = new DOMXPath($dom);
+
+            $firstParagraph = $xpath->query('//p')->item(0);
+
+            if ($firstParagraph !== null) {
+                $artikel->konten = $firstParagraph->nodeValue;
+            }
+        }
+
+        return view('artikel', compact('artikelList'));
+    }
+
+    public function getDataArtikelForUserById($id)
+    {
+        $artikel = Artikel::find($id);
+        return view('detail-artikel', compact('artikel'));
+    }
+
 }

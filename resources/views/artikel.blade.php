@@ -29,24 +29,24 @@
   <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   
   <div class="row row-cols-1 row-cols-lg-2 g-3 g-md-4">
-    @for ( $i = 0; $i < 7; $i++ )
+    @foreach ( $artikelList as $data )
     <div class="col">
       <div class="card border-0 shadow">
         <div class="row g-0">
           <div class="col-md-4 artikel-poster">
-            <img src="../img/donasi.jpg" class="rounded" alt="...">
+            <img src="{{ asset('storage/img/artikel_images/' . $data->gambar) }}" alt="" />
           </div>
           <div class="col-md-8 artikel-content">
             <div class="card-body">
-              <h5 class="card-title mb-0">Card title</h5>
-              <p class="card-text mb-2 mb-md-3"><small class="text-body-secondary">Last updated 28 November 2023</small></p>
-              <p class="card-text mb-2 mb-md-3 description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et numquam distinctio quibusdam libero sint minus! Aspernatur, qui a minima incidunt cumque quod cum quos doloremque. Dolor esse ab dignissimos iure?</p>
-              <a href="/detail-artikel" class="button-teal-500">Baca</a>
+              <h5 class="card-title mb-0">{{ $data->judul }}</h5>
+              <p class="card-text mb-2 mb-md-3"><small class="text-body-secondary">Last updated {{ \Carbon\Carbon::parse($data->updated_at)->format('d F Y') }}</small></p>
+              <p class="card-text mb-2 mb-md-3 description">{{ $data->konten }}</p>
+              <a href="/detail-artikel/{{ $data->id }}" class="button-teal-500">Baca</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    @endfor
+    @endforeach
   </div>
 @endsection

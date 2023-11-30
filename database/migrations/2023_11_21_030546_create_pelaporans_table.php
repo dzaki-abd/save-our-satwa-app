@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tindak_lanjut')->nullable();
             $table->string('hasil_investigasi')->nullable();
             $table->string('catatan_tambahan')->nullable();
-            $table->enum('status', ['Ditinjau', 'Diverifikasi', 'Ditolak'])->default('Ditinjau');
+            $table->enum('status', ['Ditinjau', 'Disetujui', 'Ditolak'])->default('Ditinjau');
             $table->string('user_id');
             $table->timestamps();
         });

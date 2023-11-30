@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
+use App\Models\Artikel;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +24,8 @@ use App\Http\Controllers\SatwaController;
 
 Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
+        Route::get('/',[DashboardController::class, 'index'])->name('index');
+
         Route::name('artikel.')->prefix('artikel')->group(function () {
             Route::get('/get-data', [ArtikelController::class, 'getDataArtikel'])->name('get-data');
             Route::get('/add', [ArtikelController::class, 'addArtikelPage'])->name('add');
@@ -42,14 +48,11 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
             Route::put('/verify/{id}', [DonasiController::class, 'verifyDonasi'])->name('verify');
         });
         Route::resource('donasi', DonasiController::class);
-    });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    });
-
-    Route::get('/dashboard/admin', function () {
-        return view('dashboard.admin');
+        Route::name('admin.')->prefix('admin')->group(function () {
+            Route::get('/get-data', [AdminController::class, 'getDataAdmin'])->name('get-data');
+        });
+        Route::resource('admin', AdminController::class);
     });
 });
 
@@ -60,27 +63,20 @@ Route::group(['middleware' => ['web']], function () {
         return view('index');
     });
 
-    Route::get('/donasi', function () {
-        return view('donasi');
-    });
+    // Route::get('/donasi', function () {
+    //     return view('donasi');
+    // });
+    Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
 
-    Route::post('/donasi/store', [App\Http\Controllers\HomeController::class, 'addDonasi'])->name('donasi.store');
+    Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
 
-    Route::get('/satwa', function () {
-        return view('satwa');
-    });
+    Route::get('/satwa', [SatwaController::class, 'getDataSatwaForUser']);
 
-    Route::get('/detail-satwa', function () {
-        return view('detail-satwa');
-    });
+    Route::get('/detail-satwa/{id}', [SatwaController::class, 'getDataSatwaForUserById']);
 
-    Route::get('/artikel', function () {
-        return view('artikel');
-    });
+    Route::get('/artikel', [ArtikelController::class, 'getDataArtikelForUser']);
 
-    Route::get('/detail-artikel', function () {
-        return view('detail-artikel');
-    });
+    Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/laporkan', function () {
@@ -88,6 +84,14 @@ Route::group(['middleware' => ['web']], function () {
         });
     
         Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
+        Route::name('dashboard.')->prefix('dashboard')->group(function () {
+            Route::name('pelaporan.')->prefix('pelaporan')->group(function () {
+                Route::get('/pelaporan', [HomeController::class, 'indexPelaporan'])->name('indexPelaporan');
+                Route::get('/get-data/{filter}', [HomeController::class, 'getDataPelaporan'])->name('get-data');
+                Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
+            });
+            Route::resource('pelaporan', HomeController::class);
+        });
     }); 
 });
 
