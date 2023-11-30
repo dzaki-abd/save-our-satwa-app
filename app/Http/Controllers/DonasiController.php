@@ -215,4 +215,11 @@ class DonasiController extends Controller
             ], 500);
         }
     }
+
+    public function getDataDonasiForUser()
+    {
+        $jumlahDonasi = Donasi::where('status', 'Sudah Diverifikasi')->sum('jumlah_donasi');
+
+        return view('donasi', compact('jumlahDonasi'));
+    }
 }
