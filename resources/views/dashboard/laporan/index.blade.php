@@ -161,6 +161,7 @@
           <thead>
             <tr>
               <th class="border-0 text-gray-700">No</th>
+              <th class="border-0 text-gray-700">Reg Number</th>
               <th class="border-0 text-gray-700">Nama Pelapor</th>
               <th class="border-0 text-gray-700">Tanggal Kejadian</th>
               <th class="border-0 text-gray-700">Jenis Pelanggaran</th>
@@ -211,20 +212,6 @@
               @for ($i = 0; $i < 5; $i++)
                 <li class="timeline-item">
                   <span class="timeline-icon bg-success">
-                    <!--
-                                                                                                                                                Gunakan icon berdasarkan status menggunakan if
-                                                                                                                                                Diajukan :
-                                                                                                                                                <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
-                                                                                                                                                
-                                                                                                                                                Ditinjau
-                                                                                                                                                <i class="fa-solid fa-file-circle-exclamation text-white fa-sm fa-fw"></i>
-
-                                                                                                                                                Disetujui
-                                                                                                                                                <i class="fa-solid fa-file-circle-check text-white fa-sm fa-fw"></i>
-
-                                                                                                                                                Ditolak
-                                                                                                                                                <i class="fa-solid fa-file-circle-xmark text-white fa-sm fa-fw"></i>
-                                                                                                                                              -->
                     <i class="fa-solid fa-file-arrow-up text-white fa-sm fa-fw"></i>
                   </span>
 
@@ -320,6 +307,10 @@
           className: 'text-center',
         },
         {
+          data: 'uniqid',
+          name: 'uniqid'
+        },
+        {
           data: 'nama_pelapor',
           name: 'nama_pelapor'
         },
@@ -348,13 +339,71 @@
       ]
     });
 
-    // $('#buttonLaporanDitinjau').trigger('click');
-
     $('#buttonLaporanDitinjau, #buttonLaporanDisetujui, #buttonLaporanDitolak').on('click', function() {
       let laporanFilter = $(this).data('id');
       $('#title-table').html('Data Laporan ' + laporanFilter);
 
       table.ajax.url("{{ route('dashboard.laporan.get-data', ':id') }}".replace(':id', laporanFilter)).load();
+
+    });
+
+    $('#list-laporan').on('click', '.btn-delete', function() {
+      let id = $(this).data('id');
+      let uniqid = $(this).data('uniq');
+      let url = "{{ route('dashboard.laporan.destroy', ':laporan') }}".replace(':laporan', id);
+
+      Swal.fire({
+        title: 'Apakah Anda Yakin?',
+        text: "Data laporan dengan Reg ID " + uniqid + " akan dihapus.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#1cc88a',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Tutup'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: url,
+            type: 'DELETE',
+            data: {
+              "_token": "{{ csrf_token() }}",
+            },
+            success: function(data) {
+              if (data.status == 'success') {
+                Swal.fire({
+                  title: 'Berhasil!',
+                  text: "Data laporan dengan Reg ID " + uniqid + " berhasil dihapus.",
+                  icon: 'success',
+                  confirmButtonColor: '#1cc88a',
+                  confirmButtonText: 'Tutup'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    table.ajax.reload();
+                  }
+                })
+              } else {
+                Swal.fire({
+                  title: 'Gagal!',
+                  text: "Data laporan dengan Reg ID " + uniqid + " gagal dihapus.",
+                  icon: 'error',
+                  confirmButtonColor: '#1cc88a',
+                  confirmButtonText: 'Tutup'
+                })
+              }
+            },
+            error: function(data) {
+              Swal.fire({
+                title: 'Gagal!',
+                text: "Data laporan dengan Reg ID " + uniq + " gagal dihapus.",
+                icon: 'error',
+                confirmButtonColor: '#1cc88a',
+                confirmButtonText: 'Tutup'
+              })
+            }
+          });
+        }
+      })
 
     });
   </script>

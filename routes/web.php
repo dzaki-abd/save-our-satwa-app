@@ -58,24 +58,17 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
     Route::get('/index', function () {
         return view('index');
     });
 
-    // Route::get('/donasi', function () {
-    //     return view('donasi');
-    // });
     Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
-
     Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
 
     Route::get('/satwa', [SatwaController::class, 'getDataSatwaForUser']);
-
     Route::get('/detail-satwa/{id}', [SatwaController::class, 'getDataSatwaForUserById']);
 
     Route::get('/artikel', [ArtikelController::class, 'getDataArtikelForUser']);
-
     Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
     Route::group(['middleware' => ['auth']], function () {
