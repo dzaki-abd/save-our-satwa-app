@@ -18,20 +18,28 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin', 'guard_name' => 'web']);
         Role::create(['name' => 'user', 'guard_name' => 'web']);
 
-        User::factory()->create([
+        // User::factory()->create([
+        //     'name' => 'User',
+        //     'no_hp' => '081234567890',
+        //     'email' => 'user@example.com',
+        // ])->each(function ($user) {
+        //     $user->assignRole(['user']);
+        // });
+
+        User::create([
             'name' => 'User',
             'no_hp' => '081234567890',
-            'email' => 'user@example.com',
-        ])->each(function ($user) {
-            $user->assignRole(['user']);
-        });
-
-        User::factory()->create([
+            'email' => 'user@example.com'
+        ])->assignRole(['user']);
+        
+        User::create([
             'name' => 'Admin',
             'no_hp' => '081234567890',
             'email' => 'admin@example.com',
-        ])->each(function ($user) {
-            $user->assignRole(['admin']);
-        });
+        ])->assignRole(['admin']);
+
+        $this->call(SatwaSeeder::class);
+        $this->call(PelanggaranSeeder::class);
+        $this->call(PelaporanSeeder::class);
     }
 }
