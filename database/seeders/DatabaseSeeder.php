@@ -29,13 +29,15 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'User',
             'no_hp' => '081234567890',
-            'email' => 'user@example.com'
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'),
         ])->assignRole(['user']);
         
         User::create([
             'name' => 'Admin',
             'no_hp' => '081234567890',
             'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
         ])->assignRole(['admin']);
 
         $this->call(SatwaSeeder::class);
