@@ -7,6 +7,8 @@ use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
 use App\Models\Donasi;
+use App\Models\Pelanggaran;
+use App\Models\Satwa;
 use Yajra\DataTables\Facades\DataTables;
 
 class HomeController extends Controller
@@ -35,15 +37,21 @@ class HomeController extends Controller
         return view('index');
     }
 
+    public function indexLaporkan()
+    {
+        $satwa = Satwa::all();
+        $pelanggaran = Pelanggaran::all();
+
+        return view('laporkan', compact('satwa', 'pelanggaran'));
+    }
     public function indexPelaporan()
     {
         $laporan = Pelaporan::all();
         $countLaporan = [
-            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
-            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
-            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('user_id', Auth()->user()->id)->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', Auth()->user()->id)->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', Auth()->user()->id)->count(),
         ];
-
         return view('dashboard.pelaporan.index', compact('countLaporan'));
     }
 
@@ -60,57 +68,73 @@ class HomeController extends Controller
         $request->validate([
             'waktu_kejadian' => 'required',
             'lokasi_kejadian' => 'required',
-            'jenis_pelanggaran' => 'required',
-            'jenis_satwa' => 'required',
+            'pelanggaran_id' => 'required',
+            'pelanggaran_lain' => 'nullable',
+            'satwa_id' => 'required',
+            'satwa_lain' => 'nullable',
             'deskripsi_kejadian' => 'required',
             'tindak_lanjut' => 'nullable',
             'catatan_tambahan' => 'nullable',
             'user_id' => 'required',
         ]);
 
-        if ($request->jenis_pelangaran == 'Lainnya') {
+        if ($request->pelanggaran_id == 'Lainnya') {
             $request->validate([
-                'jenis_pelanggaran_lainnya' => 'required',
+                'pelanggaran_lain' => 'required',
             ]);
-            $request->request->add(['jenis_pelanggaran' => $request->jenis_pelanggaran_lainnya]);
+            $request->request->add(['pelanggaran_id' => $request->pelanggaran_lain]);
         }
 
-        if ($request->jenis_satwa == 'Lainnya') {
+        if ($request->satwa_id == 'Lainnya') {
             $request->validate([
-                'jenis_satwa_lainnya' => 'required',
+                'satwa_lain' => 'required',
             ]);
-            $request->request->add(['jenis_satwa' => $request->jenis_satwa_lainnya]);
+            $request->request->add(['satwa_id' => $request->satwa_lain]);
         }
 
         if ($request->hasFile('hasil_investigasi')) {
             $request->validate([
                 'hasil_investigasi' => 'required|file|mimes:pdf|max:10240',
             ]);
-            $hasil = time() . '.' . $request->file('hasil_investigasi')->extension();
-            $request->file('hasil_investigasi')->move(public_path('storage/hasil_investigasi/'), $hasil);
 
-            $request->request->add(['hasil_investigasi' => $hasil]);
+            $file = $request->file('hasil_investigasi');
+            $hasil = 'hasil_investigasi/' . time() . '.' . $file->extension();
+            $file->move(public_path('storage/hasil_investigasi/'), $hasil);
+
+            Pelaporan::create([
+                'uniqid' => uniqid(),
+                'waktu_kejadian' => $request->waktu_kejadian,
+                'lokasi_kejadian' => $request->lokasi_kejadian,
+                'pelanggaran_id' => $request->pelanggaran_id,
+                'satwa_id' => $request->satwa_id,
+                'deskripsi_kejadian' => $request->deskripsi_kejadian,
+                'tindak_lanjut' => $request->tindak_lanjut,
+                'hasil_investigasi' => $hasil,
+                'catatan_tambahan' => $request->catatan_tambahan,
+                'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
+                'user_id' => $request->user_id,
+            ]);
+        } else {
+            Pelaporan::create([
+                'uniqid' => uniqid(),
+                'waktu_kejadian' => $request->waktu_kejadian,
+                'lokasi_kejadian' => $request->lokasi_kejadian,
+                'pelanggaran_id' => $request->pelanggaran_id,
+                'satwa_id' => $request->satwa_id,
+                'deskripsi_kejadian' => $request->deskripsi_kejadian,
+                'tindak_lanjut' => $request->tindak_lanjut,
+                'hasil_investigasi' => $request->hasil_investigasi,
+                'catatan_tambahan' => $request->catatan_tambahan,
+                'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
+                'user_id' => $request->user_id,
+            ]);
         }
-
-        Pelaporan::create([
-            'uniqid' => uniqid(),
-            'waktu_kejadian' => $request->waktu_kejadian,
-            'lokasi_kejadian' => $request->lokasi_kejadian,
-            'jenis_pelanggaran' => $request->jenis_pelanggaran,
-            'jenis_satwa' => $request->jenis_satwa,
-            'deskripsi_kejadian' => $request->deskripsi_kejadian,
-            'tindak_lanjut' => $request->tindak_lanjut,
-            'hasil_investigasi' => $request->hasil_investigasi,
-            'catatan_tambahan' => $request->catatan_tambahan,
-            'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
-            'user_id' => $request->user_id,
-        ]);
 
         $gambar = $request->file('gambar');
 
         foreach ($gambar as $key => $value) {
-            $name = time() . $key . '.' . $value->getClientOriginalExtension();
-            $value->move(public_path('storage/gambar_kejadian/'), $name);
+            $name = 'bukti_kejadian/' . time() . $key . '.' . $value->getClientOriginalExtension();
+            $value->move(public_path('storage/bukti_kejadian/'), $name);
 
             $data[] = $name;
         }
@@ -139,7 +163,7 @@ class HomeController extends Controller
 
     public function getDataPelaporan($filter)
     {
-        $laporan = Pelaporan::where('status', $filter)->get();
+        $laporan = Pelaporan::where('status', $filter)->where('user_id', Auth()->user()->id)->get();
 
         return DataTables::of($laporan)
             ->addIndexColumn()

@@ -79,9 +79,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/laporkan', function () {
-            return view('laporkan');
-        });
+        Route::get('/laporkan', [HomeController::class, 'indexLaporkan'])->name('laporkan');
     
         Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
         Route::name('dashboard.')->prefix('dashboard')->group(function () {

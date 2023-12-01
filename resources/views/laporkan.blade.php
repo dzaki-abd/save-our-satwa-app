@@ -64,38 +64,34 @@
             Jika anda memilih lainnya pada form select maka isi form dengan label lainnya!
         </p>
         <div class="mb-3">
-            <label for="jenis_pelanggaran" class="form-label">Pilih Jenis Pelanggaran</label>
-            <select class="form-select" id="jenis_pelanggaran" name="jenis_pelanggaran" aria-label="Default select example"
+            <label for="pelanggaran_id" class="form-label">Pilih Jenis Pelanggaran</label>
+            <select class="form-select" id="pelanggaran_id" name="pelanggaran_id" aria-label="Default select example"
                 required>
-                <option selected>Pilih...</option>
-                <option value="Pemeliharaan Illegal">Pemeliharaan Illegal</option>
-                <option value="Pemusnahan Satwa">Pemusnahan Satwa</option>
-                <option value="Perburuan Satwa">Perburuan Satwa</option>
-                <option value="Perdagangan Satwa">Perdagangan Satwa</option>
-                <option value="Eksperimen Satwa yang Tidak Etis">Eksperimen Satwa yang Tidak Etis</option>
-                <option value="Pertandingan Satwa">Pertandingan Satwa</option>
-                <option value="Penangkapan dan Penyiksaan Satwa">Penangkapan dan Penyiksaan Satwa</option>
+                <option selected disabled>Pilih...</option>
+                @foreach ($pelanggaran as $p)
+                    <option value="{{ $p->id }}">{{ $p->nama_pelanggaran }}</option>
+                @endforeach
                 <option value="Lainnya">Lainnya</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="jenis_pelanggaran_lainnya" class="form-label">Jenis Pelanggaran Lainnya</label>
-            <input type="text" class="form-control" id="jenis_pelanggaran_lainnya" name="jenis_pelanggaran_lainnya"
+            <label for="pelanggaran_lain" class="form-label">Jenis Pelanggaran Lainnya (Opsional)</label>
+            <input type="text" class="form-control" id="pelanggaran_lain" name="pelanggaran_lain"
                 placeholder="Masukkan jenis pelanggaran lainnya">
         </div>
         <div class="mb-3">
-            <label for="jenis_satwa" class="form-label">Pilih Jenis Satwa</label>
-            <select class="form-select" id="jenis_satwa" name="jenis_satwa" aria-label="Default select example" required>
-                <option selected>Pilih...</option>
-                <option value="Harimau Sumatra">Harimau Sumatra</option>
-                <option value="Komodo">Komodo</option>
-                <option value="Anoa">Anoa</option>
+            <label for="satwa_id" class="form-label">Pilih Jenis Satwa</label>
+            <select class="form-select" id="satwa_id" name="satwa_id" aria-label="Default select example" required>
+                <option selected disabled>Pilih...</option>
+                @foreach ($satwa as $s)
+                    <option value="{{ $s->id }}">{{ $s->nama_lokal }}</option>
+                @endforeach
                 <option value="Lainnya">Lainnya</option>
             </select>
         </div>
         <div class="mb-5">
-            <label for="jenis_satwa_lainnya" class="form-label">Jenis Satwa Lainnya</label>
-            <input type="text" class="form-control" id="jenis_satwa_lainnya" name="jenis_satwa_lainnya"
+            <label for="satwa_lain" class="form-label">Jenis Satwa Lainnya (Opsional)</label>
+            <input type="text" class="form-control" id="satwa_lain" name="satwa_lain"
                 placeholder="Masukkan jenis satwa lainya">
         </div>
 
@@ -153,8 +149,8 @@
         </p>
         <div class="mb-5">
             <label for="hasil_investigasi" class="form-label">Hasil Investigasi (Optional)</label>
-            <input type="file" class="form-control" id="hasil_investigasi" name="hasil_investigasi"
-                onchange="fileValidationPdf('hasil_investigasi')">
+            <input type="file" id="hasil_investigasi" name="hasil_investigasi" class="dropify" data-height="200"
+                data-max-file-size="10M" data-allowed-file-extensions="pdf">
         </div>
 
         <h5 class="mb-3">PENCATATAN TAMBAHAN</h5>
@@ -175,42 +171,6 @@
 
 @push('scripts')
     <script>
-        function fileValidation(id, idPreview) {
-            var fileInput = document.getElementById(id);
-            var filePath = fileInput.value;
-            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-
-            if (!allowedExtensions.exec(filePath)) {
-                alert('Jenis file tidak valid');
-                fileInput.value = '';
-                return false;
-            } else {
-                if (fileInput.files && fileInput.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById(idPreview).innerHTML = `
-                              <a href="${e.target.result}" data-fancybox="buktiLaporan" data-caption="Gallery B #2">
-                                <img src="${e.target.result}" alt="" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;">
-                              </a>
-                          `;
-                    };
-                    reader.readAsDataURL(fileInput.files[0]);
-                }
-            }
-        }
-
-        function fileValidationPdf(id) {
-            var fileInput = document.getElementById(id);
-            var filePath = fileInput.value;
-            var allowedExtensions = /(\.pdf)$/i;
-
-            if (!allowedExtensions.exec(filePath)) {
-                alert('Jenis file tidak valid');
-                fileInput.value = '';
-                return false;
-            }
-        }
-
         $(document).ready(function() {
             // Initialize Dropify
             $('.dropify').dropify();
