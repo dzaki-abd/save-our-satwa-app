@@ -20,4 +20,14 @@ class Pelaporan extends Model
     {
         return $this->hasMany(BuktiKejadian::class);
     }
+
+    public function pelanggaran()
+    {
+        return $this->belongsTo(Pelanggaran::class);
+    }
+
+    public function satwa()
+    {
+        return $this->belongsTo(Satwa::class);
+    }
 }

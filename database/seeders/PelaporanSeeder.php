@@ -15,23 +15,23 @@ class PelaporanSeeder extends Seeder
     {
         Pelaporan::create([
             'uniqid' => uniqid(),
-            'waktu_kejadian' => '2021-05-01 00:00:00',
+            'waktu_kejadian' => '2022-08-19 00:00:00',
             'lokasi_kejadian' => 'Jl. Raya Bogor',
-            'jenis_pelanggaran' => 'Pemeliharaan Ilegal',
-            'jenis_satwa' => 'Harimau Sumatera',
-            'deskripsi_kejadian' => 'Pemilik satwa tidak memiliki izin pemeliharaan',
+            'pelanggaran_id' => 2,
+            'satwa_id' => 3,
+            'deskripsi_kejadian' => 'Penjualan satwa dilakukan di pinggir jalan',
             'status' => 'Ditinjau',
             'user_id' => '1',
         ]);
         
         Pelaporan::create([
             'uniqid' => uniqid(),
-            'waktu_kejadian' => '2021-05-01 00:00:00',
-            'lokasi_kejadian' => 'Jl. Raya Bogor',
-            'jenis_pelanggaran' => 'Pemeliharaan Ilegal',
-            'jenis_satwa' => 'Harimau Sumatera',
-            'deskripsi_kejadian' => 'Pemilik satwa tidak memiliki izin pemeliharaan',
-            'status' => 'Ditolak',
+            'waktu_kejadian' => '2023-10-01 00:00:00',
+            'lokasi_kejadian' => 'Jl. Bojongsoang',
+            'pelanggaran_id' => 1,
+            'satwa_id' => 1,
+            'deskripsi_kejadian' => 'Pemelihaaraan satwa dilakukan di rumah',
+            'status' => 'Ditinjau',
             'user_id' => '1',
         ]);
     }
