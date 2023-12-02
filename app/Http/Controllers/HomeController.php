@@ -71,20 +71,55 @@ class HomeController extends Controller
 
         return view('laporkan', compact('satwa', 'pelanggaran'));
     }
-    public function indexPelaporan()
+    public function profile()
     {
         $laporan = Pelaporan::all();
+        $user = Auth()->user();
         $countLaporan = [
-            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('user_id', Auth()->user()->id)->count(),
-            'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', Auth()->user()->id)->count(),
-            'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', Auth()->user()->id)->count(),
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('user_id', $user->id)->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', $user->id)->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', $user->id)->count(),
         ];
-        return view('dashboard.pelaporan.index', compact('countLaporan'));
+        return view('profil', compact('countLaporan','user'));
     }
 
-    public function addPelaporanPage()
+    public function ubahProfile()
     {
-        return view('dashboard.pelaporan.add');
+        $user = Auth()->user();
+        return view('ubah-profil', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth()->user();
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $foto = 'foto/' . time() . '.' . $file->extension();
+            $file->move(public_path('storage/foto/'), $foto);
+
+            User::where('id', $user->id)->update([
+                'foto' => $foto,
+            ]);
+        }
+
+        User::where('id', $user->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        
+
+        return redirect()->back()
+            ->with('success', 'Profil berhasil diubah.');
     }
 
     public function addLaporan(Request $request)
@@ -188,24 +223,19 @@ class HomeController extends Controller
             ->with('success', 'Laporan berhasil ditambahkan.');
     }
 
-    public function getDataPelaporan($filter)
+    public function getDataPelaporan($filters)
     {
-        $laporan = Pelaporan::where('status', $filter)->where('user_id', Auth()->user()->id)->get();
+        $laporan = Pelaporan::where('status',$filters)->where('user_id', Auth()->user()->id)->get();
 
         return DataTables::of($laporan)
-            ->addIndexColumn()
-            ->addColumn('nama_pelapor', function ($row) {
-                $user = User::find($row->user_id);
-                return $user->name;
+            ->addColumn('pelanggaran_id', function ($row) {
+                return $row->pelanggaran->nama_pelanggaran;
             })
             ->addColumn('tanggal_kejadian', function ($row) {
                 return date('d F Y', strtotime($row->waktu_kejadian));
             })
-            ->addColumn('jenis_pelanggaran', function ($row) {
-                return $row->jenis_pelanggaran;
-            })
-            ->addColumn('jenis_satwa', function ($row) {
-                return $row->jenis_satwa;
+            ->addColumn('satwa_id', function ($row) {
+                return $row->satwa->nama_lokal;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {
