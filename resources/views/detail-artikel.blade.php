@@ -22,6 +22,7 @@
     </div>
   </div>
 @endsection
+
 @section('content')
   <div class="container shadow rounded detail-artikel-container p-2 p-md-3">
     <a href="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" data-fancybox>

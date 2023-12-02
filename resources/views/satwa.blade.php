@@ -28,6 +28,9 @@
   <h3 class="text-center h3-top">INFORMASI <span>SATWA</span></h3>
   <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   
+  @if (empty($satwaList))
+    <p class="text-center mb-0">Belum ada data yang tersedia.</p>
+  @else 
   <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 g-lg-4">
     @foreach ($satwaList as $data)
     <div class="col">
@@ -43,4 +46,5 @@
     </div>
     @endforeach
   </div>
+  @endif
 @endsection

@@ -78,6 +78,14 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
+    Route::get('/profil', function() {
+        return view('profil');
+    });
+
+    Route::get('/ubah-profil', function() {
+        return view('ubah-profil');
+    });
+
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/laporkan', function () {
             return view('laporkan');

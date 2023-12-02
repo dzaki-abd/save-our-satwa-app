@@ -28,13 +28,16 @@
   <h3 class="text-center h3-top">ARTIKEL <span>& BERITA</span></h3>
   <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
   
+  @if (empty($artikelList))
+      <p class="text-center mb-0">Belum ada data yang tersedia.</p>
+  @else 
   <div class="row row-cols-1 row-cols-lg-2 g-3 g-md-4">
     @foreach ( $artikelList as $data )
     <div class="col">
       <div class="card border-0 shadow">
         <div class="row g-0">
           <div class="col-md-4 artikel-poster">
-            <img src="{{ asset('storage/img/artikel_images/' . $data->gambar) }}" alt="" />
+            <img class="rounded" src="{{ asset('storage/img/artikel_images/' . $data->gambar) }}" alt="" />
           </div>
           <div class="col-md-8 artikel-content">
             <div class="card-body">
@@ -49,4 +52,5 @@
     </div>
     @endforeach
   </div>
+  @endif
 @endsection
