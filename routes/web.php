@@ -24,7 +24,7 @@ use App\Models\Artikel;
 
 Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
-        Route::get('/',[DashboardController::class, 'index'])->name('index');
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::name('artikel.')->prefix('artikel')->group(function () {
             Route::get('/get-data', [ArtikelController::class, 'getDataArtikel'])->name('get-data');
@@ -63,9 +63,6 @@ Route::group(['middleware' => ['web']], function () {
         return view('index');
     });
 
-    // Route::get('/donasi', function () {
-    //     return view('donasi');
-    // });
     Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
 
     Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
@@ -78,29 +75,19 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
-    Route::get('/profil', function() {
-        return view('profil');
-    });
-
-    Route::get('/ubah-profil', function() {
-        return view('ubah-profil');
-    });
-
     Route::group(['middleware' => ['auth']], function () {
+        
         Route::get('/laporkan', [HomeController::class, 'indexLaporkan'])->name('laporkan');
-    
+
         Route::post('/laporkan/store', [App\Http\Controllers\HomeController::class, 'addLaporan'])->name('laporkan.store');
-        Route::name('dashboard.')->prefix('dashboard')->group(function () {
-            Route::name('pelaporan.')->prefix('pelaporan')->group(function () {
-                Route::get('/pelaporan', [HomeController::class, 'indexPelaporan'])->name('indexPelaporan');
-                Route::get('/get-data/{filter}', [HomeController::class, 'getDataPelaporan'])->name('get-data');
-                Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
-            });
-            Route::resource('pelaporan', HomeController::class);
-        });
-    }); 
+
+        Route::get('/profil', [HomeController::class, 'profile'])->name('profile');
+        Route::get('/get-riwayat/{filters}', [HomeController::class, 'getDataPelaporan'])->name('get-riwayat');
+        Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
+
+        Route::get('/ubah-profil', [HomeController::class, 'ubahProfile'])->name('ubah-profile');
+        Route::put('/update-profil/{id}', [HomeController::class, 'updateProfile'])->name('update-profile');
+    });
 });
 
 Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
