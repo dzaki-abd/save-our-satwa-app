@@ -52,14 +52,14 @@
     <div class="row">
         <!-- Card Laporan Ditinjau -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card border-left-warning shadow h-100 py-2 border-0">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-warning-custom text-uppercase mb-1">
                                 Laporan Ditinjau
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <div class="h5 mb-0 font-weight-bold text-gray-500" style="font-size: 2rem">
                                 {{ $countLaporan['ditinjau'] }}
                             </div>
                         </div>
@@ -73,14 +73,14 @@
 
         <!-- Card Laporan Disetujui -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card border-left-teal-500 shadow h-100 py-2 border-0">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-teal-500 text-uppercase mb-1">
                                 Laporan Disetujui
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <div class="h5 mb-0 font-weight-bold text-gray-500" style="font-size: 2rem">
                                 {{ $countLaporan['disetujui'] }}
                             </div>
                         </div>
@@ -94,14 +94,14 @@
 
         <!-- Card Laporan Ditolak -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card border-left-danger shadow h-100 py-2 border-0">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-danger-custom text-uppercase mb-1">
                                 Laporan Ditolak
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <div class="h5 mb-0 font-weight-bold text-gray-500" style="font-size: 2rem">
                                 {{ $countLaporan['ditolak'] }}
                             </div>
                         </div>
@@ -113,24 +113,25 @@
             </div>
         </div>
     </div>
+
     <ul class="nav nav-tabs border-bottom-success mt-2 bg-white shadow"
         style="border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem; position: relative; z-index: 2">
         <li class="nav-item">
-            <button id="buttonLaporanDitinjau" class="btn btn-success"
+            <button id="buttonLaporanDitinjau" class="button-teal-500"
                 style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
                 data-id="Ditinjau">
                 Laporan Ditinjau
             </button>
         </li>
         <li class="nav-item">
-            <button id="buttonLaporanDisetujui" class="btn text-success"
+            <button id="buttonLaporanDisetujui" class="button-white"
                 style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
                 data-id="Disetujui">
                 Laporan Disetujui
             </button>
         </li>
         <li class="nav-item">
-            <button id="buttonLaporanDitolak" class="btn text-success"
+            <button id="buttonLaporanDitolak" class="button-white"
                 style="border-radius: 0; border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem"
                 data-id="Ditolak">
                 Laporan Ditolak
@@ -159,7 +160,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/laporan-initiator.js') }}"></script>
+    <script src="{{ asset('js/laporan-user-initiator.js') }}"></script>
 
     <script>
         // trigger buttonLaporanDitinjau click
@@ -201,7 +202,6 @@
 
             table.ajax.url("{{ route('get-riwayat', ':id') }}".replace(':id', laporanFilter))
                 .load();
-
         });
     </script>
 @endpush
