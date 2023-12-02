@@ -71,49 +71,9 @@
       <div class="d-flex login-button-box">
         @if (Auth::check())
           <div class="dropdown">
-            <a
-              href="#"
-              class="btn text-decoration-none link-dark profile-picture rounded-circle"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="../img/profie-picture.jpg"
-                alt=""
-              >
+            <a href="/profil" class="btn text-decoration-none link-dark profile-picture rounded-circle">
+              <img src="../img/default-profil.png" alt="">
             </a>
-            <ul
-              class="dropdown-menu shadow dropdown-profile"
-              aria-labelledby="dropdownMenuLink"
-            >
-              <li>
-                <a
-                  href="/profil"
-                  class="p-2 px-3 text-decoration-none"
-                >Profil</a>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li class="d-flex align-items-center gap-1">
-                <a
-                  class="ps-3 pe-1 text-decoration-none"
-                  href="#"
-                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                >Keluar</a>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <form
-                  id="logout-form"
-                  action="{{ route('logout') }}"
-                  method="POST"
-                  class="d-none"
-                >
-                  @csrf
-                </form>
-              </li>
-            </ul>
           </div>
       </div>
     @else

@@ -7,9 +7,12 @@ use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
 use App\Models\Donasi;
-use App\Models\Pelanggaran;
 use App\Models\Satwa;
+use App\Models\Artikel;
+use App\Models\Pelanggaran;
 use Yajra\DataTables\Facades\DataTables;
+use DOMDocument;
+use DOMXPath;
 
 class HomeController extends Controller
 {
@@ -34,7 +37,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $pelaporanList = Pelaporan::all();
+
+        $ditinjauCount = $pelaporanList->where('status', 'Ditinjau')->count();
+        $disetujuiCount = $pelaporanList->where('status', 'Disetujui')->count();
+        $ditolakCount = $pelaporanList->where('status', 'Ditolak')->count();
+
+        $satwaList = Satwa::all();
+
+        $artikelList = Artikel::all();
+    
+        foreach ($artikelList as $artikel) {
+            $dom = new DOMDocument();
+
+            $dom->loadHTML($artikel->konten);
+
+            $xpath = new DOMXPath($dom);
+
+            $firstParagraph = $xpath->query('//p')->item(0);
+
+            if ($firstParagraph !== null) {
+                $artikel->konten = $firstParagraph->nodeValue;
+            }
+        }
+
+        return view('index', compact('satwaList', 'artikelList', 'ditinjauCount', 'disetujuiCount', 'ditolakCount'));
     }
 
     public function indexLaporkan()
