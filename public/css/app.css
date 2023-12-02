@@ -51,6 +51,72 @@ body {
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* ========== TEXT COLOR ========== */
+
+.text-gray-100 {
+  color: #f8f9fc !important;
+}
+
+.text-gray-200 {
+  color: #eaecf4 !important;
+}
+
+.text-gray-300 {
+  color: #dddfeb !important;
+}
+
+.text-gray-400 {
+  color: #d1d3e2 !important;
+}
+
+.text-gray-500 {
+  color: #b7b9cc !important;
+}
+
+.text-gray-600 {
+  color: #858796 !important;
+}
+
+.text-gray-700 {
+  color: #6e707e !important;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.text-gray-900 {
+  color: #3a3b45 !important;
+}
+
+.text-warning-custom {
+  color: var(--warning);
+}
+
+.text-danger-custom {
+  color: var(--danger);
+}
+
+.text-teal-500 {
+  color: var(--teal-500);
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid var(--warning) !important;
+}
+
+.border-left-danger {
+  border-left: 0.25rem solid var(--danger) !important;
+}
+
+.border-bottom-teal-500 {
+  border-bottom: 0.1rem solid var(--teal-500) !important;
+ }
+
+.font-weight-bold {
+  font-weight: 500 !important;
+}
+
 /* ========== NAVBAR ========== */
 
 .navbar {
@@ -108,7 +174,6 @@ body {
 .button-teal-500 {
   display: inline-block;
 	font-weight: 400;
-	color: #212529;
 	text-align: center;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
@@ -134,6 +199,27 @@ body {
 .button-teal-500-custom:hover {
   background-color: var(--teal-700);
 }
+
+.button-white {
+  display: inline-block;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	color: var(--teal-500);
+	background-color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* .button-white:hover {
+  background-color: var(--teal-400);
+  color: var(--white)
+} */
 
 /* ========== FOOTER ========== */
 

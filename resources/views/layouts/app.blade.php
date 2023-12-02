@@ -70,7 +70,7 @@
     </script>
 
     <script src="{{ asset('js/datatables-initiator.js') }}"></script>
-    <script src="../js/navbar-initiator.js"></script>
+    <script src="{{ asset('js/navbar-initiator.js') }}"></script>
 
     @if (session('success'))
         <script>

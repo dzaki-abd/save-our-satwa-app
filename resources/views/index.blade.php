@@ -53,8 +53,8 @@
       <p class="text-center p-top">Dapatkan Pengetahuan Mendalam tentang Satwa dengan Informasi Detail yang Menarik</p>
     </div>
 
-    @if (empty($satwaList))
-      <p class="text-center mb-0">Belum ada data yang tersedia.</p>
+    @if ($satwaList->count() === 0)
+      <p class="text-center mb-0">Belum ada data yang tersedia</p>
     @else 
       <div class="swiper-satwa" style="width: 100%;">
         <div class="swiper-wrapper">
@@ -86,37 +86,37 @@
       <p class="text-center p-top">Baca Informasi Menarik dan Pengetahuan Terbaru tentang Satwa</p>
     </div>
    
-    @if (empty($artikelList))
-      <p class="text-center mb-0">Belum ada data yang tersedia.</p>
+    @if ($artikelList->count() === 0)
+      <p class="text-center mb-0">Belum ada data yang tersedia</p>
     @else 
-    <div class="swiper-artikel" style="width: 100%;">
-      <div class="swiper-wrapper">
-        @foreach ($artikelList as $artikel)
-        <div data-aos="zoom-in" data-aos-offset="150" class="swiper-slide">
-          <div class="card">
-            <div class="row g-0">
-              <div class="col-md-4 artikel-poster">
-                <img class="rounded" src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" alt="" />
-              </div>
-              <div class="col-md-8 artikel-content">
-                <div class="card-body">
-                  <h5 class="card-title mb-0">{{ $artikel->judul }}</h5>
-                  <p class="card-text mb-2 mb-md-3"><small class="text-body-secondary">Last updated {{ \Carbon\Carbon::parse($artikel->updated_at)->format('d F Y') }}</small></p>
-                  <p class="card-text mb-2 mb-md-3 description">{{ $artikel->konten }}</p>
-                  <a href="/detail-artikel/{{ $artikel->id }}" class="button-teal-500">Baca</a>
+      <div class="swiper-artikel" style="width: 100%;">
+        <div class="swiper-wrapper">
+          @foreach ($artikelList as $artikel)
+          <div data-aos="zoom-in" data-aos-offset="150" class="swiper-slide">
+            <div class="card">
+              <div class="row g-0">
+                <div class="col-md-4 artikel-poster">
+                  <img class="rounded" src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" alt="" />
+                </div>
+                <div class="col-md-8 artikel-content">
+                  <div class="card-body">
+                    <h5 class="card-title mb-0">{{ $artikel->judul }}</h5>
+                    <p class="card-text mb-2 mb-md-3"><small class="text-body-secondary">Last updated {{ \Carbon\Carbon::parse($artikel->updated_at)->format('d F Y') }}</small></p>
+                    <p class="card-text mb-2 mb-md-3 description">{{ $artikel->konten }}</p>
+                    <a href="/detail-artikel/{{ $artikel->id }}" class="button-teal-500">Baca</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          @endforeach
+          <a data-aos="zoom-in" data-aos-offset="150" href="/artikel" class="swiper-slide selengkapnya-container selengkapnya-artikel d-flex flex-column justify-content-center align-items-center p-2 rounded mb-0">
+            Lihat Selengkapnya
+          </a>
         </div>
-        @endforeach
-        <a data-aos="zoom-in" data-aos-offset="150" href="/artikel" class="swiper-slide selengkapnya-container selengkapnya-artikel d-flex flex-column justify-content-center align-items-center p-2 rounded mb-0">
-          Lihat Selengkapnya
-        </a>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    </div>
     @endif
 
     <div class="tentangkami-container rounded">

@@ -58,10 +58,8 @@ Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
-    Route::get('/index', function () {
-        return view('index');
-    });
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/index', [HomeController::class, 'index'])->name('home');
 
     Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
 

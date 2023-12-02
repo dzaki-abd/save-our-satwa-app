@@ -239,11 +239,11 @@ class HomeController extends Controller
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {
-                    $badgeStatus = '<span class="badge text-bg-danger">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-danger text-white">' . $row->status . '</span>';
                 } elseif ($row->status == 'Ditinjau') {
-                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-warning text-white">' . $row->status . '</span>';
                 } else {
-                    $badgeStatus = '<span class="badge text-bg-success">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
                 }
                 return $badgeStatus;
             })
