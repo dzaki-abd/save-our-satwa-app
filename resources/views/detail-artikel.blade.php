@@ -13,8 +13,8 @@
                 <li class="breadcrumb-item active" aria-current="page">Detail Artikel</li>
               </ol>
             </nav>
-            <div class="like-button button-teal-500 mt-3">
-              <i class="fa-regular fa-heart"></i>
+            <div id="favorite-button" class="mt-3">
+
             </div>
           </div>
         </div>
@@ -58,7 +58,20 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script type="module">
+      import LikeButtonInitiator from '{{ asset('js/utils/like-button-artikel-initiator.js') }}';
+
+      LikeButtonInitiator.init({
+        likeButtonContainer: document.getElementById('favorite-button'),
+        artikel: {
+          id: {{ $artikel->id }},
+          title: '{{ $artikel->judul }}',
+          description: '{{ $deskripsi }}',
+          image: '{{ $artikel->gambar }}',
+          updated_at: '{{ $artikel->updated_at }}'
+        },
+      });
+
       const table = document.querySelector("table");
       if (table) {
         table.classList.add("table", "table-striped");
@@ -69,4 +82,7 @@
         figure.classList.add("table-responsive");
       }
     </script>
+@endpush
+
+@push('scripts')
 @endpush

@@ -117,9 +117,16 @@ body {
   font-weight: 500 !important;
 }
 
+.border-bottom-success {
+  border-bottom: 0.15rem solid var(--teal-500) !important;
+ }
+
 /* ========== NAVBAR ========== */
 
 .navbar {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
   background-color: transparent;
   backdrop-filter: blur(20px);
 }
