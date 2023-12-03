@@ -65,13 +65,15 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
 
-    Route::get('/satwa', [SatwaController::class, 'getDataSatwaForUser']);
+    Route::get('/satwa', [HomeController::class, 'getDataSatwaForUser']);
 
-    Route::get('/detail-satwa/{id}', [SatwaController::class, 'getDataSatwaForUserById']);
+    Route::get('/detail-satwa/{id}', [HomeController::class, 'getDataSatwaForUserById']);
 
-    Route::get('/artikel', [ArtikelController::class, 'getDataArtikelForUser']);
+    Route::get('/artikel', [HomeController::class, 'getDataArtikelForUser']);
 
-    Route::get('/detail-artikel/{id}', [ArtikelController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
+    Route::get('/detail-artikel/{id}', [HomeController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
+
+    Route::get('/favorit', function() { return view ('favorit'); });
 
     Route::group(['middleware' => ['auth']], function () {
         

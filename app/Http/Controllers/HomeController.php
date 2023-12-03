@@ -13,6 +13,7 @@ use App\Models\Pelanggaran;
 use Yajra\DataTables\Facades\DataTables;
 use DOMDocument;
 use DOMXPath;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -277,5 +278,91 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Konfirmasi gagal dikirim, silahkan coba lagi.');
         }
+    }
+
+    public function getDataArtikelForUser()
+    {
+        $artikelList = Artikel::all();
+
+        foreach ($artikelList as $artikel) {
+            $dom = new DOMDocument();
+
+            $dom->loadHTML($artikel->konten);
+
+            $xpath = new DOMXPath($dom);
+
+            $firstParagraph = $xpath->query('//p')->item(0);
+
+            if ($firstParagraph !== null) {
+                $artikel->konten = $firstParagraph->nodeValue;
+            }
+        }
+
+        return view('artikel', compact('artikelList'));
+    }
+
+    public function getDataArtikelForUserById($id)
+    {
+        $artikel = Artikel::find($id);
+
+        $dom = new DOMDocument();
+
+        $dom->loadHTML($artikel->konten);
+
+        $xpath = new DOMXPath($dom);
+
+        $firstParagraph = $xpath->query('//p')->item(0);
+
+        if ($firstParagraph !== null) {
+            $deskripsi = $firstParagraph->nodeValue;
+        }
+
+        return view('detail-artikel', compact('artikel', 'deskripsi'));
+    }
+
+    public function getDataSatwaForUser()
+    {
+        $satwaList = Satwa::all();
+        return view('satwa',  compact('satwaList'));
+    }
+
+    public function getDataSatwaForUserById($id)
+    {
+        $satwa = Satwa::find($id);
+        $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
+        $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
+        return view('detail-satwa', compact('satwa'));
+    }
+
+    private function convertIUCN($originalValue, $isCategory = true)
+    {
+        $map = $isCategory ? $this->getIUCNCategoryMap() : $this->getIUCNTrendPopulationMap();
+
+        return isset($map[$originalValue]) ? $map[$originalValue] : $originalValue;
+    }
+
+    private function getIUCNCategoryMap()
+    {
+        return [
+            'EX' => 'Extinct (EX) - Punah',
+            'EW' => 'Extinct in the Wild (EW) - Punah di Alam Liar',
+            'CR' => 'Critically Endangered (CR) - Terancam Punah',
+            'EN' => 'Endangered (EN) - Terancam',
+            'VU' => 'Vulnerable (VU) - Rentan',
+            'NT' => 'Near Threatened (NT) - Hampir Terancam',
+            'LC' => 'Least Concern (LC) - Risiko Rendah',
+            'DD' => 'Data Deficient (DD) - Data Kurang',
+            'NE' => 'Not Evaluated (NE) - Belum Dinilai',
+        ];
+    }
+
+    private function getIUCNTrendPopulationMap()
+    {
+        return [
+            'Unknown' => 'Unknown - Tidak diketahui',
+            'Stable' => 'Stable - Stabil',
+            'Decreasing' => 'Decreasing - Menurun',
+            'Increasing' => 'Increasing - Bertambah',
+        ];
     }
 }

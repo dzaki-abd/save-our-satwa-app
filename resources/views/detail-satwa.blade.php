@@ -15,8 +15,8 @@
             <a href="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" data-fancybox>
               <img src="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" class="rounded"/>
             </a>
-            <div class="like-button button-teal-500">
-              <i class="fa-regular fa-heart"></i>
+            <div id="favorite-button">
+
             </div>
           </div>
         </div>
@@ -148,3 +148,19 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <script type="module">
+    import LikeButtonInitiator from '{{ asset('js/utils/like-button-satwa-initiator.js') }}';
+
+    LikeButtonInitiator.init({
+      likeButtonContainer: document.getElementById('favorite-button'),
+      satwa: {
+        id: {{ $satwa->id }},
+        name: '{{ $satwa->nama_lokal }}',
+        description: '{{ $satwa->deskripsi }}',
+        image: '{{ $satwa->gambar }}'
+      },
+    });
+  </script>
+@endpush

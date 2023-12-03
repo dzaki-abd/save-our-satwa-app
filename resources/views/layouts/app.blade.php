@@ -46,7 +46,7 @@
 
     <!-- Fancybox -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    <script src="../js/fancybox-initiator.js"></script>
+    <script src="../js/utils/fancybox-initiator.js"></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -69,8 +69,8 @@
         AOS.init();
     </script>
 
-    <script src="{{ asset('js/datatables-initiator.js') }}"></script>
-    <script src="{{ asset('js/navbar-initiator.js') }}"></script>
+    <script src="{{ asset('js/utils/datatables-initiator.js') }}"></script>
+    <script src="{{ asset('js/utils/navbar-initiator.js') }}"></script>
 
     @if (session('success'))
         <script>
