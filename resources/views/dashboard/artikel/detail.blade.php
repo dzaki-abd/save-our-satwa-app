@@ -153,8 +153,8 @@
   $('#tag_artikel').val('{{ $artikel->tag }}');
   $('#konten').val('{!! $artikel->konten !!}');
   $('#imagePreviewCover').html(`
-        <a href="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" data-fancybox>
-            <img src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
+        <a href="{{ asset('storage/' . $artikel->gambar) }}" data-fancybox>
+            <img src="{{ asset('storage/' . $artikel->gambar) }}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
         </a>
         `);
 </script>
