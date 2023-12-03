@@ -287,7 +287,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-primary" id="btnConfirmEditSatwa">Tambah</button>
+          <button type="submit" class="btn btn-primary" id="btnConfirmEditSatwa">Simpan</button>
         </div>
         </form>
       </div>
@@ -465,11 +465,10 @@
         $('#editSatwaModal #tren_populasi').val(response.data.tren_populasi);
         $('#editSatwaModal #kategori_iucn').val(response.data.kategori_iucn);
         $('#editSatwaModal #imagePreviewCoverEdit').html(`
-            <a href="${base_url_asset}storage/img/satwa_images/${response.data.gambar}" data-fancybox>
-                <img src="${base_url_asset}storage/img/satwa_images/${response.data.gambar}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
+            <a href="${base_url_asset}storage/${response.data.gambar}" data-fancybox>
+                <img src="${base_url_asset}storage/${response.data.gambar}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
             </a>
         `);
-        // $('#edit')
       },
       error: function(xhr) {
         Swal.fire({

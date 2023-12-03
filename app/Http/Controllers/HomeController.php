@@ -264,13 +264,16 @@ class HomeController extends Controller
             ]);
 
             $namaFile = 'donasi-' . time() . '.' . $request->image->extension();
-            $request->file('image')->storeAs('img/donasi_images', $namaFile, 'public');
+            $namaFile_db = 'donasi_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/donasi_images'), $namaFile);
+
+            $validatedData['jumlah_donatur'] = str_replace('.', '', $validatedData['jumlah_donatur']);
 
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
                 'email' => $validatedData['email_donatur'],
                 'no_hp' => $validatedData['nomor_donatur'],
-                'bukti_transfer' => $namaFile,
+                'bukti_transfer' => $namaFile_db,
                 'jumlah_donasi' => $validatedData['jumlah_donatur'],
             ]);
 

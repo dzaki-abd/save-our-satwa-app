@@ -359,8 +359,8 @@
             $('#editDonasiModal #jumlah_donatur').val(response.data.jumlah_donasi);
             $('#editDonasiModal #status').val(response.data.status);
             $('#editDonasiModal #imagePreviewCoverEdit').html(`
-                    <a href="${base_url_asset}storage/img/donasi_images/${response.data.bukti_transfer}" data-fancybox>
-                        <img src="${base_url_asset}storage/img/donasi_images/${response.data.bukti_transfer}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
+                    <a href="${base_url_asset}storage/${response.data.bukti_transfer}" data-fancybox>
+                        <img src="${base_url_asset}storage/${response.data.bukti_transfer}" class="rounded" style="margin-bottom: 0.8rem; height: 200px; max-height: 300px;"/>
                     </a>
                     `);
             $('#editDonasiModal').modal('show');
@@ -429,6 +429,7 @@
       });
     }
 
-    $('#jumlah_donatur').mask('Rp 000.000.000.000', { reverse: true });
+    $('#addDonasiModal #jumlah_donatur').mask('Rp 000.000.000.000', { reverse: true });
+    $('#editDonasiModal #jumlah_donatur').mask('Rp 000.000.000.000', { reverse: true });
   </script>
   @endpush

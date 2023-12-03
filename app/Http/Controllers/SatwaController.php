@@ -53,7 +53,8 @@ class SatwaController extends Controller
             ]);
     
             $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
-            $request->file('image')->storeAs('img/satwa_images', $namaFile, 'public');
+            $namaFile_db = 'satwa_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/satwa_images'), $namaFile);
             
             $slug = Str::slug($validatedData['nama_lokal'], '-');
     
@@ -73,7 +74,7 @@ class SatwaController extends Controller
                 'genus' => $validatedData['genus'],
                 'tren_populasi' => $validatedData['tren_populasi'],
                 'kategori_iucn' => $validatedData['kategori_iucn'],
-                'gambar' => $namaFile,
+                'gambar' => $namaFile_db,
                 'populasi' => $populasi,
                 'lokasi' => $validatedData['lokasi'],
                 'slug' => $slug,
@@ -217,7 +218,8 @@ class SatwaController extends Controller
                 return $row->nama_lokal;
             })
             ->addColumn('populasi', function ($row) {
-                return $row->populasi;
+                $populasi = number_format($row->populasi, 0, ',', '.');
+                return $populasi;
             })
             ->addColumn('kategori_iucn', function ($row) {
                 return $row->kategori_iucn;

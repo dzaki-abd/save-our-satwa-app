@@ -55,7 +55,8 @@ class ArtikelController extends Controller
             $users_id = auth()->user()->id;
 
             $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
-            $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
+            $namaFile_db = 'artikel_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/artikel_images'), $namaFile);
 
             $slug = Str::slug($validatedData['judul_artikel'], '-');
 
@@ -64,7 +65,7 @@ class ArtikelController extends Controller
                 'di_posting' => $validatedData['di_posting'],
                 'judul' => $validatedData['judul_artikel'],
                 'tag' => $validatedData['tag_artikel'],
-                'gambar' => $namaFile,
+                'gambar' => $namaFile_db,
                 'konten' => $validatedData['konten'],
                 'users_id' => $users_id,
                 'slug' => $slug,
