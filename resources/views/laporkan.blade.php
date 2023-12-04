@@ -54,8 +54,13 @@
         </div>
         <div class="mb-5">
             <label for="lokasi_kejadian" class="form-label">Lokasi Kejadian</label>
+            <div id="map" class="mb-1 rounded" style="height: 400px;"></div>
             <input type="text" class="form-control" id="lokasi_kejadian" name="lokasi_kejadian"
-                placeholder="Masukkan lokasi kejadian" required>
+                placeholder="Masukkan lokasi kejadian" required readonly>
+            <input type="hidden" class="form-control" id="latitude" name="latitude"
+                placeholder="Masukkan lokasi kejadian" required readonly>
+            <input type="hidden" class="form-control" id="longitude" name="longitude"
+                placeholder="Masukkan lokasi kejadian" required readonly>
         </div>
 
         <h5 class="mb-3">JENIS PELANGGARAN</h5>
@@ -170,6 +175,45 @@
 @endsection
 
 @push('scripts')
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        let map = L.map('map').setView([-7.6145, 110.7128], 8);
+        let marker;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        function reverseGeocode(latlng) {
+            const url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let address = data.display_name;
+                    document.getElementById('lokasi_kejadian').value = address;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        map.on('click', function (e) {
+            let latitude = e.latlng.lat;
+            let longitude = e.latlng.lng
+
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker(e.latlng).addTo(map);
+
+            reverseGeocode(e.latlng);
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             // Initialize Dropify
