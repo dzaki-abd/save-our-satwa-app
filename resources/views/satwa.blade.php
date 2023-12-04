@@ -36,7 +36,7 @@
     <div class="col">
       <a href="/detail-satwa/{{ $data->id }}" class="card satwa-box border-0">
         <div class="satwa-overlay">
-          <img src="{{ asset('storage/img/satwa_images/' . $data->gambar) }}" alt="" />
+          <img src="{{ asset('storage/' . $data->gambar) }}" alt="" />
         </div>
         <div class="satwa-content">
           <h6>{{ $data->nama_lokal }}</h6>

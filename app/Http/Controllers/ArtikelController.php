@@ -116,8 +116,15 @@ class ArtikelController extends Controller
             $users_id = auth()->user()->id;
 
             if ($request->hasFile('image')) {
-                $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
-                $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
+                if ($artikel->gambar) {
+                    $pathToOldImage = public_path('storage/' . $artikel->gambar);
+                    if (file_exists($pathToOldImage)) {
+                        unlink($pathToOldImage);
+                    }
+                }
+                
+                $namaFile = 'artikel_images/artikel-' . time() . '.' .  $request->image->extension();
+                $request->file('image')->storeAs('', $namaFile, 'public');
                 $artikel->gambar = $namaFile;
             }
 
@@ -148,7 +155,7 @@ class ArtikelController extends Controller
     {
         try {
             $artikel = Artikel::findOrFail($id);
-            $image_path = public_path('storage/img/artikel_images/' . $artikel->gambar);
+            $image_path = public_path('storage/' . $artikel->gambar);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
@@ -185,9 +192,9 @@ class ArtikelController extends Controller
             })
             ->addColumn('di_posting', function ($row) {
                 if ($row->di_posting === 'Ya') {
-                    return '<span class="badge rounded-pill text-bg-info">Ya</span>';
+                    return '<span class="badge rounded-pill text-bg-info text-white">Ya</span>';
                 } else {
-                    return '<span class="badge rounded-pill text-bg-warning">Tidak</span>';
+                    return '<span class="badge rounded-pill text-bg-warning text-white">Tidak</span>';
                 }
             })
             ->addColumn('action', function ($row) {

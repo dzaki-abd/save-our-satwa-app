@@ -37,7 +37,7 @@
       <div class="card border-0 shadow">
         <div class="row g-0">
           <div class="col-md-4 artikel-poster">
-            <img class="rounded" src="{{ asset('storage/img/artikel_images/' . $data->gambar) }}" alt="" />
+            <img class="rounded" src="{{ asset('storage/' . $data->gambar) }}" alt="" />
           </div>
           <div class="col-md-8 artikel-content">
             <div class="card-body">

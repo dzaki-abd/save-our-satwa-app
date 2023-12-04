@@ -141,15 +141,16 @@ class SatwaController extends Controller
             $slug = Str::slug($validatedData['nama_lokal'], '-');
 
             if ($request->hasFile('image_edit')) {
-                $namaFile = 'satwa-' . time() . '.' .  $request->image_edit->extension();
-                $request->file('image_edit')->storeAs('img/satwa_images', $namaFile, 'public');
-
-                $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
-                if (file_exists($image_path)) {
-                    unlink($image_path);
+                if ($satwa->gambar) {
+                    $pathToOldImage = public_path('storage/' . $satwa->gambar);
+                    if (file_exists($pathToOldImage)) {
+                        unlink($pathToOldImage);
+                    }
                 }
-            } else {
-                $namaFile = $satwa->gambar;
+
+                $namaFile = 'satwa_images/satwa-' . time() . '.' .  $request->image_edit->extension();
+                $request->file('image_edit')->storeAs('', $namaFile, 'public');
+                $satwa->gambar = $namaFile;
             }
 
             $satwa->update([
@@ -186,7 +187,7 @@ class SatwaController extends Controller
         try {
             $satwa = Satwa::findOrFail($id);
 
-            $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
+            $image_path = public_path('storage/' . $satwa->gambar);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }

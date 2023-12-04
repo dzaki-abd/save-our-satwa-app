@@ -88,13 +88,13 @@ class DonasiController extends Controller
             ]);
 
             if ($request->hasFile('image_edit')) {
-                $image_path = public_path('storage/img/donasi_images/' . $donasi->bukti_transfer);
+                $image_path = public_path('storage/' . $donasi->bukti_transfer);
                 if (file_exists($image_path)) {
                     unlink($image_path);
                 }
 
                 $namaFile = 'donasi-' . time() . '.' . $request->image_edit->extension();
-                $request->file('image_edit')->storeAs('img/donasi_images', $namaFile, 'public');
+                $request->file('image_edit')->storeAs('', $namaFile, 'public');
 
                 $donasi->update([
                     'nama_donatur' => $validatedData['nama_donatur'],
@@ -123,7 +123,7 @@ class DonasiController extends Controller
         try {
             $donasi = Donasi::findOrFail($id);
 
-            $image_path = public_path('storage/img/donasi_images/' . $donasi->bukti_transfer);
+            $image_path = public_path('storage/' . $donasi->bukti_transfer);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
