@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <!-- PWA  -->
+    <meta name="theme-color" content="#20c997"/>
+    <link rel="apple-touch-icon" href="{{ asset('icon/maskable_icon_x512.png') }}">
+    <link rel="icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
+    <link rel="shortcut icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <title>Save Our Satwa</title>
 
@@ -43,6 +49,24 @@
     @if (isset($showFooter) && $showFooter)
         @include('layouts.footer')
     @endif
+
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+        (registration) => {
+            console.log("Service worker registration succeeded:", registration);
+        },
+        (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+        },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
+    </script>
 
     <!-- Fancybox -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
