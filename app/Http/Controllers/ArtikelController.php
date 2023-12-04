@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Str;
-use DOMDocument;
-use DOMXPath;
-use Carbon\Carbon;
 
 class ArtikelController extends Controller
 {
@@ -58,7 +55,8 @@ class ArtikelController extends Controller
             $users_id = auth()->user()->id;
 
             $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
-            $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
+            $namaFile_db = 'artikel_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/artikel_images'), $namaFile);
 
             $slug = Str::slug($validatedData['judul_artikel'], '-');
 
@@ -67,7 +65,7 @@ class ArtikelController extends Controller
                 'di_posting' => $validatedData['di_posting'],
                 'judul' => $validatedData['judul_artikel'],
                 'tag' => $validatedData['tag_artikel'],
-                'gambar' => $namaFile,
+                'gambar' => $namaFile_db,
                 'konten' => $validatedData['konten'],
                 'users_id' => $users_id,
                 'slug' => $slug,
@@ -118,8 +116,15 @@ class ArtikelController extends Controller
             $users_id = auth()->user()->id;
 
             if ($request->hasFile('image')) {
-                $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
-                $request->file('image')->storeAs('img/artikel_images', $namaFile, 'public');
+                if ($artikel->gambar) {
+                    $pathToOldImage = public_path('storage/' . $artikel->gambar);
+                    if (file_exists($pathToOldImage)) {
+                        unlink($pathToOldImage);
+                    }
+                }
+                
+                $namaFile = 'artikel_images/artikel-' . time() . '.' .  $request->image->extension();
+                $request->file('image')->storeAs('', $namaFile, 'public');
                 $artikel->gambar = $namaFile;
             }
 
@@ -150,7 +155,7 @@ class ArtikelController extends Controller
     {
         try {
             $artikel = Artikel::findOrFail($id);
-            $image_path = public_path('storage/img/artikel_images/' . $artikel->gambar);
+            $image_path = public_path('storage/' . $artikel->gambar);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
@@ -187,9 +192,9 @@ class ArtikelController extends Controller
             })
             ->addColumn('di_posting', function ($row) {
                 if ($row->di_posting === 'Ya') {
-                    return '<span class="badge rounded-pill text-bg-info">Ya</span>';
+                    return '<span class="badge rounded-pill text-bg-info text-white">Ya</span>';
                 } else {
-                    return '<span class="badge rounded-pill text-bg-warning">Tidak</span>';
+                    return '<span class="badge rounded-pill text-bg-warning text-white">Tidak</span>';
                 }
             })
             ->addColumn('action', function ($row) {
@@ -205,32 +210,4 @@ class ArtikelController extends Controller
             ->rawColumns(['action', 'di_posting'])
             ->make(true);
     }
-
-    public function getDataArtikelForUser()
-    {
-        $artikelList = Artikel::all();
-
-        foreach ($artikelList as $artikel) {
-            $dom = new DOMDocument();
-
-            $dom->loadHTML($artikel->konten);
-
-            $xpath = new DOMXPath($dom);
-
-            $firstParagraph = $xpath->query('//p')->item(0);
-
-            if ($firstParagraph !== null) {
-                $artikel->konten = $firstParagraph->nodeValue;
-            }
-        }
-
-        return view('artikel', compact('artikelList'));
-    }
-
-    public function getDataArtikelForUserById($id)
-    {
-        $artikel = Artikel::find($id);
-        return view('detail-artikel', compact('artikel'));
-    }
-
 }

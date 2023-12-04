@@ -284,7 +284,7 @@
 @endsection
 
 @push('scripts')
-  <script src="{{ asset('js/laporan-initiator.js') }}"></script>
+  <script src="{{ asset('js/utils/laporan-initiator.js') }}"></script>
 
   <script>
     // trigger buttonLaporanDitinjau click

@@ -40,10 +40,5 @@ class PelanggaranSeeder extends Seeder
         Pelanggaran::create([
             'nama_pelanggaran' => 'Eksperimen Satwa Yang Tidak Etis',
         ]);
-        
-        Pelanggaran::create([
-            'nama_pelanggaran' => 'Lainnya',
-        ]);
-
     }
 }

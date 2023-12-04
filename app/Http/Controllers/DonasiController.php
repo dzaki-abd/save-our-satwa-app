@@ -32,13 +32,16 @@ class DonasiController extends Controller
             ]);
 
             $namaFile = 'donasi-' . time() . '.' . $request->image->extension();
-            $request->file('image')->storeAs('img/donasi_images', $namaFile, 'public');
+            $namaFile_db = 'donasi_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/donasi_images'), $namaFile);
+
+            $validatedData['jumlah_donatur'] = str_replace('.', '', $validatedData['jumlah_donatur']);
 
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
                 'email' => $validatedData['email_donatur'],
                 'no_hp' => $validatedData['nomor_donatur'],
-                'bukti_transfer' => $namaFile,
+                'bukti_transfer' => $namaFile_db,
                 'jumlah_donasi' => $validatedData['jumlah_donatur'],
                 'status' => $validatedData['status'],
             ]);
@@ -85,13 +88,13 @@ class DonasiController extends Controller
             ]);
 
             if ($request->hasFile('image_edit')) {
-                $image_path = public_path('storage/img/donasi_images/' . $donasi->bukti_transfer);
+                $image_path = public_path('storage/' . $donasi->bukti_transfer);
                 if (file_exists($image_path)) {
                     unlink($image_path);
                 }
 
                 $namaFile = 'donasi-' . time() . '.' . $request->image_edit->extension();
-                $request->file('image_edit')->storeAs('img/donasi_images', $namaFile, 'public');
+                $request->file('image_edit')->storeAs('', $namaFile, 'public');
 
                 $donasi->update([
                     'nama_donatur' => $validatedData['nama_donatur'],
@@ -120,7 +123,7 @@ class DonasiController extends Controller
         try {
             $donasi = Donasi::findOrFail($id);
 
-            $image_path = public_path('storage/img/donasi_images/' . $donasi->bukti_transfer);
+            $image_path = public_path('storage/' . $donasi->bukti_transfer);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }

@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron-4 jumbotron-search-4" style="background-image: url('{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}')">
+  <div class="jumbotron-4 jumbotron-search-4" style="background-image: url('{{ asset('storage/' . $artikel->gambar) }}')">
     <div class="jumbotron-container-4">
       <div class="container h-100">
         <div class="d-flex align-items-center justify-content-center h-100 jumbotron-content-4">
@@ -13,8 +13,8 @@
                 <li class="breadcrumb-item active" aria-current="page">Detail Artikel</li>
               </ol>
             </nav>
-            <div class="like-button button-teal-500 mt-3">
-              <i class="fa-regular fa-heart"></i>
+            <div id="favorite-button" class="mt-3">
+
             </div>
           </div>
         </div>
@@ -22,10 +22,11 @@
     </div>
   </div>
 @endsection
+
 @section('content')
   <div class="container shadow rounded detail-artikel-container p-2 p-md-3">
-    <a href="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" data-fancybox>
-      <img src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" class="rounded" alt="">
+    <a href="{{ asset('storage/' . $artikel->gambar) }}" data-fancybox>
+      <img src="{{ asset('storage/' . $artikel->gambar) }}" class="rounded" alt="">
     </a>
 
     <div class="row g-0 mt-4">
@@ -57,7 +58,20 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script type="module">
+      import LikeButtonInitiator from '{{ asset('js/utils/like-button-artikel-initiator.js') }}';
+
+      LikeButtonInitiator.init({
+        likeButtonContainer: document.getElementById('favorite-button'),
+        artikel: {
+          id: {{ $artikel->id }},
+          title: '{{ $artikel->judul }}',
+          description: '{{ $deskripsi }}',
+          image: '{{ $artikel->gambar }}',
+          updated_at: '{{ $artikel->updated_at }}'
+        },
+      });
+
       const table = document.querySelector("table");
       if (table) {
         table.classList.add("table", "table-striped");
@@ -68,4 +82,7 @@
         figure.classList.add("table-responsive");
       }
     </script>
+@endpush
+
+@push('scripts')
 @endpush

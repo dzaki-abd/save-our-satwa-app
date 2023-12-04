@@ -51,9 +51,82 @@ body {
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+/* ========== TEXT COLOR ========== */
+
+.text-gray-100 {
+  color: #f8f9fc !important;
+}
+
+.text-gray-200 {
+  color: #eaecf4 !important;
+}
+
+.text-gray-300 {
+  color: #dddfeb !important;
+}
+
+.text-gray-400 {
+  color: #d1d3e2 !important;
+}
+
+.text-gray-500 {
+  color: #b7b9cc !important;
+}
+
+.text-gray-600 {
+  color: #858796 !important;
+}
+
+.text-gray-700 {
+  color: #6e707e !important;
+}
+
+.text-gray-800 {
+  color: #5a5c69 !important;
+}
+
+.text-gray-900 {
+  color: #3a3b45 !important;
+}
+
+.text-warning-custom {
+  color: var(--warning);
+}
+
+.text-danger-custom {
+  color: var(--danger);
+}
+
+.text-teal-500 {
+  color: var(--teal-500);
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid var(--warning) !important;
+}
+
+.border-left-danger {
+  border-left: 0.25rem solid var(--danger) !important;
+}
+
+.border-bottom-teal-500 {
+  border-bottom: 0.1rem solid var(--teal-500) !important;
+ }
+
+.font-weight-bold {
+  font-weight: 500 !important;
+}
+
+.border-bottom-success {
+  border-bottom: 0.15rem solid var(--teal-500) !important;
+ }
+
 /* ========== NAVBAR ========== */
 
 .navbar {
+  position: fixed;
+  z-index: 99;
+  width: 100%;
   background-color: transparent;
   backdrop-filter: blur(20px);
 }
@@ -108,7 +181,6 @@ body {
 .button-teal-500 {
   display: inline-block;
 	font-weight: 400;
-	color: #212529;
 	text-align: center;
 	border: 1px solid transparent;
 	padding: .375rem .75rem;
@@ -119,12 +191,42 @@ body {
 	background-color: var(--teal-500);
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .button-teal-500:hover {
   background-color: var(--teal-400);
   color: var(--white)
 }
+
+.button-teal-500-custom {
+  background-color: var(--teal-600);
+}
+
+.button-teal-500-custom:hover {
+  background-color: var(--teal-700);
+}
+
+.button-white {
+  display: inline-block;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+	color: var(--teal-500);
+	background-color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* .button-white:hover {
+  background-color: var(--teal-400);
+  color: var(--white)
+} */
 
 /* ========== FOOTER ========== */
 
@@ -214,15 +316,208 @@ body {
   line-height: 2rem;
 }
 
-/* ========== DONASI ========== */
+/* ========== HOME ========== */
 
-.main-content .h3-top {
-  margin-top: 70px;
+.layanan-container {
+  position: relative;
+  top: -70px;
+  background-color: var(--white);
+  z-index: 2;
+}
+
+.layanan-content h5 {
+  color: var(--teal-500);
+}
+
+.layanan-content p {
+ text-align: center;
+}
+
+.layanan-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--teal-500);
+  transition: all 0.2s;
+}
+
+.layanan-icon:hover {
+  background-color: var(--teal-400);
+}
+
+.layanan-icon i {
+  font-size: 1.6rem;
+  color: var(--white);
+}
+
+.main-content .h3-home {
   color: var(--teal-600);
   font-weight: 600;
 }
 
-.main-content .h3-top span {
+.selengkapnya-container {
+  width: 100%;
+  height: 18rem;
+  background: linear-gradient(6deg, rgba(121,223,193,1) 0%, rgba(77,212,172,1) 26%, rgba(32,201,151,1) 50%, rgba(77,212,172,1) 75%, rgba(121,223,193,1) 100%);
+  text-decoration: none;
+  color: var(--white);
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.selengkapnya-container:hover {
+  background: linear-gradient(10deg, rgba(121,223,193,1) 0%, rgba(77,212,172,1) 26%, rgba(32,201,151,1) 50%, rgba(77,212,172,1) 75%, rgba(121,223,193,1) 100%);
+  opacity: 0.9;
+}
+
+.selengkapnya-container i {
+  color: var(--white);
+}
+
+.selengkapnya-artikel {
+  height: 248px;
+}
+
+.swiper-satwa, .swiper-artikel {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  display: block;
+}
+
+.swiper-artikel .card {
+  border: 1px solid var(--teal-200);
+  border-radius: 0.55rem;
+}
+
+.swiper-wrapper {
+  position: relative;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1rem !important;
+  font-weight: 700;
+  color: white;
+  backdrop-filter: blur(20px);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.tentangkami-container {
+  background-image: url('../img/donasi.jpg');
+  background-position: center;
+  background-size: cover;
+  margin: 70px 0;
+}
+
+.tentangkami-content {
+  width: 60%;
+  backdrop-filter: blur(20px);
+}
+
+.tentangakami-body {
+  padding-bottom: 70px;
+}
+
+.tentangkami-contact i {
+  font-size: 1.2rem;
+}
+
+.jumlahlaporan-container{
+  background: rgb(255,255,255);
+  background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(121,223,193,1) 50%, rgba(255,255,255,1) 100%);
+}
+
+.jumlahlaporan-content-row {
+  padding-bottom: 70px;
+}
+
+.jumlahlaporan-content {
+  background-color: var(--teal-500);
+}
+
+.jumlahlaporan-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--white);
+}
+
+.jumlahlaporan-icon i {
+  font-size: 1.6rem;
+  color: var(--teal-500);
+}
+
+.donasi-container {
+  padding: 70px 0;
+  background-image: url('../img/jumbotron-2.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.donasi-home-content {
+  backdrop-filter: blur(20px);
+}
+
+/* .donasi-home-content h3 {
+  padding-bottom: 40px;
+} */
+
+.faq-container {
+  padding: 70px 0;
+}
+
+.faq-container img {
+  width: 25rem;
+}
+
+.faqlanjut-container {
+  padding: 70px 0;
+  background: rgb(255,255,255);
+  background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(121,223,193,1) 50%, rgba(255,255,255,1) 100%);
+}
+
+.faqlanjut-container .faqlanjut-content {
+  background-color: var(--teal-500);
+}
+
+.profil-container {
+  margin-top: 70px;
+  background-color: var(--teal-500);
+}
+
+.profil-image {
+  width: fit-content;
+  background-color: var(--white);
+}
+
+.profil-image img {
+  background-color: #e6e6e6;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.profil-content h3, .profil-content p {
+  color: var(--white);
+}
+
+.profil-container .profil-input {
+  width: 75%;
+}
+
+/* ========== DONASI ========== */
+
+.main-content .h3-top {
+  padding-top: 70px;
+  color: var(--teal-600);
+  font-weight: 600;
+}
+
+.main-content .h3-top span, .main-content .h3-home span  {
   color: var(--teal-900);
 }
 
@@ -231,7 +526,7 @@ body {
   font-weight: 400;
   font-style: italic;
   color: var(--teal-900);
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .donasi-content {
@@ -383,7 +678,7 @@ body {
 }
 
 .jumbotron-container-3 {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   height: 100%;
   padding-top: 70px;
   padding-bottom: 70px;
@@ -484,6 +779,13 @@ body {
     font-size: 0.9rem;
   }
 
+  .table-riwayat .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .table-riwayat .icon-riwayat p,
   .table-riwayat .icon-riwayat i {
     font-size: 0.8rem;
@@ -496,6 +798,7 @@ body {
 }
 
 /* ========== DATA TABLES ========== */
+
 .active>.page-link,
 .page-link.active {
   z-index: 3;
@@ -547,6 +850,13 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
 .artikel-content .card-title {
   color: var(--teal-500);
+}
+
+.artikel-content h5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .artikel-content .description {
@@ -654,6 +964,9 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 }
 
 @media screen and (max-width: 992px) {
+
+  /* ========== NAVBAR========== */
+
   .nav-item {
     margin: 0.5rem 0;
   }
@@ -662,6 +975,8 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 1rem;
   }
 
+  /* ========== JUMBOTRON  ========== */
+
   .jumbotron {
     height: 60vh;
   }
@@ -669,6 +984,8 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .jumbotron-content {
     width: 75%;
   }
+
+  /* ========== JUMBOTRON 2 ========== */
 
   .jumbotron-2 {
     height: 25vh;
@@ -679,9 +996,13 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 0;
   }
 
+  /* ========== JUMBOTRON 3 ========== */
+
   .jumbotron-3 {
     height: fit-content;
   }
+
+  /* ========== FOOTER ========== */
 
   .footer {
     margin-top: 60px;
@@ -696,14 +1017,20 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 60px;
   }
 
+  /* ========== MAIN CONTENT ========== */
+
   .main-content .h3-top {
-    margin-top: 60px;
+    padding-top: 60px;
   }
+
+  /* ========== JUMBOTRON 3 ========== */
 
   .jumbotron-container-3 {
     padding-top: 100px;
     padding-bottom: 60px;
   }
+
+  /* ========== DETAIL SATWA ========== */
 
   .detail-satwa-container {
     display: flex;
@@ -719,9 +1046,58 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .detail-artikel-container {
     top: -60px;
   }
+
+   /* ========== HOME ========== */
+
+  .layanan-container {
+    top: -60px;
+  }
+
+  .selengkapnya-artikel {
+    height: 246px;
+  }
+
+  .tentangkami-container {
+    margin: 60px 0;
+  }
+
+  .tentangkami-content {
+    width: 80%;
+  }
+
+  .tentangakami-body {
+    padding-bottom: 60px;
+  }
+
+  .jumlahlaporan-content-row {
+    padding-bottom: 60px;
+  }
+
+  .donasi-container {
+    padding: 60px 0;
+  }
+
+  .faq-container {
+    padding: 60px 0;
+  }
+
+  .faqlanjut-container {
+    padding: 60px 0;
+  }
+
+  .profil-container {
+    margin-top: 60px;
+  }
+
+  .profil-container .profil-input {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 576px) {
+
+  /* ========== NAVBAR ========== */
+
   .nav-item {
     margin: 0.5rem 0;
   }
@@ -730,13 +1106,17 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 1rem;
   }
 
+  /* ========== JUMBOTRON  ========== */
+
   .jumbotron {
-    height: 80vh;
+    height: 100vh;
   }
 
   .jumbotron-content {
     width: 100%;
   }
+
+  /* ========== JUMBOTRON 2 ========== */
 
   .jumbotron-2 {
     height: 35vh;
@@ -755,13 +1135,17 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 0;
   }
 
+  /* ========== MAIN CONTENT ========== */
+
   .main-content .h3-top {
-    margin-top: 50px;
+    padding-top: 50px;
   }
 
-  .main-content p {
-    margin-bottom: 30px;
+  .main-content p.p-top {
+    padding-bottom: 30px;
   }
+
+  /* ========== FOOTER ========== */
 
   .footer {
     margin-top: 50px;
@@ -776,11 +1160,15 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     margin-bottom: 50px;
   }
 
+  /* ========== INFORMASI SATWA ========== */
+
   .satwa-box {
     height: 16rem;
     position: relative;
     overflow: hidden;
   }
+
+  /* ========== JUMBOTRON 3 ========== */
 
   .jumbotron-container-3 {
     padding-top: 100px;
@@ -809,6 +1197,60 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
   .detail-artikel-container img {
     height: 15rem;
+  }
+
+  /* ========== HOME ========== */
+
+  .layanan-container {
+    top: -50px;
+  }
+
+  .selengkapnya-container {
+    height: 16rem;
+  }
+
+  .selengkapnya-artikel {
+    height: 392px;
+  }
+
+  .tentangkami-container {
+    margin: 50px 0;
+  }
+
+  .tentangakami-body {
+    padding-bottom: 50px;
+  }
+
+  .tentangkami-content {
+    width: 90%;
+  }
+
+  .jumlahlaporan-content-row {
+    padding-bottom: 50px;
+  }
+
+  .donasi-container {
+    padding: 50px 0;
+  }
+
+  /* .donasi-home-content h3 {
+    padding-bottom: 30px;
+  } */
+
+  .faq-container {
+    padding: 50px 0;
+  }  
+
+  .faq-container img {
+    width: 18rem;
+  }
+
+  .faqlanjut-container {
+    padding: 50px 0;
+  }
+
+  .profil-container {
+    margin-top: 50px;
   }
 }
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('bukti_transfer');
-            $table->string('jumlah_donasi');
+            $table->integer('jumlah_donasi');
             $table->enum('status', ['Belum Diverifikasi', 'Sudah Diverifikasi',])->default('Belum Diverifikasi');
             $table->timestamps();
         });

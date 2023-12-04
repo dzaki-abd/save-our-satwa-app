@@ -7,7 +7,13 @@ use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
 use App\Models\Donasi;
+use App\Models\Satwa;
+use App\Models\Artikel;
+use App\Models\Pelanggaran;
 use Yajra\DataTables\Facades\DataTables;
+use DOMDocument;
+use DOMXPath;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -32,24 +38,89 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $pelaporanList = Pelaporan::all();
+
+        $ditinjauCount = $pelaporanList->where('status', 'Ditinjau')->count();
+        $disetujuiCount = $pelaporanList->where('status', 'Disetujui')->count();
+        $ditolakCount = $pelaporanList->where('status', 'Ditolak')->count();
+
+        $satwaList = Satwa::all();
+
+        $artikelList = Artikel::all();
+    
+        foreach ($artikelList as $artikel) {
+            $dom = new DOMDocument();
+
+            $dom->loadHTML($artikel->konten);
+
+            $xpath = new DOMXPath($dom);
+
+            $firstParagraph = $xpath->query('//p')->item(0);
+
+            if ($firstParagraph !== null) {
+                $artikel->konten = $firstParagraph->nodeValue;
+            }
+        }
+
+        return view('index', compact('satwaList', 'artikelList', 'ditinjauCount', 'disetujuiCount', 'ditolakCount'));
     }
 
-    public function indexPelaporan()
+    public function indexLaporkan()
+    {
+        $satwa = Satwa::all();
+        $pelanggaran = Pelanggaran::all();
+
+        return view('laporkan', compact('satwa', 'pelanggaran'));
+    }
+    public function profile()
     {
         $laporan = Pelaporan::all();
+        $user = Auth()->user();
         $countLaporan = [
-            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
-            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
-            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('user_id', $user->id)->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', $user->id)->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', $user->id)->count(),
         ];
-
-        return view('dashboard.pelaporan.index', compact('countLaporan'));
+        return view('profil', compact('countLaporan','user'));
     }
 
-    public function addPelaporanPage()
+    public function ubahProfile()
     {
-        return view('dashboard.pelaporan.add');
+        $user = Auth()->user();
+        return view('ubah-profil', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth()->user();
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+        ]);
+
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $foto = 'foto/' . time() . '.' . $file->extension();
+            $file->move(public_path('storage/foto/'), $foto);
+
+            User::where('id', $user->id)->update([
+                'foto' => $foto,
+            ]);
+        }
+
+        User::where('id', $user->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        
+
+        return redirect()->back()
+            ->with('success', 'Profil berhasil diubah.');
     }
 
     public function addLaporan(Request $request)
@@ -60,57 +131,73 @@ class HomeController extends Controller
         $request->validate([
             'waktu_kejadian' => 'required',
             'lokasi_kejadian' => 'required',
-            'jenis_pelanggaran' => 'required',
-            'jenis_satwa' => 'required',
+            'pelanggaran_id' => 'required',
+            'pelanggaran_lain' => 'nullable',
+            'satwa_id' => 'required',
+            'satwa_lain' => 'nullable',
             'deskripsi_kejadian' => 'required',
             'tindak_lanjut' => 'nullable',
             'catatan_tambahan' => 'nullable',
             'user_id' => 'required',
         ]);
 
-        if ($request->jenis_pelangaran == 'Lainnya') {
+        if ($request->pelanggaran_id == 'Lainnya') {
             $request->validate([
-                'jenis_pelanggaran_lainnya' => 'required',
+                'pelanggaran_lain' => 'required',
             ]);
-            $request->request->add(['jenis_pelanggaran' => $request->jenis_pelanggaran_lainnya]);
+            $request->request->add(['pelanggaran_id' => $request->pelanggaran_lain]);
         }
 
-        if ($request->jenis_satwa == 'Lainnya') {
+        if ($request->satwa_id == 'Lainnya') {
             $request->validate([
-                'jenis_satwa_lainnya' => 'required',
+                'satwa_lain' => 'required',
             ]);
-            $request->request->add(['jenis_satwa' => $request->jenis_satwa_lainnya]);
+            $request->request->add(['satwa_id' => $request->satwa_lain]);
         }
 
         if ($request->hasFile('hasil_investigasi')) {
             $request->validate([
                 'hasil_investigasi' => 'required|file|mimes:pdf|max:10240',
             ]);
-            $hasil = time() . '.' . $request->file('hasil_investigasi')->extension();
-            $request->file('hasil_investigasi')->move(public_path('storage/hasil_investigasi/'), $hasil);
 
-            $request->request->add(['hasil_investigasi' => $hasil]);
+            $file = $request->file('hasil_investigasi');
+            $hasil = 'hasil_investigasi/' . time() . '.' . $file->extension();
+            $file->move(public_path('storage/hasil_investigasi/'), $hasil);
+
+            Pelaporan::create([
+                'uniqid' => uniqid(),
+                'waktu_kejadian' => $request->waktu_kejadian,
+                'lokasi_kejadian' => $request->lokasi_kejadian,
+                'pelanggaran_id' => $request->pelanggaran_id,
+                'satwa_id' => $request->satwa_id,
+                'deskripsi_kejadian' => $request->deskripsi_kejadian,
+                'tindak_lanjut' => $request->tindak_lanjut,
+                'hasil_investigasi' => $hasil,
+                'catatan_tambahan' => $request->catatan_tambahan,
+                'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
+                'user_id' => $request->user_id,
+            ]);
+        } else {
+            Pelaporan::create([
+                'uniqid' => uniqid(),
+                'waktu_kejadian' => $request->waktu_kejadian,
+                'lokasi_kejadian' => $request->lokasi_kejadian,
+                'pelanggaran_id' => $request->pelanggaran_id,
+                'satwa_id' => $request->satwa_id,
+                'deskripsi_kejadian' => $request->deskripsi_kejadian,
+                'tindak_lanjut' => $request->tindak_lanjut,
+                'hasil_investigasi' => $request->hasil_investigasi,
+                'catatan_tambahan' => $request->catatan_tambahan,
+                'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
+                'user_id' => $request->user_id,
+            ]);
         }
-
-        Pelaporan::create([
-            'uniqid' => uniqid(),
-            'waktu_kejadian' => $request->waktu_kejadian,
-            'lokasi_kejadian' => $request->lokasi_kejadian,
-            'jenis_pelanggaran' => $request->jenis_pelanggaran,
-            'jenis_satwa' => $request->jenis_satwa,
-            'deskripsi_kejadian' => $request->deskripsi_kejadian,
-            'tindak_lanjut' => $request->tindak_lanjut,
-            'hasil_investigasi' => $request->hasil_investigasi,
-            'catatan_tambahan' => $request->catatan_tambahan,
-            'status' => 'Ditinjau', // 'Ditinjau', 'Diverifikasi', 'Ditolak
-            'user_id' => $request->user_id,
-        ]);
 
         $gambar = $request->file('gambar');
 
         foreach ($gambar as $key => $value) {
-            $name = time() . $key . '.' . $value->getClientOriginalExtension();
-            $value->move(public_path('storage/gambar_kejadian/'), $name);
+            $name = 'bukti_kejadian/' . time() . $key . '.' . $value->getClientOriginalExtension();
+            $value->move(public_path('storage/bukti_kejadian/'), $name);
 
             $data[] = $name;
         }
@@ -137,32 +224,27 @@ class HomeController extends Controller
             ->with('success', 'Laporan berhasil ditambahkan.');
     }
 
-    public function getDataPelaporan($filter)
+    public function getDataPelaporan($filters)
     {
-        $laporan = Pelaporan::where('status', $filter)->get();
+        $laporan = Pelaporan::where('status',$filters)->where('user_id', Auth()->user()->id)->get();
 
         return DataTables::of($laporan)
-            ->addIndexColumn()
-            ->addColumn('nama_pelapor', function ($row) {
-                $user = User::find($row->user_id);
-                return $user->name;
+            ->addColumn('pelanggaran_id', function ($row) {
+                return $row->pelanggaran->nama_pelanggaran;
             })
             ->addColumn('tanggal_kejadian', function ($row) {
                 return date('d F Y', strtotime($row->waktu_kejadian));
             })
-            ->addColumn('jenis_pelanggaran', function ($row) {
-                return $row->jenis_pelanggaran;
-            })
-            ->addColumn('jenis_satwa', function ($row) {
-                return $row->jenis_satwa;
+            ->addColumn('satwa_id', function ($row) {
+                return $row->satwa->nama_lokal;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {
-                    $badgeStatus = '<span class="badge text-bg-danger">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-danger text-white">' . $row->status . '</span>';
                 } elseif ($row->status == 'Ditinjau') {
-                    $badgeStatus = '<span class="badge text-bg-warning">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-warning text-white">' . $row->status . '</span>';
                 } else {
-                    $badgeStatus = '<span class="badge text-bg-success">' . $row->status . '</span>';
+                    $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
                 }
                 return $badgeStatus;
             })
@@ -182,13 +264,16 @@ class HomeController extends Controller
             ]);
 
             $namaFile = 'donasi-' . time() . '.' . $request->image->extension();
-            $request->file('image')->storeAs('img/donasi_images', $namaFile, 'public');
+            $namaFile_db = 'donasi_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/donasi_images'), $namaFile);
+
+            $validatedData['jumlah_donatur'] = str_replace('.', '', $validatedData['jumlah_donatur']);
 
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
                 'email' => $validatedData['email_donatur'],
                 'no_hp' => $validatedData['nomor_donatur'],
-                'bukti_transfer' => $namaFile,
+                'bukti_transfer' => $namaFile_db,
                 'jumlah_donasi' => $validatedData['jumlah_donatur'],
             ]);
 
@@ -196,5 +281,91 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Konfirmasi gagal dikirim, silahkan coba lagi.');
         }
+    }
+
+    public function getDataArtikelForUser()
+    {
+        $artikelList = Artikel::all();
+
+        foreach ($artikelList as $artikel) {
+            $dom = new DOMDocument();
+
+            $dom->loadHTML($artikel->konten);
+
+            $xpath = new DOMXPath($dom);
+
+            $firstParagraph = $xpath->query('//p')->item(0);
+
+            if ($firstParagraph !== null) {
+                $artikel->konten = $firstParagraph->nodeValue;
+            }
+        }
+
+        return view('artikel', compact('artikelList'));
+    }
+
+    public function getDataArtikelForUserById($id)
+    {
+        $artikel = Artikel::find($id);
+
+        $dom = new DOMDocument();
+
+        $dom->loadHTML($artikel->konten);
+
+        $xpath = new DOMXPath($dom);
+
+        $firstParagraph = $xpath->query('//p')->item(0);
+
+        if ($firstParagraph !== null) {
+            $deskripsi = $firstParagraph->nodeValue;
+        }
+
+        return view('detail-artikel', compact('artikel', 'deskripsi'));
+    }
+
+    public function getDataSatwaForUser()
+    {
+        $satwaList = Satwa::all();
+        return view('satwa',  compact('satwaList'));
+    }
+
+    public function getDataSatwaForUserById($id)
+    {
+        $satwa = Satwa::find($id);
+        $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
+        $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
+        return view('detail-satwa', compact('satwa'));
+    }
+
+    private function convertIUCN($originalValue, $isCategory = true)
+    {
+        $map = $isCategory ? $this->getIUCNCategoryMap() : $this->getIUCNTrendPopulationMap();
+
+        return isset($map[$originalValue]) ? $map[$originalValue] : $originalValue;
+    }
+
+    private function getIUCNCategoryMap()
+    {
+        return [
+            'EX' => 'Extinct (EX) - Punah',
+            'EW' => 'Extinct in the Wild (EW) - Punah di Alam Liar',
+            'CR' => 'Critically Endangered (CR) - Terancam Punah',
+            'EN' => 'Endangered (EN) - Terancam',
+            'VU' => 'Vulnerable (VU) - Rentan',
+            'NT' => 'Near Threatened (NT) - Hampir Terancam',
+            'LC' => 'Least Concern (LC) - Risiko Rendah',
+            'DD' => 'Data Deficient (DD) - Data Kurang',
+            'NE' => 'Not Evaluated (NE) - Belum Dinilai',
+        ];
+    }
+
+    private function getIUCNTrendPopulationMap()
+    {
+        return [
+            'Unknown' => 'Unknown - Tidak diketahui',
+            'Stable' => 'Stable - Stabil',
+            'Decreasing' => 'Decreasing - Menurun',
+            'Increasing' => 'Increasing - Bertambah',
+        ];
     }
 }

@@ -53,7 +53,8 @@ class SatwaController extends Controller
             ]);
     
             $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
-            $request->file('image')->storeAs('img/satwa_images', $namaFile, 'public');
+            $namaFile_db = 'satwa_images/' . $namaFile;
+            $request->file('image')->move(public_path('storage/satwa_images'), $namaFile);
             
             $slug = Str::slug($validatedData['nama_lokal'], '-');
     
@@ -73,7 +74,7 @@ class SatwaController extends Controller
                 'genus' => $validatedData['genus'],
                 'tren_populasi' => $validatedData['tren_populasi'],
                 'kategori_iucn' => $validatedData['kategori_iucn'],
-                'gambar' => $namaFile,
+                'gambar' => $namaFile_db,
                 'populasi' => $populasi,
                 'lokasi' => $validatedData['lokasi'],
                 'slug' => $slug,
@@ -140,15 +141,16 @@ class SatwaController extends Controller
             $slug = Str::slug($validatedData['nama_lokal'], '-');
 
             if ($request->hasFile('image_edit')) {
-                $namaFile = 'satwa-' . time() . '.' .  $request->image_edit->extension();
-                $request->file('image_edit')->storeAs('img/satwa_images', $namaFile, 'public');
-
-                $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
-                if (file_exists($image_path)) {
-                    unlink($image_path);
+                if ($satwa->gambar) {
+                    $pathToOldImage = public_path('storage/' . $satwa->gambar);
+                    if (file_exists($pathToOldImage)) {
+                        unlink($pathToOldImage);
+                    }
                 }
-            } else {
-                $namaFile = $satwa->gambar;
+
+                $namaFile = 'satwa_images/satwa-' . time() . '.' .  $request->image_edit->extension();
+                $request->file('image_edit')->storeAs('', $namaFile, 'public');
+                $satwa->gambar = $namaFile;
             }
 
             $satwa->update([
@@ -185,7 +187,7 @@ class SatwaController extends Controller
         try {
             $satwa = Satwa::findOrFail($id);
 
-            $image_path = public_path('storage/img/satwa_images/' . $satwa->gambar);
+            $image_path = public_path('storage/' . $satwa->gambar);
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
@@ -217,7 +219,8 @@ class SatwaController extends Controller
                 return $row->nama_lokal;
             })
             ->addColumn('populasi', function ($row) {
-                return $row->populasi;
+                $populasi = number_format($row->populasi, 0, ',', '.');
+                return $populasi;
             })
             ->addColumn('kategori_iucn', function ($row) {
                 return $row->kategori_iucn;
@@ -268,51 +271,5 @@ class SatwaController extends Controller
             // Menangani kasus jika request tidak berhasil
             return response()->json(['error' => 'Gagal mengambil data dari API'], 500);
         }
-    }
-
-    public function getDataSatwaForUser()
-    {
-        $satwaList = Satwa::all();
-        return view('satwa',  compact('satwaList'));
-    }
-
-    public function getDataSatwaForUserById($id)
-    {
-        $satwa = Satwa::find($id);
-        $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
-        $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
-        return view('detail-satwa', compact('satwa'));
-    }
-
-    private function convertIUCN($originalValue, $isCategory = true)
-    {
-        $map = $isCategory ? $this->getIUCNCategoryMap() : $this->getIUCNTrendPopulationMap();
-
-        return isset($map[$originalValue]) ? $map[$originalValue] : $originalValue;
-    }
-
-    private function getIUCNCategoryMap()
-    {
-        return [
-            'EX' => 'Extinct (EX) - Punah',
-            'EW' => 'Extinct in the Wild (EW) - Punah di Alam Liar',
-            'CR' => 'Critically Endangered (CR) - Terancam Punah',
-            'EN' => 'Endangered (EN) - Terancam',
-            'VU' => 'Vulnerable (VU) - Rentan',
-            'NT' => 'Near Threatened (NT) - Hampir Terancam',
-            'LC' => 'Least Concern (LC) - Risiko Rendah',
-            'DD' => 'Data Deficient (DD) - Data Kurang',
-            'NE' => 'Not Evaluated (NE) - Belum Dinilai',
-        ];
-    }
-
-    private function getIUCNTrendPopulationMap()
-    {
-        return [
-            'Unknown' => 'Unknown - Tidak diketahui',
-            'Stable' => 'Stable - Stabil',
-            'Decreasing' => 'Decreasing - Menurun',
-            'Increasing' => 'Increasing - Bertambah',
-        ];
     }
 }

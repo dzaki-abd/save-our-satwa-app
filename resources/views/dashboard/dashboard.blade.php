@@ -39,7 +39,7 @@
                   Laporan
                 </div>
                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                  400
+                  {{$countPelaporan}}
                 </div>
               </div>
               <div class="col-auto">
@@ -215,6 +215,6 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script src="../js/chart-area-initiator.js"></script>
-<script src="../js/chart-pie-initiator.js"></script>
+<script src="../js/utils/chart-area-initiator.js"></script>
+<script src="../js/utils/chart-pie-initiator.js"></script>
 @endpush

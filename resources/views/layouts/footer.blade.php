@@ -3,7 +3,7 @@
     $isDetailArtikel = Str::startsWith($currentRoute, 'detail-artikel');
 @endphp
 
-<div class="footer card text-center p-0 shadow {{ $isDetailArtikel ? 'active' : '' }}" data-bs-theme="dark">
+<div class="footer card text-center p-0 shadow {{ $isDetailArtikel || Request::url() == url('/') || Request::url() == url('/index') ? 'active' : '' }}" data-bs-theme="dark">
   <div class="container">
     <div class="card-body d-flex flex-column justify-content-between gap-4 container flex-lg-row p-0">
       <div class="card border-0" style="min-width: 20rem; width: 100%">
