@@ -62,7 +62,7 @@
             <div data-aos="zoom-in" data-aos-offset="150" class="swiper-slide">
               <a href="/detail-satwa/{{ $satwa->id }}" class="card satwa-box border-0">
                 <div class="satwa-overlay">
-                  <img src="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" alt="" />
+                  <img src="{{ asset('storage/' . $satwa->gambar) }}" alt="" />
                 </div>
                 <div class="satwa-content">
                   <h6>{{ $satwa->nama_lokal }}</h6>
@@ -96,7 +96,7 @@
             <div class="card">
               <div class="row g-0">
                 <div class="col-md-4 artikel-poster">
-                  <img class="rounded" src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" alt="" />
+                  <img class="rounded" src="{{ asset('storage/' . $artikel->gambar) }}" alt="" />
                 </div>
                 <div class="col-md-8 artikel-content">
                   <div class="card-body">

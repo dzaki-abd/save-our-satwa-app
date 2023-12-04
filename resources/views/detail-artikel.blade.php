@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron-4 jumbotron-search-4" style="background-image: url('{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}')">
+  <div class="jumbotron-4 jumbotron-search-4" style="background-image: url('{{ asset('storage/' . $artikel->gambar) }}')">
     <div class="jumbotron-container-4">
       <div class="container h-100">
         <div class="d-flex align-items-center justify-content-center h-100 jumbotron-content-4">
@@ -25,8 +25,8 @@
 
 @section('content')
   <div class="container shadow rounded detail-artikel-container p-2 p-md-3">
-    <a href="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" data-fancybox>
-      <img src="{{ asset('storage/img/artikel_images/' . $artikel->gambar) }}" class="rounded" alt="">
+    <a href="{{ asset('storage/' . $artikel->gambar) }}" data-fancybox>
+      <img src="{{ asset('storage/' . $artikel->gambar) }}" class="rounded" alt="">
     </a>
 
     <div class="row g-0 mt-4">

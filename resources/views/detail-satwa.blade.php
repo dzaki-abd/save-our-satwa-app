@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron-3" style="background-image: url('{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}');">
+  <div class="jumbotron-3" style="background-image: url('{{ asset('storage/' . $satwa->gambar) }}');">
     <div class="jumbotron-container-3">
       <div class="container d-flex flex-column flex-lg-row gap-5 detail-satwa-container h-100">
         <div class="detail-poster d-flex flex-column gap-3">
@@ -12,8 +12,8 @@
             </ol>
           </nav>
           <div class="poster-box">
-            <a href="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" data-fancybox>
-              <img src="{{ asset('storage/img/satwa_images/' . $satwa->gambar) }}" class="rounded"/>
+            <a href="{{ asset('storage/' . $satwa->gambar) }}" data-fancybox>
+              <img src="{{ asset('storage/' . $satwa->gambar) }}" class="rounded"/>
             </a>
             <div id="favorite-button">
 
