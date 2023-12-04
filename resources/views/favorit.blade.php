@@ -62,7 +62,7 @@
       const satwas = await SatwaIdb.getAllSatwas();
       const satwaContainer = document.querySelector('.favorite-satwa-container');
       const notFoundContainerSatwa = document.querySelector('.not-found-container-satwa');
-      const imgBaseUrlSatwa = '{{ asset('storage/img/satwa_images/') }}';
+      const imgBaseUrlSatwa = '{{ asset('storage/') }}';
 
       if (satwas.length > 0) {
         satwas.forEach((satwa) => {
@@ -88,7 +88,7 @@
       const artikels = await ArtikelIdb.getAllArtikels();
       const artikelContainer = document.querySelector('.favorite-artikel-container');
       const notFoundContainerArtikel = document.querySelector('.not-found-container-artikel');
-      const imgBaseUrlArtikel = '{{ asset('storage/img/artikel_images/') }}';
+      const imgBaseUrlArtikel = '{{ asset('storage/') }}';
 
       if (artikels.length > 0) {
         artikels.forEach((artikel) => {
