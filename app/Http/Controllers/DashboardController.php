@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\Donasi;
 use App\Models\Pelaporan;
 use App\Models\Satwa;
 use App\Models\User;
@@ -17,5 +18,33 @@ class DashboardController extends Controller
         $countAdmin = User::role('admin')->count();
         $countPelaporan = Pelaporan::count();
         return view('dashboard.dashboard', compact('countArtikel', 'countSatwa', 'countAdmin', 'countPelaporan'));
+    }
+
+    public function getChartDataDonasi()
+    {
+        $donations = Donasi::where('status', 'Sudah Diverifikasi')
+            ->orderBy('updated_at')
+            ->get();
+
+        $data = $donations->groupBy(function ($item) {
+            return $item->updated_at->format('M');
+        })->map(function ($group) {
+            return $group->sum('jumlah_donasi');
+        })->toArray();
+
+        return response()->json(['data' => $data]);
+    }
+
+    public function getChartDataLaporan()
+    {
+        $laporans = Pelaporan::all();
+
+        $data = $laporans->groupBy(function ($item) {
+            return $item->status;
+        })->map(function ($group) {
+            return $group->count();
+        })->toArray();
+
+        return response()->json(['data' => $data]);
     }
 }

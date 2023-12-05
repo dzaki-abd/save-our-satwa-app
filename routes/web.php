@@ -25,6 +25,8 @@ use App\Models\Artikel;
 Route::group(['middleware' => ['auth', 'web', 'role:admin']], function () {
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::get('/get-chart-data-donasi', [DashboardController::class, 'getChartDataDonasi'])->name('get-chart-data-donasi');
+        Route::get('/get-chart-data-laporan', [DashboardController::class, 'getChartDataLaporan'])->name('get-chart-data-laporan');
 
         Route::name('artikel.')->prefix('artikel')->group(function () {
             Route::get('/get-data', [ArtikelController::class, 'getDataArtikel'])->name('get-data');
