@@ -108,7 +108,7 @@
         <!-- Card Body -->
         <div class="card-body">
           <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
+            <canvas id="AreaChart"></canvas>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
         <!-- Card Header - Dropdown -->
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">
-            Ikhtisar laporan
+            Ikhtisar Laporan
           </h6>
         </div>
         <!-- Card Body -->
@@ -130,13 +130,13 @@
           </div>
           <div class="mt-4 text-center small">
             <span class="mr-2">
-              <i class="fas fa-circle text-primary"></i> Direct
+              <i class="fas fa-circle text-primary"></i> Ditinjau
             </span>
             <span class="mr-2">
-              <i class="fas fa-circle text-success"></i> Social
+              <i class="fas fa-circle text-success"></i> Disetujui
             </span>
             <span class="mr-2">
-              <i class="fas fa-circle text-info"></i> Referral
+              <i class="fas fa-circle text-info"></i> Ditolak
             </span>
           </div>
         </div>
@@ -215,6 +215,7 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script src="../js/utils/chart-area-initiator.js"></script>
-<script src="../js/utils/chart-pie-initiator.js"></script>
+<script src="{{ asset('js/utils/chart-area-initiator.js') }}"></script>
+<!-- <script src="../js/utils/chart-pie-initiator.js"></script> -->
+<script src="{{ asset('js/utils/chart-pie-initiator.js') }}"></script>
 @endpush
