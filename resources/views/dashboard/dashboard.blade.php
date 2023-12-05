@@ -216,6 +216,5 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 <script src="{{ asset('js/utils/chart-area-initiator.js') }}"></script>
-<!-- <script src="../js/utils/chart-pie-initiator.js"></script> -->
 <script src="{{ asset('js/utils/chart-pie-initiator.js') }}"></script>
 @endpush
