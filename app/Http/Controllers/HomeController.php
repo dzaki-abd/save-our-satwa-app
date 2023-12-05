@@ -141,18 +141,16 @@ class HomeController extends Controller
             'user_id' => 'required',
         ]);
 
-        if ($request->pelanggaran_id == 'Lainnya') {
+        if ($request->pelanggaran_id == '0') {
             $request->validate([
                 'pelanggaran_lain' => 'required',
             ]);
-            $request->request->add(['pelanggaran_id' => $request->pelanggaran_lain]);
         }
 
-        if ($request->satwa_id == 'Lainnya') {
+        if ($request->satwa_id == '0') {
             $request->validate([
                 'satwa_lain' => 'required',
             ]);
-            $request->request->add(['satwa_id' => $request->satwa_lain]);
         }
 
         if ($request->hasFile('hasil_investigasi')) {
@@ -168,8 +166,12 @@ class HomeController extends Controller
                 'uniqid' => uniqid(),
                 'waktu_kejadian' => $request->waktu_kejadian,
                 'lokasi_kejadian' => $request->lokasi_kejadian,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
                 'pelanggaran_id' => $request->pelanggaran_id,
+                'pelanggaran_lain' => $request->pelanggaran_lain,
                 'satwa_id' => $request->satwa_id,
+                'satwa_lain' => $request->satwa_lain,
                 'deskripsi_kejadian' => $request->deskripsi_kejadian,
                 'tindak_lanjut' => $request->tindak_lanjut,
                 'hasil_investigasi' => $hasil,
@@ -182,8 +184,12 @@ class HomeController extends Controller
                 'uniqid' => uniqid(),
                 'waktu_kejadian' => $request->waktu_kejadian,
                 'lokasi_kejadian' => $request->lokasi_kejadian,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
                 'pelanggaran_id' => $request->pelanggaran_id,
+                'pelanggaran_lain' => $request->pelanggaran_lain,
                 'satwa_id' => $request->satwa_id,
+                'satwa_lain' => $request->satwa_lain,
                 'deskripsi_kejadian' => $request->deskripsi_kejadian,
                 'tindak_lanjut' => $request->tindak_lanjut,
                 'hasil_investigasi' => $request->hasil_investigasi,
@@ -230,13 +236,19 @@ class HomeController extends Controller
 
         return DataTables::of($laporan)
             ->addColumn('pelanggaran_id', function ($row) {
-                return $row->pelanggaran->nama_pelanggaran;
+                if($row->pelanggaran_id == 0)
+                    return $row->pelanggaran_lain;
+                else
+                    return $row->pelanggaran->nama_pelanggaran;
             })
             ->addColumn('tanggal_kejadian', function ($row) {
                 return date('d F Y', strtotime($row->waktu_kejadian));
             })
             ->addColumn('satwa_id', function ($row) {
-                return $row->satwa->nama_lokal;
+                if($row->satwa_id == 0)
+                    return $row->satwa_lain;
+                else
+                    return $row->satwa->nama_lokal;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {

@@ -49,7 +49,7 @@
         <h5 class="mb-3">INFORMASI KEJADIAN</h5>
         <div class="mb-3">
             <label for="waktu_kejadian" class="form-label">Tanggal Kejadian</label>
-            <input type="date" class="form-control" id="waktu_kejadian" name="waktu_kejadian"
+            <input type="datetime-local" class="form-control" id="waktu_kejadian" name="waktu_kejadian"
                 placeholder="Masukkan tanggal kejadian" required>
         </div>
         <div class="mb-5">
@@ -76,7 +76,7 @@
                 @foreach ($pelanggaran as $p)
                     <option value="{{ $p->id }}">{{ $p->nama_pelanggaran }}</option>
                 @endforeach
-                <option value="Lainnya">Lainnya</option>
+                <option value="0">Lainnya</option>
             </select>
         </div>
         <div class="mb-3">
@@ -91,7 +91,7 @@
                 @foreach ($satwa as $s)
                     <option value="{{ $s->id }}">{{ $s->nama_lokal }}</option>
                 @endforeach
-                <option value="Lainnya">Lainnya</option>
+                <option value="0">Lainnya</option>
             </select>
         </div>
         <div class="mb-5">
@@ -123,8 +123,8 @@
         </p>
         <div class="mb-3">
             <label for="gambar" class="form-label">Foto</label>
-            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200"
-                data-max-file-size="25M" data-allowed-file-extensions="jpg jpeg png" multiple>
+            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200" data-max-file-size="10M"
+                data-allowed-file-extensions="jpg jpeg png">
         </div>
 
         <div class="mb-5">
