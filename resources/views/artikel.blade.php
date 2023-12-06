@@ -26,7 +26,7 @@
 
 @section('content')
   <h3 class="text-center h3-top">ARTIKEL <span>& BERITA</span></h3>
-  <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+  <p class="text-center p-top">Telusuri lebih lanjut artikel dan berita terkait satwa.</p>
   
   @if ($artikelList->count() === 0)
       <p class="text-center mb-0">Belum ada data yang tersedia</p>

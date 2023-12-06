@@ -26,7 +26,7 @@
 
 @section('content')
   <h3 class="text-center h3-top">INFORMASI <span>SATWA</span></h3>
-  <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+  <p class="text-center p-top">Jelajahi informasi tentang satwa yang dilindungi.</p>
   
   @if ($satwaList->count() === 0)
     <p class="text-center mb-0">Belum ada data yang tersedia</p>

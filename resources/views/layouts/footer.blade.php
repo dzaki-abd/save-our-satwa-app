@@ -40,9 +40,9 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column gap-3">
               <h5 class="card-title">Kontak</h5>
-              <a href="#" class="nav-link">Email</a>
-              <a href="#" class="nav-link">Twitter</a>
-              <a href="#" class="nav-link">Instagram</a>
+              <a href="mailto:zalfanirwana@gmail.com" target="blank_" rel="noopener" class="nav-link">Email</a>
+              <a href="https://x.com/saveoursatwa?s=21" target="blank_" rel="noopener" class="nav-link">Twitter</a>
+              <a href="https://instagram.com/saveoursatwa?igshid=OGQ5ZDc2ODk2ZA==" target="blank_" rel="noopener" class="nav-link">Instagram</a>
           </div>
         </div>
       </div>
