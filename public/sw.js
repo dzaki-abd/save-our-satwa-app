@@ -11,7 +11,8 @@ self.addEventListener("install", function (event) {
 
 const filesToCache = [
     '/',
-    '/offline.html'
+    '/offline.html',
+    '/img/jumbotron.jpg'
 ];
 
 const checkResponse = function (request) {

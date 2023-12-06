@@ -38,6 +38,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *::before,
@@ -120,6 +121,31 @@ body {
 .border-bottom-success {
   border-bottom: 0.15rem solid var(--teal-500) !important;
  }
+
+ .text-bg-success {
+  background-color: var(--teal-500) !important; 
+ }
+
+ .text-bg-warning {
+  background-color: var(--warning) !important; 
+ }
+
+ .text-bg-danger {
+  background-color: var(--danger) !important; 
+ }
+
+
+/* ========== BACK TO TOP ========== */
+
+.back-to-top {
+  width: 100%;
+  bottom: 2rem;
+}
+
+.button-teal-500.custom-back-to-top {
+  display: none;
+  background-color: rgba(32, 201, 151, 0.8);
+}
 
 /* ========== NAVBAR ========== */
 
@@ -222,11 +248,6 @@ body {
   cursor: pointer;
   transition: all 0.3s;
 }
-
-/* .button-white:hover {
-  background-color: var(--teal-400);
-  color: var(--white)
-} */
 
 /* ========== FOOTER ========== */
 

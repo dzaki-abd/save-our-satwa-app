@@ -53,6 +53,14 @@
         @include('layouts.footer')
     @endif
 
+    <div class="container back-to-top fixed-bottom d-flex justify-content-end">
+        <button id="back-to-top" class="button-teal-500 custom-back-to-top" onclick="topFunction()">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="{{ asset('js/utils/back-to-top-initiator.js') }}"></script>
+
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
     if ("serviceWorker" in navigator) {
