@@ -123,13 +123,13 @@
       <div class="tentangkami-content px-3 px-md-4 rounded">
         <div data-aos="zoom-in" data-aos-offset="150" class="tentangkami-title">
           <h3 class="text-white h3-top">TENTANG KAMI</h3>
-          <p class="text-white p-top">Baca Informasi Menarik dan Pengetahuan Terbaru tentang Satwa.</p>
+          <p class="text-white p-top">Misi dan Dedikasi dalam Melindungi Satwa</p>
         </div>
         <div data-aos="zoom-in" data-aos-offset="150" class="tentangakami-body">
           <p class="text-white">Save Our Satwa adalah komunitas peduli satwa yang berkomitmen untuk melindungi dan melestarikan keanekaragaman hayati. Kami hadir untuk memberikan informasi, mengedukasi, dan bertindak nyata dalam menjaga kehidupan satwa. Bergabunglah dengan kami dan menjadi bagian dari perubahan positif untuk masa depan satwa dan alam kita.</p>
           <p class="text-white">Hubungi kami,</p>
           <div class="tentangkami-contact">
-            <a href="#" target="blank_" rel="noopener" class="button-teal-500" style="width: fit-content">
+            <a href="mailto:zalfanirwana@gmail.com" target="blank_" rel="noopener" class="button-teal-500" style="width: fit-content">
               <i class="fa-solid fa-envelope pe-2"></i>
               Email
             </a>
@@ -198,7 +198,7 @@
     <div class="container">
       <div data-aos="zoom-in" data-aos-offset="150" class="donasi-home-content rounded p-3 d-flex flex-column align-items-center">
         <h3 class="text-white text-center">DONASI</h3>
-        <p class="text-center text-lg-start p-top text-white">Baca Informasi Menarik dan Pengetahuan Terbaru tentang Satwa</p>
+        <p class="text-center text-lg-start p-top text-white">Berkontribusi untuk Perlindungan Satwa</p>
 
         <p class="text-white text-center">Sumbangkan bantuan Anda untuk mendukung misi Save Our Satwa dalam melindungi dan melestarikan satwa-satwa yang membutuhkan. Bergabunglah dalam upaya kolektif kami untuk menciptakan perubahan positif bagi satwa dilindungi. Dengan memberikan sumbangan, Anda turut berperan aktif dalam menjaga keindahan dan keseimbangan alam. Terima kasih atas kebaikan hati dan kontribusi Anda.</p>
         <a href="/donasi" class="button-teal-500">Donasi Sekarang!</a>
@@ -212,7 +212,7 @@
         
         <div data-aos="zoom-in" data-aos-offset="150">
           <h3 class="text-center text-lg-start h3-home">SERING <span>DITANYAKAN</span></h3>
-        <p class="text-center text-lg-start p-top">Baca Informasi Menarik dan Pengetahuan Terbaru tentang Satwa</p>
+        <p class="text-center text-lg-start p-top">Temukan Jawaban untuk Pertanyaan-Pertanyaan yang Sering Diajukan</p>
         </div>
 
         <div data-aos="zoom-in" data-aos-offset="150" class="accordion accordion-flush shadow w-100" id="accordionFlushExample">
@@ -220,12 +220,12 @@
           <div class="accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Apa itu SaveOurSatwa?</h6>
               </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                SaveOurSatwa adalah sebuah aplikasi yang bertujuan untuk pelaporkan tindakan ilegal terhadap satwa dan menggalang dukungan untuk pelestarian satwa. Aplikasi ini memberikan informasi tentang satwa, kampanye perlindungan, dan cara berkontribusi.
               </div>
             </div>
           </div>
@@ -233,13 +233,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Bagaimana cara menggunakan SaveOurSatwa?</h6>
               </button>
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Cari aplikasi SaveOurSatwa dari website, daftar, dan jelajahi kontennya. Anda dapat menemukan informasi tentang satwa, berpartisipasi dalam pelaporan satwa dilindungi, dan melihat artikel serta berita satwa.
                 </div>
               </div>
             </div>
@@ -248,13 +248,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Bagaimana saya bisa berkontribusi untuk melestarikan satwa?</h6>
               </button>
             </h2>
             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Ada beberapa cara untuk berkontribusi. Anda dapat menyumbangkan dana, berpartisipasi dalam kampanye pelaporan satwa dilindungi, atau bahkan membagikan informasi melalui media sosial untuk meningkatkan kesadaran.
                 </div>
               </div>
             </div>
@@ -263,13 +263,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Apakah aplikasi SaveOurSatwa gratis?</h6>
               </button>
             </h2>
             <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Ya, SaveOurSatwa dapat dijangkau secara gratis dengan website. Namun, terdapat opsi untuk menyumbangkan dana sebagai bentuk dukungan untuk proyek pelestarian dan kampanye penyelamatan satwa.
                 </div>
               </div>
             </div>
@@ -278,13 +278,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Bagaimana saya bisa melaporkan kasus kejahatan terhadap satwa dilindungi?</h6>
               </button>
             </h2>
             <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Aplikasi ini menyediakan fitur pelaporan di mana pengguna dapat melaporkan kasus kejahatan terhadap satwa liar. Anda dapat mengunggah informasi, deskripsi, atau foto terkait untuk membantu penyelidikan lebih lanjut.
                 </div>
               </div>
             </div>
@@ -293,13 +293,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Apakah informasi pribadi saya aman di SaveOurSatwa?</h6>
               </button>
             </h2>
             <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Keamanan informasi pengguna sangat penting. Aplikasi ini memiliki kebijakan privasi yang ketat untuk melindungi data pengguna dan memastikan bahwa informasi pribadi tetap aman.
                 </div>
               </div>
             </div>
@@ -308,13 +308,13 @@
           <div class="accordian-donasi accordion-item rounded">
             <h2 class="accordion-header rounded">
               <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-                <h6 class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit</h6>
+                <h6 class="m-0">Bagaimana cara menghubungi tim dukungan SaveOurSatwa?</h6>
               </button>
             </h2>
             <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
                 <div class="accordion-body p-3 p-lg-4">
-                  Gabung dalam aksi kebaikan di <strong>Kitabisa!</strong> Sumbangkan donasi untuk melindungi satwa yang membutuhkan. Setiap sumbanganmu memberikan harapan baru bagi kehidupan mereka. Donasikan sekarang di <strong>Kitabisa!</strong> dan menjadi bagian dari perubahan positif untuk kehidupan satwa.
+                  Anda dapat menghubungi tim dukungan melalui fitur "Hubungi Kami" di dalam aplikasi atau melalui alamat email yang tercantum di situs web resmi SaveOurSatwa.
                 </div>
               </div>
             </div>
@@ -334,9 +334,9 @@
       <div data-aos="zoom-in" data-aos-offset="150" class="faqlanjut-content d-flex flex-column justify-content-center flex-md-row justify-content-md-between align-items-md-center rounded px-4 py-5 gap-4">
         <div>
           <h3 class="text-white text-center text-md-start">PUNYA PERTANYAAN LEBIH LANJUT</h3>
-          <p class="text-white text-center text-md-start mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti a ducimus ut dolore hic eligendi in ab aperiam pariatur.</p>
+          <p class="text-white text-center text-md-start mb-0">Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan tambahan atau butuh informasi lebih lanjut</p>
         </div>
-        <a href="#" target="blank_" rel="noopener" class="button-teal-500 button-teal-500-custom">Hubungi Kami</a>
+        <a href="mailto:zalfanirwana@gmail.com" target="blank_" rel="noopener" class="button-teal-500 button-teal-500-custom">Hubungi Kami</a>
       </div>
     </div>
   </div>

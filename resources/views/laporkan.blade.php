@@ -18,7 +18,7 @@
 
 @section('content')
     <h3 class="text-center h3-top">LAPORKAN <span>SEKARANG</span></h3>
-    <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <p class="text-center p-top">Laporkan temuan tindakan ilegal terhadap satwa.</p>
 
     <form action="/laporkan/store" method="POST" enctype="multipart/form-data" class="shadow p-4 form-laporkan">
         @csrf

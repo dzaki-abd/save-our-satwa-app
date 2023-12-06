@@ -20,8 +20,8 @@
 @endsection
 
 @section('content')
-    <h3 class="text-center h3-top">FAVORIT <span>ARTIKEL</span> & MOVIE</h3>
-    <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <h3 class="text-center h3-top">FAVORIT <span>SATWA</span> & ARTIKEL</h3>
+    <p class="text-center p-top">Lihat List Satwa dan Artikel yang Anda Favoritkan.</p>
 
     <ul class="nav nav-tabs border-bottom-success mt-2 bg-white shadow"
         style="border-top-left-radius: 0.35rem; border-top-right-radius: 0.35rem; position: relative; z-index: 2">

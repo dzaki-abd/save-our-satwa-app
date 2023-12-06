@@ -99,7 +99,7 @@
 
 @section('content')
   <h3 class="text-center h3-top">RIWAYAT <span>SATWA</span></h3>
-  <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+  <p class="text-center p-top">Menelusuri Riwayat dan Keunikan Kehidupan Satwa.</p>
 
   <div class="shadow p-3 rounded">
     <div class="table-responsive pt-2 pb-2">
