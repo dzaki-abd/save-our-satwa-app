@@ -238,9 +238,7 @@
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Cari aplikasi SaveOurSatwa dari website, daftar, dan jelajahi kontennya. Anda dapat menemukan informasi tentang satwa, berpartisipasi dalam pelaporan satwa dilindungi, dan melihat artikel serta berita satwa.
-                </div>
+                Cari aplikasi SaveOurSatwa dari website, daftar, dan jelajahi kontennya. Anda dapat menemukan informasi tentang satwa, berpartisipasi dalam pelaporan satwa dilindungi, dan melihat artikel serta berita satwa.
               </div>
             </div>
           </div>
@@ -253,9 +251,7 @@
             </h2>
             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Ada beberapa cara untuk berkontribusi. Anda dapat menyumbangkan dana, berpartisipasi dalam kampanye pelaporan satwa dilindungi, atau bahkan membagikan informasi melalui media sosial untuk meningkatkan kesadaran.
-                </div>
+                Ada beberapa cara untuk berkontribusi. Anda dapat menyumbangkan dana, berpartisipasi dalam kampanye pelaporan satwa dilindungi, atau bahkan membagikan informasi melalui media sosial untuk meningkatkan kesadaran.
               </div>
             </div>
           </div>
@@ -268,9 +264,7 @@
             </h2>
             <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Ya, SaveOurSatwa dapat dijangkau secara gratis dengan website. Namun, terdapat opsi untuk menyumbangkan dana sebagai bentuk dukungan untuk proyek pelestarian dan kampanye penyelamatan satwa.
-                </div>
+                Ya, SaveOurSatwa dapat dijangkau secara gratis dengan website. Namun, terdapat opsi untuk menyumbangkan dana sebagai bentuk dukungan untuk proyek pelestarian dan kampanye penyelamatan satwa.
               </div>
             </div>
           </div>
@@ -283,9 +277,7 @@
             </h2>
             <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Aplikasi ini menyediakan fitur pelaporan di mana pengguna dapat melaporkan kasus kejahatan terhadap satwa liar. Anda dapat mengunggah informasi, deskripsi, atau foto terkait untuk membantu penyelidikan lebih lanjut.
-                </div>
+                Aplikasi ini menyediakan fitur pelaporan di mana pengguna dapat melaporkan kasus kejahatan terhadap satwa liar. Anda dapat mengunggah informasi, deskripsi, atau foto terkait untuk membantu penyelidikan lebih lanjut.
               </div>
             </div>
           </div>
@@ -298,9 +290,7 @@
             </h2>
             <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Keamanan informasi pengguna sangat penting. Aplikasi ini memiliki kebijakan privasi yang ketat untuk melindungi data pengguna dan memastikan bahwa informasi pribadi tetap aman.
-                </div>
+                Keamanan informasi pengguna sangat penting. Aplikasi ini memiliki kebijakan privasi yang ketat untuk melindungi data pengguna dan memastikan bahwa informasi pribadi tetap aman.
               </div>
             </div>
           </div>
@@ -313,9 +303,7 @@
             </h2>
             <div id="flush-collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div class="accordion-body p-3 p-lg-4">
-                <div class="accordion-body p-3 p-lg-4">
-                  Anda dapat menghubungi tim dukungan melalui fitur "Hubungi Kami" di dalam aplikasi atau melalui alamat email yang tercantum di situs web resmi SaveOurSatwa.
-                </div>
+                Anda dapat menghubungi tim dukungan melalui fitur "Hubungi Kami" di dalam aplikasi atau melalui alamat email yang tercantum di situs web resmi SaveOurSatwa.
               </div>
             </div>
           </div>

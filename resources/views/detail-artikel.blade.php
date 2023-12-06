@@ -49,7 +49,7 @@
           @endphp
       
           @foreach ($tags as $tag)
-              <div class="button-teal-500">{{ $tag }}</div>
+              <a href="/artikel?kata_kunci={{ $tag }}" class="button-teal-500">{{ $tag }}</a>
           @endforeach
       </div>
       </div>

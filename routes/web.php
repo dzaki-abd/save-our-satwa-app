@@ -70,6 +70,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/satwa', [HomeController::class, 'getDataSatwaForUser']);
 
     Route::get('/detail-satwa/{id}', [HomeController::class, 'getDataSatwaForUserById']);
+    Route::get('/get-riwayat-satwa/{id}', [HomeController::class, 'getDataPelaporanByIdSatwa'])->name('get-riwayat-satwa');
 
     Route::get('/artikel', [HomeController::class, 'getDataArtikelForUser']);
 

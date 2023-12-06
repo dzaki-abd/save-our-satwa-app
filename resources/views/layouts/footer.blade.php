@@ -16,12 +16,12 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column gap-3">
               <h5 class="card-title">Navigasi</h5>
-              <a href="#" class="nav-link">Home</a>
-              <a href="#" class="nav-link">Satwa</a>
-              <a href="#" class="nav-link">Artikel</a>
-              <a href="#" class="nav-link">Favorit</a>
-              <a href="#" class="nav-link">Donasi</a>
-              <a href="#" class="nav-link">Laporkan</a>
+              <a href="/home" class="nav-link">Home</a>
+              <a href="/satwa" class="nav-link">Satwa</a>
+              <a href="/artikel" class="nav-link">Artikel</a>
+              <a href="/favorit" class="nav-link">Favorit</a>
+              <a href="/donasi" class="nav-link">Donasi</a>
+              <a href="/laporkan" class="nav-link">Laporkan</a>
           </div>
         </div>
       </div>
@@ -29,10 +29,13 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column gap-3">
             <h5 class="card-title">Akun</h5>
-            <a href="#" class="nav-link">Profil</a>
-            <a href="#" class="nav-link">Masuk</a>
-            <a href="#" class="nav-link">Daftar</a>
-            <a href="#" class="nav-link">Keluar</a>
+            <a href="/profil" class="nav-link">Profil</a>
+            <a href="/login" class="nav-link">Masuk</a>
+            <a href="/register" class="nav-link">Daftar</a>
+            <button class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</button>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form>
           </div>
         </div>
     </div>

@@ -105,44 +105,26 @@
     <div class="table-responsive pt-2 pb-2">
       <table
         class="table table-striped table-riwayat m-0"
-        id="detailSatwa"
+        id="table-riwayat-satwa"
         width="100%"
         cellspacing="0"
       >
         <thead>
           <tr>
             <th class="border-0 text-gray-700">Laporan</th>
-            <th class="border-0 text-gray-700">Aksi</th>
+            <th class="border-0 text-gray-700">Tanggal Kejadian</th>
+            <th class="border-0 text-gray-700">Satwa</th>
+            <th class="border-0 text-gray-700">Status</th>
           </tr>
         </thead>
-        <tfoot>
+        {{-- <tfoot>
           <tr>
             <th class="text-gray-700">Laporan</th>
             <th class="text-gray-700">Aksi</th>
           </tr>
-        </tfoot>
+        </tfoot> --}}
         <tbody>
-          @for ($i = 0; $i < 2; $i++)
-            <tr class="align-middle">
-              <td class="text-gray-600">
-                <h6 class="mb-2">PERBURUAN HEWAN KAKAKTUA RAJA</h6>
-                <p class="mb-2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore modi in a provident delectus repudiandae voluptate reprehenderit corrupti veritatis, iusto vero doloremque dolores aperiam animi dolor cum sit dolore voluptas.</p>
-                <div class="d-flex gap-2 align-items-center mb-2 icon-riwayat">
-                  <i class="fa-solid fa-calendar"></i>
-                  <p class="m-0">20 November 2023</p>
-                </div>
-                <div class="d-flex gap-2 align-items-center icon-riwayat">
-                  <i class="fa-solid fa-clock-rotate-left"></i>
-                  <p class="m-0">27 November 2023</p>
-                </div>
-              </td>
-              <td class="">
-                <div class="d-flex gap-1">
-                  <button type="submit" class="button-teal-500"><i class="fa-solid fa-eye"></i></button>
-                </div>
-              </td>
-            </tr>
-          @endfor
+
         </tbody>
       </table>
     </div>
@@ -161,6 +143,37 @@
         description: '{{ $satwa->deskripsi }}',
         image: '{{ $satwa->gambar }}'
       },
+    });
+
+    $('#table-riwayat-satwa').DataTable({
+      fixedHeader: true,
+      pageLength: 25,
+      lengthChange: true,
+      autoWidth: false,
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "{{ route('get-riwayat-satwa', $satwa->id) }}",
+        type: 'GET',
+      },
+      columns: [{
+          data: 'pelanggaran_id',
+          name: 'laporan'
+        },
+        {
+          data: 'tanggal_kejadian',
+          name: 'tanggal_kejadian'
+        },
+        {
+          data: 'satwa_id',
+          name: 'satwa'
+        },
+        {
+          data: 'status',
+          name: 'status'
+        },
+      ]
     });
   </script>
 @endpush
