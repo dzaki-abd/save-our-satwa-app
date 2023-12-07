@@ -129,7 +129,7 @@
           <p class="text-white">Save Our Satwa adalah komunitas peduli satwa yang berkomitmen untuk melindungi dan melestarikan keanekaragaman hayati. Kami hadir untuk memberikan informasi, mengedukasi, dan bertindak nyata dalam menjaga kehidupan satwa. Bergabunglah dengan kami dan menjadi bagian dari perubahan positif untuk masa depan satwa dan alam kita.</p>
           <p class="text-white">Hubungi kami,</p>
           <div class="tentangkami-contact">
-            <a href="mailto:zalfanirwana@gmail.com" target="blank_" rel="noopener" class="button-teal-500" style="width: fit-content">
+            <a href="mailto:zalfanirwana@gmail.com?subject=Halo Save Our Satwa!" target="blank_" rel="noopener" class="button-teal-500" style="width: fit-content">
               <i class="fa-solid fa-envelope pe-2"></i>
               Email
             </a>
@@ -324,7 +324,7 @@
           <h3 class="text-white text-center text-md-start">PUNYA PERTANYAAN LEBIH LANJUT</h3>
           <p class="text-white text-center text-md-start mb-0">Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan tambahan atau butuh informasi lebih lanjut</p>
         </div>
-        <a href="mailto:zalfanirwana@gmail.com" target="blank_" rel="noopener" class="button-teal-500 button-teal-500-custom">Hubungi Kami</a>
+        <a href="mailto:zalfanirwana@gmail.com?subject=Halo Save Our Satwa!" target="blank_" rel="noopener" class="button-teal-500 button-teal-500-custom">Hubungi Kami</a>
       </div>
     </div>
   </div>
