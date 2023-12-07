@@ -35,12 +35,12 @@
   >
   <link
     rel="icon"
-    href="icon/maskable_icon_x512.png"
+    href="{{ asset('icon/maskable_icon_x512.png') }}"
     type="image/x-icon"
   >
   <link
     rel="shortcut icon"
-    href="icon/maskable_icon_x512.png"
+    href="{{ asset('icon/maskable_icon_x512.png') }}"
     type="image/x-icon"
   >
   <link

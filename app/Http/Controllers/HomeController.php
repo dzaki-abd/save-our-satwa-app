@@ -384,6 +384,7 @@ class HomeController extends Controller
     public function getDataPelaporanByIdSatwa($id) {
         $laporan = Pelaporan::where('satwa_id', $id)
                         ->where('status', 'Disetujui')
+                        ->where('isdelete', false)
                         ->get();
 
         return DataTables::of($laporan)
@@ -394,7 +395,7 @@ class HomeController extends Controller
                     return $row->pelanggaran->nama_pelanggaran;
             })
             ->addColumn('tanggal_kejadian', function ($row) {
-                return date('d F Y', strtotime($row->waktu_kejadian));
+                return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
             })
             ->addColumn('satwa_id', function ($row) {
                 if($row->satwa_id == 0)
