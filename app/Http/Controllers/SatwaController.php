@@ -233,6 +233,7 @@ class SatwaController extends Controller
                     <div class="btn-group" role="group" aria-label="Action">
                         <button type="button" class="btn btn-primary btn-md btn-icon" onclick="editSatwa(' . $row->id . ')" title="Detail / Edit"><i class="fa-solid fa-eye"></i></button>
                         <button type="button" class="btn btn-danger btn-md btn-icon" onclick="destroySatwa(' . $row->id . ')" title="Hapus"><i class="fa-solid fa-trash"></i></button>
+                        <button type="button" class="btn btn-info btn-md btn-icon" onclick="destroySatwa(' . $row->id . ')" title="Daftar Pelaporan Satwa"><i class="fa-solid fa-table-list"></i></button>
                     </div>
                             ';
                 return $actionBtn;

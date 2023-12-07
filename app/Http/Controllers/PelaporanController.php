@@ -130,11 +130,12 @@ class PelaporanController extends Controller
 
         $laporan = Pelaporan::where('id', $idLaporan)->first();
         $laporan->status = $request->status;
+        $laporan->jumlah_satwa = $request->jumlahSatwa;
         $laporan->save();
 
         if ($request->status == 'Disetujui') {
             $satwa = Satwa::find($laporan->satwa_id);
-            $satwa->populasi = $satwa->populasi - 1;
+            $satwa->populasi = $satwa->populasi - $laporan->jumlah_satwa;
             $satwa->save();
         }
 
