@@ -19,6 +19,8 @@ class PelaporanSeeder extends Seeder
             'lokasi_kejadian' => 'Jl. Raya Bogor',
             'pelanggaran_id' => 2,
             'satwa_id' => 3,
+            'longitude' => '106.827153',
+            'latitude' => '-6.264301',
             'deskripsi_kejadian' => 'Penjualan satwa dilakukan di pinggir jalan',
             'status' => 'Ditinjau',
             'user_id' => '1',
@@ -30,8 +32,10 @@ class PelaporanSeeder extends Seeder
             'lokasi_kejadian' => 'Jl. Bojongsoang',
             'pelanggaran_id' => 1,
             'satwa_id' => 1,
+            'longitude' => '107.609810',
+            'latitude' => '-6.914744',
             'deskripsi_kejadian' => 'Pemelihaaraan satwa dilakukan di rumah',
-            'status' => 'Ditinjau',
+            'status' => 'Disetujui',
             'user_id' => '1',
         ]);
     }

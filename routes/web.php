@@ -64,7 +64,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/index', [HomeController::class, 'index'])->name('home');
 
     Route::get('/donasi', [DonasiController::class, 'getDataDonasiForUser']);
-
     Route::post('/donasi/store', [HomeController::class, 'addDonasi'])->name('donasi.store');
 
     Route::get('/satwa', [HomeController::class, 'getDataSatwaForUser']);

@@ -1,19 +1,34 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron-3" style="background-image: url('{{ asset('storage/' . $satwa->gambar) }}');">
+  <div
+    class="jumbotron-3"
+    style="background-image: url('{{ asset('storage/' . $satwa->gambar) }}');"
+  >
     <div class="jumbotron-container-3">
       <div class="container d-flex flex-column flex-lg-row gap-5 detail-satwa-container h-100">
         <div class="detail-poster d-flex flex-column gap-3">
-          <nav aria-label="breadcrumb" data-bs-theme="dark">
+          <nav
+            aria-label="breadcrumb"
+            data-bs-theme="dark"
+          >
             <ol class="breadcrumb m-0">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Detail Satwa</li>
+              <li
+                class="breadcrumb-item active"
+                aria-current="page"
+              >Detail Satwa</li>
             </ol>
           </nav>
           <div class="poster-box">
-            <a href="{{ asset('storage/' . $satwa->gambar) }}" data-fancybox>
-              <img src="{{ asset('storage/' . $satwa->gambar) }}" class="rounded"/>
+            <a
+              href="{{ asset('storage/' . $satwa->gambar) }}"
+              data-fancybox
+            >
+              <img
+                src="{{ asset('storage/' . $satwa->gambar) }}"
+                class="rounded"
+              />
             </a>
             <div id="favorite-button">
 
@@ -22,7 +37,11 @@
         </div>
         <div class="detail-content d-flex flex-column justify-content-center gap-3">
           <h1>{{ $satwa->nama_lokal }}</h1>
-          <table class="table m-0" width="100%" cellspacing="0">
+          <table
+            class="table m-0"
+            width="100%"
+            cellspacing="0"
+          >
             <tbody>
               <tr>
                 <th class="ps-0">Nama Inggris</th>
@@ -52,13 +71,19 @@
                 <th class="ps-0">Deskripsi</th>
               </tr>
               <tr>
-                <td colspan="2" class="p-2 ps-0">{{ $satwa->deskripsi }}</td>
+                <td
+                  colspan="2"
+                  class="p-2 ps-0"
+                >{{ $satwa->deskripsi }}</td>
               </tr>
               <tr>
                 <th class="ps-0">Taksonomi</th>
               </tr>
               <tr>
-                <td colspan="2" class="p-2 ps-0">
+                <td
+                  colspan="2"
+                  class="p-2 ps-0"
+                >
                   <div class="taxonomy-box rounded p-3">
                     <div class="row">
                       <div class="col-6 col-md-4 d-flex flex-column p-2">

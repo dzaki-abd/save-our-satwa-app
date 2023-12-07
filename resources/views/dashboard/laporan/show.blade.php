@@ -24,7 +24,7 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center">
       <h6 class="m-0 font-weight-bold text-success">
-        Edit Status Laporan dengan ID {{ $data['laporan']->uniqid }}
+        Edit Status Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
       </h6>
     </div>
     <div class="card-body">
@@ -73,7 +73,7 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center">
       <h6 class="m-0 font-weight-bold text-success">
-        Detail Laporan dengan ID KAL121JWY
+        Detail Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
       </h6>
     </div>
     <div class="card-body">
@@ -191,6 +191,50 @@
                 style="border-top: 0"
               >{{ $data['laporan']->lokasi_kejadian }}</td>
             </tr>
+            <tr class="align-middle">
+              <td
+                colspan="2"
+                class="align-middle text-gray-600 pl-0"
+                style="border-top: 0"
+              >
+                <div class="mb-3">
+                  <div
+                    id="map"
+                    class="mb-1 rounded"
+                    style="height: 400px;"
+                  ></div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lokasi_kejadian"
+                    name="lokasi_kejadian"
+                    placeholder="Masukkan lokasi kejadian"
+                    required
+                    readonly
+                  >
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="latitude"
+                    name="latitude"
+                    placeholder="Masukkan lokasi kejadian"
+                    required
+                    readonly
+                    value="{{ $data['laporan']->latitude }}"
+                  >
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="longitude"
+                    name="longitude"
+                    placeholder="Masukkan lokasi kejadian"
+                    required
+                    readonly
+                    value="{{ $data['laporan']->longitude }}"
+                  >
+                </div>
+              </td>
+            </tr>
 
             <thead>
               <tr>
@@ -210,7 +254,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $data['laporan']->jenis_pelanggaran }}</td>
+              >{{ $data['laporan']->pelanggaran->nama_pelanggaran }}</td>
             </tr>
             <tr class="align-middle">
               <th
@@ -220,7 +264,7 @@
               <td
                 class="align-middle text-gray-600"
                 style="border-top: 0"
-              >{{ $data['laporan']->jenis_satwa }}</td>
+              >{{ $data['laporan']->satwa->nama_lokal }}</td>
             </tr>
 
             <thead>
@@ -340,6 +384,7 @@
 @endsection
 
 @push('scripts')
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
     // Fancybox.bind('[data-fancybox="buktiLaporan"]', {});
     // get from url
@@ -399,5 +444,31 @@
         })
       }
     });
+
+    let latitude = $('#latitude').val();
+    let longitude = $('#longitude').val();
+    let map = L.map('map').setView([latitude, longitude], 12);
+    L.marker([latitude, longitude], {
+      draggable: false,
+      autoPan: true
+    }).addTo(map);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    function reverseGeocode(latlng) {
+      const url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          let address = data.display_name;
+          document.getElementById('lokasi_kejadian').value = address;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    reverseGeocode(map.getCenter());
   </script>
 @endpush
