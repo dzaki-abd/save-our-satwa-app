@@ -30,8 +30,7 @@ class PelaporanController extends Controller
     }
 
     public function getDataLaporan($filter) {
-        setlocale(LC_TIME, 'id_ID');
-        $laporan = Pelaporan::where('status', $filter)->get();
+        $laporan = Pelaporan::where('status', $filter)->where('isdelete', false)->get();
 
         return DataTables::of($laporan)
             ->addIndexColumn()
@@ -50,8 +49,7 @@ class PelaporanController extends Controller
                 return $pelanggaran->nama_pelanggaran;
             })
             ->addColumn('jenis_satwa', function ($row) {
-                $satwa = Satwa::find($row->satwa_id);
-                return $satwa->nama_lokal;
+                return $row->satwa_id ? Satwa::find($row->satwa_id)->nama_lokal : $row->satwa_lain;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {
@@ -149,7 +147,9 @@ class PelaporanController extends Controller
         $idLaporan = decrypt($laporan);
 
         $laporan = Pelaporan::where('id', $idLaporan)->first();
-        $laporan->delete();
+        // $laporan->delete();
+        $laporan->isdelete = true;
+        $laporan->save();
 
         return response()->json([
             'status' => 'success',

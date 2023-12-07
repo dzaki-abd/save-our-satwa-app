@@ -18,7 +18,7 @@
 
 @section('content')
     <h3 class="text-center h3-top">LAPORKAN <span>SEKARANG</span></h3>
-    <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <p class="text-center p-top">Laporkan temuan tindakan ilegal terhadap satwa.</p>
 
     <form action="/laporkan/store" method="POST" enctype="multipart/form-data" class="shadow p-4 form-laporkan">
         @csrf
@@ -49,13 +49,18 @@
         <h5 class="mb-3">INFORMASI KEJADIAN</h5>
         <div class="mb-3">
             <label for="waktu_kejadian" class="form-label">Tanggal Kejadian</label>
-            <input type="date" class="form-control" id="waktu_kejadian" name="waktu_kejadian"
+            <input type="datetime-local" class="form-control" id="waktu_kejadian" name="waktu_kejadian"
                 placeholder="Masukkan tanggal kejadian" required>
         </div>
         <div class="mb-5">
             <label for="lokasi_kejadian" class="form-label">Lokasi Kejadian</label>
+            <div id="map" class="mb-1 rounded" style="height: 400px;"></div>
             <input type="text" class="form-control" id="lokasi_kejadian" name="lokasi_kejadian"
-                placeholder="Masukkan lokasi kejadian" required>
+                placeholder="Masukkan lokasi kejadian" required readonly>
+            <input type="hidden" class="form-control" id="latitude" name="latitude"
+                placeholder="Masukkan lokasi kejadian" required readonly>
+            <input type="hidden" class="form-control" id="longitude" name="longitude"
+                placeholder="Masukkan lokasi kejadian" required readonly>
         </div>
 
         <h5 class="mb-3">JENIS PELANGGARAN</h5>
@@ -71,7 +76,7 @@
                 @foreach ($pelanggaran as $p)
                     <option value="{{ $p->id }}">{{ $p->nama_pelanggaran }}</option>
                 @endforeach
-                <option value="Lainnya">Lainnya</option>
+                <option value="0">Lainnya</option>
             </select>
         </div>
         <div class="mb-3">
@@ -86,7 +91,7 @@
                 @foreach ($satwa as $s)
                     <option value="{{ $s->id }}">{{ $s->nama_lokal }}</option>
                 @endforeach
-                <option value="Lainnya">Lainnya</option>
+                <option value="0">Lainnya</option>
             </select>
         </div>
         <div class="mb-5">
@@ -118,8 +123,8 @@
         </p>
         <div class="mb-3">
             <label for="gambar" class="form-label">Foto</label>
-            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200"
-                data-max-file-size="25M" data-allowed-file-extensions="jpg jpeg png" multiple>
+            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200" data-max-file-size="10M"
+                data-allowed-file-extensions="jpg jpeg png">
         </div>
 
         <div class="mb-5">
@@ -170,6 +175,45 @@
 @endsection
 
 @push('scripts')
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        let map = L.map('map').setView([-7.6145, 110.7128], 8);
+        let marker;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        function reverseGeocode(latlng) {
+            const url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let address = data.display_name;
+                    document.getElementById('lokasi_kejadian').value = address;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        map.on('click', function (e) {
+            let latitude = e.latlng.lat;
+            let longitude = e.latlng.lng
+
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker(e.latlng).addTo(map);
+
+            reverseGeocode(e.latlng);
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             // Initialize Dropify

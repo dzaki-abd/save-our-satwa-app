@@ -81,7 +81,7 @@
                 for="check"
               >Ingat saya</label>
             </div>
-            <a href="{{ route('password.request') }}">Lupa Password?</a>
+            <a href="#" id="forgotpassword">Lupa Password?</a>
           </div>
           <button
             type="submit"
@@ -93,3 +93,20 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+<script>
+  // show alert if user click forgot password
+  const forgotpassword = document.querySelector('#forgotpassword');
+  forgotpassword.addEventListener('click', function(e) {
+    e.preventDefault();
+    SweetAlert.fire({
+      icon: 'info',
+      title: 'Lupa Password?',
+      text: 'Mohon maaf fitur ini belum tersedia. Silahkan hubungi admin melalui email untuk reset password anda.',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#0d6efd',
+    });
+  });
+</script>
+@endpush

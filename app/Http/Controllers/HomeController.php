@@ -44,9 +44,9 @@ class HomeController extends Controller
         $disetujuiCount = $pelaporanList->where('status', 'Disetujui')->count();
         $ditolakCount = $pelaporanList->where('status', 'Ditolak')->count();
 
-        $satwaList = Satwa::all();
+        $satwaList = Satwa::take(10)->get();
 
-        $artikelList = Artikel::all();
+        $artikelList = Artikel::take(8)->get();
     
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
@@ -141,18 +141,16 @@ class HomeController extends Controller
             'user_id' => 'required',
         ]);
 
-        if ($request->pelanggaran_id == 'Lainnya') {
+        if ($request->pelanggaran_id == '0') {
             $request->validate([
                 'pelanggaran_lain' => 'required',
             ]);
-            $request->request->add(['pelanggaran_id' => $request->pelanggaran_lain]);
         }
 
-        if ($request->satwa_id == 'Lainnya') {
+        if ($request->satwa_id == '0') {
             $request->validate([
                 'satwa_lain' => 'required',
             ]);
-            $request->request->add(['satwa_id' => $request->satwa_lain]);
         }
 
         if ($request->hasFile('hasil_investigasi')) {
@@ -168,8 +166,12 @@ class HomeController extends Controller
                 'uniqid' => uniqid(),
                 'waktu_kejadian' => $request->waktu_kejadian,
                 'lokasi_kejadian' => $request->lokasi_kejadian,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
                 'pelanggaran_id' => $request->pelanggaran_id,
+                'pelanggaran_lain' => $request->pelanggaran_lain,
                 'satwa_id' => $request->satwa_id,
+                'satwa_lain' => $request->satwa_lain,
                 'deskripsi_kejadian' => $request->deskripsi_kejadian,
                 'tindak_lanjut' => $request->tindak_lanjut,
                 'hasil_investigasi' => $hasil,
@@ -182,8 +184,12 @@ class HomeController extends Controller
                 'uniqid' => uniqid(),
                 'waktu_kejadian' => $request->waktu_kejadian,
                 'lokasi_kejadian' => $request->lokasi_kejadian,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
                 'pelanggaran_id' => $request->pelanggaran_id,
+                'pelanggaran_lain' => $request->pelanggaran_lain,
                 'satwa_id' => $request->satwa_id,
+                'satwa_lain' => $request->satwa_lain,
                 'deskripsi_kejadian' => $request->deskripsi_kejadian,
                 'tindak_lanjut' => $request->tindak_lanjut,
                 'hasil_investigasi' => $request->hasil_investigasi,
@@ -230,13 +236,19 @@ class HomeController extends Controller
 
         return DataTables::of($laporan)
             ->addColumn('pelanggaran_id', function ($row) {
-                return $row->pelanggaran->nama_pelanggaran;
+                if($row->pelanggaran_id == 0)
+                    return $row->pelanggaran_lain;
+                else
+                    return $row->pelanggaran->nama_pelanggaran;
             })
             ->addColumn('tanggal_kejadian', function ($row) {
                 return date('d F Y', strtotime($row->waktu_kejadian));
             })
             ->addColumn('satwa_id', function ($row) {
-                return $row->satwa->nama_lokal;
+                if($row->satwa_id == 0)
+                    return $row->satwa_lain;
+                else
+                    return $row->satwa->nama_lokal;
             })
             ->addColumn('status', function ($row) {
                 if ($row->status == 'Ditolak') {
@@ -285,7 +297,7 @@ class HomeController extends Controller
 
     public function getDataArtikelForUser()
     {
-        $artikelList = Artikel::all();
+        $artikelList = Artikel::latest()->filter(request(['search', 'jenis', 'kata_kunci']))->paginate(14);
 
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
@@ -325,7 +337,7 @@ class HomeController extends Controller
 
     public function getDataSatwaForUser()
     {
-        $satwaList = Satwa::all();
+        $satwaList = Satwa::latest()->filter(request(['search', 'lokasi', 'status', 'tren_populasi']))->paginate(20);
         return view('satwa',  compact('satwaList'));
     }
 
@@ -367,5 +379,34 @@ class HomeController extends Controller
             'Decreasing' => 'Decreasing - Menurun',
             'Increasing' => 'Increasing - Bertambah',
         ];
+    }
+
+    public function getDataPelaporanByIdSatwa($id) {
+        $laporan = Pelaporan::where('satwa_id', $id)
+                        ->where('status', 'Disetujui')
+                        ->get();
+
+        return DataTables::of($laporan)
+            ->addColumn('pelanggaran_id', function ($row) {
+                if($row->pelanggaran_id == 0)
+                    return $row->pelanggaran_lain;
+                else
+                    return $row->pelanggaran->nama_pelanggaran;
+            })
+            ->addColumn('tanggal_kejadian', function ($row) {
+                return date('d F Y', strtotime($row->waktu_kejadian));
+            })
+            ->addColumn('satwa_id', function ($row) {
+                if($row->satwa_id == 0)
+                    return $row->satwa_lain;
+                else
+                    return $row->satwa->nama_lokal;
+            })
+            ->addColumn('status', function ($row) {
+                $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
+                return $badgeStatus;
+            })
+            ->rawColumns(['status'])
+            ->make(true);
     }
 }

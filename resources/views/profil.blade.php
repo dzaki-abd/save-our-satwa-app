@@ -47,7 +47,7 @@
     </div>
 
     <h3 class="text-center h3-top">RIWAYAT <span>LAPORAN</span></h3>
-    <p class="text-center p-top">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <p class="text-center p-top">lihat status riwayat laporan yang telah anda ajukan</p>
 
     <div class="row">
         <!-- Card Laporan Ditinjau -->

@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <!-- PWA  -->
+    <meta name="theme-color" content="#20c997"/>
+    <link rel="apple-touch-icon" href="{{ asset('icon/maskable_icon_x512.png') }}">
+    <link rel="icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
+    <link rel="shortcut icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <title>Save Our Satwa</title>
 
@@ -26,6 +32,9 @@
     <!-- Dropify -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dropify/dist/css/dropify.min.css">
 
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/data-tables.css') }}" />
@@ -43,6 +52,32 @@
     @if (isset($showFooter) && $showFooter)
         @include('layouts.footer')
     @endif
+
+    <div class="container back-to-top fixed-bottom d-flex justify-content-end">
+        <button id="back-to-top" class="button-teal-500 custom-back-to-top" onclick="topFunction()">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script src="{{ asset('js/utils/back-to-top-initiator.js') }}"></script>
+
+    <script src="{{ asset('/sw.js') }}"></script>
+    <script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+        (registration) => {
+            console.log("Service worker registration succeeded:", registration);
+        },
+        (error) => {
+            console.error(`Service worker registration failed: ${error}`);
+        },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
+    </script>
 
     <!-- Fancybox -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
