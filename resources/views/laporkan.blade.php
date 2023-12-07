@@ -54,6 +54,19 @@
         </div>
         <div class="mb-5">
             <label for="lokasi_kejadian" class="form-label">Lokasi Kejadian</label>
+            <div class="text-sm text-white p-1 ps-2 mb-3 rounded d-flex align-items-center information">
+                <i class="fa-solid fa-circle-info"></i>
+                <div class="rounded p-2 d-flex gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-primary-subtle rounded-circle lokasi-anda" style="width: 1rem; height: 1rem"></div>
+                        <p class="mb-0">Lokasi Anda</p>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-danger-subtle rounded-circle lokasi-kejadian" style="width: 1rem; height: 1rem"></div>
+                        <p class="mb-0">Lokasi Kejadian</p>
+                    </div>
+                </div>
+            </div>
             <div id="map" class="mb-1 rounded" style="height: 400px;"></div>
             <input type="text" class="form-control" id="lokasi_kejadian" name="lokasi_kejadian"
                 placeholder="Masukkan lokasi kejadian" required readonly>
@@ -184,15 +197,51 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         let map = L.map('map').setView([-7.6145, 110.7128], 8);
-        let marker;
-
+        let userMarker; 
+        let clickMarkers = L.layerGroup();
+    
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-
+    
+        // Fungsi untuk mendapatkan lokasi pengguna
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showUserPosition, errorHandler);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    
+        // Fungsi yang dipanggil saat lokasi pengguna berhasil didapatkan
+        function showUserPosition(position) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+    
+            document.getElementById('latitude').value = latitude;
+            document.getElementById('longitude').value = longitude;
+    
+            // Hapus marker pengguna jika sudah ada
+            if (userMarker) {
+                map.removeLayer(userMarker);
+            }
+    
+            // Tambahkan marker ke lokasi pengguna
+            userMarker = L.circleMarker([latitude, longitude], { radius: 10, color: 'blue' }).addTo(map);
+    
+            // Reverse geocode untuk mendapatkan alamat
+            reverseGeocode({ lat: latitude, lng: longitude });
+        }
+    
+        // Fungsi yang dipanggil saat terjadi kesalahan mendapatkan lokasi
+        function errorHandler(error) {
+            console.error('Error getting location:', error.message);
+        }
+    
+        // Fungsi reverse geocode untuk mendapatkan alamat berdasarkan koordinat
         function reverseGeocode(latlng) {
             const url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latlng.lat + '&lon=' + latlng.lng;
-
+    
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -201,24 +250,32 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-
+    
+        // Panggil fungsi getLocation saat halaman dimuat
+        getLocation();
+    
+        // Tambahkan event listener untuk mendapatkan lokasi saat klik peta
         map.on('click', function (e) {
             let latitude = e.latlng.lat;
-            let longitude = e.latlng.lng
-
+            let longitude = e.latlng.lng;
+    
             document.getElementById('latitude').value = latitude;
             document.getElementById('longitude').value = longitude;
-
-            if (marker) {
-                map.removeLayer(marker);
-            }
-
-            marker = L.marker(e.latlng).addTo(map);
-
+    
+            // Hapus semua marker klik sebelumnya
+            clickMarkers.clearLayers();
+    
+            // Tambahkan marker ke lokasi yang diklik pengguna
+            let clickMarker = L.circleMarker([latitude, longitude], { radius: 10, color: 'red' }).addTo(clickMarkers);
+    
+            // Reverse geocode untuk mendapatkan alamat saat klik peta
             reverseGeocode(e.latlng);
         });
+    
+        // Tambahkan clickMarkers ke peta
+        clickMarkers.addTo(map);
     </script>
-
+    
     <script>
         $(document).ready(function() {
             // Initialize Dropify

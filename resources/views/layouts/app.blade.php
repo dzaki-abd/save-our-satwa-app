@@ -5,14 +5,10 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="Aplicaton for protect animals" />
+    <meta name="author" content="Save Our Satwa" />
     <!-- PWA  -->
-    <meta name="theme-color" content="#20c997"/>
-    <link rel="apple-touch-icon" href="{{ asset('icon/maskable_icon_x512.png') }}">
-    <link rel="icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
-    <link rel="shortcut icon" href="icon/maskable_icon_x512.png" type="image/x-icon">
-    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+    @laravelPWA
 
     <title>Save Our Satwa</title>
 
@@ -60,24 +56,6 @@
     </div>
 
     <script src="{{ asset('js/utils/back-to-top-initiator.js') }}"></script>
-
-    <script src="{{ asset('/sw.js') }}"></script>
-    <script>
-    if ("serviceWorker" in navigator) {
-        // Register a service worker hosted at the root of the
-        // site using the default scope.
-        navigator.serviceWorker.register("/sw.js").then(
-        (registration) => {
-            console.log("Service worker registration succeeded:", registration);
-        },
-        (error) => {
-            console.error(`Service worker registration failed: ${error}`);
-        },
-        );
-    } else {
-        console.error("Service workers are not supported.");
-    }
-    </script>
 
     <!-- Fancybox -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
