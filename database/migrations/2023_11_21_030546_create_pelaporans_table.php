@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('latitude')->nullable();
             $table->string('jenis_pelanggaran');
             $table->string('jenis_satwa');
+            $table->integer('jumlah_satwa')->default(1);
             $table->text('deskripsi_kejadian');
             $table->string('tindak_lanjut')->nullable();
             $table->string('hasil_investigasi')->nullable();
