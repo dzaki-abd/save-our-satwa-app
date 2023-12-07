@@ -21,9 +21,9 @@ class PelaporanController extends Controller
     {
         $laporan = Pelaporan::all();
         $countLaporan = [
-            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
-            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
-            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('isdelete', false)->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->where('isdelete', false)->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->where('isdelete', false)->count(),
         ];
 
         return view('dashboard.laporan.index', compact('countLaporan'));
@@ -108,7 +108,7 @@ class PelaporanController extends Controller
             'buktiKejadian' => $buktiKejadian,
         ];
 
-        // return $buktiKejadian;
+        // return $data;
 
         return view('dashboard.laporan.show', compact('data'));
     }
@@ -131,6 +131,12 @@ class PelaporanController extends Controller
         $laporan = Pelaporan::where('id', $idLaporan)->first();
         $laporan->status = $request->status;
         $laporan->save();
+
+        if ($request->status == 'Disetujui') {
+            $satwa = Satwa::find($laporan->satwa_id);
+            $satwa->populasi = $satwa->populasi - 1;
+            $satwa->save();
+        }
 
         return response()->json([
             'status' => 'success',
