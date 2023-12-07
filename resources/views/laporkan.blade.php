@@ -94,10 +94,15 @@
                 <option value="0">Lainnya</option>
             </select>
         </div>
-        <div class="mb-5">
+        <div class="mb-3">
             <label for="satwa_lain" class="form-label">Jenis Satwa Lainnya (Opsional)</label>
             <input type="text" class="form-control" id="satwa_lain" name="satwa_lain"
                 placeholder="Masukkan jenis satwa lainya">
+        </div>
+        <div class="mb-5">
+            <label for="jumlah_satwa" class="form-label">Jumlah Satwa</label>
+            <input type="number" class="form-control" id="jumlah_satwa" name="jumlah_satwa"
+                placeholder="Masukkan jumlah satwa" required>
         </div>
 
         <h5 class="mb-3">DESKRIPSI KEJADIAN</h5>
