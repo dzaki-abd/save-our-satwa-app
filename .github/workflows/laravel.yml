@@ -3,7 +3,7 @@ name: Laravel CI
 on:
   push:
     branches:
-      - main
+      - alif
 
 jobs:
   laravel-tests:
