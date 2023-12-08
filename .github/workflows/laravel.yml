@@ -4,7 +4,7 @@ name: Laravel CI/CD
 on:
   push:
     branches:
-      - main # Change this to your default branch
+      - alif # Change this to your default branch
 
 jobs:
   laravel:
