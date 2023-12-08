@@ -35,7 +35,12 @@ jobs:
         run: php artisan key:generate
 
       - name: Show MySQL info
-        run: php artisan migrate:status
+        run: |
+          echo "MySQL Service Information:"
+          echo "Host: ${{ job.services.mysql.host }}"
+          echo "Port: ${{ job.services.mysql.port }}"
+          echo "Database: ${{ job.services.mysql.MYSQL_DATABASE }}"
+          echo "Username: ${{ job.services.mysql.MYSQL_USER }}"
 
       - name: Run database migrations
         run: php artisan migrate --force
