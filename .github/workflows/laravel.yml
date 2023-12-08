@@ -34,6 +34,9 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate
 
+      - name: Show MySQL info
+        run: php artisan migrate:status
+
       - name: Run database migrations
         run: php artisan migrate --force
 
