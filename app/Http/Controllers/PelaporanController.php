@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Satwa;
 use App\Models\Pelaporan;
+use App\Mail\UpdateLaporan;
 use App\Models\Pelanggaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\StorePelaporanRequest;
 use App\Http\Requests\UpdatePelaporanRequest;
-use Carbon\Carbon;
 
 class PelaporanController extends Controller
 {
@@ -138,6 +140,8 @@ class PelaporanController extends Controller
             $satwa->populasi = $satwa->populasi - $laporan->jumlah_satwa;
             $satwa->save();
         }
+
+        Mail::to($laporan->user->email)->send(new UpdateLaporan($laporan));
 
         return response()->json([
             'status' => 'success',

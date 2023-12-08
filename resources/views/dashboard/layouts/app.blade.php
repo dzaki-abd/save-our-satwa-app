@@ -13,40 +13,17 @@
   />
   <meta
     name="description"
-    content=""
+    content="Aplicaton for protect animals"
   />
   <meta
     name="author"
-    content=""
+    content="Save Our Satwa"
   />
   <meta
     name="csrf-token"
     content="{{ csrf_token() }}"
   >
-
-  <!-- PWA  -->
-  <meta
-    name="theme-color"
-    content="#20c997"
-  />
-  <link
-    rel="apple-touch-icon"
-    href="{{ asset('icon/maskable_icon_x512.png') }}"
-  >
-  <link
-    rel="icon"
-    href="{{ asset('icon/maskable_icon_x512.png') }}"
-    type="image/x-icon"
-  >
-  <link
-    rel="shortcut icon"
-    href="{{ asset('icon/maskable_icon_x512.png') }}"
-    type="image/x-icon"
-  >
-  <link
-    rel="manifest"
-    href="{{ asset('/manifest.json') }}"
-  >
+  @laravelPWA
 
   <title>Admin - Dashboard</title>
 
