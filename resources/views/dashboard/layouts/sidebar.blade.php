@@ -40,7 +40,7 @@
       </a>
     </li>
   @endif
-  <li class="nav-item {{ Request::url() == url('/dashboard/laporan') ? 'active' : '' }}">
+  <li class="nav-item @if (request()->routeIs('dashboard.laporan.*')) active @endif">
     <a
       href="/dashboard/laporan"
       class="nav-link"
@@ -103,6 +103,9 @@
   <hr class="sidebar-divider d-none d-md-block" />
 
   <div class="text-center d-none d-md-inline">
-     <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    <button
+      class="rounded-circle border-0"
+      id="sidebarToggle"
+    ></button>
   </div>
 </ul>

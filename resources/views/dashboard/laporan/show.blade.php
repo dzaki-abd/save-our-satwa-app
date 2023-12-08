@@ -266,6 +266,16 @@
                 style="border-top: 0"
               >{{ $data['laporan']->satwa->nama_lokal }}</td>
             </tr>
+            <tr class="align-middle">
+              <th
+                class="pl-0"
+                style="border-top: 0; max-width: 10rem;"
+              >Jumlah Satwa</th>
+              <td
+                class="align-middle text-gray-600"
+                style="border-top: 0"
+              >{{ $data['laporan']->jumlah_satwa }} ekor</td>
+            </tr>
 
             <thead>
               <tr>
@@ -390,16 +400,72 @@
     // get from url
     const idLaporan = window.location.pathname.split('/')[3];
 
-    $('#btn-ubah-status').click(function() {
-      // console.log(idLaporan);
-      let status = $('#status').val();
+    function updateStatus(status, jumlahSatwa = null) {
       let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
+      $.ajax({
+        url: urlUpdate,
+        method: 'PUT',
+        data: {
+          _token: '{{ csrf_token() }}',
+          status: status,
+          jumlahSatwa: jumlahSatwa
+        },
+        success: function(response) {
+          if (response.status == 'success') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Berhasil',
+              text: 'Status laporan berhasil diubah!',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.reload();
+              }
+            })
+          }
+        },
+        error: function(response) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Terjadi kesalahan!',
+          })
+        }
+      })
+    }
+
+    $('#btn-ubah-status').click(function() {
+      let status = $('#status').val();
+      const inputValue = "{{ $data['laporan']->jumlah_satwa }}";
       if (status == 'null') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Anda belum memilih status!',
         })
+      } else if (status == 'Disetujui') {
+        (async () => {
+          const {
+            value: jumlahSatwa
+          } = await Swal.fire({
+            title: "Anda akan menyetujui laporan ini!",
+            input: "text",
+            inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
+            confirmButtonColor: '#1cc88a',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal',
+            showCancelButton: true,
+            inputValue,
+            inputValidator: (value) => {
+              if (!value) {
+                return "Jumlah satwa wajib dimasukan!";
+              }
+            }
+          });
+          if (jumlahSatwa) {
+            updateStatus(status, jumlahSatwa);
+          }
+        })();
       } else {
         Swal.fire({
           title: 'Apakah Anda yakin?',
@@ -412,34 +478,7 @@
           cancelButtonText: 'Batal'
         }).then((result) => {
           if (result.isConfirmed) {
-            $.ajax({
-              url: urlUpdate,
-              method: 'PUT',
-              data: {
-                _token: '{{ csrf_token() }}',
-                status: status
-              },
-              success: function(response) {
-                if (response.status == 'success') {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Status laporan berhasil diubah!',
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      window.location.reload();
-                    }
-                  })
-                }
-              },
-              error: function(response) {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Terjadi kesalahan!',
-                })
-              }
-            })
+            updateStatus(status, inputValue);
           }
         })
       }
