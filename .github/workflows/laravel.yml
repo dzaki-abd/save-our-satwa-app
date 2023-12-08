@@ -39,11 +39,6 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate
 
-      - name: Set application key
-        run: |
-          key=$(php artisan key:generate --show)
-          sed -i "s/APP_KEY=.*/APP_KEY=$key/" .env
-
       - name: Run database migrations
         run: php artisan migrate --force
 
