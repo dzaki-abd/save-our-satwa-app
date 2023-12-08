@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Satwa;
+use App\Models\Pelanggaran;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Str;
 
 class SatwaController extends Controller
 {
@@ -229,11 +233,12 @@ class SatwaController extends Controller
                 return $row->lokasi;
             })
             ->addColumn('action', function ($row) {
+                $pelaporanSatwaUrl = route('dashboard.satwa.pelaporan-satwa', $row->id);
                 $actionBtn = '
                     <div class="btn-group" role="group" aria-label="Action">
                         <button type="button" class="btn btn-primary btn-md btn-icon" onclick="editSatwa(' . $row->id . ')" title="Detail / Edit"><i class="fa-solid fa-eye"></i></button>
                         <button type="button" class="btn btn-danger btn-md btn-icon" onclick="destroySatwa(' . $row->id . ')" title="Hapus"><i class="fa-solid fa-trash"></i></button>
-                        <button type="button" class="btn btn-info btn-md btn-icon" onclick="destroySatwa(' . $row->id . ')" title="Daftar Pelaporan Satwa"><i class="fa-solid fa-table-list"></i></button>
+                        <a href="' . $pelaporanSatwaUrl . '" type="button" class="btn btn-info btn-md btn-icon" title="Daftar Pelaporan Satwa"><i class="fa-solid fa-table-list"></i></a>
                     </div>
                             ';
                 return $actionBtn;
@@ -272,5 +277,60 @@ class SatwaController extends Controller
             // Menangani kasus jika request tidak berhasil
             return response()->json(['error' => 'Gagal mengambil data dari API'], 500);
         }
+    }
+
+    public function pelaporanSatwa($satwa) {
+        $satwa = DB::table('satwas')
+            ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
+            ->where('satwas.id', $satwa)
+            ->get();
+        // $satwa = $satwa->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')->get();
+        // return $satwa;
+
+        if (request()->ajax()) {
+            return DataTables::of($satwa)
+            ->addIndexColumn()
+            ->addColumn('nama_pelapor', function ($row) {
+                $user = User::find($row->user_id);
+                return $user->name;
+            })
+            ->addColumn('tanggal_kejadian', function ($row) {
+                return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
+            })
+            ->addColumn('jenis_pelanggaran', function ($row) {
+                $pelanggaran = Pelanggaran::find($row->pelanggaran_id);
+                return $pelanggaran->nama_pelanggaran;
+            })
+            ->addColumn('jenis_satwa', function ($row) {
+                return $row->satwa_id ? Satwa::find($row->satwa_id)->nama_lokal : $row->satwa_lain;
+            })
+            ->addColumn('jumlah_satwa', function ($row) {
+                return $row->jumlah_satwa;
+            })
+            ->addColumn('status', function ($row) {
+                if ($row->status == 'Ditolak') {
+                    $badgeStatus = '<span class="badge text-bg-danger text-white">' . $row->status . '</span>';
+                } elseif ($row->status == 'Ditinjau') {
+                    $badgeStatus = '<span class="badge text-bg-warning text-white">' . $row->status . '</span>';
+                } else {
+                    $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
+                }
+                return $badgeStatus;
+            })
+            ->addColumn('action', function ($row) {
+                $encId = encrypt($row->id);
+                $show = route('dashboard.laporan.show', $encId);
+                $actionBtn = '
+                    <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
+                        <a type="button" target="_blank" class="btn btn-primary btn-md btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
+                    </div>
+                ';
+                return $actionBtn;
+            })
+            ->rawColumns(['status', 'action'])
+            ->make(true);
+        }
+
+        return view('dashboard.satwa.laporan', compact('satwa'));
     }
 }
