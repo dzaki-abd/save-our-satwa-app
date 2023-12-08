@@ -14,10 +14,9 @@ jobs:
       mysql:
         image: mysql:8.0 # Change to the MySQL version you are using
         env:
-          MYSQL_ROOT_PASSWORD: ""
           MYSQL_DATABASE: "save-satwa"
           MYSQL_USER: "root"
-          MYSQL_PASSWORD: "" # Set your MySQL password
+          MYSQL_PASSWORD:  # Set your MySQL password
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
