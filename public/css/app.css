@@ -942,7 +942,8 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 }
 
 .form-laporkan p {
-  background-color: var(--teal-500);
+  font-size: 1rem;
+  /* background-color: var(--teal-500); */
 }
 
 .form-laporkan .information {
