@@ -151,7 +151,7 @@ body {
 
 .navbar {
   position: fixed;
-  z-index: 9999999;
+  z-index: 999;
   width: 100vw;
   background-color: transparent;
   backdrop-filter: blur(20px);
@@ -276,7 +276,6 @@ body {
 /* ========== JUMBOTRON ========== */
 
 .jumbotron {
-  background-image: url('../img/jumbotron.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -307,7 +306,6 @@ body {
 /* ========== JUMBOTRON 2 ========== */
 
 .jumbotron-2 {
-  background-image: url('../img/jumbotron-2.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -423,13 +421,12 @@ body {
   font-size: 1rem !important;
   font-weight: 700;
   color: white;
-  backdrop-filter: blur(20px);
+  background-color: var(--teal-500);
   padding: 0.5rem;
   border-radius: 0.3rem;
 }
 
 .tentangkami-container {
-  background-image: url('../img/donasi.jpg');
   background-position: center;
   background-size: cover;
   margin: 70px 0;
@@ -474,7 +471,6 @@ body {
 
 .donasi-container {
   padding: 70px 0;
-  background-image: url('../img/jumbotron-2.jpg');
   background-position: center;
   background-size: cover;
 }
@@ -551,7 +547,6 @@ body {
 }
 
 .donasi-content {
-  background-image: url('../img/donasi.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -711,8 +706,10 @@ body {
 }
 
 .detail-poster .poster-box {
-  width: 18rem;
-  height: 25rem;
+  /* width: 18rem; */
+  max-width: 25rem;
+  height: fit-content;
+  /* height: 25rem; */
   position: relative;
 }
 
@@ -861,6 +858,7 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
 .artikel-poster{
   padding: 0.4rem;
+  height: 15.4rem;
 }
 
 .artikel-poster img {
@@ -914,7 +912,7 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 
 .detail-artikel-container img {
   width: 100%;
-  height: 25rem;
+  height: fit-content;
   object-fit: cover;
 }
 
@@ -933,6 +931,16 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
 .detail-artikel-sidebar h6 {
   color: var(--teal-500);
 }
+
+/* .favorite-button-artikel-box {
+  position: relative;
+}
+
+.favorite-button-artikel {
+  position: absolute; 
+  top: -180px; 
+  right: 10px;
+} */
 
 /* ========== LAPORKAN ========== */
 
@@ -1232,6 +1240,13 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .detail-artikel-container img {
     height: 15rem;
   }
+
+  /* .favorite-button-artikel {
+    position: absolute; 
+    top: -100px; 
+    right: 10px;
+    z-index: 10;
+  } */
 
   /* ========== HOME ========== */
 

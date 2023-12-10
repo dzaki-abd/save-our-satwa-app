@@ -46,8 +46,10 @@ class HomeController extends Controller
 
         $satwaList = Satwa::take(10)->get();
 
-        $artikelList = Artikel::take(8)->get();
-    
+        $artikelList = Artikel::where('di_posting', 'Ya')
+            ->take(8)
+            ->get();
+
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
 
@@ -81,7 +83,7 @@ class HomeController extends Controller
             'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', $user->id)->count(),
             'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', $user->id)->count(),
         ];
-        return view('profil', compact('countLaporan','user'));
+        return view('profil', compact('countLaporan', 'user'));
     }
 
     public function ubahProfile()
@@ -101,7 +103,7 @@ class HomeController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        if($request->hasFile('foto')){
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $foto = 'foto/' . time() . '.' . $file->extension();
             $file->move(public_path('storage/foto/'), $foto);
@@ -117,7 +119,7 @@ class HomeController extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        
+
 
         return redirect()->back()
             ->with('success', 'Profil berhasil diubah.');
@@ -235,11 +237,11 @@ class HomeController extends Controller
 
     public function getDataPelaporan($filters)
     {
-        $laporan = Pelaporan::where('status',$filters)->where('user_id', Auth()->user()->id)->get();
+        $laporan = Pelaporan::where('status', $filters)->where('user_id', Auth()->user()->id)->get();
 
         return DataTables::of($laporan)
             ->addColumn('pelanggaran_id', function ($row) {
-                if($row->pelanggaran_id == 0)
+                if ($row->pelanggaran_id == 0)
                     return $row->pelanggaran_lain;
                 else
                     return $row->pelanggaran->nama_pelanggaran;
@@ -248,7 +250,7 @@ class HomeController extends Controller
                 return date('d F Y', strtotime($row->waktu_kejadian));
             })
             ->addColumn('satwa_id', function ($row) {
-                if($row->satwa_id == 0)
+                if ($row->satwa_id == 0)
                     return $row->satwa_lain;
                 else
                     return $row->satwa->nama_lokal;
@@ -298,9 +300,20 @@ class HomeController extends Controller
         }
     }
 
+    public function favoritData() 
+    {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+
+        return view('favorit', compact('user_id'));
+    }
+
     public function getDataArtikelForUser()
     {
-        $artikelList = Artikel::latest()->filter(request(['search', 'jenis', 'kata_kunci']))->paginate(14);
+        $artikelList = Artikel::latest()
+            ->where('di_posting', 'Ya')
+            ->filter(request(['search', 'jenis', 'kata_kunci']))
+            ->paginate(14);
 
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
@@ -321,6 +334,9 @@ class HomeController extends Controller
 
     public function getDataArtikelForUserById($id)
     {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+
         $artikel = Artikel::find($id);
 
         $dom = new DOMDocument();
@@ -335,7 +351,7 @@ class HomeController extends Controller
             $deskripsi = $firstParagraph->nodeValue;
         }
 
-        return view('detail-artikel', compact('artikel', 'deskripsi'));
+        return view('detail-artikel', compact('artikel', 'deskripsi', 'user_id'));
     }
 
     public function getDataSatwaForUser()
@@ -346,10 +362,15 @@ class HomeController extends Controller
 
     public function getDataSatwaForUserById($id)
     {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+        
         $satwa = Satwa::find($id);
+
         $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
         $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
-        return view('detail-satwa', compact('satwa'));
+
+        return view('detail-satwa', compact('satwa', 'user_id'));
     }
 
     private function convertIUCN($originalValue, $isCategory = true)
@@ -384,15 +405,16 @@ class HomeController extends Controller
         ];
     }
 
-    public function getDataPelaporanByIdSatwa($id) {
+    public function getDataPelaporanByIdSatwa($id)
+    {
         $laporan = Pelaporan::where('satwa_id', $id)
-                        ->where('status', 'Disetujui')
-                        ->where('isdelete', false)
-                        ->get();
+            ->where('status', 'Disetujui')
+            ->where('isdelete', false)
+            ->get();
 
         return DataTables::of($laporan)
             ->addColumn('pelanggaran_id', function ($row) {
-                if($row->pelanggaran_id == 0)
+                if ($row->pelanggaran_id == 0)
                     return $row->pelanggaran_lain;
                 else
                     return $row->pelanggaran->nama_pelanggaran;

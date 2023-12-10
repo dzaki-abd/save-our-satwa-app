@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => false])
 
 @section('jumbotron')
-  <div class="jumbotron h-100">
+  <div class="jumbotron h-100" style="background-image: url('{{ asset('img/jumbotron.jpg') }}')">
     <div class="container login-container d-flex justify-content-center align-items-center">
       <div class="login-box p-3 rounded" style="width: 20rem">
         <h4 class="text-white text-center mb-4">MASUK</h4>

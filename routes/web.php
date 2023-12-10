@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
+use App\Http\Controllers\FavoritSatwaController;
 use App\Models\Artikel;
 
 /*
@@ -76,8 +77,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/detail-artikel/{id}', [HomeController::class, 'getDataArtikelForUserById'])->name('detail-artikel');
 
-    Route::get('/favorit', function() { return view ('favorit'); });
-
     Route::group(['middleware' => ['auth']], function () {
         
         Route::get('/laporkan', [HomeController::class, 'indexLaporkan'])->name('laporkan');
@@ -87,6 +86,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/profil', [HomeController::class, 'profile'])->name('profile');
         Route::get('/get-riwayat/{filters}', [HomeController::class, 'getDataPelaporan'])->name('get-riwayat');
         Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
+
+        Route::get('/favorit', [HomeController::class, 'favoritData']);
 
         Route::get('/ubah-profil', [HomeController::class, 'ubahProfile'])->name('ubah-profile');
         Route::put('/update-profil/{id}', [HomeController::class, 'updateProfile'])->name('update-profile');

@@ -30,9 +30,12 @@
                 class="rounded"
               />
             </a>
-            <div id="favorite-button">
+            @if ($user_id)
+                <div id="favorite-button">
 
-            </div>
+                </div>
+            @endif
+  
           </div>
         </div>
         <div class="detail-content d-flex flex-column justify-content-center gap-3">
@@ -154,16 +157,17 @@
       </table>
     </div>
   </div>
+
 @endsection
 
 @push('scripts')
   <script type="module">
     import LikeButtonInitiator from '{{ asset('js/utils/like-button-satwa-initiator.js') }}';
-
     LikeButtonInitiator.init({
       likeButtonContainer: document.getElementById('favorite-button'),
       satwa: {
         id: {{ $satwa->id }},
+        user_id: {{ $user_id }},
         name: '{{ $satwa->nama_lokal }}',
         description: '{{ $satwa->deskripsi }}',
         image: '{{ $satwa->gambar }}'

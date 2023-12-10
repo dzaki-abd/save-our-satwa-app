@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-<div class="jumbotron-2">
+<div class="jumbotron-2" style="background-image: url('{{ asset('img/jumbotron-2.jpg') }}')">
   <div class="container jumbotron-container-2">
     <div class="d-flex flex-column justify-content-center align-items-start gap-1 h-100 jumbotron-content-2">
       <h2 class="text-white">DONASI</h2>
@@ -21,7 +21,7 @@
 <p class="text-center p-top">Berkontribusi untuk Perlindungan Satwa</p>
 <div class="row gap-4 gap-lg-0">
   <div class="col-12 col-lg-5">
-    <div class="donasi-content rounded p-3 p-lg-4 shadow">
+    <div class="donasi-content rounded p-3 p-lg-4 shadow" style="background-image: url('{{ asset('img/donasi.jpg') }}')">
       <div class="donasi-jumlah rounded p-3">
         <h5 class="text-white mb-1">Jumlah Donasi (via Bank BRI)</h5>
         <p class="text-white mb-3" style="font-size: 0.9rem">hingga {{ getFullDateID() }}</p>
