@@ -16,7 +16,7 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column gap-3">
               <h5 class="card-title">Navigasi</h5>
-              <a href="/home" class="nav-link">Home</a>
+              <a href="/" class="nav-link">Home</a>
               <a href="/satwa" class="nav-link">Satwa</a>
               <a href="/artikel" class="nav-link">Artikel</a>
               <a href="/favorit" class="nav-link">Favorit</a>
