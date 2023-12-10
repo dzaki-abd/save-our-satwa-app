@@ -318,13 +318,16 @@
                     {{-- data-caption="Gallery B #2" --}}
                   >
                     <img
-                      src="{{ asset('storage/bukti_kejadian/' . $bukti->bukti_kejadian) }}"
+                      src="{{ asset('storage/' . $bukti->bukti_kejadian) }}"
                       alt=""
                       class="rounded mb-1"
                       style="height: 200px"
                     >
                   </a>
                 @endforeach
+                @if ($data['buktiKejadian']->isEmpty())
+                  <p class="text-gray-600">Tidak ada</p>
+                @endif
               </td>
             </tr>
 
@@ -363,8 +366,9 @@
                 style="border-top: 0;"
               >
                 <a
-                  href="../../../pdf/brosurIL.pdf"
+                  href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
                   class="btn btn-success"
+                  target="_blank"
                 >Download pdf</a>
               </td>
             </tr>
