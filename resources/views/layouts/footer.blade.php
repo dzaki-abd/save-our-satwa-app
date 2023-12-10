@@ -32,10 +32,6 @@
             <a href="/profil" class="nav-link">Profil</a>
             <a href="/login" class="nav-link">Masuk</a>
             <a href="/register" class="nav-link">Daftar</a>
-            <button class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</button>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-            </form>
           </div>
         </div>
     </div>
@@ -53,9 +49,8 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column  gap-3">
               <h5 class="card-title">Alamat</h5>
-              <p class="card-text m-0" class="nav-link">Pondok Indah</p>
-              <p class="card-text m-0" class="nav-link">Jakarta</p>
-              <p class="card-text m-0" class="nav-link">Indonesia</p>
+              <p class="card-text m-0" class="nav-link">Ciputra, Bandung</p>
+              <p class="card-text m-0" class="nav-link">Rungkut, Surabaya</p>
           </div>
         </div>
       </div>
