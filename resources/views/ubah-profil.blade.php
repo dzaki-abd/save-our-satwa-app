@@ -56,12 +56,22 @@
             <div class="mb-3 profil-input">
                 <label for="email" class="form-label text-white">Email</label>
                 <input type="text" class="form-control" id="email" name="email"
-                    placeholder="Masukkan nama lengkap anda" required value="{{ $user->email }}">
+                    placeholder="Masukkan email anda" required value="{{ $user->email }}">
             </div>
             <div class="mb-3 profil-input">
                 <label for="no_hp" class="form-label text-white">No. Telepon</label>
                 <input type="text" class="form-control" id="no_hp" name="no_hp"
-                    placeholder="Masukkan nama lengkap anda" required value="{{ $user->no_hp }}">
+                    placeholder="Masukkan no telepon anda" required value="{{ $user->no_hp }}">
+            </div>
+            <div class="mb-3 profil-input">
+                <label for="password" class="form-label text-white">Ganti Password Baru</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    placeholder="Masukkan password baru">
+            </div>
+            <div class="mb-3 profil-input">
+                <label for="konfirmasi_password" class="form-label text-white">Konfirmasi Password Baru</label>
+                <input type="password" class="form-control" id="konfirmasi_password" name="konfirmasi_password"
+                    placeholder="Konfirmasi password baru">
             </div>
             <button type="submit" class="button-teal-500 button-teal-500-custom">Simpan Perubahan</button>
         </form>
