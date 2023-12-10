@@ -13,7 +13,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Detail Artikel</li>
               </ol>
             </nav>
-            <div id="favorite-button" class="mt-3">
+            <div id="favorite-button" class="favorite-button-artikel mt-3">
 
             </div>
           </div>
@@ -25,7 +25,7 @@
 
 @section('content')
   <div class="container shadow rounded detail-artikel-container p-2 p-md-3">
-    <a href="{{ asset('storage/' . $artikel->gambar) }}" data-fancybox>
+    <a href="{{ asset('storage/' . $artikel->gambar) }}" data-fancybox class="favorite-button-artikel-box">
       <img src="{{ asset('storage/' . $artikel->gambar) }}" class="rounded" alt="">
     </a>
 
@@ -65,6 +65,7 @@
         likeButtonContainer: document.getElementById('favorite-button'),
         artikel: {
           id: {{ $artikel->id }},
+          user_id: {{ $user_id }},
           title: '{{ $artikel->judul }}',
           description: '{{ $deskripsi }}',
           image: '{{ $artikel->gambar }}',
@@ -82,7 +83,4 @@
         figure.classList.add("table-responsive");
       }
     </script>
-@endpush
-
-@push('scripts')
 @endpush

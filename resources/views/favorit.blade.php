@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-    <div class="jumbotron-2 jumbotron-search-2">
+    <div class="jumbotron-2 jumbotron-search-2" style="background-image: url('{{ asset('img/jumbotron-2.jpg') }}')">
         <div class="container jumbotron-container-2">
             <div
                 class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-start align-items-md-center h-100 jumbotron-content-2 gap-3">
@@ -59,7 +59,7 @@
       import SatwaIdb from '{{ asset('js/data/satwa-idb.js') }}';
       import ArtikelIdb from '{{ asset('js/data/artikel-idb.js') }}';
 
-      const satwas = await SatwaIdb.getAllSatwas();
+      const satwas = await SatwaIdb.getAllDataByUserId({{ $user_id }});
       const satwaContainer = document.querySelector('.favorite-satwa-container');
       const notFoundContainerSatwa = document.querySelector('.not-found-container-satwa');
       const imgBaseUrlSatwa = '{{ asset('storage/') }}';
@@ -85,7 +85,7 @@
       }
 
 
-      const artikels = await ArtikelIdb.getAllArtikels();
+      const artikels = await ArtikelIdb.getAllDataByUserId({{ $user_id }});
       const artikelContainer = document.querySelector('.favorite-artikel-container');
       const notFoundContainerArtikel = document.querySelector('.not-found-container-artikel');
       const imgBaseUrlArtikel = '{{ asset('storage/') }}';

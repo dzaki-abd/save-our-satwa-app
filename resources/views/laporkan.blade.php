@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-    <div class="jumbotron-2">
+    <div class="jumbotron-2" style="background-image: url('{{ asset('img/jumbotron-2.jpg') }}')">
         <div class="container jumbotron-container-2">
             <div class="d-flex flex-column justify-content-center align-items-start gap-1 h-100 jumbotron-content-2">
                 <h2 class="text-white">LAPORKAN</h2>
@@ -142,7 +142,7 @@
         <div class="mb-3">
             <label for="gambar" class="form-label">Foto</label>
             <input type="file" id="gambar" name="gambar[]" class="dropify form-control" data-height="200" data-max-file-size="10M"
-                data-allowed-file-extensions="jpg jpeg png">
+                data-allowed-file-extensions="jpg jpeg png" multiple> 
         </div>
 
         <div class="mb-5">
@@ -282,48 +282,48 @@
             $('.dropify').dropify();
 
             // You can also add event listeners or customize options here
-            $('.dropify').on('dropify.beforeClear', function(event, element) {
-                return confirm("Apakah Anda yakin ingin menghapus \"" + element.file.name + "\" ?");
-            });
+            // $('.dropify').on('dropify.beforeClear', function(event, element) {
+            //     return confirm("Apakah Anda yakin ingin menghapus \"" + element.file.name + "\" ?");
+            // });
 
-            $('.dropify').on('dropify.afterClear', function(event, element) {
-                Swal.fire({
-                    title: 'Berhasil',
-                    text: 'Foto berhasil dihapus.',
-                    icon: 'success',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                });
-            });
+            // $('.dropify').on('dropify.afterClear', function(event, element) {
+            //     Swal.fire({
+            //         title: 'Berhasil',
+            //         text: 'Foto berhasil dihapus.',
+            //         icon: 'success',
+            //         timer: 3000,
+            //         timerProgressBar: true,
+            //         showConfirmButton: false
+            //     });
+            // });
 
-            $('.dropify').on('dropify.errors', function(event, element) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Tipe file tidak valid. Hanya file JPG, JPEG, dan PNG yang diperbolehkan.',
-                    icon: 'error',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                });
-            });
+            // $('.dropify').on('dropify.errors', function(event, element) {
+            //     Swal.fire({
+            //         title: 'Error',
+            //         text: 'Tipe file tidak valid. Hanya file JPG, JPEG, dan PNG yang diperbolehkan.',
+            //         icon: 'error',
+            //         timer: 3000,
+            //         timerProgressBar: true,
+            //         showConfirmButton: false
+            //     });
+            // });
 
-            $('.dropify').on('dropify.fileReady', function(event, element) {
-                let fileSize = element.file.size; // in bytes
-                let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+            // $('.dropify').on('dropify.fileReady', function(event, element) {
+            //     let fileSize = element.file.size; // in bytes
+            //     let maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
 
-                if (fileSize > maxSizeInBytes) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'Ukuran file terlalu besar. Maksimal 10 MB.',
-                        icon: 'error',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        showConfirmButton: false
-                    });
-                    $('.dropify').dropify('clear');
-                }
-            });
+            //     if (fileSize > maxSizeInBytes) {
+            //         Swal.fire({
+            //             title: 'Error',
+            //             text: 'Ukuran file terlalu besar. Maksimal 10 MB.',
+            //             icon: 'error',
+            //             timer: 3000,
+            //             timerProgressBar: true,
+            //             showConfirmButton: false
+            //         });
+            //         $('.dropify').dropify('clear');
+            //     }
+            // });
         });
     </script>
 @endpush
