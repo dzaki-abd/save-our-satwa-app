@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Satwa;
+use App\Models\Pelaporan;
 use App\Models\Pelanggaran;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -280,10 +281,24 @@ class SatwaController extends Controller
     }
 
     public function pelaporanSatwa($satwa) {
-        $satwa = DB::table('satwas')
+        // $satwa = Satwa::where('id', $satwa);
+
+        // return $satwa;
+            
+        if (Pelaporan::where('satwa_id', $satwa)->exists()) {
+            $satwa = DB::table('satwas')
             ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
             ->where('satwas.id', $satwa)
+            ->select('satwas.*', 'pelaporans.*')
             ->get();
+        } else {
+            $satwa = DB::table('satwas')
+            ->where('satwas.id', $satwa)
+            ->select('satwas.*')
+            ->get();
+        }
+
+        // $satwa = $satwa->select('satwas.*', 'pelaporans.*')->get();
         // $satwa = $satwa->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')->get();
         // return $satwa;
 
