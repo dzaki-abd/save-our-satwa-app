@@ -3,7 +3,11 @@ name: Laravel CI
 on:
   push:
     branches:
+      - alif
       - dzaki
+      - kevin
+      - rafi
+      - zalfa
   pull_request:
     branches:
       - main
@@ -47,5 +51,5 @@ jobs:
 
       - name: Run tests
         run: php artisan test
-        env: 
+        env:
           DB_DATABASE: save-satwa
