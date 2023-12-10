@@ -64,7 +64,7 @@ return [
             [
                 'name' => 'Home',
                 'description' => 'Shortcut Link Home',
-                'url' => '/home',
+                'url' => '/',
                 'icons' => [
                     'src' => '/img/icon/maskable_icon_x512.png',
                     'purpose' => 'any'
