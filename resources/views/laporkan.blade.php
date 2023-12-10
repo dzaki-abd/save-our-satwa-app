@@ -25,7 +25,7 @@
         {{-- if the user is logged in --}}
         @if (!Auth::check())
             <h5 class="mb-3">INFORMASI PELAPOR</h5>
-            <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+            <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
                 <i class="fa-solid fa-circle-info"></i>
                 Data anda kami jamin kerahasiaannya!
             </p>
@@ -77,7 +77,7 @@
         </div>
 
         <h5 class="mb-3">JENIS PELANGGARAN</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Jika anda memilih lainnya pada form select maka isi form dengan label lainnya!
         </p>
@@ -119,7 +119,7 @@
         </div>
 
         <h5 class="mb-3">DESKRIPSI KEJADIAN</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Ceritakan secara rinci tentang kejadian yang dilaporkan, termasuk aktivitas yang teramati dan potensi dampak
             terhadap satwa dilindungi!
@@ -131,7 +131,7 @@
         </div>
 
         <h5 class="mb-3">BUKTI PENDUKUNG</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Wajib melampirkan satu foto, dengan jumlah maksimal foto yang dapat diunggah sebanyak 10. Jika Anda memiliki
             lebih
@@ -141,7 +141,7 @@
         </p>
         <div class="mb-3">
             <label for="gambar" class="form-label">Foto</label>
-            <input type="file" id="gambar" name="gambar[]" class="dropify" data-height="200" data-max-file-size="10M"
+            <input type="file" id="gambar" name="gambar[]" class="dropify form-control" data-height="200" data-max-file-size="10M"
                 data-allowed-file-extensions="jpg jpeg png">
         </div>
 
@@ -152,7 +152,7 @@
         </div>
 
         <h5 class="mb-3">TINDAKAN YANG DIAMBIL</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Apakah tindakan langsung diambil sebagai tanggapan terhadap pelanggaran tersebut? Jika ya, jelaskan tindakan
             yang
@@ -165,19 +165,19 @@
         </div>
 
         <h5 class="mb-3">HASIL INVESTIGASI</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Jika ada penyelidikan yang dilakukan, sertakan hasil penyelidikan termasuk pihak yang terlibat dan bukti yang
             ditemukan. Lampirkan hasil investigasi dalam bentuk file dengan format pdf.
         </p>
         <div class="mb-5">
             <label for="hasil_investigasi" class="form-label">Hasil Investigasi (Optional)</label>
-            <input type="file" id="hasil_investigasi" name="hasil_investigasi" class="dropify" data-height="200"
+            <input type="file" id="hasil_investigasi" name="hasil_investigasi" class="dropify form-control" data-height="200"
                 data-max-file-size="10M" data-allowed-file-extensions="pdf">
         </div>
 
         <h5 class="mb-3">PENCATATAN TAMBAHAN</h5>
-        <p class="text-sm text-white p-1 ps-2 mb-3 rounded">
+        <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
             Apakah tindakan langsung diambil sebagai tanggapan terhadap pelanggaran tersebut? Jika ya, jelaskan tindakan
             yang
