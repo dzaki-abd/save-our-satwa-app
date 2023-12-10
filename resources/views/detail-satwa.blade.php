@@ -138,7 +138,7 @@
           <tr>
             <th class="border-0 text-gray-700">Laporan</th>
             <th class="border-0 text-gray-700">Tanggal Kejadian</th>
-            <th class="border-0 text-gray-700">Satwa</th>
+            <th class="border-0 text-gray-700">Jumlah Satwa Terdampak</th>
             <th class="border-0 text-gray-700">Status</th>
           </tr>
         </thead>
@@ -191,8 +191,8 @@
           name: 'tanggal_kejadian'
         },
         {
-          data: 'satwa_id',
-          name: 'satwa'
+          data: 'jumlah_satwa',
+          name: 'jumlah_satwa_terdampak'
         },
         {
           data: 'status',

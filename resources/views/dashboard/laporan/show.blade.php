@@ -313,7 +313,7 @@
               >
                 @foreach ($data['buktiKejadian'] as $bukti)
                   <a
-                    href="../../../img/buktilaporan.jpg"
+                    href="{{ asset('img/buktilaporan.jpg') }}"
                     {{-- data-fancybox="buktiLaporan" --}}
                     {{-- data-caption="Gallery B #2" --}}
                   >

@@ -400,11 +400,8 @@ class HomeController extends Controller
             ->addColumn('tanggal_kejadian', function ($row) {
                 return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
             })
-            ->addColumn('satwa_id', function ($row) {
-                if($row->satwa_id == 0)
-                    return $row->satwa_lain;
-                else
-                    return $row->satwa->nama_lokal;
+            ->addColumn('jumlah_satwa', function ($row) {
+                return $row->jumlah_satwa;
             })
             ->addColumn('status', function ($row) {
                 $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
