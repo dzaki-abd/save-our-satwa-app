@@ -38,7 +38,7 @@
           <button class="accordion-button rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
             <h6 class="m-0">KitaBisa</h6>
             <div class="accordion-logo ms-3 rounded">
-              <img src="../img/kitabisa.png" alt="" style="height: 1.3rem">
+              <img src="{{ asset('img/kitabisa.png') }}" alt="" style="height: 1.3rem">
             </div>
           </button>
         </h2>
@@ -58,7 +58,7 @@
           <button class="accordion-button collapsed rounded p-3 p-lg-4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
             <h6 class="m-0">BRI</h6>
             <div class="accordion-logo ms-3 rounded">
-              <img src="../img/bri.png" alt="" style="height: 1.2rem">
+              <img src="{{ asset('img/bri.png') }}" alt="" style="height: 1.2rem">
             </div>
           </button>
         </h2>

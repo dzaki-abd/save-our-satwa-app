@@ -50,7 +50,7 @@
                                 <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto Profil"
                                     class="rounded-circle" style="width: 2rem; height: 2rem">
                             @else
-                                <img src="../img/default-profil.png" alt="">
+                                <img src="{{ asset('img/default-profil.png') }}" alt="">
                             @endif
                         </a>
                     </div>

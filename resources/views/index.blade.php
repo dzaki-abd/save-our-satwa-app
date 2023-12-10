@@ -312,7 +312,7 @@
 
       </div>
       <div data-aos="zoom-in" data-aos-offset="150" class="faq-image d-none d-lg-block">
-        <img src="../img/faq.png" alt="">
+        <img src="{{ asset('img/faq.png') }}" alt="">
       </div>
     </div>
   </div>

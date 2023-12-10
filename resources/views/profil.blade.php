@@ -27,8 +27,8 @@
                     <img src="{{ asset('storage/' . $user->foto) }}" class="rounded" />
                 </a>
             @else
-                <a href="../img/default-profil.png" data-fancybox>
-                    <img src="../img/default-profil.png" class="rounded" />
+                <a href="{{ asset('img/default-profil.png') }}" data-fancybox>
+                    <img src="{{ asset('img/default-profil.png') }}" class="rounded" />
                 </a>
             @endif
         </div>

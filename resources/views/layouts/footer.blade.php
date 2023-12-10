@@ -8,7 +8,7 @@
     <div class="card-body d-flex flex-column justify-content-between gap-4 container flex-lg-row p-0">
       <div class="card border-0" style="min-width: 20rem; width: 100%">
         <div class="text-start p-0">
-          <img src="../img/logosos.png" alt="" class="mb-2" style="height: 1.8rem">
+          <img src="{{ asset('img/logosos.png') }}" alt="" class="mb-2" style="height: 1.8rem">
           <p class="card-text mt-3"> Save Our Satwa, aplikasi pelaporan tindakan ilegal terhadap satwa langka dan sumber informasi detail serta artikel menarik tentang satwa. Lindungi kehidupan satwa dengan memberikan suaramu melalui aplikasi ini.</p>
         </div>
       </div>
