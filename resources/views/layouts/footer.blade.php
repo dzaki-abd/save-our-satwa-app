@@ -49,14 +49,14 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column  gap-3">
               <h5 class="card-title">Alamat</h5>
-              <p class="card-text m-0" class="nav-link">Ciputra, Bandung</p>
+              <p class="card-text m-0" class="nav-link">Cikutra, Bandung</p>
               <p class="card-text m-0" class="nav-link">Rungkut, Surabaya</p>
           </div>
         </div>
       </div>
     </div>
     <div class="card-footer p-3">
-      &copy;SaveOurSatwa - 2023
+      &copy;SaveOurSatwa - <script>document.write(new Date().getFullYear())</script>
     </div>
   </div>
 </div>

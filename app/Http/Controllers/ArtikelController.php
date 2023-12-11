@@ -60,6 +60,10 @@ class ArtikelController extends Controller
 
             $slug = Str::slug($validatedData['judul_artikel'], '-');
 
+            if (strpos($validatedData['tag_artikel'], ', ') === false) {
+                $validatedData['tag_artikel'] = str_replace(',', ', ', $validatedData['tag_artikel']);
+            }
+
             $artikel = new Artikel([
                 'jenis' => $validatedData['jenis_artikel'],
                 'di_posting' => $validatedData['di_posting'],
@@ -129,6 +133,10 @@ class ArtikelController extends Controller
             }
 
             $slug = Str::slug($validatedData['judul_artikel'], '-');
+
+            if (strpos($validatedData['tag_artikel'], ', ') === false) {
+                $validatedData['tag_artikel'] = str_replace(',', ', ', $validatedData['tag_artikel']);
+            }
 
             $artikel->jenis = $validatedData['jenis_artikel'];
             $artikel->di_posting = $validatedData['di_posting'];

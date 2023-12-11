@@ -97,7 +97,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Save Our Satwa 2023</span>
+            <span>Copyright &copy; Save Our Satwa <script>document.write(new Date().getFullYear())</script></span>
           </div>
         </div>
       </footer>
@@ -179,7 +179,7 @@
   <script src="{{ asset('js/utils/datatables-initiator.js') }}"></script>
 
   <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   <script src="{{ asset('js/utils/fancybox-initiator.js') }}"></script>
   <script
@@ -196,7 +196,7 @@
       Swal.fire({
         icon: 'success',
         title: 'Berhasil!',
-        text: "{{ session(' success ') }}",
+        text: "{{ session('success') }}",
         timer: 2000,
         timerProgressBar: true,
         showConfirmButton: false
@@ -209,7 +209,7 @@
       Swal.fire({
         icon: 'error',
         title: 'Gagal!',
-        text: "{{ session('error ') }}",
+        text: "{{ session('error') }}",
         timer: 2000,
         timerProgressBar: true,
         showConfirmButton: false
