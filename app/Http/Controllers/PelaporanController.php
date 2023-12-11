@@ -68,10 +68,17 @@ class PelaporanController extends Controller
                 $show = route('dashboard.laporan.show', $encId);
                 $actionBtn = '
                     <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
-                        <a type="button" class="btn btn-primary btn-sm btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
-                        <button type="button" class="btn btn-danger btn-sm btn-icon btn-delete" title="Hapus" data-id="' . $encId . '" data-uniq="' . $row->uniqid . '"><i class="fa-solid fa-trash"></i></button>
-                    </div>
+                        <a type="button" class="btn btn-primary btn-sm btn-icon" title="Lihat Detail" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
                 ';
+
+                if ($row->status == 'Ditinjau') {
+                    $actionBtn .= '
+                        <button type="button" class="btn btn-danger btn-sm btn-icon btn-delete" title="Hapus" data-id="' . $encId . '" data-uniq="' . $row->uniqid . '"><i class="fa-solid fa-trash"></i></button>
+                    ';
+                }
+
+                $actionBtn .= '</div>';
+
                 return $actionBtn;
             })
             ->rawColumns(['action', 'status'])

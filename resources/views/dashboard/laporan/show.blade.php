@@ -21,54 +21,56 @@
     </nav>
   </div>
 
-  <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Edit Status Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
-      </h6>
-    </div>
-    <div class="card-body">
-      <form
-        action=""
-        method=""
-        class="row g-3 align-items-center"
-      >
-        <div class="col-auto">
-          <label
-            for="status"
-            class="col-form-label"
-          >Status</label>
-        </div>
-        <div
-          class="col-auto"
-          style="width: 10rem"
+  @if ($data['laporan']->status == 'Ditinjau')
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex align-items-center">
+        <h6 class="m-0 font-weight-bold text-success">
+          Edit Status Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
+        </h6>
+      </div>
+      <div class="card-body">
+        <form
+          action=""
+          method=""
+          class="row g-3 align-items-center"
         >
-          <select
-            class="custom-select"
-            id="status"
-            name="status"
-            required
+          <div class="col-auto">
+            <label
+              for="status"
+              class="col-form-label"
+            >Status</label>
+          </div>
+          <div
+            class="col-auto"
+            style="width: 10rem"
           >
-            <option
-              readonly
-              selected
-              value="null"
-            >Pilih...</option>
-            <option value="Ditinjau">Ditinjau</option>
-            <option value="Disetujui">Disetujui</option>
-            <option value="Ditolak">Ditolak</option>
-          </select>
-        </div>
-        <div class="col-auto">
-          <button
-            type="button"
-            class="btn btn-success"
-            id = "btn-ubah-status"
-          >Simpan</button>
-        </div>
-      </form>
+            <select
+              class="custom-select"
+              id="status"
+              name="status"
+              required
+            >
+              <option
+                readonly
+                selected
+                value="null"
+              >Pilih...</option>
+              <option value="Ditinjau">Ditinjau</option>
+              <option value="Disetujui">Disetujui</option>
+              <option value="Ditolak">Ditolak</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-success"
+              id = "btn-ubah-status"
+            >Simpan</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  @endif
 
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center">
@@ -365,11 +367,15 @@
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0;"
               >
-                <a
-                  href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
-                  class="btn btn-success"
-                  target="_blank"
-                >Download pdf</a>
+                @if ($data['laporan']->hasil_investigasi == null)
+                  <p class="text-gray-600">Tidak ada</p>
+                @else
+                  <a
+                    href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
+                    class="btn btn-success"
+                    target="_blank"
+                  >Download pdf</a>
+                @endif
               </td>
             </tr>
 
