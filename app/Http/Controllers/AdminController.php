@@ -77,11 +77,15 @@ class AdminController extends Controller
                 'nomor_admin_edit' => 'required',
             ]);
 
-            if(request()->filled('password_admin')) {
+            if(request()->filled('password_admin_edit')) {
                 $validatedData = request()->validate([
                     'password_admin_edit' => 'required',
-                    'confirm_password_admin_edit' => 'required|same:password_admin',
+                    'confirm_password_admin_edit' => 'required|same:password_admin_edit',
                 ]);
+
+                if($validatedData == false) {
+                    return redirect()->back()->with('error', 'Password tidak sama.');
+                }
 
                 $admin->update([
                     'name' => $validatedData['nama_admin_edit'],
