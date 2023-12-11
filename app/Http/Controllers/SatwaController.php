@@ -289,6 +289,7 @@ class SatwaController extends Controller
             $satwa = DB::table('satwas')
             ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
             ->where('satwas.id', $satwa)
+            // ->where('pelaporans.status', '=', 'Disetujui')
             ->select('satwas.*', 'pelaporans.*')
             ->get();
         } else {

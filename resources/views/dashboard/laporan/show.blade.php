@@ -411,73 +411,83 @@
     const idLaporan = window.location.pathname.split('/')[3];
 
     function updateStatus(status, jumlahSatwa = null) {
-      let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
-      $.ajax({
-        url: urlUpdate,
-        method: 'PUT',
-        data: {
-          _token: '{{ csrf_token() }}',
-          status: status,
-          jumlahSatwa: jumlahSatwa
-        },
-        success: function(response) {
-          if (response.status == 'success') {
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil',
-              text: 'Status laporan berhasil diubah!',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.reload();
-              }
-            })
+      return new Promise((resolve, reject) => {
+        let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
+        $.ajax({
+          url: urlUpdate,
+          method: 'PUT',
+          data: {
+            _token: '{{ csrf_token() }}',
+            status: status,
+            jumlahSatwa: jumlahSatwa
+          },
+          success: function(response) {
+            if (response.status == 'success') {
+              resolve(response);
+            } else {
+              reject(response);
+            }
+          },
+          error: function(response) {
+            reject(response);
           }
-        },
-        error: function(response) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Terjadi kesalahan!',
-          })
-        }
-      })
+        });
+      });
     }
 
-    $('#btn-ubah-status').click(function() {
+    $('#btn-ubah-status').click(async function() {
       let status = $('#status').val();
       const inputValue = "{{ $data['laporan']->jumlah_satwa }}";
+
       if (status == 'null') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Anda belum memilih status!',
-        })
+        });
       } else if (status == 'Disetujui') {
-        (async () => {
-          const {
-            value: jumlahSatwa
-          } = await Swal.fire({
-            title: "Anda akan menyetujui laporan ini!",
-            input: "text",
-            inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
-            confirmButtonColor: '#1cc88a',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Batal',
-            showCancelButton: true,
-            inputValue,
-            inputValidator: (value) => {
-              if (!value) {
-                return "Jumlah satwa wajib dimasukan!";
+        await Swal.fire({
+          title: "Anda akan menyetujui laporan ini!",
+          input: "text",
+          inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
+          confirmButtonColor: '#1cc88a',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal',
+          showCancelButton: true,
+          inputValue,
+          showLoaderOnConfirm: true,
+          preConfirm: async (inputValue) => {
+            try {
+              const response = await updateStatus(status, inputValue);
+              if (response.status == 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Status laporan berhasil diubah!',
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Terjadi kesalahan!',
+                });
               }
+            } catch (error) {
+              Swal.hideLoading();
             }
-          });
-          if (jumlahSatwa) {
-            updateStatus(status, jumlahSatwa);
+          },
+          allowOutsideClick: () => !Swal.isLoading(),
+          inputValidator: (value) => {
+            if (!value) {
+              return "Jumlah satwa wajib dimasukkan!";
+            }
           }
-        })();
+        });
       } else {
-        Swal.fire({
+        await Swal.fire({
           title: 'Apakah Anda yakin?',
           text: "Anda akan mengubah status laporan ini!",
           icon: 'warning',
@@ -485,12 +495,32 @@
           confirmButtonColor: '#1cc88a',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Ubah',
-          cancelButtonText: 'Batal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            updateStatus(status, inputValue);
-          }
-        })
+          cancelButtonText: 'Batal',
+          showLoaderOnConfirm: true,
+          preConfirm: async () => {
+            try {
+              const response = await updateStatus(status, inputValue);
+              if (response.status == 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Status laporan berhasil diubah!',
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Terjadi kesalahan!',
+                });
+              }
+            } catch (error) {
+              Swal.hideLoading();
+            }
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        });
       }
     });
 
