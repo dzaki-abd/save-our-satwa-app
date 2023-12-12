@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         // create role
         Role::create(['name' => 'admin', 'guard_name' => 'web']);
         Role::create(['name' => 'user', 'guard_name' => 'web']);
+        Role::create(['name' => 'superadmin', 'guard_name' => 'web']);
 
         // User::factory()->create([
         //     'name' => 'User',
@@ -39,6 +40,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
         ])->assignRole(['admin']);
+        
+        User::create([
+            'name' => 'Super Admin',
+            'no_hp' => '081234567890',
+            'email' => 'super@example.com',
+            'password' => bcrypt('password'),
+        ])->assignRole(['superadmin', 'admin']);
 
         $this->call(SatwaSeeder::class);
         $this->call(PelanggaranSeeder::class);
