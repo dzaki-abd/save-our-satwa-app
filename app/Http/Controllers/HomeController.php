@@ -76,12 +76,12 @@ class HomeController extends Controller
     }
     public function profile()
     {
-        $laporan = Pelaporan::all();
         $user = Auth()->user();
+        $laporan = Pelaporan::where('user_id', $user->id)->get();
         $countLaporan = [
-            'ditinjau' => $laporan->where('status', 'Ditinjau')->where('user_id', $user->id)->count(),
-            'disetujui' => $laporan->where('status', 'Disetujui')->where('user_id', $user->id)->count(),
-            'ditolak' => $laporan->where('status', 'Ditolak')->where('user_id', $user->id)->count(),
+            'ditinjau' => $laporan->where('status', 'Ditinjau')->count(),
+            'disetujui' => $laporan->where('status', 'Disetujui')->count(),
+            'ditolak' => $laporan->where('status', 'Ditolak')->count(),
         ];
         return view('profil', compact('countLaporan', 'user'));
     }
@@ -103,7 +103,7 @@ class HomeController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        if ($request->hasFile('foto')) {
+        if($request->hasFile('foto')){
             $file = $request->file('foto');
             $foto = 'foto/' . time() . '.' . $file->extension();
             $file->move(public_path('storage/foto/'), $foto);
@@ -121,7 +121,7 @@ class HomeController extends Controller
 
 
 
-        return redirect()->back()
+        return redirect('/profil')
             ->with('success', 'Profil berhasil diubah.');
     }
 
@@ -357,7 +357,7 @@ class HomeController extends Controller
     public function getDataSatwaForUser()
     {
         $satwaList = Satwa::latest()->filter(request(['search', 'lokasi', 'status', 'tren_populasi']))->paginate(20);
-        return view('satwa',  compact('satwaList'));
+        return view('satwa', compact('satwaList'));
     }
 
     public function getDataSatwaForUserById($id)
@@ -422,8 +422,11 @@ class HomeController extends Controller
             ->addColumn('tanggal_kejadian', function ($row) {
                 return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
             })
-            ->addColumn('jumlah_satwa', function ($row) {
-                return $row->jumlah_satwa;
+            ->addColumn('satwa_id', function ($row) {
+                if($row->satwa_id == 0)
+                    return $row->satwa_lain;
+                else
+                    return $row->satwa->nama_lokal;
             })
             ->addColumn('status', function ($row) {
                 $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';

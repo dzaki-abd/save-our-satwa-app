@@ -8,6 +8,7 @@ on:
       - kevin
       - rafi
       - zalfa
+      - main
   pull_request:
     branches:
       - main
