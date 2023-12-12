@@ -21,54 +21,56 @@
     </nav>
   </div>
 
-  <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex align-items-center">
-      <h6 class="m-0 font-weight-bold text-success">
-        Edit Status Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
-      </h6>
-    </div>
-    <div class="card-body">
-      <form
-        action=""
-        method=""
-        class="row g-3 align-items-center"
-      >
-        <div class="col-auto">
-          <label
-            for="status"
-            class="col-form-label"
-          >Status</label>
-        </div>
-        <div
-          class="col-auto"
-          style="width: 10rem"
+  @if ($data['laporan']->status == 'Ditinjau')
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex align-items-center">
+        <h6 class="m-0 font-weight-bold text-success">
+          Edit Status Laporan dengan Registration Number {{ strtoupper($data['laporan']->uniqid) }}
+        </h6>
+      </div>
+      <div class="card-body">
+        <form
+          action=""
+          method=""
+          class="row g-3 align-items-center"
         >
-          <select
-            class="custom-select"
-            id="status"
-            name="status"
-            required
+          <div class="col-auto">
+            <label
+              for="status"
+              class="col-form-label"
+            >Status</label>
+          </div>
+          <div
+            class="col-auto"
+            style="width: 10rem"
           >
-            <option
-              readonly
-              selected
-              value="null"
-            >Pilih...</option>
-            <option value="Ditinjau">Ditinjau</option>
-            <option value="Disetujui">Disetujui</option>
-            <option value="Ditolak">Ditolak</option>
-          </select>
-        </div>
-        <div class="col-auto">
-          <button
-            type="button"
-            class="btn btn-success"
-            id = "btn-ubah-status"
-          >Simpan</button>
-        </div>
-      </form>
+            <select
+              class="custom-select"
+              id="status"
+              name="status"
+              required
+            >
+              <option
+                readonly
+                selected
+                value="null"
+              >Pilih...</option>
+              <option value="Ditinjau">Ditinjau</option>
+              <option value="Disetujui">Disetujui</option>
+              <option value="Ditolak">Ditolak</option>
+            </select>
+          </div>
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-success"
+              id = "btn-ubah-status"
+            >Simpan</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  @endif
 
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center">
@@ -313,7 +315,7 @@
               >
                 @foreach ($data['buktiKejadian'] as $bukti)
                   <a
-                    href="../../../img/buktilaporan.jpg"
+                    href="{{ asset('img/buktilaporan.jpg') }}"
                     {{-- data-fancybox="buktiLaporan" --}}
                     {{-- data-caption="Gallery B #2" --}}
                   >
@@ -365,11 +367,15 @@
                 class="align-middle text-gray-600 pl-0"
                 style="border-top: 0;"
               >
-                <a
-                  href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
-                  class="btn btn-success"
-                  target="_blank"
-                >Download pdf</a>
+                @if ($data['laporan']->hasil_investigasi == null)
+                  <p class="text-gray-600">Tidak ada</p>
+                @else
+                  <a
+                    href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
+                    class="btn btn-success"
+                    target="_blank"
+                  >Download pdf</a>
+                @endif
               </td>
             </tr>
 
@@ -405,73 +411,83 @@
     const idLaporan = window.location.pathname.split('/')[3];
 
     function updateStatus(status, jumlahSatwa = null) {
-      let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
-      $.ajax({
-        url: urlUpdate,
-        method: 'PUT',
-        data: {
-          _token: '{{ csrf_token() }}',
-          status: status,
-          jumlahSatwa: jumlahSatwa
-        },
-        success: function(response) {
-          if (response.status == 'success') {
-            Swal.fire({
-              icon: 'success',
-              title: 'Berhasil',
-              text: 'Status laporan berhasil diubah!',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.reload();
-              }
-            })
+      return new Promise((resolve, reject) => {
+        let urlUpdate = "{{ route('dashboard.laporan.update', ':id') }}".replace(':id', idLaporan);
+        $.ajax({
+          url: urlUpdate,
+          method: 'PUT',
+          data: {
+            _token: '{{ csrf_token() }}',
+            status: status,
+            jumlahSatwa: jumlahSatwa
+          },
+          success: function(response) {
+            if (response.status == 'success') {
+              resolve(response);
+            } else {
+              reject(response);
+            }
+          },
+          error: function(response) {
+            reject(response);
           }
-        },
-        error: function(response) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Terjadi kesalahan!',
-          })
-        }
-      })
+        });
+      });
     }
 
-    $('#btn-ubah-status').click(function() {
+    $('#btn-ubah-status').click(async function() {
       let status = $('#status').val();
       const inputValue = "{{ $data['laporan']->jumlah_satwa }}";
+
       if (status == 'null') {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Anda belum memilih status!',
-        })
+        });
       } else if (status == 'Disetujui') {
-        (async () => {
-          const {
-            value: jumlahSatwa
-          } = await Swal.fire({
-            title: "Anda akan menyetujui laporan ini!",
-            input: "text",
-            inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
-            confirmButtonColor: '#1cc88a',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Batal',
-            showCancelButton: true,
-            inputValue,
-            inputValidator: (value) => {
-              if (!value) {
-                return "Jumlah satwa wajib dimasukan!";
+        await Swal.fire({
+          title: "Anda akan menyetujui laporan ini!",
+          input: "text",
+          inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
+          confirmButtonColor: '#1cc88a',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal',
+          showCancelButton: true,
+          inputValue,
+          showLoaderOnConfirm: true,
+          preConfirm: async (inputValue) => {
+            try {
+              const response = await updateStatus(status, inputValue);
+              if (response.status == 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Status laporan berhasil diubah!',
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Terjadi kesalahan!',
+                });
               }
+            } catch (error) {
+              Swal.hideLoading();
             }
-          });
-          if (jumlahSatwa) {
-            updateStatus(status, jumlahSatwa);
+          },
+          allowOutsideClick: () => !Swal.isLoading(),
+          inputValidator: (value) => {
+            if (!value) {
+              return "Jumlah satwa wajib dimasukkan!";
+            }
           }
-        })();
+        });
       } else {
-        Swal.fire({
+        await Swal.fire({
           title: 'Apakah Anda yakin?',
           text: "Anda akan mengubah status laporan ini!",
           icon: 'warning',
@@ -479,12 +495,32 @@
           confirmButtonColor: '#1cc88a',
           cancelButtonColor: '#d33',
           confirmButtonText: 'Ubah',
-          cancelButtonText: 'Batal'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            updateStatus(status, inputValue);
-          }
-        })
+          cancelButtonText: 'Batal',
+          showLoaderOnConfirm: true,
+          preConfirm: async () => {
+            try {
+              const response = await updateStatus(status, inputValue);
+              if (response.status == 'success') {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Berhasil',
+                  text: 'Status laporan berhasil diubah!',
+                }).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Terjadi kesalahan!',
+                });
+              }
+            } catch (error) {
+              Swal.hideLoading();
+            }
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        });
       }
     });
 

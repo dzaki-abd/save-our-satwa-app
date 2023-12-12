@@ -29,7 +29,7 @@
 
   <div class="sidebar-heading">Menu Admin</div>
 
-  @if (auth()->user()->hasRole('admin'))
+  @if (auth()->user()->hasRole('superadmin'))
     <li class="nav-item @if (request()->routeIs('dashboard.admin.index')) active @endif">
       <a
         href="{{ route('dashboard.admin.index') }}"
@@ -40,6 +40,7 @@
       </a>
     </li>
   @endif
+
   <li class="nav-item @if (request()->routeIs('dashboard.laporan.*')) active @endif">
     <a
       href="/dashboard/laporan"

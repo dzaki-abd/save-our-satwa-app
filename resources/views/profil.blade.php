@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-    <div class="jumbotron-2 jumbotron-search-2">
+    <div class="jumbotron-2 jumbotron-search-2" style="background-image: url('{{ asset('img/jumbotron-2.jpg') }}')">
         <div class="container jumbotron-container-2">
             <div
                 class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-start align-items-md-center h-100 jumbotron-content-2 gap-3">
@@ -27,8 +27,8 @@
                     <img src="{{ asset('storage/' . $user->foto) }}" class="rounded" />
                 </a>
             @else
-                <a href="../img/default-profil.png" data-fancybox>
-                    <img src="../img/default-profil.png" class="rounded" />
+                <a href="{{ asset('img/default-profil.png') }}" data-fancybox>
+                    <img src="{{ asset('img/default-profil.png') }}" class="rounded" />
                 </a>
             @endif
         </div>

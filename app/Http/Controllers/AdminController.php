@@ -77,11 +77,15 @@ class AdminController extends Controller
                 'nomor_admin_edit' => 'required',
             ]);
 
-            if(request()->filled('password_admin')) {
+            if(request()->filled('password_admin_edit')) {
                 $validatedData = request()->validate([
                     'password_admin_edit' => 'required',
-                    'confirm_password_admin_edit' => 'required|same:password_admin',
+                    'confirm_password_admin_edit' => 'required|same:password_admin_edit',
                 ]);
+
+                if($validatedData == false) {
+                    return redirect()->back()->with('error', 'Password tidak sama.');
+                }
 
                 $admin->update([
                     'name' => $validatedData['nama_admin_edit'],
@@ -137,7 +141,7 @@ class AdminController extends Controller
                 return $row->no_hp;
             })
             ->addColumn('action', function ($row) {
-                if(auth()->user()->email === 'admin@example.com'){
+                if(auth()->user()->hasRole('superadmin')){
                     $actionBtn = '
                         <div class="btn-group" role="group" aria-label="Action">
                             <button type="button" class="btn btn-warning btn-md btn-icon" onclick="editAdmin(' . $row->id . ')" title="Edit"><i class="fa-solid fa-pen"></i></button>

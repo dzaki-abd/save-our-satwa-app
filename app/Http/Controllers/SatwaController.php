@@ -156,28 +156,47 @@ class SatwaController extends Controller
                 $namaFile = 'satwa_images/satwa-' . time() . '.' .  $request->image_edit->extension();
                 $request->file('image_edit')->storeAs('', $namaFile, 'public');
                 $satwa->gambar = $namaFile;
+
+                $satwa->update([
+                    'taxonid' => $validatedData['taxonid'],
+                    'nama_ilmiah' => $validatedData['nama_ilmiah'],
+                    'nama_lokal' => $validatedData['nama_lokal'],
+                    'nama_inggris' => $validatedData['nama_inggris'],
+                    'deskripsi' => $validatedData['deskripsi'],
+                    'kingdom' => $validatedData['kingdom'],
+                    'filum' => $validatedData['filum'],
+                    'kelas' => $validatedData['kelas'],
+                    'ordo' => $validatedData['ordo'],
+                    'famili' => $validatedData['famili'],
+                    'genus' => $validatedData['genus'],
+                    'tren_populasi' => $validatedData['tren_populasi'],
+                    'kategori_iucn' => $validatedData['kategori_iucn'],
+                    'gambar' => $namaFile,
+                    'populasi' => $populasi,
+                    'lokasi' => $validatedData['lokasi'],
+                    'slug' => $slug,
+                ]);
+            } else {
+                $satwa->update([
+                    'taxonid' => $validatedData['taxonid'],
+                    'nama_ilmiah' => $validatedData['nama_ilmiah'],
+                    'nama_lokal' => $validatedData['nama_lokal'],
+                    'nama_inggris' => $validatedData['nama_inggris'],
+                    'deskripsi' => $validatedData['deskripsi'],
+                    'kingdom' => $validatedData['kingdom'],
+                    'filum' => $validatedData['filum'],
+                    'kelas' => $validatedData['kelas'],
+                    'ordo' => $validatedData['ordo'],
+                    'famili' => $validatedData['famili'],
+                    'genus' => $validatedData['genus'],
+                    'tren_populasi' => $validatedData['tren_populasi'],
+                    'kategori_iucn' => $validatedData['kategori_iucn'],
+                    'populasi' => $populasi,
+                    'lokasi' => $validatedData['lokasi'],
+                    'slug' => $slug,
+                ]);
             }
 
-            $satwa->update([
-                'taxonid' => $validatedData['taxonid'],
-                'nama_ilmiah' => $validatedData['nama_ilmiah'],
-                'nama_lokal' => $validatedData['nama_lokal'],
-                'nama_inggris' => $validatedData['nama_inggris'],
-                'deskripsi' => $validatedData['deskripsi'],
-                'kingdom' => $validatedData['kingdom'],
-                'filum' => $validatedData['filum'],
-                'kelas' => $validatedData['kelas'],
-                'ordo' => $validatedData['ordo'],
-                'famili' => $validatedData['famili'],
-                'genus' => $validatedData['genus'],
-                'tren_populasi' => $validatedData['tren_populasi'],
-                'kategori_iucn' => $validatedData['kategori_iucn'],
-                'gambar' => $namaFile,
-                'populasi' => $populasi,
-                'lokasi' => $validatedData['lokasi'],
-                'slug' => $slug,
-            ]);
-            
             return redirect()->back()->with('success', $validatedData['nama_ilmiah'] . ' berhasil diubah.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -289,6 +308,7 @@ class SatwaController extends Controller
             $satwa = DB::table('satwas')
             ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
             ->where('satwas.id', $satwa)
+            // ->where('pelaporans.status', '=', 'Disetujui')
             ->select('satwas.*', 'pelaporans.*')
             ->get();
         } else {

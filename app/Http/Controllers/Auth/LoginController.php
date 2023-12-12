@@ -30,7 +30,7 @@ class LoginController extends Controller
     // if role user redirect to /home
     protected function redirectTo()
     {
-        if (auth()->user()->hasRole('admin')) {
+        if (auth()->user()->hasRole(['admin', 'superadmin'])) {
             return route('dashboard.index');
         } else {
             return '/';

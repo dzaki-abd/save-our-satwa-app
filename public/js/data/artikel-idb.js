@@ -2,13 +2,15 @@ import { openDB } from "https://cdn.jsdelivr.net/npm/idb@8/+esm";
 
 const CONFIG = {
     DATABASE_NAME: "artikel-database",
-    DATABASE_VERSION: 1,
+    DATABASE_VERSION: 2,
     OBJECT_STORE_NAME: "artikel",
+    INDEX_NAME: "user_id_index",
 };
 
 const dbPromise = openDB(CONFIG.DATABASE_NAME, CONFIG.DATABASE_VERSION, {
     upgrade(database) {
-        database.createObjectStore(CONFIG.OBJECT_STORE_NAME, { keyPath: "id" });
+        const objectStore = database.createObjectStore(CONFIG.OBJECT_STORE_NAME, { keyPath: "id" });
+        objectStore.createIndex(CONFIG.INDEX_NAME, "user_id", { unique: false });
     },
 });
 
@@ -23,6 +25,20 @@ const ArtikelIdb = {
 
     async getAllArtikels() {
         return (await dbPromise).getAll(CONFIG.OBJECT_STORE_NAME);
+    },
+
+    async getAllDataByUserId(user_id) {
+        console.log(user_id);
+        if (!user_id) {
+            return [];
+        }
+
+        const db = await dbPromise;
+        const transaction = db.transaction(CONFIG.OBJECT_STORE_NAME);
+        const objectStore = transaction.objectStore(CONFIG.OBJECT_STORE_NAME);
+        const index = objectStore.index(CONFIG.INDEX_NAME);
+
+        return index.getAll(IDBKeyRange.only(user_id));
     },
 
     async putArtikel(artikel) {

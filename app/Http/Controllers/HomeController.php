@@ -46,7 +46,9 @@ class HomeController extends Controller
 
         $satwaList = Satwa::take(10)->get();
 
-        $artikelList = Artikel::take(8)->get();
+        $artikelList = Artikel::where('di_posting', 'Ya')
+            ->take(8)
+            ->get();
 
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
@@ -101,22 +103,7 @@ class HomeController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        if ($request->password != null) {
-            $request->validate([
-                'password' => 'required|min:8',
-                'konfirmasi_password' => 'required|min:8',
-            ]);
-            if ($request->password != $request->konfirmasi_password) {
-                return redirect()->back()
-                    ->with('error', 'Password tidak sama.');
-            } else {
-                User::where('id', $user->id)->update([
-                    'password' => bcrypt($request->password),
-                ]);
-            }
-        }
-
-        if ($request->hasFile('foto')) {
+        if($request->hasFile('foto')){
             $file = $request->file('foto');
             $foto = 'foto/' . time() . '.' . $file->extension();
             $file->move(public_path('storage/foto/'), $foto);
@@ -313,9 +300,20 @@ class HomeController extends Controller
         }
     }
 
+    public function favoritData() 
+    {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+
+        return view('favorit', compact('user_id'));
+    }
+
     public function getDataArtikelForUser()
     {
-        $artikelList = Artikel::latest()->filter(request(['search', 'jenis', 'kata_kunci']))->paginate(14);
+        $artikelList = Artikel::latest()
+            ->where('di_posting', 'Ya')
+            ->filter(request(['search', 'jenis', 'kata_kunci']))
+            ->paginate(14);
 
         foreach ($artikelList as $artikel) {
             $dom = new DOMDocument();
@@ -336,6 +334,9 @@ class HomeController extends Controller
 
     public function getDataArtikelForUserById($id)
     {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+
         $artikel = Artikel::find($id);
 
         $dom = new DOMDocument();
@@ -350,7 +351,7 @@ class HomeController extends Controller
             $deskripsi = $firstParagraph->nodeValue;
         }
 
-        return view('detail-artikel', compact('artikel', 'deskripsi'));
+        return view('detail-artikel', compact('artikel', 'deskripsi', 'user_id'));
     }
 
     public function getDataSatwaForUser()
@@ -361,10 +362,15 @@ class HomeController extends Controller
 
     public function getDataSatwaForUserById($id)
     {
+        $user = Auth()->user();
+        $user_id = $user ? $user->id : null;
+        
         $satwa = Satwa::find($id);
+
         $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
         $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
-        return view('detail-satwa', compact('satwa'));
+
+        return view('detail-satwa', compact('satwa', 'user_id'));
     }
 
     private function convertIUCN($originalValue, $isCategory = true)
@@ -417,7 +423,7 @@ class HomeController extends Controller
                 return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
             })
             ->addColumn('satwa_id', function ($row) {
-                if ($row->satwa_id == 0)
+                if($row->satwa_id == 0)
                     return $row->satwa_lain;
                 else
                     return $row->satwa->nama_lokal;

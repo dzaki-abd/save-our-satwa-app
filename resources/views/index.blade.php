@@ -1,7 +1,7 @@
 @extends('layouts.app', ['showFooter' => true])
 
 @section('jumbotron')
-  <div class="jumbotron">
+<div class="jumbotron" style="background-image: url('{{ asset('img/jumbotron.jpg') }}')">
     <div class="container jumbotron-container">
       <div class="d-flex flex-column justify-content-center align-items-start gap-3 h-100 jumbotron-content">
         <h1 class="text-white">SAVE OUR SATWA</h1>
@@ -119,7 +119,7 @@
       </div>
     @endif
 
-    <div class="tentangkami-container rounded">
+    <div class="tentangkami-container rounded" style="background-image: url('{{ asset('img/donasi.jpg') }}')">
       <div class="tentangkami-content px-3 px-md-4 rounded">
         <div data-aos="zoom-in" data-aos-offset="150" class="tentangkami-title">
           <h3 class="text-white h3-top">TENTANG KAMI</h3>
@@ -194,7 +194,7 @@
     </div>
   </div>
 
-  <div class="donasi-container">
+  <div class="donasi-container" style="background-image: url('{{ asset('img/jumbotron-2.jpg') }}')">
     <div class="container">
       <div data-aos="zoom-in" data-aos-offset="150" class="donasi-home-content rounded p-3 d-flex flex-column align-items-center">
         <h3 class="text-white text-center">DONASI</h3>
@@ -312,7 +312,7 @@
 
       </div>
       <div data-aos="zoom-in" data-aos-offset="150" class="faq-image d-none d-lg-block">
-        <img src="../img/faq.png" alt="">
+        <img src="{{ asset('img/faq.png') }}" alt="">
       </div>
     </div>
   </div>

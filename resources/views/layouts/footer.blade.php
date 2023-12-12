@@ -8,7 +8,7 @@
     <div class="card-body d-flex flex-column justify-content-between gap-4 container flex-lg-row p-0">
       <div class="card border-0" style="min-width: 20rem; width: 100%">
         <div class="text-start p-0">
-          <img src="../img/logosos.png" alt="" class="mb-2" style="height: 1.8rem">
+          <img src="{{ asset('img/logosos.png') }}" alt="" class="mb-2" style="height: 1.8rem">
           <p class="card-text mt-3"> Save Our Satwa, aplikasi pelaporan tindakan ilegal terhadap satwa langka dan sumber informasi detail serta artikel menarik tentang satwa. Lindungi kehidupan satwa dengan memberikan suaramu melalui aplikasi ini.</p>
         </div>
       </div>
@@ -49,14 +49,14 @@
         <div class="text-start d-flex justify-content-start justify-content-lg-end p-0">
           <div class="d-flex flex-column  gap-3">
               <h5 class="card-title">Alamat</h5>
-              <p class="card-text m-0" class="nav-link">Ciputra, Bandung</p>
+              <p class="card-text m-0" class="nav-link">Cikutra, Bandung</p>
               <p class="card-text m-0" class="nav-link">Rungkut, Surabaya</p>
           </div>
         </div>
       </div>
     </div>
     <div class="card-footer p-3">
-      &copy;SaveOurSatwa - 2023
+      &copy;SaveOurSatwa - <script>document.write(new Date().getFullYear())</script>
     </div>
   </div>
 </div>
