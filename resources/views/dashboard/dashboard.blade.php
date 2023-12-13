@@ -130,13 +130,13 @@
           </div>
           <div class="mt-4 text-center small">
             <span class="mr-2">
-              <i class="fas fa-circle text-primary"></i> Ditinjau
+              <i class="fas fa-circle text-warning"></i> Ditinjau
             </span>
             <span class="mr-2">
               <i class="fas fa-circle text-success"></i> Disetujui
             </span>
             <span class="mr-2">
-              <i class="fas fa-circle text-info"></i> Ditolak
+              <i class="fas fa-circle text-danger"></i> Ditolak
             </span>
           </div>
         </div>

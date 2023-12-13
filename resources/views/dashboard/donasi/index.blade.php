@@ -65,6 +65,7 @@
               <th class="border-0">No HP</th>
               <th class="border-0">Jumlah</th>
               <th class="border-0">Status</th>
+              <th class="border-0">Role</th>
               <th class="border-0">Aksi</th>
             </tr>
           </thead>
@@ -212,6 +213,10 @@
           name: 'status',
         },
         {
+          data: 'input_by',
+          name: 'input_by',
+        },
+        {
           data: 'action',
           name: 'action',
           orderable: false,
@@ -335,7 +340,7 @@
         type: 'GET',
         success: function(response) {
           if (response.status) {
-            if (response.data.status === 'Sudah Diverifikasi') {
+            if (response.data.status === 'Sudah Diverifikasi' || response.data.input_by === 'User') {
               $('#editDonasiModal #nama_donatur').attr('disabled', true);
               $('#editDonasiModal #email_donatur').attr('disabled', true);
               $('#editDonasiModal #nomor_donatur').attr('disabled', true);

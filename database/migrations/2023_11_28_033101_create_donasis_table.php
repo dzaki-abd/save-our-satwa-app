@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->string('bukti_transfer');
             $table->integer('jumlah_donasi');
-            $table->enum('status', ['Belum Diverifikasi', 'Sudah Diverifikasi',])->default('Belum Diverifikasi');
+            $table->enum('status', ['Belum Diverifikasi', 'Sudah Diverifikasi'])->default('Belum Diverifikasi');
+            $table->enum('input_by', ['User', 'Admin'])->default('User');
             $table->timestamps();
         });
     }
