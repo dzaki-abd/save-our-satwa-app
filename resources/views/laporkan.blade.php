@@ -79,7 +79,7 @@
         <h5 class="mb-3">JENIS PELANGGARAN</h5>
         <p class="text-sm text-white p-1 ps-2 mb-3 rounded information">
             <i class="fa-solid fa-circle-info"></i>
-            Jika anda memilih lainnya pada form select maka isi form dengan label lainnya!
+            Jika anda memilih lainnya pada form pilih maka isi form dengan label lainnya!
         </p>
         <div class="mb-3">
             <label for="pelanggaran_id" class="form-label">Pilih Jenis Pelanggaran</label>
