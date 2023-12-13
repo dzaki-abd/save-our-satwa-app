@@ -151,7 +151,7 @@ body {
 
 .navbar {
   position: fixed;
-  z-index: 999;
+  z-index: 1050;
   width: 100vw;
   background-color: transparent;
   backdrop-filter: blur(20px);
