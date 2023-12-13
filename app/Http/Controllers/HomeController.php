@@ -286,12 +286,19 @@ class HomeController extends Controller
 
             $validatedData['jumlah_donatur'] = str_replace('.', '', $validatedData['jumlah_donatur']);
 
+            if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('admin')){
+                $input_by = 'Admin';
+            } else {
+                $input_by = 'User';
+            }
+
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
                 'email' => $validatedData['email_donatur'],
                 'no_hp' => $validatedData['nomor_donatur'],
                 'bukti_transfer' => $namaFile_db,
                 'jumlah_donasi' => $validatedData['jumlah_donatur'],
+                'input_by' => $input_by,
             ]);
 
             return redirect()->back()->with('success', 'Konfirmasi dikirim, terima kasih.');

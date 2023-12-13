@@ -171,6 +171,13 @@ class DonasiController extends Controller
                     return '<span class="badge badge-success">' . $row->status . '</span>';
                 }
             })
+            ->addColumn('input_by', function ($row) {
+                if($row->input_by == 'User') {
+                    return '<span class="badge badge-primary">' . $row->input_by . '</span>';
+                } else if($row->input_by == 'Admin') {
+                    return '<span class="badge badge-secondary">' . $row->input_by . '</span>';
+                }
+            })
             ->addColumn('action', function ($row) {
                 $actionBtn = '<div class="btn-group" role="group" aria-label="Action">';
 
@@ -194,7 +201,7 @@ class DonasiController extends Controller
 
                 return $actionBtn;
             })
-            ->rawColumns(['action', 'status'])
+            ->rawColumns(['action', 'status', 'input_by'])
             ->make(true);
     }
 
