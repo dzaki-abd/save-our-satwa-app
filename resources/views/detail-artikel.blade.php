@@ -13,15 +13,41 @@
                 <li class="breadcrumb-item active" aria-current="page">Detail Artikel</li>
               </ol>
             </nav>
-            <div id="favorite-button" class="favorite-button-artikel mt-3">
 
-            </div>
+            @if ($user_id)
+              <div id="favorite-button" class="favorite-button-artikel mt-3">
+                @if ($isFavorite)
+                  <form action="/favorite-remove-artikel" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="user_id" value="{{ $user_id }}">
+                    <input type="hidden" name="artikel_id" value="{{ $artikel->id }}">
+                    <button type="submit" aria-label="unlike this artikel" class="like-button button-teal-500">
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  </form>
+                @else
+                  <form action="/favorite-add-artikel" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ $user_id }}">
+                    <input type="hidden" name="artikel_id" value="{{ $artikel->id }}">
+                    <input type="hidden" name="judul" value="{{ $artikel->judul }}">
+                    <input type="hidden" name="konten" value="{{ $deskripsi }}">
+                    <input type="hidden" name="gambar" value="{{ $artikel->gambar}}">
+                    <button type="submit" aria-label="like this artikel" class="like-button button-teal-500">
+                      <i class="fa-regular fa-heart"></i>
+                    </button>
+                  </form>
+                @endif
+              </div>
+            @endif
           </div>
         </div>
       </div>
     </div>
   </div>
 @endsection
+
 
 @section('content')
   <div class="container shadow rounded detail-artikel-container p-2 p-md-3">
@@ -37,7 +63,7 @@
         <h6>Jenis</h6>
         <p>{{ $artikel->jenis }}</p>
         <h6>Penulis</h6>
-        <p>Admin</p>
+        <p>{{ $user_name }}</p>
         <h6>Diterbitkan</h6>
         <p>{{ \Carbon\Carbon::parse($artikel->created_at)->format('d F Y') }}</p>
         <h6>Diubah</h6>
@@ -59,20 +85,6 @@
 
 @push('scripts')
     <script type="module">
-      import LikeButtonInitiator from '{{ asset('js/utils/like-button-artikel-initiator.js') }}';
-
-      LikeButtonInitiator.init({
-        likeButtonContainer: document.getElementById('favorite-button'),
-        artikel: {
-          id: {{ $artikel->id }},
-          user_id: {{ $user_id }},
-          title: '{{ $artikel->judul }}',
-          description: '{{ $deskripsi }}',
-          image: '{{ $artikel->gambar }}',
-          updated_at: '{{ $artikel->updated_at }}'
-        },
-      });
-
       const table = document.querySelector("table");
       if (table) {
         table.classList.add("table", "table-striped");

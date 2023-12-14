@@ -9,8 +9,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\PelaporanController;
 use App\Http\Controllers\SatwaController;
-use App\Http\Controllers\FavoritSatwaController;
-use App\Models\Artikel;
+use App\Http\Controllers\FavoriteSatwaController;
+use App\Http\Controllers\FavoriteArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +88,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/add', [HomeController::class, 'addPelaporanPage'])->name('add');
 
         Route::get('/favorit', [HomeController::class, 'favoritData']);
+        Route::post('/favorite-add-satwa', [FavoriteSatwaController::class, 'addFavorite']);
+        Route::delete('/favorite-remove-satwa', [FavoriteSatwaController::class, 'removeFavorite']);
+        Route::post('/favorite-add-artikel', [FavoriteArtikelController::class, 'addFavorite']);
+        Route::delete('/favorite-remove-artikel', [FavoriteArtikelController::class, 'removeFavorite']);
 
         Route::get('/ubah-profil', [HomeController::class, 'ubahProfile'])->name('ubah-profile');
         Route::put('/update-profil/{id}', [HomeController::class, 'updateProfile'])->name('update-profile');

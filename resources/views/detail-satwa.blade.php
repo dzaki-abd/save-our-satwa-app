@@ -32,7 +32,29 @@
             </a>
             @if ($user_id)
                 <div id="favorite-button">
-
+                  @if ($isFavorite)
+                    <form action="/favorite-remove-satwa" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <input type="hidden" name="user_id" value="{{ $user_id }}">
+                      <input type="hidden" name="satwa_id" value="{{ $satwa->id }}">
+                      <button type="submit" aria-label="unlike this satwa" class="like-button button-teal-500">
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
+                    </form>
+                  @else
+                    <form action="/favorite-add-satwa" method="POST">
+                      @csrf
+                      <input type="hidden" name="user_id" value="{{ $user_id }}">
+                      <input type="hidden" name="satwa_id" value="{{ $satwa->id }}">
+                      <input type="hidden" name="nama_lokal" value="{{ $satwa->nama_lokal }}">
+                      <input type="hidden" name="deskripsi" value="{{ $satwa->deskripsi }}">
+                      <input type="hidden" name="gambar" value="{{ $satwa->gambar}}">
+                      <button type="submit" aria-label="like this satwa" class="like-button button-teal-500">
+                        <i class="fa-regular fa-heart"></i>
+                      </button>
+                    </form>
+                  @endif
                 </div>
             @endif
   
@@ -145,12 +167,6 @@
             <th class="border-0 text-gray-700">Status</th>
           </tr>
         </thead>
-        {{-- <tfoot>
-          <tr>
-            <th class="text-gray-700">Laporan</th>
-            <th class="text-gray-700">Aksi</th>
-          </tr>
-        </tfoot> --}}
         <tbody>
 
         </tbody>
@@ -162,18 +178,6 @@
 
 @push('scripts')
   <script type="module">
-    import LikeButtonInitiator from '{{ asset('js/utils/like-button-satwa-initiator.js') }}';
-    LikeButtonInitiator.init({
-      likeButtonContainer: document.getElementById('favorite-button'),
-      satwa: {
-        id: {{ $satwa->id }},
-        user_id: {{ $user_id }},
-        name: '{{ $satwa->nama_lokal }}',
-        description: '{{ $satwa->deskripsi }}',
-        image: '{{ $satwa->gambar }}'
-      },
-    });
-
     $('#table-riwayat-satwa').DataTable({
       fixedHeader: true,
       pageLength: 25,

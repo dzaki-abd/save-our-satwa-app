@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Pelaporan;
 use App\Models\User;
 use App\Models\BuktiKejadian;
@@ -10,6 +11,8 @@ use App\Models\Donasi;
 use App\Models\Satwa;
 use App\Models\Artikel;
 use App\Models\Pelanggaran;
+use App\Models\FavoriteSatwa;
+use App\Models\FavoriteArtikel;
 use Yajra\DataTables\Facades\DataTables;
 use DOMDocument;
 use DOMXPath;
@@ -310,9 +313,11 @@ class HomeController extends Controller
     public function favoritData() 
     {
         $user = Auth()->user();
-        $user_id = $user ? $user->id : null;
 
-        return view('favorit', compact('user_id'));
+        $favoritSatwa = FavoriteSatwa::where('user_id', $user->id)->get();
+        $favoritArtikel = FavoriteArtikel::where('user_id', $user->id)->get();
+
+        return view('favorit', compact('favoritSatwa', 'favoritArtikel'));
     }
 
     public function getDataArtikelForUser()
@@ -344,7 +349,12 @@ class HomeController extends Controller
         $user = Auth()->user();
         $user_id = $user ? $user->id : null;
 
+        $isFavorite = FavoriteArtikel::isExist($user_id, $id);
+
         $artikel = Artikel::find($id);
+
+        $user = User::find($artikel->users_id);
+        $user_name = $user->name;
 
         $dom = new DOMDocument();
 
@@ -358,7 +368,7 @@ class HomeController extends Controller
             $deskripsi = $firstParagraph->nodeValue;
         }
 
-        return view('detail-artikel', compact('artikel', 'deskripsi', 'user_id'));
+        return view('detail-artikel', compact('artikel', 'deskripsi', 'user_id', 'user_name', 'isFavorite'));
     }
 
     public function getDataSatwaForUser()
@@ -370,14 +380,17 @@ class HomeController extends Controller
     public function getDataSatwaForUserById($id)
     {
         $user = Auth()->user();
+        
         $user_id = $user ? $user->id : null;
+
+        $isFavorite = FavoriteSatwa::isExist($user_id, $id);
         
         $satwa = Satwa::find($id);
 
         $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
         $satwa->tren_populasi = $this->convertIUCN($satwa->tren_populasi, false);
 
-        return view('detail-satwa', compact('satwa', 'user_id'));
+        return view('detail-satwa', compact('satwa', 'user_id', 'isFavorite'));
     }
 
     private function convertIUCN($originalValue, $isCategory = true)
