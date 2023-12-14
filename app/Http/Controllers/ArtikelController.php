@@ -143,7 +143,6 @@ class ArtikelController extends Controller
             $artikel->judul = $validatedData['judul_artikel'];
             $artikel->tag = $validatedData['tag_artikel'];
             $artikel->konten = $validatedData['konten'];
-            $artikel->users_id = $users_id;
             $artikel->slug = $slug;
 
             // Save the artikel to the database
