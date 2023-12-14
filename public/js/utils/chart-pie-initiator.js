@@ -42,7 +42,7 @@ fetch('dashboard/get-chart-data-laporan')
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ["Ditinjau", "Disetujui", "Ditolak"],
+                labels: Object.keys(data.data),
                 datasets: [{
                     data: Object.values(data.data),
                     backgroundColor: ['#f6c23e', '#1cc88a', '#e74a3b'],
