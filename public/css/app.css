@@ -706,10 +706,8 @@ body {
 }
 
 .detail-poster .poster-box {
-  /* width: 18rem; */
-  max-width: 25rem;
+  width: 25rem;
   height: fit-content;
-  /* height: 25rem; */
   position: relative;
 }
 
@@ -1210,6 +1208,10 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     overflow: hidden;
   }
 
+  .detail-poster .poster-box {
+    width: 20rem;
+  }
+
   /* ========== JUMBOTRON 3 ========== */
 
   .jumbotron-container-3 {
@@ -1240,13 +1242,6 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .detail-artikel-container img {
     height: 15rem;
   }
-
-  /* .favorite-button-artikel {
-    position: absolute; 
-    top: -100px; 
-    right: 10px;
-    z-index: 10;
-  } */
 
   /* ========== HOME ========== */
 
@@ -1282,10 +1277,6 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
     padding: 50px 0;
   }
 
-  /* .donasi-home-content h3 {
-    padding-bottom: 30px;
-  } */
-
   .faq-container {
     padding: 50px 0;
   }  
@@ -1301,6 +1292,13 @@ div.dataTables_wrapper div.dataTables_length>label>select:focus {
   .profil-container {
     margin-top: 50px;
   }
+}
+
+@media screen and (max-width: 320px) {
+  .detail-poster .poster-box {
+    width: 17rem;
+  }
+
 }
 
 .required:after {
