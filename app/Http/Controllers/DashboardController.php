@@ -45,6 +45,17 @@ class DashboardController extends Controller
             return $group->count();
         })->toArray();
 
-        return response()->json(['data' => $data]);
+        $desiredOrder = ['Ditinjau', 'Disetujui', 'Ditolak'];
+
+        $orderedData = [];
+        foreach ($desiredOrder as $key) {
+            if (isset($data[$key])) {
+                $orderedData[$key] = $data[$key];
+            } else {
+                $orderedData[$key] = 0;
+            }
+        }
+
+        return response()->json(['data' => $orderedData]);
     }
 }
