@@ -11856,3 +11856,19 @@ body.sidebar-toggled footer.sticky-footer {
   padding-left:.25rem;
   font-weight:600
 }
+
+div:where(.swal2-container) label:where(.swal2-input-label) {
+  display: flex;
+  justify-content: center;
+  margin: 1em 1em 0 1em;
+  text-align: center;
+  font-size: 1.125em;
+}
+
+.table>:not(caption)>*>* {
+  padding: .5rem .5rem;
+  color: var(--bs-table-color-state,var(--bs-table-color-type,var(--bs-table-color)));
+  background-color: var(--bs-table-bg);
+  border-bottom-width: var(--bs-border-width);
+  box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state,var(--bs-table-bg-type,var(--bs-table-accent-bg)));
+}
