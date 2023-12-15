@@ -100,7 +100,6 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >
                 <!-- Pilih salah satu status menggunakan if berdasarkan status terbar -->
                 @if ($data['laporan']->status == 'Ditolak')
@@ -135,31 +134,28 @@
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Nama</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->user->name }}</td>
             </tr>
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Email</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->user->email }}</td>
             </tr>
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Nomor Telepon</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->user->no_hp }}</td>
             </tr>
 
@@ -176,28 +172,25 @@
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Tanggal Kejadian</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ date('d F Y', strtotime($data['laporan']->waktu_kejadian)) }}</td>
             </tr>
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Lokasi Kejadian</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->lokasi_kejadian }}</td>
             </tr>
             <tr class="align-middle">
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >
                 <div class="mb-3">
                   <div
@@ -251,31 +244,28 @@
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Jenis Pelanggaran</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->pelanggaran->nama_pelanggaran }}</td>
             </tr>
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Jenis Satwa</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->satwa->nama_lokal }}</td>
             </tr>
             <tr class="align-middle">
               <th
                 class="pl-0"
-                style="border-top: 0; max-width: 10rem;"
+                style="max-width: 10rem;"
               >Jumlah Satwa</th>
               <td
                 class="align-middle text-gray-600"
-                style="border-top: 0"
               >{{ $data['laporan']->jumlah_satwa }} ekor</td>
             </tr>
 
@@ -293,7 +283,6 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >{{ $data['laporan']->deskripsi_kejadian }}</td>
             </tr>
 
@@ -311,13 +300,11 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >
                 @foreach ($data['buktiKejadian'] as $bukti)
                   <a
-                    href="{{ asset('img/buktilaporan.jpg') }}"
-                    {{-- data-fancybox="buktiLaporan" --}}
-                    {{-- data-caption="Gallery B #2" --}}
+                    href="{{ asset('storage/' . $bukti->bukti_kejadian) }}"
+                    data-fancybox="buktiLaporan"
                   >
                     <img
                       src="{{ asset('storage/' . $bukti->bukti_kejadian) }}"
@@ -347,7 +334,6 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >{{ $data['laporan']->tindak_lanjut ?? 'Tidak ada' }}</td>
             </tr>
 
@@ -365,10 +351,9 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0;"
               >
                 @if ($data['laporan']->hasil_investigasi == null)
-                  <p class="text-gray-600">Tidak ada</p>
+                  <p class="text-gray-600 mb-0">Tidak ada</p>
                 @else
                   <a
                     href="{{ asset('storage/' . $data['laporan']->hasil_investigasi) }}"
@@ -393,7 +378,6 @@
               <td
                 colspan="2"
                 class="align-middle text-gray-600 pl-0"
-                style="border-top: 0"
               >{{ $data['laporan']->catatan_tambahan ?? 'Tidak ada' }}</td>
             </tr>
           </tbody>
@@ -449,6 +433,7 @@
         await Swal.fire({
           title: "Anda akan menyetujui laporan ini!",
           input: "text",
+          icon: 'question',
           inputLabel: "Dengan menyetujui, populasi satwa akan berkurang. Ubah jumlah satwa jika tidak sesuai",
           confirmButtonColor: '#1cc88a',
           cancelButtonColor: '#d33',
