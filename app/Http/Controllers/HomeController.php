@@ -106,7 +106,7 @@ class HomeController extends Controller
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
-        if($request->hasFile('foto')){
+        if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $foto = 'foto/' . time() . '.' . $file->extension();
             $file->move(public_path('storage/foto/'), $foto);
@@ -289,11 +289,19 @@ class HomeController extends Controller
 
             $validatedData['jumlah_donatur'] = str_replace('.', '', $validatedData['jumlah_donatur']);
 
-            if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('admin')){
-                $input_by = 'Admin';
-            } else {
-                $input_by = 'User';
+            $input_by = 'User';
+
+            if (auth() && auth()->check()) {
+                if (auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('admin')) {
+                    $input_by = 'Admin';
+                }
             }
+
+            // if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('admin')){
+            //     $input_by = 'Admin';
+            // } else {
+            //     $input_by = 'User';
+            // }
 
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
@@ -310,7 +318,7 @@ class HomeController extends Controller
         }
     }
 
-    public function favoritData() 
+    public function favoritData()
     {
         $user = Auth()->user();
 
@@ -380,11 +388,11 @@ class HomeController extends Controller
     public function getDataSatwaForUserById($id)
     {
         $user = Auth()->user();
-        
+
         $user_id = $user ? $user->id : null;
 
         $isFavorite = FavoriteSatwa::isExist($user_id, $id);
-        
+
         $satwa = Satwa::find($id);
 
         $satwa->kategori_iucn = $this->convertIUCN($satwa->kategori_iucn);
@@ -443,7 +451,7 @@ class HomeController extends Controller
                 return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
             })
             ->addColumn('satwa_id', function ($row) {
-                if($row->satwa_id == 0)
+                if ($row->satwa_id == 0)
                     return $row->satwa_lain;
                 else
                     return $row->satwa->nama_lokal;
