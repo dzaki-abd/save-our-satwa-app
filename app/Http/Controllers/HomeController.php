@@ -297,12 +297,6 @@ class HomeController extends Controller
                 }
             }
 
-            // if(auth()->user()->hasRole('superadmin') || auth()->user()->hasRole('admin')){
-            //     $input_by = 'Admin';
-            // } else {
-            //     $input_by = 'User';
-            // }
-
             Donasi::create([
                 'nama_donatur' => $validatedData['nama_donatur'],
                 'email' => $validatedData['email_donatur'],
