@@ -56,15 +56,15 @@ class SatwaController extends Controller
                 'lokasi' => 'required',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             ]);
-    
+
             $namaFile = 'satwa-' . time() . '.' . $request->image->extension();
             $namaFile_db = 'satwa_images/' . $namaFile;
             $request->file('image')->move(public_path('storage/satwa_images'), $namaFile);
-            
+
             $slug = Str::slug($validatedData['nama_lokal'], '-');
-    
+
             $populasi = (int) $validatedData['populasi'];
-            
+
             $satwa = Satwa::create([
                 'taxonid' => $validatedData['taxonid'],
                 'nama_ilmiah' => $validatedData['nama_ilmiah'],
@@ -84,14 +84,13 @@ class SatwaController extends Controller
                 'lokasi' => $validatedData['lokasi'],
                 'slug' => $slug,
             ]);
-    
+
             $satwa->save();
-    
+
             return redirect()->back()->with('success', 'Satwa berhasil ditambahkan');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error',$e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
-
     }
 
     /**
@@ -153,9 +152,9 @@ class SatwaController extends Controller
                     }
                 }
 
-                $namaFile = 'satwa_images/satwa-' . time() . '.' .  $request->image_edit->extension();
-                $request->file('image_edit')->storeAs('', $namaFile, 'public');
-                $satwa->gambar = $namaFile;
+                $namaFile = 'satwa-' . time() . '.' . $request->image_edit->extension();
+                $namaFile_db = 'satwa_images/' . $namaFile;
+                $request->file('image_edit')->move(public_path('storage/satwa_images'), $namaFile);
 
                 $satwa->update([
                     'taxonid' => $validatedData['taxonid'],
@@ -171,7 +170,7 @@ class SatwaController extends Controller
                     'genus' => $validatedData['genus'],
                     'tren_populasi' => $validatedData['tren_populasi'],
                     'kategori_iucn' => $validatedData['kategori_iucn'],
-                    'gambar' => $namaFile,
+                    'gambar' => $namaFile_db,
                     'populasi' => $populasi,
                     'lokasi' => $validatedData['lokasi'],
                     'slug' => $slug,
@@ -299,23 +298,24 @@ class SatwaController extends Controller
         }
     }
 
-    public function pelaporanSatwa($satwa) {
+    public function pelaporanSatwa($satwa)
+    {
         // $satwa = Satwa::where('id', $satwa);
 
         // return $satwa;
-            
+
         if (Pelaporan::where('satwa_id', $satwa)->exists()) {
             $satwa = DB::table('satwas')
-            ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
-            ->where('satwas.id', $satwa)
-            // ->where('pelaporans.status', '=', 'Disetujui')
-            ->select('satwas.*', 'pelaporans.*')
-            ->get();
+                ->join('pelaporans', 'satwas.id', '=', 'pelaporans.satwa_id')
+                ->where('satwas.id', $satwa)
+                // ->where('pelaporans.status', '=', 'Disetujui')
+                ->select('satwas.*', 'pelaporans.*')
+                ->get();
         } else {
             $satwa = DB::table('satwas')
-            ->where('satwas.id', $satwa)
-            ->select('satwas.*')
-            ->get();
+                ->where('satwas.id', $satwa)
+                ->select('satwas.*')
+                ->get();
         }
 
         // $satwa = $satwa->select('satwas.*', 'pelaporans.*')->get();
@@ -324,46 +324,46 @@ class SatwaController extends Controller
 
         if (request()->ajax()) {
             return DataTables::of($satwa)
-            ->addIndexColumn()
-            ->addColumn('nama_pelapor', function ($row) {
-                $user = User::find($row->user_id);
-                return $user->name;
-            })
-            ->addColumn('tanggal_kejadian', function ($row) {
-                return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
-            })
-            ->addColumn('jenis_pelanggaran', function ($row) {
-                $pelanggaran = Pelanggaran::find($row->pelanggaran_id);
-                return $pelanggaran->nama_pelanggaran;
-            })
-            ->addColumn('jenis_satwa', function ($row) {
-                return $row->satwa_id ? Satwa::find($row->satwa_id)->nama_lokal : $row->satwa_lain;
-            })
-            ->addColumn('jumlah_satwa', function ($row) {
-                return $row->jumlah_satwa;
-            })
-            ->addColumn('status', function ($row) {
-                if ($row->status == 'Ditolak') {
-                    $badgeStatus = '<span class="badge text-bg-danger text-white">' . $row->status . '</span>';
-                } elseif ($row->status == 'Ditinjau') {
-                    $badgeStatus = '<span class="badge text-bg-warning text-white">' . $row->status . '</span>';
-                } else {
-                    $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
-                }
-                return $badgeStatus;
-            })
-            ->addColumn('action', function ($row) {
-                $encId = encrypt($row->id);
-                $show = route('dashboard.laporan.show', $encId);
-                $actionBtn = '
+                ->addIndexColumn()
+                ->addColumn('nama_pelapor', function ($row) {
+                    $user = User::find($row->user_id);
+                    return $user->name;
+                })
+                ->addColumn('tanggal_kejadian', function ($row) {
+                    return Carbon::parse($row->waktu_kejadian)->translatedFormat('d F Y');
+                })
+                ->addColumn('jenis_pelanggaran', function ($row) {
+                    $pelanggaran = Pelanggaran::find($row->pelanggaran_id);
+                    return $pelanggaran->nama_pelanggaran;
+                })
+                ->addColumn('jenis_satwa', function ($row) {
+                    return $row->satwa_id ? Satwa::find($row->satwa_id)->nama_lokal : $row->satwa_lain;
+                })
+                ->addColumn('jumlah_satwa', function ($row) {
+                    return $row->jumlah_satwa;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->status == 'Ditolak') {
+                        $badgeStatus = '<span class="badge text-bg-danger text-white">' . $row->status . '</span>';
+                    } elseif ($row->status == 'Ditinjau') {
+                        $badgeStatus = '<span class="badge text-bg-warning text-white">' . $row->status . '</span>';
+                    } else {
+                        $badgeStatus = '<span class="badge text-bg-success text-white">' . $row->status . '</span>';
+                    }
+                    return $badgeStatus;
+                })
+                ->addColumn('action', function ($row) {
+                    $encId = encrypt($row->id);
+                    $show = route('dashboard.laporan.show', $encId);
+                    $actionBtn = '
                     <div class="btn-group" id="group-edit-' . $row->id . '" role="group" aria-label="Action">
                         <a type="button" target="_blank" class="btn btn-primary btn-md btn-icon" title="Ubah" href="' . $show . '"><i class="fa-solid fa-eye"></i></a>
                     </div>
                 ';
-                return $actionBtn;
-            })
-            ->rawColumns(['status', 'action'])
-            ->make(true);
+                    return $actionBtn;
+                })
+                ->rawColumns(['status', 'action'])
+                ->make(true);
         }
 
         return view('dashboard.satwa.laporan', compact('satwa'));
