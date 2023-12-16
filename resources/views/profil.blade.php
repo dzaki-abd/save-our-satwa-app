@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-    <div class="profil-container rounded p-4 d-flex align-items-center gap-4">
+    <div class="profil-container rounded p-4 d-flex flex-column flex-md-row align-items-md-center gap-4">
         <div class="profil-image p-2 rounded">
             @if ($user->foto)
                 <a href="{{ asset('storage/' . $user->foto) }}" data-fancybox>
