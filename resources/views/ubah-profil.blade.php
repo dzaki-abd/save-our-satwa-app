@@ -27,7 +27,7 @@
             @method('PUT')
             <div class="mb-3">
                 <label for="foto" class="form-label text-white">Foto Profil</label>
-                <div class="d-flex align-items-center gap-4">
+                <div class="d-flex flex-column flex-md-row align-items-md-center gap-4">
                     <div id="imagePreview" class="profil-image p-2 rounded">
                         @if ($user->foto)
                             <a href="{{ asset('storage/' . $user->foto) }}" data-fancybox>
