@@ -47,9 +47,10 @@ class HomeController extends Controller
         $disetujuiCount = $pelaporanList->where('status', 'Disetujui')->count();
         $ditolakCount = $pelaporanList->where('status', 'Ditolak')->count();
 
-        $satwaList = Satwa::take(10)->get();
+        $satwaList = Satwa::latest()->take(10)->get();
 
         $artikelList = Artikel::where('di_posting', 'Ya')
+            ->latest()
             ->take(8)
             ->get();
 
