@@ -127,9 +127,11 @@ class ArtikelController extends Controller
                     }
                 }
                 
-                $namaFile = 'artikel_images/artikel-' . time() . '.' .  $request->image->extension();
-                $request->file('image')->storeAs('', $namaFile, 'public');
-                $artikel->gambar = $namaFile;
+                $namaFile = 'artikel-' . time() . '.' .  $request->image->extension();
+                $namaFile_db = 'artikel_images/' . $namaFile;
+                $request->file('image')->move(public_path('storage/artikel_images'), $namaFile);
+                
+                $artikel->gambar = $namaFile_db;
             }
 
             $slug = Str::slug($validatedData['judul_artikel'], '-');
