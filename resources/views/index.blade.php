@@ -168,7 +168,7 @@
                 <i class="fa-solid fa-file-circle-check"></i>
               </div>
               <div>
-                <h5 class="mb-0 text-white">Laporan Diseujui</h5>
+                <h5 class="mb-0 text-white">Laporan Disetujui</h5>
                 <p class="mb-0 text-white"><small>hingga {{ getFullDateID() }}</small></p>
               </div>
             </div>
