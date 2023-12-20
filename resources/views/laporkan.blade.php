@@ -142,7 +142,7 @@
         <div class="mb-3">
             <label for="gambar" class="form-label">Foto</label>
             <input type="file" id="gambar" name="gambar[]" class="dropify form-control" data-height="200" data-max-file-size="10M"
-                data-allowed-file-extensions="jpg jpeg png" multiple> 
+                data-allowed-file-extensions="jpg jpeg png" multiple required> 
         </div>
 
         <div class="mb-5">
